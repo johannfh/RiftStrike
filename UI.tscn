@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://1vcfcehr7rof"]
+
+[ext_resource type="Script" path="res://Camera.gd" id="1_2at54"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huj47"]
+bg_color = Color(0.435294, 0.588235, 0.937255, 0.345098)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.3192, 0.568987, 0.76, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+script = ExtResource("1_2at54")
+
+[node name="Panel" type="Panel" parent="."]
+scale = Vector2(0.99077, 1.00315)
+theme_override_styles/panel = SubResource("StyleBoxFlat_huj47")
