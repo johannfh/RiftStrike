@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7jhgs55kks2a"]
+
+[ext_resource type="Script" path="res://Camera.gd" id="1_uue7p"]
+[ext_resource type="PackedScene" uid="uid://c7kmi4edvj1qx" path="res://Unit.tscn" id="2_efccg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huj47"]
+bg_color = Color(0.435294, 0.588235, 0.937255, 0.345098)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.3192, 0.568987, 0.76, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Node2D" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Camera" type="Camera2D" parent="UI"]
+zoom = Vector2(3, 3)
+script = ExtResource("1_uue7p")
+
+[node name="Panel" type="Panel" parent="UI"]
+scale = Vector2(0.99077, 1.00315)
+theme_override_styles/panel = SubResource("StyleBoxFlat_huj47")
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Unit" parent="Units" instance=ExtResource("2_efccg")]
+position = Vector2(-143, 49)
+
+[node name="Unit2" parent="Units" instance=ExtResource("2_efccg")]
+position = Vector2(188, 108)
+
+[node name="Unit3" parent="Units" instance=ExtResource("2_efccg")]
+position = Vector2(239, -151)
+
+[node name="Unit4" parent="Units" instance=ExtResource("2_efccg")]
+position = Vector2(-235, -222)
