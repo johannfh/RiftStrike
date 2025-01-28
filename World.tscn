@@ -1,22 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=2 format=3 uid="uid://depbhjumchk3u"]
 
-[ext_resource type="PackedScene" uid="uid://1vcfcehr7rof" path="res://UI.tscn" id="1_ji8ce"]
-[ext_resource type="PackedScene" uid="uid://c7kmi4edvj1qx" path="res://Unit.tscn" id="2_efccg"]
+[ext_resource type="PackedScene" uid="uid://1vcfcehr7rof" path="res://UI.tscn" id="1_d64y4"]
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 
-[node name="UI" parent="." instance=ExtResource("1_ji8ce")]
-
-[node name="Units" type="Node2D" parent="."]
-
-[node name="Unit" parent="Units" instance=ExtResource("2_efccg")]
-position = Vector2(-143, 49)
-
-[node name="Unit2" parent="Units" instance=ExtResource("2_efccg")]
-position = Vector2(188, 108)
-
-[node name="Unit3" parent="Units" instance=ExtResource("2_efccg")]
-position = Vector2(239, -151)
-
-[node name="Unit4" parent="Units" instance=ExtResource("2_efccg")]
-position = Vector2(-235, -222)
+[node name="UI" parent="." instance=ExtResource("1_d64y4")]
