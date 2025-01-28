@@ -2,15 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://ujk51d7h6vv5" path="res://icon.svg" id="1_auodm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f3no2"]
-radius = 31.0161
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htp1d"]
 
 [node name="Unit" type="CharacterBody2D"]
 scale = Vector2(0.690031, 0.690031)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.99422, 1)
-shape = SubResource("CircleShape2D_f3no2")
+scale = Vector2(2.76, 2.77604)
+shape = SubResource("RectangleShape2D_htp1d")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.418065, 0.418065)
