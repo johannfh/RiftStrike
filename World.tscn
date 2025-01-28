@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=4 format=3 uid="uid://depbhjumchk3u"]
 
 [ext_resource type="Script" path="res://Camera.gd" id="1_1s717"]
+[ext_resource type="Texture2D" uid="uid://ujk51d7h6vv5" path="res://icon.svg" id="2_am6y4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_huj47"]
 bg_color = Color(0.435294, 0.588235, 0.937255, 0.345098)
@@ -27,3 +28,7 @@ script = ExtResource("1_1s717")
 [node name="Panel" type="Panel" parent="UI"]
 scale = Vector2(0.99077, 1.00315)
 theme_override_styles/panel = SubResource("StyleBoxFlat_huj47")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-16, -11)
+texture = ExtResource("2_am6y4")
