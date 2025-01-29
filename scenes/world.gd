@@ -11,4 +11,3 @@ func _on_move_command(target: Vector2, append: bool) -> void:
 		else:
 			unit.commands = [cmd]
 		print("commands %s" % str(unit.commands))
-	

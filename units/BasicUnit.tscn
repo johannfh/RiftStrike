@@ -15,3 +15,5 @@ shape = SubResource("RectangleShape2D_00oxo")
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.191337, 0.191337)
 texture = ExtResource("1_auodm")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]

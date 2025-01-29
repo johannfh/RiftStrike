@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=5 format=3 uid="uid://depbhjumchk3u"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_1lukw"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="2_12qvs"]
 [ext_resource type="PackedScene" uid="uid://cxi70ygv1ky5l" path="res://units/BasicUnit.tscn" id="3_0vtaq"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_c6t31"]
+vertices = PackedVector2Array(238.992, -97.5938, 333.469, -58.4063, 120.852, 6.72656, 129, -45.7031, 115.094, -72.5703, 123.891, -74.1797, 84.2734, -28.3828, 85.1016, 82.0781, -110.508, 54.8125, -140.977, -3.64844, -41.5, -69.9688)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(3, 5, 0), PackedInt32Array(6, 3, 2, 7), PackedInt32Array(7, 8, 9, 10, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-154, -7, -117, 64, 91, 93, 128, 15, 363, -57, 240, -108, 122, -84, 100, -80, 115, -51, 84, -39, -43, -81)])
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1lukw")
@@ -14,5 +19,9 @@ script = ExtResource("2_12qvs")
 [node name="Units" type="Node2D" parent="."]
 
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(10, -19)
+navigation_polygon = SubResource("NavigationPolygon_c6t31")
 
 [connection signal="move_command" from="Camera" to="." method="_on_move_command"]
