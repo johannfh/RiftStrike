@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://depbhjumchk3u"]
+
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_1lukw"]
+[ext_resource type="Script" path="res://scenes/camera.gd" id="2_12qvs"]
+[ext_resource type="PackedScene" uid="uid://cxi70ygv1ky5l" path="res://units/BasicUnit.tscn" id="3_0vtaq"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_1lukw")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+script = ExtResource("2_12qvs")
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
+
+[connection signal="move_command" from="Camera" to="." method="_on_move_command"]

@@ -1,14 +1,10 @@
 class_name MovementCommand
 extends Command
 
-enum MoveType { Walk, Attack }
+var target: Vector2
 
-class Params:
-	var target: Vector2
-	var move_type: MoveType
-	
-	func _init(target: Vector2, move_type: MoveType = MoveType.Walk) -> void:
-		self.target = target
+func _init(_target: Vector2) -> void:
+	target = _target
 
-func execute(unit: Unit, data: Object = null) -> void:
-	var params = data as Params
+func _to_string() -> String:
+	return "MovementCommand to (%.1f, %.1f)" % [target.x, target.y]
