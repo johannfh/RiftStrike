@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 			if navigation_agent.target_position != command.target:
 				navigation_agent.target_position = command.target
 			if navigation_agent.is_navigation_finished():
-				print("reached target %v!", position)
+				print("reached target %v!" % position)
 				commands.remove_at(0)
 	
 	var current_agent_position: Vector2 = position
