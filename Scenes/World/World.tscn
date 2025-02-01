@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dy5ndjh7m11ri" path="res://Units/TilePlaceholders.png" id="4_3rtu0"]
 [ext_resource type="Script" path="res://resources/unit_upgrades/unit_upgrade.gd" id="5_iiej1"]
 [ext_resource type="Resource" uid="uid://bje43svmdrein" path="res://resources/unit_upgrades/move_speed_upgrade/double_speed.tres" id="6_yfp84"]
-[ext_resource type="Texture2D" uid="uid://nhpsd8nf22uo" path="res://Assets/Frame.png" id="8_h4xgy"]
 [ext_resource type="Resource" uid="uid://cmd6f1tc6dc2f" path="res://resources/unit_upgrades/move_speed_upgrade/50_percent_speed_upgrade.tres" id="9_gotw1"]
+[ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://Assets/Smiley.png" id="9_gus5t"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nlov8"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -51,17 +51,19 @@ rendering_quadrant_size = 64
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(48, 37)
 upgrades = Array[ExtResource("5_iiej1")]([ExtResource("6_yfp84")])
-icon = ExtResource("8_h4xgy")
+icon = ExtResource("9_gus5t")
 
 [node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-69, -115)
+icon = ExtResource("9_gus5t")
 
 [node name="Unit3" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-137, 112)
 upgrades = Array[ExtResource("5_iiej1")]([ExtResource("9_gotw1")])
-icon = ExtResource("8_h4xgy")
+icon = ExtResource("9_gus5t")
 
 [node name="Unit4" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
-position = Vector2(175, 149)
+position = Vector2(173, 149)
+icon = ExtResource("9_gus5t")
 
 [connection signal="move_command" from="Camera" to="." method="_on_move_command"]
