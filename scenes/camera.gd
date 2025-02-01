@@ -6,7 +6,6 @@ extends Camera2D
 const MIN_ZOOM = Vector2(1, 1)
 const MAX_ZOOM = Vector2(20, 20)
 
-
 signal move_command(target: Vector2, append: bool)
 
 func _process(delta: float) -> void:
