@@ -11,11 +11,6 @@ collision_layer = 2
 script = ExtResource("1_lkcib")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
-target_desired_distance = 30.0
-path_max_distance = 50.0
-avoidance_enabled = true
-radius = 20.0
-avoidance_layers = 0
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
@@ -28,5 +23,3 @@ texture = ExtResource("1_auodm")
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 scale = Vector2(0.823489, 0.823489)
 shape = SubResource("CircleShape2D_g3l4h")
-
-[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]

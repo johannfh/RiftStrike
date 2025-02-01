@@ -22,13 +22,8 @@ func _physics_process(delta: float) -> void:
 				commands.remove_at(0)
 	var next_path_pos = nav_agent.get_next_path_position()
 	var direction = global_position.direction_to(next_path_pos)
-	var new_velocity = direction * speed * delta
+	velocity = direction * speed * delta
 	
-	nav_agent.velocity = new_velocity
-
-
-func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
-	velocity = velocity.move_toward(safe_velocity, 100)
 	if not nav_agent.is_navigation_finished():
 		move_and_slide()
 
