@@ -1,7 +1,11 @@
 extends Camera2D
 
 @export_range(10, 500, 1) var camera_move_speed = 150
-@export_range(0, 1, 0.001) var zoom_sensitivity = 0.05
+@export_range(0.05, 0.5, 0.01) var zoom_sensitivity = 0.05
+
+const MIN_ZOOM = Vector2(1, 1)
+const MAX_ZOOM = Vector2(20, 20)
+
 
 signal move_command(target: Vector2, append: bool)
 
@@ -31,4 +35,4 @@ func _process(delta: float) -> void:
 			print("Zoom out")
 		zoom.x += zoom_direction * zoom_sensitivity
 		zoom.y += zoom_direction * zoom_sensitivity
-		
+		zoom.clamp(MIN_ZOOM, MAX_ZOOM)
