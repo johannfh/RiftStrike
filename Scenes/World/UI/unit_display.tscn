@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scenes/World/UI/unit_display.gd" id="1_cjxaa"]
 
 [node name="UnitDisplay" type="Panel"]
-custom_minimum_size = Vector2(64, 64)
-offset_right = 64.0
-offset_bottom = 64.0
+custom_minimum_size = Vector2(96, 96)
+offset_right = 96.0
+offset_bottom = 96.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 script = ExtResource("1_cjxaa")
@@ -13,8 +13,8 @@ script = ExtResource("1_cjxaa")
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.533333)
 layout_mode = 1
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 60.0
-offset_bottom = 60.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 88.0
+offset_bottom = 88.0
 expand_mode = 2

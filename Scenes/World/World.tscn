@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=13 format=4 uid="uid://depbhjumchk3u"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1lukw"]
 [ext_resource type="Script" path="res://Scenes/World/camera.gd" id="2_12qvs"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dy5ndjh7m11ri" path="res://Units/TilePlaceholders.png" id="4_3rtu0"]
 [ext_resource type="Script" path="res://resources/unit_upgrades/unit_upgrade.gd" id="5_iiej1"]
 [ext_resource type="Resource" uid="uid://bje43svmdrein" path="res://resources/unit_upgrades/move_speed_upgrade/double_speed.tres" id="6_yfp84"]
+[ext_resource type="Texture2D" uid="uid://nhpsd8nf22uo" path="res://Assets/Frame.png" id="8_h4xgy"]
+[ext_resource type="Resource" uid="uid://cmd6f1tc6dc2f" path="res://resources/unit_upgrades/move_speed_upgrade/50_percent_speed_upgrade.tres" id="9_gotw1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nlov8"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -49,12 +51,15 @@ rendering_quadrant_size = 64
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(48, 37)
 upgrades = Array[ExtResource("5_iiej1")]([ExtResource("6_yfp84")])
+icon = ExtResource("8_h4xgy")
 
 [node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-69, -115)
 
 [node name="Unit3" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-137, 112)
+upgrades = Array[ExtResource("5_iiej1")]([ExtResource("9_gotw1")])
+icon = ExtResource("8_h4xgy")
 
 [node name="Unit4" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(175, 149)

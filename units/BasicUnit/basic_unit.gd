@@ -1,6 +1,9 @@
 class_name BasicUnit
 extends Unit
 
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent
+@onready var selected_circle: Panel = $SelectedCircle
+
 @export var speed: float = 120
 
 func get_speed() -> float:
@@ -12,12 +15,13 @@ func get_speed() -> float:
 			result *= upgrade.multiplier
 	return result
 
-@onready var nav_agent: NavigationAgent2D = $NavigationAgent
-
 func _ready() -> void:
 	nav_agent.path_desired_distance = 2.0
 	nav_agent.target_desired_distance = 2.0
 	make_path(position)
+
+func _process(delta: float) -> void:
+	selected_circle.visible = selected
 
 func _physics_process(_delta: float) -> void:
 	# Pull in commands
