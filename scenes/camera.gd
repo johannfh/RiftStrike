@@ -1,6 +1,7 @@
 extends Camera2D
 
 @export_range(10, 500, 1) var camera_move_speed = 150
+@export_range(0, 1, 0.001) var zoom_sensitivity = 0.05
 
 signal move_command(target: Vector2, append: bool)
 
@@ -17,3 +18,14 @@ func _process(delta: float) -> void:
 		var appendCommand = Input.is_action_pressed("shift")
 		var mouseGlobalPos = get_viewport().get_final_transform().basis_xform_inv(get_global_mouse_position())
 		move_command.emit(mouseGlobalPos, appendCommand)
+	
+	var zoom_in = Input.is_action_just_released("zoom_in")
+	var zoom_out = Input.is_action_just_released("zoom_out")
+	
+	var zoom_direction = int(zoom_in) - int(zoom_out)
+	
+	if zoom_direction != 0:
+		print(zoom_direction)
+		zoom.x += zoom_direction * zoom_sensitivity
+		zoom.y += zoom_direction * zoom_sensitivity
+		
