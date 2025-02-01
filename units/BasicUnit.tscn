@@ -3,18 +3,30 @@
 [ext_resource type="Texture2D" uid="uid://ujk51d7h6vv5" path="res://icon.svg" id="1_auodm"]
 [ext_resource type="Script" path="res://units/basic_unit.gd" id="1_lkcib"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_00oxo"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_g3l4h"]
+radius = 16.0
 
 [node name="Unit" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_lkcib")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-scale = Vector2(1.26268, 1.26268)
-shape = SubResource("RectangleShape2D_00oxo")
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+target_desired_distance = 30.0
+path_max_distance = 50.0
+avoidance_enabled = true
+radius = 20.0
+avoidance_layers = 0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 3.0
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.191337, 0.191337)
+scale = Vector2(0.216931, 0.216931)
 texture = ExtResource("1_auodm")
 
-[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
-avoidance_enabled = true
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(0.823489, 0.823489)
+shape = SubResource("CircleShape2D_g3l4h")
+
+[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]
