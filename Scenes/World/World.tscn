@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=11 format=4 uid="uid://depbhjumchk3u"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_1lukw"]
-[ext_resource type="Script" path="res://scenes/camera.gd" id="2_12qvs"]
-[ext_resource type="PackedScene" uid="uid://cxi70ygv1ky5l" path="res://units/BasicUnit.tscn" id="3_0vtaq"]
-[ext_resource type="Texture2D" uid="uid://dy5ndjh7m11ri" path="res://units/TilePlaceholders.png" id="4_3rtu0"]
+[ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1lukw"]
+[ext_resource type="Script" path="res://Scenes/World/camera.gd" id="2_12qvs"]
+[ext_resource type="PackedScene" uid="uid://tfgm7he4533a" path="res://Scenes/World/UI/UI.tscn" id="2_lba6o"]
+[ext_resource type="PackedScene" uid="uid://cxi70ygv1ky5l" path="res://Units/BasicUnit/BasicUnit.tscn" id="3_0vtaq"]
+[ext_resource type="Texture2D" uid="uid://dy5ndjh7m11ri" path="res://Units/TilePlaceholders.png" id="4_3rtu0"]
 [ext_resource type="Script" path="res://resources/unit_upgrades/unit_upgrade.gd" id="5_iiej1"]
 [ext_resource type="Resource" uid="uid://bje43svmdrein" path="res://resources/unit_upgrades/move_speed_upgrade/double_speed.tres" id="6_yfp84"]
 
@@ -28,6 +29,8 @@ sources/0 = SubResource("TileSetAtlasSource_a20v2")
 [node name="World" type="Node2D"]
 script = ExtResource("1_1lukw")
 
+[node name="UI" parent="." instance=ExtResource("2_lba6o")]
+
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
@@ -44,9 +47,16 @@ rendering_quadrant_size = 64
 [node name="Units" type="Node2D" parent="."]
 
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
+position = Vector2(48, 37)
 upgrades = Array[ExtResource("5_iiej1")]([ExtResource("6_yfp84")])
 
 [node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-69, -115)
+
+[node name="Unit3" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
+position = Vector2(-137, 112)
+
+[node name="Unit4" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
+position = Vector2(175, 149)
 
 [connection signal="move_command" from="Camera" to="." method="_on_move_command"]

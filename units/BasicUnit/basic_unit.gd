@@ -5,6 +5,8 @@ extends Unit
 
 func get_speed() -> float:
 	var result = speed
+	var multiplier = 1
+	# TODO: count multiplier
 	for upgrade in upgrades:
 		if upgrade is UnitUpgradeMoveSpeed:
 			result *= upgrade.multiplier
@@ -15,10 +17,9 @@ func get_speed() -> float:
 func _ready() -> void:
 	nav_agent.path_desired_distance = 2.0
 	nav_agent.target_desired_distance = 2.0
-	nav_agent.debug_enabled = true
 	make_path(position)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Pull in commands
 	if len(commands) > 0:
 		var command = commands[0]
