@@ -25,7 +25,10 @@ func _process(delta: float) -> void:
 	var zoom_direction = int(zoom_in) - int(zoom_out)
 	
 	if zoom_direction != 0:
-		print(zoom_direction)
+		if zoom_direction == 1:
+			print("Zoom in")
+		if zoom_direction == -1:
+			print("Zoom out")
 		zoom.x += zoom_direction * zoom_sensitivity
 		zoom.y += zoom_direction * zoom_sensitivity
 		
