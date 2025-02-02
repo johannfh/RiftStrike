@@ -50,26 +50,19 @@ rendering_quadrant_size = 64
 
 [node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(48, 37)
-speed = 120.0
 upgrades = Array[ExtResource("5_iiej1")]([ExtResource("6_yfp84")])
 icon = ExtResource("9_gus5t")
 
 [node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-69, -115)
-speed = 120.0
-upgrades = Array[ExtResource("5_iiej1")]([])
 icon = ExtResource("9_gus5t")
 
 [node name="Unit3" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(-137, 112)
-speed = 120.0
-upgrades = Array[ExtResource("5_iiej1")]([])
 icon = ExtResource("9_gus5t")
 
 [node name="Unit4" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
 position = Vector2(173, 149)
-speed = 120.0
-upgrades = Array[ExtResource("5_iiej1")]([])
 icon = ExtResource("9_gus5t")
 
 [node name="Enemies" type="Node2D" parent="."]
