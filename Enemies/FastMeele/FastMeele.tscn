@@ -26,7 +26,7 @@ process_callback = 0
 autostart = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="RecalculateTargetTimer" to="." method="_on_recalculate_target_timer_timeout"]
