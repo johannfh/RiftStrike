@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="UnitUpgradeMoveSpeed" load_steps=2 format=3 uid="uid://bje43svmdrein"]
-
-[ext_resource type="Script" path="res://CustomResources/UnitUpgrade/MoveSpeed/move_speed.gd" id="1_q4h7s"]
-
-[resource]
-script = ExtResource("1_q4h7s")
-multiplier = 1.0

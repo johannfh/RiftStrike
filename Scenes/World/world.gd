@@ -20,6 +20,7 @@ func _on_move_command(target: Vector2, append: bool) -> void:
 func _process(_delta: float) -> void:
 	var units: Array[Unit]
 	units.assign(get_tree().get_nodes_in_group("units"))
-	var units_alive = units.filter(func(u: Unit): return u.hp > 0)
+	var units_alive = units \
+		.filter(func(u: Unit): return u.health_component.health > 0)
 	if len(units_alive) <= 0:
 		get_tree().change_scene_to_packed(GAME_OVER)

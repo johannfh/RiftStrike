@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxi70ygv1ky5l"]
+[gd_scene load_steps=10 format=3 uid="uid://cxi70ygv1ky5l"]
 
 [ext_resource type="Texture2D" uid="uid://ujk51d7h6vv5" path="res://icon.svg" id="1_auodm"]
 [ext_resource type="Script" path="res://Units/BasicUnit/basic_unit.gd" id="1_lkcib"]
 [ext_resource type="SpriteFrames" uid="uid://3eehd4uerkti" path="res://Assets/SpriteFrames/dead_alive_unit_placeholder.tres" id="3_hu6po"]
+[ext_resource type="PackedScene" uid="uid://bbe3ucwdqcmgu" path="res://Components/health_component.tscn" id="4_wu3wf"]
+[ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Components/hitbox_component.tscn" id="5_ykejh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g3l4h"]
+radius = 0.01
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu6p4"]
 bg_color = Color(0.0901961, 0.0823529, 0.0705882, 0.101961)
@@ -17,13 +22,21 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g3l4h"]
-radius = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ai5xy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8we2p"]
+radius = 20.0
 
 [node name="Unit" type="CharacterBody2D"]
+scale = Vector2(1.96308, 1.96308)
 collision_layer = 2
 script = ExtResource("1_lkcib")
 icon = ExtResource("1_auodm")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(0.823489, 0.823489)
+shape = SubResource("CircleShape2D_g3l4h")
+disabled = true
 
 [node name="SelectedCircle" type="Panel" parent="."]
 texture_filter = 2
@@ -39,17 +52,37 @@ offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pu6p4")
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.216931, 0.216931)
 sprite_frames = ExtResource("3_hu6po")
-animation = &"dead"
+animation = &"alive"
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
 debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 3.0
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-scale = Vector2(0.823489, 0.823489)
-shape = SubResource("CircleShape2D_g3l4h")
+[node name="HealthComponent" parent="." instance=ExtResource("4_wu3wf")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_ykejh")]
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+scale = Vector2(1.47207, 1.47207)
+shape = SubResource("CircleShape2D_ai5xy")
+
+[node name="Attack Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Range"]
+visible = false
+scale = Vector2(11.6027, 11.6027)
+shape = SubResource("CircleShape2D_8we2p")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -13,7 +13,7 @@ func _ready() -> void:
 	texture_rect.texture = unit.icon
 
 func get_modulate_for_unit(u: Unit) -> Color:
-	if u.hp > 0:
+	if u.health_component.health > 0:
 		if u.selected:
 			return MODULATE_SELECTED
 		else:
