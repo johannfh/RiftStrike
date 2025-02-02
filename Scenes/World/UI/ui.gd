@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 			print("added unit %s to ui" % unit.name)
 	
 	if Input.is_action_just_pressed("select_all_units"):
-		select_units([0, 1, 2, 3])
+		select_all_units()
 	else:
 		var unit_index_dict: Dictionary = {
 			0: Input.is_action_just_pressed("number_1"),
@@ -48,13 +48,13 @@ func _process(_delta: float) -> void:
 			select_units(unit_indices)
 
 func select_all_units():
-	var units: Array[Unit]
-	units.assign(get_tree().get_nodes_in_group("units"))
-	for unit in units:
-		unit.selected = true
+	var uts: Array[Unit]
+	uts.assign(get_tree().get_nodes_in_group("units"))
+	for u in uts:
+		u.selected = true
 
 func select_units(indices: Array[int]) -> void:
-	var units: Array[Unit]
-	units.assign(get_tree().get_nodes_in_group("units"))
-	for idx in len(units):
-		units[idx].selected = indices.has(idx)
+	var uts: Array[Unit]
+	uts.assign(get_tree().get_nodes_in_group("units"))
+	for idx in len(uts):
+		uts[idx].selected = indices.has(idx)

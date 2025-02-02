@@ -21,5 +21,5 @@ func get_modulate_for_unit(u: Unit) -> Color:
 	else:
 		return MODULATE_DEAD
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	texture_rect.modulate = get_modulate_for_unit(unit)

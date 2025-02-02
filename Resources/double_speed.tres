@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_q4h7s")
-multiplier = 2.0
+multiplier = 0.5
