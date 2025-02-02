@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="UnitUpgradeMoveSpeed" load_steps=2 format=3 uid="uid://cmd6f1tc6dc2f"]
 
-[ext_resource type="Script" path="res://resources/unit_upgrades/move_speed_upgrade/move_speed_upgrade.gd" id="1_exkdb"]
+[ext_resource type="Script" path="res://CustomResources/UnitUpgrade/MoveSpeed/move_speed.gd" id="1_exkdb"]
 
 [resource]
 script = ExtResource("1_exkdb")

@@ -14,6 +14,7 @@ scale = Vector2(9.44935, 9.44935)
 script = ExtResource("1_ci0c6")
 
 [node name="StartButton" type="Button" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2

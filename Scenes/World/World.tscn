@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://tfgm7he4533a" path="res://Scenes/World/UI/UI.tscn" id="2_lba6o"]
 [ext_resource type="PackedScene" uid="uid://cxi70ygv1ky5l" path="res://Units/BasicUnit/BasicUnit.tscn" id="3_0vtaq"]
 [ext_resource type="Texture2D" uid="uid://dy5ndjh7m11ri" path="res://Units/TilePlaceholders.png" id="4_3rtu0"]
-[ext_resource type="Script" path="res://resources/unit_upgrades/unit_upgrade.gd" id="5_iiej1"]
-[ext_resource type="Resource" uid="uid://bje43svmdrein" path="res://resources/unit_upgrades/move_speed_upgrade/double_speed.tres" id="6_yfp84"]
-[ext_resource type="Resource" uid="uid://cmd6f1tc6dc2f" path="res://resources/unit_upgrades/move_speed_upgrade/50_percent_speed_upgrade.tres" id="9_gotw1"]
+[ext_resource type="Script" path="res://CustomResources/UnitUpgrade/unit_upgrade.gd" id="5_iiej1"]
+[ext_resource type="Resource" uid="uid://bje43svmdrein" path="res://Resources/double_speed.tres" id="6_yfp84"]
+[ext_resource type="Resource" uid="uid://cmd6f1tc6dc2f" path="res://Resources/50_percent_speed_upgrade.tres" id="9_gotw1"]
 [ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://Assets/Smiley.png" id="9_gus5t"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nlov8"]
