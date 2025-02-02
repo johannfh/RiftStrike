@@ -17,8 +17,7 @@ func _on_move_command(target: Vector2, append: bool) -> void:
 			unit.commands = [cmd]
 		print("commands %s" % str(unit.commands))
 
-func _process(delta: float) -> void:
-	await _process
+func _process(_delta: float) -> void:
 	var units: Array[Unit]
 	units.assign(get_tree().get_nodes_in_group("units"))
 	var units_alive = units.filter(func(u: Unit): return u.hp > 0)
