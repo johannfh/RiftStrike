@@ -1,5 +1,7 @@
 extends Node2D
 
+const GAME_OVER = preload("res://Scenes/GameOver/GameOver.tscn")
+
 func _on_move_command(target: Vector2, append: bool) -> void:
 	print("move units to %v" % target)
 	var units: Array[Unit]
@@ -14,3 +16,11 @@ func _on_move_command(target: Vector2, append: bool) -> void:
 		else:
 			unit.commands = [cmd]
 		print("commands %s" % str(unit.commands))
+
+func _process(delta: float) -> void:
+	await _process
+	var units: Array[Unit]
+	units.assign(get_tree().get_nodes_in_group("units"))
+	var units_alive = units.filter(func(u: Unit): return u.hp > 0)
+	if len(units_alive) <= 0:
+		get_tree().change_scene_to_packed(GAME_OVER)

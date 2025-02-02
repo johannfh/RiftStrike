@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://cblh8kspi23nh"]
+
+[ext_resource type="Script" path="res://Scenes/GameOver/game_over.gd" id="1_7wl4q"]
+[ext_resource type="Texture2D" uid="uid://dhngmhk1xf1nu" path="res://Assets/HomeIcon.png" id="2_5hjmh"]
+[ext_resource type="Texture2D" uid="uid://jtaykc128s2f" path="res://Assets/Skull.png" id="3_cvj7h"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7wl4q")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 417.0
+offset_top = 118.0
+offset_right = 481.0
+offset_bottom = 182.0
+scale = Vector2(4.2021, 4.2021)
+texture = ExtResource("3_cvj7h")
+
+[node name="HomeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 464.0
+offset_right = 564.0
+offset_bottom = 536.0
+scale = Vector2(1.58331, 1.58331)
+icon = ExtResource("2_5hjmh")
+
+[connection signal="pressed" from="HomeButton" to="." method="_on_home_button_pressed"]

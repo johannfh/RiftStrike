@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxi70ygv1ky5l"]
+[gd_scene load_steps=6 format=3 uid="uid://cxi70ygv1ky5l"]
 
 [ext_resource type="Texture2D" uid="uid://ujk51d7h6vv5" path="res://icon.svg" id="1_auodm"]
 [ext_resource type="Script" path="res://Units/BasicUnit/basic_unit.gd" id="1_lkcib"]
+[ext_resource type="SpriteFrames" uid="uid://3eehd4uerkti" path="res://Assets/SpriteFrames/dead_alive_unit_placeholder.tres" id="3_hu6po"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu6p4"]
 bg_color = Color(0.0901961, 0.0823529, 0.0705882, 0.101961)
@@ -24,11 +25,6 @@ collision_layer = 2
 script = ExtResource("1_lkcib")
 icon = ExtResource("1_auodm")
 
-[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
-debug_use_custom = true
-debug_path_custom_color = Color(1, 0, 0, 1)
-debug_path_custom_point_size = 3.0
-
 [node name="SelectedCircle" type="Panel" parent="."]
 texture_filter = 2
 anchors_preset = 8
@@ -44,9 +40,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pu6p4")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.216931, 0.216931)
-texture = ExtResource("1_auodm")
+sprite_frames = ExtResource("3_hu6po")
+animation = &"dead"
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 3.0
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 scale = Vector2(0.823489, 0.823489)

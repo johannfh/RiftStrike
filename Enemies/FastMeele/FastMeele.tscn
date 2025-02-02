@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bshvxw1bkcf3v"]
+
+[ext_resource type="Script" path="res://Enemies/FastMeele/fast_meele.gd" id="1_ydf2d"]
+[ext_resource type="SpriteFrames" uid="uid://3eehd4uerkti" path="res://Assets/SpriteFrames/dead_alive_unit_placeholder.tres" id="2_j0co3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhvv3"]
+
+[node name="FastMeele" type="CharacterBody2D"]
+scale = Vector2(0.690513, 0.690513)
+collision_mask = 3
+script = ExtResource("1_ydf2d")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.230385, 0.230385)
+sprite_frames = ExtResource("2_j0co3")
+animation = &"dead"
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(0.745423, 0.745423)
+shape = SubResource("RectangleShape2D_rhvv3")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+
+[node name="RecalculateTargetTimer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="RecalculateTargetTimer" to="." method="_on_recalculate_target_timer_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
