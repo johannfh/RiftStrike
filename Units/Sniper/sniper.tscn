@@ -13,6 +13,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ifi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl7p5"]
+size = Vector2(20, 50)
 
 [node name="Sniper" type="Node2D"]
 script = ExtResource("1_msh00")
@@ -28,7 +29,7 @@ shape = SubResource("RectangleShape2D_62ifi")
 [node name="SelectableComponent" parent="." instance=ExtResource("2_yssty")]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="SelectableComponent"]
-position = Vector2(0, 10)
+position = Vector2(0, -7.55695)
 scale = Vector2(3.12326, -1.08861)
 shape = SubResource("RectangleShape2D_kl7p5")
 
