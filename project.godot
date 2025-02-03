@@ -19,18 +19,6 @@ config/icon="res://icon.svg"
 
 Utils="*res://Scripts/Utils.gd"
 
-[file_customization]
-
-folder_colors={
-"res://Assets/": "pink",
-"res://Enemies/": "orange",
-"res://Scenes/": "green",
-"res://Scenes/Components/": "blue",
-"res://Scripts/": "yellow",
-"res://Scripts/Commands/": "red",
-"res://Units/": "purple"
-}
-
 [global_group]
 
 selectable_components="All `SelectableComponent`s are part of this group"
