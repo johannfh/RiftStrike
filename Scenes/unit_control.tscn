@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqx7n6evvuqvi"]
+
+[ext_resource type="Script" path="res://Scripts/UnitControl.gd" id="1_dfk50"]
+
+[node name="UnitControl" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dfk50")
+
+[node name="Node" type="Node" parent="."]
+
+[connection signal="selection_changed" from="." to="." method="_on_selection_changed"]

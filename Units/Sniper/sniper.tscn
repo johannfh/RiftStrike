@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c236q0rc37124"]
+[gd_scene load_steps=13 format=3 uid="uid://c236q0rc37124"]
 
 [ext_resource type="Script" path="res://Units/Sniper/Sniper.gd" id="1_msh00"]
 [ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Scenes/Components/hitbox_component.tscn" id="2_1u4k4"]
 [ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://Assets/SmileyHappy.png" id="2_d8udp"]
 [ext_resource type="StyleBox" uid="uid://b3iiicrirjigk" path="res://Assets/Styles/unit_hovering.tres" id="2_q71rg"]
+[ext_resource type="PackedScene" uid="uid://dvtwi7txgg32b" path="res://Scenes/Components/commands_component.tscn" id="2_qrq3p"]
 [ext_resource type="PackedScene" uid="uid://cvljta2rymgto" path="res://Scenes/Components/selectable_component.tscn" id="2_yssty"]
 [ext_resource type="StyleBox" uid="uid://dhr4wcoll1lqo" path="res://Assets/Styles/unit_selected.tres" id="3_u06ye"]
 [ext_resource type="PackedScene" uid="uid://bbe3ucwdqcmgu" path="res://Scenes/Components/health_component.tscn" id="7_87nkl"]
@@ -17,6 +18,9 @@ size = Vector2(20, 50)
 
 [node name="Sniper" type="Node2D"]
 script = ExtResource("1_msh00")
+
+[node name="CommandsComponent" parent="." instance=ExtResource("2_qrq3p")]
+supported = Array[int]([0, 1, 2, 3])
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_1u4k4")]
 

@@ -1,6 +1,5 @@
-class_name Sniper extends Node2D
+class_name Sniper extends Unit
 
-@onready var selectable_component: SelectableComponent = $SelectableComponent
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var pathfind_component: PathfindComponent = $PathfindComponent
 
@@ -9,6 +8,8 @@ class_name Sniper extends Node2D
 
 func _ready() -> void:
 	print("Im at %v (%v)" % [position, global_position])
+	selectable_component = $SelectableComponent
+	commands_component = $CommandsComponent
 
 func _process(_delta: float) -> void:
 	panel_hovering.visible = \
@@ -23,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 		cmd = commands[0]
 	
 	if cmd:
-		if cmd is MovementCommand:
+		if cmd is GlobalMovementCommand:
 			if not pathfind_component.is_path_target(cmd.target):
 				pathfind_component.make_path(cmd.target)
 			if pathfind_component.is_target_reached():

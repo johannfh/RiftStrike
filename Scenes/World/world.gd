@@ -3,12 +3,21 @@ extends Node2D
 const GAME_OVER = preload("res://Scenes/GameOver/GameOver.tscn")
 
 @onready var selection_box: SelectionBox = $SelectionBox
+@onready var unit_manager: UnitManager = $UnitManager
+@onready var unit_control: UnitControl = $UnitControl
+
 var hovering_selectables: Array[SelectableComponent] = []
 
+func _ready() -> void:
+	for i in range(3):
+		var sniper := UnitFactory.create_sniper()
+		unit_manager.add_unit(sniper)
+
 func _on_move_command(target: Vector2, append: bool) -> void:
+	return
 	print("move units to %v" % target)
 	var selected: Array[SelectableComponent]
-	var cmd = MovementCommand.new(target)
+	var cmd = GlobalMovementCommand.new(target)
 	selected.assign(Utils.get_selectables().filter(Utils.filter_selected))
 	for s in selected:
 		if append:
@@ -20,7 +29,7 @@ func _on_move_command(target: Vector2, append: bool) -> void:
 func _process(_delta: float) -> void:
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for s in Utils.get_selectables():
 		# deselect hovering
 		if s.state == Utils.SelectionState.Hovering:
