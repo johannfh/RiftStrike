@@ -1,4 +1,4 @@
-extends Node2D
+class_name Sniper extends Node2D
 
 @onready var selectable_component: SelectableComponent = $SelectableComponent
 @onready var sprite: Sprite2D = $Sprite2D
