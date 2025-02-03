@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Enemies/FastMeele/fast_meele.gd" id="1_ydf2d"]
 [ext_resource type="SpriteFrames" uid="uid://3eehd4uerkti" path="res://Assets/SpriteFrames/dead_alive_unit_placeholder.tres" id="2_j0co3"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_l8t3x"]
-[ext_resource type="PackedScene" uid="uid://bbe3ucwdqcmgu" path="res://Components/health_component.tscn" id="2_xhg3e"]
-[ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Components/hitbox_component.tscn" id="3_rf8ec"]
+[ext_resource type="PackedScene" uid="uid://bbe3ucwdqcmgu" path="res://Scenes/Components/health_component.tscn" id="2_xhg3e"]
+[ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Scenes/Components/hitbox_component.tscn" id="3_rf8ec"]
 [ext_resource type="Script" path="res://Enemies/FastMeele/IdleState.gd" id="3_wpdh2"]
 [ext_resource type="Script" path="res://Enemies/FastMeele/AttackingState.gd" id="4_hebw1"]
 

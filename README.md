@@ -22,4 +22,3 @@ This creates a blend of strategy and action as players position their units, tim
 **How will you keep players engaged for 30 minutes? What's the general scope of your game (will change as you go)?**
 
 Each run lasts approximately 10-15 minutes with varied enemy types, and randomized rewards and upgrades ensuring no two sessions feel identical.
-

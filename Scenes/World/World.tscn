@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=10 format=4 uid="uid://depbhjumchk3u"]
 
 [ext_resource type="Script" path="res://Scenes/World/world.gd" id="1_1lukw"]
 [ext_resource type="Script" path="res://Scenes/World/camera.gd" id="2_12qvs"]
-[ext_resource type="PackedScene" uid="uid://tfgm7he4533a" path="res://Scenes/World/UI/UI.tscn" id="2_lba6o"]
-[ext_resource type="PackedScene" uid="uid://cxi70ygv1ky5l" path="res://Units/BasicUnit/BasicUnit.tscn" id="3_0vtaq"]
+[ext_resource type="PackedScene" uid="uid://co4pw8dai8qxw" path="res://Scenes/selection_box.tscn" id="3_6byyk"]
 [ext_resource type="Texture2D" uid="uid://cwhrjoovspe02" path="res://Assets/FloorTileset.png" id="4_w6h1m"]
-[ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://Assets/SmileyHappy.png" id="9_gus5t"]
-[ext_resource type="PackedScene" uid="uid://bshvxw1bkcf3v" path="res://Enemies/FastMeele/FastMeele.tscn" id="9_mosc0"]
+[ext_resource type="PackedScene" uid="uid://c236q0rc37124" path="res://Units/Sniper/sniper.tscn" id="5_qstmr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x246n"]
 vertices = PackedVector2Array(64, -16, 0, 16, -64, -16, 0, -48)
@@ -43,7 +41,7 @@ position = Vector2(369, -339)
 rotation = 1.0513
 shadow_enabled = true
 
-[node name="UI" parent="." instance=ExtResource("2_lba6o")]
+[node name="SelectionBox" parent="." instance=ExtResource("3_6byyk")]
 
 [node name="Camera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -63,25 +61,15 @@ rendering_quadrant_size = 64
 
 [node name="Units" type="Node2D" parent="."]
 
-[node name="Unit" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
-position = Vector2(-644, 10)
-icon = ExtResource("9_gus5t")
+[node name="Sniper" parent="Units" instance=ExtResource("5_qstmr")]
+position = Vector2(-311, -172)
 
-[node name="Unit2" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
-position = Vector2(-123, -307)
-icon = ExtResource("9_gus5t")
+[node name="Sniper2" parent="Units" instance=ExtResource("5_qstmr")]
+position = Vector2(-195, 226)
 
-[node name="Unit3" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
-position = Vector2(-122, 421)
-icon = ExtResource("9_gus5t")
-
-[node name="Unit4" parent="Units" groups=["units"] instance=ExtResource("3_0vtaq")]
-position = Vector2(439, 51)
-icon = ExtResource("9_gus5t")
+[node name="Sniper3" parent="Units" instance=ExtResource("5_qstmr")]
+position = Vector2(157, -240)
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[node name="FastMeele" parent="Enemies" instance=ExtResource("9_mosc0")]
-position = Vector2(353, -262)
 
 [connection signal="move_command" from="Camera" to="." method="_on_move_command"]

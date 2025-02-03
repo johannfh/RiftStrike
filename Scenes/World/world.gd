@@ -2,25 +2,52 @@ extends Node2D
 
 const GAME_OVER = preload("res://Scenes/GameOver/GameOver.tscn")
 
+@onready var selection_box: SelectionBox = $SelectionBox
+var hovering_selectables: Array[SelectableComponent] = []
+
 func _on_move_command(target: Vector2, append: bool) -> void:
 	print("move units to %v" % target)
-	var units: Array[Unit]
-	units.assign(get_tree().get_nodes_in_group("units"))
-	var selected_units: Array[Unit] = units \
-		.filter(func(u: Unit): return u.selected)
-	
-	for unit in selected_units:
-		var cmd = MovementCommand.new(target)
+	var selected: Array[SelectableComponent]
+	var cmd = MovementCommand.new(target)
+	selected.assign(Utils.get_selectables().filter(Utils.filter_selected))
+	for s in selected:
 		if append:
-			unit.commands.append(cmd)
+			s.commands.append(cmd)
 		else:
-			unit.commands = [cmd]
-		print("commands %s" % str(unit.commands))
+			s.commands = [cmd]
+		print("commands %s" % str(s.commands))
 
 func _process(_delta: float) -> void:
-	var units: Array[Unit]
-	units.assign(get_tree().get_nodes_in_group("units"))
-	var units_alive = units \
-		.filter(func(u: Unit): return u.health_component.health > 0)
-	if len(units_alive) <= 0:
-		get_tree().change_scene_to_packed(GAME_OVER)
+	pass
+
+func _physics_process(delta: float) -> void:
+	for s in Utils.get_selectables():
+		# deselect hovering
+		if s.state == Utils.SelectionState.Hovering:
+			s.state = Utils.SelectionState.NotSelected
+
+	var selectables: Array[SelectableComponent]
+	selectables.assign(selection_box.get_overlapping_areas())
+	hovering_selectables.assign(selectables)
+	
+	if Input.is_action_just_pressed("escape"):
+		var selected := Utils.get_selectables() \
+			.filter(Utils.filter_selected)
+		for s in selected:
+			s.state = Utils.SelectionState.NotSelected
+	elif Input.is_action_just_released("left_click"):
+		var selected := Utils.get_selectables() \
+			.filter(Utils.filter_selected)
+		
+		if not Input.is_action_pressed("shift") and len(selectables) > 0:
+			# deselect old selected selectables
+			for s in selected:
+				s.state = Utils.SelectionState.NotSelected
+		
+		# select new selectables
+		for s in selectables:
+			s.state = Utils.SelectionState.Selected
+	else:
+		for s in selectables:
+			if s.state != Utils.SelectionState.Selected:
+				s.state = Utils.SelectionState.Hovering

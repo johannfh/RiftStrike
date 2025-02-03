@@ -4,13 +4,6 @@ class_name State extends Node
 @warning_ignore("unused_signal")
 signal transitioned(state: State, new_state_name: String)
 
-func _ready() -> void:
-	connect("transitioned", _on_transitioned)
-
-func _on_transitioned(state: State, new_state_name):
-	print("transitioning from state %s to %s" % 
-		[state.name.to_lower(), new_state_name])
-
 func enter() -> void:
 	pass
 
