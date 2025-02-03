@@ -1,6 +1,7 @@
 class_name State extends Node
 
 ## Emitted when the state finishes and wants to transition to another state.
+@warning_ignore("unused_signal")
 signal transitioned(state: State, new_state_name: String)
 
 func _ready() -> void:

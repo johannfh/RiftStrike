@@ -9,7 +9,7 @@ var target: Unit
 func exit():
 	attack_cooldown.start()
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if target:
 		nav_agent.target_position = target.position
 	var overlapping_nodes := hitbox_component \
