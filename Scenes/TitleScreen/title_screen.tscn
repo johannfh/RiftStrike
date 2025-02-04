@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdewdox331ij1"]
 
-[ext_resource type="Script" path="res://Scenes/TitleScreen/title_screen.gd" id="1_ci0c6"]
-[ext_resource type="Texture2D" uid="uid://cih4imkxh3eva" path="res://Assets/Play.png" id="1_dkyqj"]
+[ext_resource type="Script" path="res://Scenes/TitleScreen/TitleScreen.gd" id="1_0g3bm"]
+[ext_resource type="Texture2D" uid="uid://cih4imkxh3eva" path="res://Assets/Play.png" id="2_v2rug"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ offset_top = 126.0
 offset_right = 399.0
 offset_bottom = 126.0
 scale = Vector2(9.44935, 9.44935)
-script = ExtResource("1_ci0c6")
+script = ExtResource("1_0g3bm")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
@@ -19,6 +19,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("1_dkyqj")
+icon = ExtResource("2_v2rug")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

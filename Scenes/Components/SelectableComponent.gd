@@ -8,7 +8,6 @@ var selected: bool = false:
 	set(v):
 		# when new state is different
 		if selected != v:
-			print("%s now selected: %s" % [parent.name, v])
 			selection_changed.emit(parent, v)
 		selected = v
 	get:

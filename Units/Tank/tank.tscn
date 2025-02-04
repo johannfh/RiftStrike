@@ -16,7 +16,7 @@ size = Vector2(44, 20)
 script = ExtResource("1_m5xo3")
 
 [node name="CommandsComponent" parent="." instance=ExtResource("2_jwl36")]
-supported = Array[int]([0, 1, 2, 4, 5])
+supported = Array[int]([1, 10, 20, 200, 201])
 
 [node name="SelectableComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_rj4bk")]
 parent = NodePath("..")

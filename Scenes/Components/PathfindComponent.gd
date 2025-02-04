@@ -14,6 +14,6 @@ func _ready() -> void:
 		"PathfindComponent requires a MovementComponent to work."
 	)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var next_pos := get_next_path_position()
 	movement_component.set_target(next_pos)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cblh8kspi23nh"]
 
-[ext_resource type="Script" path="res://Scenes/GameOver/game_over.gd" id="1_7wl4q"]
+[ext_resource type="Script" path="res://Scenes/GameOver/GameOver.gd" id="1_7wl4q"]
 [ext_resource type="Texture2D" uid="uid://dhngmhk1xf1nu" path="res://Assets/HomeIcon.png" id="2_5hjmh"]
 [ext_resource type="Texture2D" uid="uid://jtaykc128s2f" path="res://Assets/Skull.png" id="3_cvj7h"]
 

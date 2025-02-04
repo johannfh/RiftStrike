@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://depbhjumchk3u"]
+[gd_scene load_steps=13 format=4 uid="uid://cxgj5vhx2nhr3"]
 
 [ext_resource type="Script" path="res://Scenes/World/World.gd" id="1_qnuxs"]
-[ext_resource type="PackedScene" uid="uid://co4pw8dai8qxw" path="res://Scenes/selection_box.tscn" id="2_ru5dn"]
+[ext_resource type="PackedScene" uid="uid://b8wut54lhmovv" path="res://Scenes/selection_box.tscn" id="2_ru5dn"]
 [ext_resource type="Script" path="res://Scenes/World/Camera.gd" id="3_g7nkv"]
 [ext_resource type="Texture2D" uid="uid://cwhrjoovspe02" path="res://Assets/FloorTileset.png" id="4_qgvrg"]
 [ext_resource type="PackedScene" uid="uid://dqx7n6evvuqvi" path="res://Scenes/unit_control.tscn" id="5_akogp"]
@@ -44,8 +44,7 @@ position = Vector2(369, -339)
 rotation = 1.0513
 shadow_enabled = true
 
-[node name="SelectionBox" parent="." node_paths=PackedStringArray("unit_manager") instance=ExtResource("2_ru5dn")]
-unit_manager = NodePath("../UnitManager")
+[node name="SelectionBox" parent="." instance=ExtResource("2_ru5dn")]
 
 [node name="Camera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -63,8 +62,7 @@ tile_map_data = PackedByteArray("AAD6/wUAAwAAAAAAAAD7/wUAAwAAAAAAAAD8/wUAAwAAAAA
 tile_set = SubResource("TileSet_cbhpm")
 rendering_quadrant_size = 64
 
-[node name="UnitControl" parent="." node_paths=PackedStringArray("selection_box", "unit_manager") instance=ExtResource("5_akogp")]
-selection_box = NodePath("../SelectionBox")
+[node name="UnitControl" parent="." node_paths=PackedStringArray("unit_manager") instance=ExtResource("5_akogp")]
 unit_manager = NodePath("../UnitManager")
 
 [node name="UnitManager" type="Node" parent="."]

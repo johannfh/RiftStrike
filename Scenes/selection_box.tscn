@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://co4pw8dai8qxw"]
+[gd_scene load_steps=4 format=3 uid="uid://b8wut54lhmovv"]
 
-[ext_resource type="Script" path="res://Scenes/SelectionBox.gd" id="1_8mck7"]
+[ext_resource type="Script" path="res://Scripts/SelectionBox.gd" id="1_2faqw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vgra"]
 bg_color = Color(0.486275, 0.839216, 1, 0.25098)
@@ -16,7 +16,7 @@ border_blend = true
 [node name="SelectionBox" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("1_8mck7")
+script = ExtResource("1_2faqw")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false

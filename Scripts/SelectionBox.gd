@@ -1,16 +1,17 @@
 class_name SelectionBox extends Area2D
 
-@export var unit_manager: UnitManager
-
 @onready var panel: Panel = $Panel
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+var unit_manager: UnitManager
+var reactive: bool = true
 
 var start := Vector2.ZERO
 var end := Vector2.ZERO
 
 var _active: bool = false
 
-func _process(delta: float) -> void:
+func update(_delta: float) -> void:
 	var mouse_pos := get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("left_click"):
@@ -38,9 +39,7 @@ func _process(delta: float) -> void:
 	panel.visible = _active
 	collision_shape.disabled = not _active
 
-func _physics_process(delta: float) -> void:
-	
-
+func physics_update(_delta: float) -> void:
 	if _active:
 		end = get_global_mouse_position()
 	

@@ -5,8 +5,10 @@ class_name Sniper extends Unit
 
 @onready var panel_selected: Panel = $PanelSelected
 
+func get_unit_type() -> String:
+	return "sniper"
+
 func _ready() -> void:
-	print("Im at %v (%v)" % [position, global_position])
 	selectable_component = $SelectableComponent
 	commands_component = $CommandsComponent
 

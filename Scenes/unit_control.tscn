@@ -1,10 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqx7n6evvuqvi"]
+[gd_scene load_steps=5 format=3 uid="uid://dqx7n6evvuqvi"]
 
 [ext_resource type="Script" path="res://Scripts/UnitControl.gd" id="1_dfk50"]
+[ext_resource type="Script" path="res://Scripts/SelectionBox.gd" id="2_16bsl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vgra"]
+bg_color = Color(0.486275, 0.839216, 1, 0.25098)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1.34766e-06, 0.702207, 0.974052, 1)
+border_blend = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7oq3"]
 
 [node name="UnitControl" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_dfk50")
 
-[node name="Node" type="Node" parent="."]
+[node name="SelectionBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_16bsl")
+
+[node name="Panel" type="Panel" parent="SelectionBox"]
+visible = false
+top_level = true
+light_mask = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4vgra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionBox"]
+shape = SubResource("RectangleShape2D_n7oq3")
+disabled = true
