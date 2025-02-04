@@ -44,7 +44,8 @@ position = Vector2(369, -339)
 rotation = 1.0513
 shadow_enabled = true
 
-[node name="SelectionBox" parent="." instance=ExtResource("2_ru5dn")]
+[node name="SelectionBox" parent="." node_paths=PackedStringArray("unit_manager") instance=ExtResource("2_ru5dn")]
+unit_manager = NodePath("../UnitManager")
 
 [node name="Camera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -62,7 +63,8 @@ tile_map_data = PackedByteArray("AAD6/wUAAwAAAAAAAAD7/wUAAwAAAAAAAAD8/wUAAwAAAAA
 tile_set = SubResource("TileSet_cbhpm")
 rendering_quadrant_size = 64
 
-[node name="UnitControl" parent="." node_paths=PackedStringArray("unit_manager") instance=ExtResource("5_akogp")]
+[node name="UnitControl" parent="." node_paths=PackedStringArray("selection_box", "unit_manager") instance=ExtResource("5_akogp")]
+selection_box = NodePath("../SelectionBox")
 unit_manager = NodePath("../UnitManager")
 
 [node name="UnitManager" type="Node" parent="."]
@@ -84,5 +86,3 @@ position = Vector2(454, 140)
 position = Vector2(-490, 84)
 
 [node name="Enemies" type="Node2D" parent="."]
-
-[connection signal="move_command" from="Camera" to="." method="_on_move_command"]

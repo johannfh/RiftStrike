@@ -8,5 +8,3 @@ anchors_preset = 0
 script = ExtResource("1_dfk50")
 
 [node name="Node" type="Node" parent="."]
-
-[connection signal="selection_changed" from="." to="." method="_on_selection_changed"]

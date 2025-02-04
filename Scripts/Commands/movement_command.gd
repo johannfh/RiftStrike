@@ -1,10 +1,10 @@
-class_name GlobalMovementCommand extends Command
+class_name MovementCommand extends Command
 
 var target: Vector2
 
 func _init(_target: Vector2) -> void:
 	target = _target
-	type = CommandsComponent.CommandTypes.Movement
+	type = Command.Type.Movement
 
 func _to_string() -> String:
-	return "GlobalMovementCommand"
+	return "MovementCommand"

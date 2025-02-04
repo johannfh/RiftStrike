@@ -18,7 +18,8 @@ script = ExtResource("1_m5xo3")
 [node name="CommandsComponent" parent="." instance=ExtResource("2_jwl36")]
 supported = Array[int]([0, 1, 2, 4, 5])
 
-[node name="SelectableComponent" parent="." instance=ExtResource("2_rj4bk")]
+[node name="SelectableComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_rj4bk")]
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableComponent"]
 position = Vector2(0, -7)

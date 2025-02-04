@@ -1,4 +1,15 @@
 class_name SelectableComponent extends Area2D
 
-var state: Utils.SelectionState = Utils.SelectionState.NotSelected
-var commands: Array[Command] = []
+@export var parent: Unit
+
+signal selection_changed(unit: Unit, selected: bool)
+
+var selected: bool = false:
+	set(v):
+		# when new state is different
+		if selected != v:
+			print("%s now selected: %s" % [parent.name, v])
+			selection_changed.emit(parent, v)
+		selected = v
+	get:
+		return selected

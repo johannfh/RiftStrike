@@ -6,8 +6,6 @@ extends Camera2D
 const MIN_ZOOM = Vector2(0.1, 0.1)
 const MAX_ZOOM = Vector2(1, 1)
 
-signal move_command(target: Vector2, append: bool)
-
 func _process(delta: float) -> void:
 	var direction = Vector2.ZERO
 	
@@ -16,11 +14,6 @@ func _process(delta: float) -> void:
 	
 	direction = direction.normalized()
 	position += direction * delta * camera_move_speed
-	
-	if Input.is_action_just_pressed("right_click"):
-		var appendCommand = Input.is_action_pressed("shift")
-		var mouseGlobalPos = get_viewport().get_final_transform().basis_xform_inv(get_global_mouse_position())
-		move_command.emit(mouseGlobalPos, appendCommand)
 	
 	var zoom_in = Input.is_action_just_released("zoom_in")
 	var zoom_out = Input.is_action_just_released("zoom_out")

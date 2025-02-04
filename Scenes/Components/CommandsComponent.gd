@@ -1,13 +1,5 @@
 class_name CommandsComponent extends Node
 
-var commands: Array[Command] = []
-@export var supported: Array[CommandTypes] = []
+signal command(cmd: Command, append: bool)
 
-enum CommandTypes {
-	Movement,
-	Attack,
-	Stop,
-	Cloak,
-	Siege,
-	Unsiege,
-}
+@export var supported: Array[Command.Type] = []

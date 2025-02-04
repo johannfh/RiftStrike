@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" path="res://Scenes/SelectionBox.gd" id="1_8mck7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7oq3"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vgra"]
 bg_color = Color(0.486275, 0.839216, 1, 0.25098)
 border_width_left = 5
@@ -13,14 +11,12 @@ border_width_bottom = 5
 border_color = Color(1.34766e-06, 0.702207, 0.974052, 1)
 border_blend = true
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7oq3"]
+
 [node name="SelectionBox" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_8mck7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_n7oq3")
-disabled = true
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
@@ -29,3 +25,7 @@ light_mask = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4vgra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n7oq3")
+disabled = true

@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c236q0rc37124"]
+[gd_scene load_steps=12 format=3 uid="uid://c236q0rc37124"]
 
 [ext_resource type="Script" path="res://Units/Sniper/Sniper.gd" id="1_msh00"]
 [ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Scenes/Components/hitbox_component.tscn" id="2_1u4k4"]
 [ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://Assets/SmileyHappy.png" id="2_d8udp"]
-[ext_resource type="StyleBox" uid="uid://b3iiicrirjigk" path="res://Assets/Styles/unit_hovering.tres" id="2_q71rg"]
 [ext_resource type="PackedScene" uid="uid://dvtwi7txgg32b" path="res://Scenes/Components/commands_component.tscn" id="2_qrq3p"]
 [ext_resource type="PackedScene" uid="uid://cvljta2rymgto" path="res://Scenes/Components/selectable_component.tscn" id="2_yssty"]
 [ext_resource type="StyleBox" uid="uid://dhr4wcoll1lqo" path="res://Assets/Styles/unit_selected.tres" id="3_u06ye"]
@@ -30,21 +29,15 @@ position = Vector2(0, 10)
 scale = Vector2(3.12326, -1.08861)
 shape = SubResource("RectangleShape2D_62ifi")
 
-[node name="SelectableComponent" parent="." instance=ExtResource("2_yssty")]
+[node name="SelectableComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_yssty")]
+parent = NodePath("..")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="SelectableComponent"]
 position = Vector2(0, -7.55695)
 scale = Vector2(3.12326, -1.08861)
 shape = SubResource("RectangleShape2D_kl7p5")
 
-[node name="PanelHovering" type="Panel" parent="."]
-offset_left = -30.0
-offset_right = 30.0
-offset_bottom = 20.0
-theme_override_styles/panel = ExtResource("2_q71rg")
-
 [node name="PanelSelected" type="Panel" parent="."]
-visible = false
 offset_left = -30.0
 offset_right = 30.0
 offset_bottom = 20.0
