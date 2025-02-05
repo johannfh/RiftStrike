@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c00jkcawsyrn8"]
+[gd_scene load_steps=5 format=3 uid="uid://c00jkcawsyrn8"]
 
 [ext_resource type="Script" path="res://scripts/units/ShockTrooper.cs" id="1_8rt8p"]
+[ext_resource type="PackedScene" uid="uid://2s2j7h68riq3" path="res://scenes/components/command_component.tscn" id="2_3dj8p"]
 [ext_resource type="Texture2D" uid="uid://cugenjp5upy8v" path="res://icon.svg" id="2_y1ase"]
+[ext_resource type="Resource" uid="uid://dcrsu6u53uwwy" path="res://scripts/units/ShockTrooperKeyMap.tres" id="3_t1n6q"]
 
 [node name="ShockTrooper" type="Node2D"]
 script = ExtResource("1_8rt8p")
+
+[node name="CommandComponent" parent="." instance=ExtResource("2_3dj8p")]
+keyMap = ExtResource("3_t1n6q")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(0, -44)
