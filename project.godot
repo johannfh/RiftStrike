@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 Utils="*res://Scripts/Utils.gd"
 UnitFactory="*res://Scripts/UnitFactory.gd"
 
+[dotnet]
+
+project/assembly_name="RiftStrike"
+
 [global_group]
 
 selectable_components="All `SelectableComponent`s are part of this group"

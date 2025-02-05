@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://3eehd4uerkti"]
 
-[ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://Assets/SmileyHappy.png" id="1_7vk2b"]
-[ext_resource type="Texture2D" uid="uid://sodfmegoenu4" path="res://Assets/SmileySad.png" id="2_nrbnt"]
+[ext_resource type="Texture2D" uid="uid://du4ayhs7jabx7" path="res://assets/SmileyHappy.png" id="1_7vk2b"]
+[ext_resource type="Texture2D" uid="uid://sodfmegoenu4" path="res://assets/SmileySad.png" id="2_nrbnt"]
 
 [resource]
 animations = [{
