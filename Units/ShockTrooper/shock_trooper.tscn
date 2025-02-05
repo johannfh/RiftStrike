@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvijsoqctaoqf"]
+
+[ext_resource type="Script" path="res://Units/ShockTrooper/ShockTrooper.gd" id="1_l682h"]
+[ext_resource type="PackedScene" uid="uid://cj4h0ijo1f6xm" path="res://Scenes/Components/movement_component.tscn" id="2_kndvp"]
+[ext_resource type="PackedScene" uid="uid://cvljta2rymgto" path="res://Scenes/Components/selectable_component.tscn" id="2_nayoo"]
+[ext_resource type="PackedScene" uid="uid://dvtwi7txgg32b" path="res://Scenes/Components/commands_component.tscn" id="2_wlsp7"]
+[ext_resource type="PackedScene" uid="uid://d0dfo2rivy4bx" path="res://Scenes/Components/pathfind_component.tscn" id="3_eigr4"]
+[ext_resource type="PackedScene" uid="uid://bbe3ucwdqcmgu" path="res://Scenes/Components/health_component.tscn" id="4_ns8fu"]
+[ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Scenes/Components/hitbox_component.tscn" id="5_54puw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_poqu8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0viy7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xqwc"]
+
+[node name="ShockTrooper" type="CharacterBody2D"]
+script = ExtResource("1_l682h")
+
+[node name="CommandsComponent" parent="." instance=ExtResource("2_wlsp7")]
+supported = Array[int]([1, 10, 20])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_poqu8")
+disabled = true
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("controlled_node") instance=ExtResource("2_kndvp")]
+controlled_node = NodePath("..")
+
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("movement_component") instance=ExtResource("3_eigr4")]
+movement_component = NodePath("../MovementComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_ns8fu")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_54puw")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -21)
+scale = Vector2(2.06591, 2.28867)
+shape = SubResource("RectangleShape2D_0viy7")
+
+[node name="SelectableComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_nayoo")]
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableComponent"]
+scale = Vector2(2.45614, 0.672727)
+shape = SubResource("RectangleShape2D_3xqwc")
+
+[connection signal="command" from="CommandsComponent" to="." method="_on_command"]

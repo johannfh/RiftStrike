@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c236q0rc37124"]
+[gd_scene load_steps=13 format=3 uid="uid://c236q0rc37124"]
 
 [ext_resource type="Script" path="res://Units/Sniper/Sniper.gd" id="1_msh00"]
 [ext_resource type="PackedScene" uid="uid://dexbgihkuueft" path="res://Scenes/Components/hitbox_component.tscn" id="2_1u4k4"]
@@ -10,18 +10,25 @@
 [ext_resource type="PackedScene" uid="uid://cj4h0ijo1f6xm" path="res://Scenes/Components/movement_component.tscn" id="8_ots8i"]
 [ext_resource type="PackedScene" uid="uid://d0dfo2rivy4bx" path="res://Scenes/Components/pathfind_component.tscn" id="9_7342w"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1wib"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ifi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kl7p5"]
 size = Vector2(20, 50)
 
-[node name="Sniper" type="Node2D"]
+[node name="Sniper" type="CharacterBody2D"]
 script = ExtResource("1_msh00")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m1wib")
+disabled = true
 
 [node name="CommandsComponent" parent="." instance=ExtResource("2_qrq3p")]
 supported = Array[int]([1, 10, 20, 100, 101])
 
-[node name="HitboxComponent" parent="." instance=ExtResource("2_1u4k4")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_1u4k4")]
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false
