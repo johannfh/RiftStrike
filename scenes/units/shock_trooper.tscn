@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c00jkcawsyrn8"]
+
+[ext_resource type="Script" path="res://scripts/units/ShockTrooper.cs" id="1_8rt8p"]
+[ext_resource type="Texture2D" uid="uid://cugenjp5upy8v" path="res://icon.svg" id="2_y1ase"]
+
+[node name="ShockTrooper" type="Node2D"]
+script = ExtResource("1_8rt8p")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -44)
+scale = Vector2(0.62632, 0.62632)
+texture = ExtResource("2_y1ase")
