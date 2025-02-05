@@ -15,11 +15,6 @@ run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Utils="*res://Scripts/Utils.gd"
-UnitFactory="*res://Scripts/UnitFactory.gd"
-
 [dotnet]
 
 project/assembly_name="RiftStrike"
