@@ -8,6 +8,7 @@
 script = ExtResource("1_8rt8p")
 
 [node name="CommandComponent" parent="." instance=ExtResource("2_3dj8p")]
+supported = [0, 1, 2]
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(0, -44)
