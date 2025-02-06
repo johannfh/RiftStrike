@@ -2,3 +2,6 @@
 .godot/
 /android/
 *.tmp
+
+# Editor Configs
+.vscode/

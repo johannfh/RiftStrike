@@ -3,6 +3,7 @@ using Godot;
 namespace Riftstrike.scripts.commands {
     [GlobalClass]
     public partial class MoveCommand : Command {
+
         public Vector2 target;
 
         public MoveCommand() {
@@ -11,6 +12,10 @@ namespace Riftstrike.scripts.commands {
 
         public MoveCommand(Vector2 target) {
             this.target = target;
+        }
+
+        public override CommandType GetCommandType() {
+            return CommandType.Move;
         }
     }
 }
