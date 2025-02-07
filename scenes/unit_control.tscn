@@ -1,9 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3dqew7y0cdfq"]
+[gd_scene load_steps=5 format=3 uid="uid://b3dqew7y0cdfq"]
 
 [ext_resource type="Script" path="res://scripts/ui/SelectionBox.cs" id="1_iy82a"]
 [ext_resource type="Script" path="res://scripts/ui/UnitControl.cs" id="1_rmpru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ucjfu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30ag3"]
+bg_color = Color(0.172549, 0.615686, 1, 0.113725)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.474088, 0.785084, 1)
+border_blend = true
 
 [node name="UnitControl" type="Control"]
 layout_mode = 3
@@ -19,9 +28,11 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_iy82a")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionBox"]
+shape = SubResource("RectangleShape2D_ucjfu")
+debug_color = Color(0.370381, 0.477667, 1, 0.42)
+
 [node name="Panel" type="Panel" parent="SelectionBox"]
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionBox"]
-shape = SubResource("RectangleShape2D_ucjfu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_30ag3")

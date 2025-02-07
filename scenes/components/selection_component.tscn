@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ljd2sxwh38r"]
+
+[ext_resource type="Script" path="res://scripts/components/SelectionComponent.cs" id="1_4jt57"]
+
+[node name="SelectionComponent" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_4jt57")

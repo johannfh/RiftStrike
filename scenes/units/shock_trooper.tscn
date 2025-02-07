@@ -1,11 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://c00jkcawsyrn8"]
+[gd_scene load_steps=7 format=3 uid="uid://c00jkcawsyrn8"]
 
 [ext_resource type="Script" path="res://scripts/units/ShockTrooper.cs" id="1_8rt8p"]
 [ext_resource type="PackedScene" uid="uid://2s2j7h68riq3" path="res://scenes/components/command_component.tscn" id="2_3dj8p"]
+[ext_resource type="PackedScene" uid="uid://ljd2sxwh38r" path="res://scenes/components/selection_component.tscn" id="2_o23id"]
 [ext_resource type="Texture2D" uid="uid://cugenjp5upy8v" path="res://icon.svg" id="2_y1ase"]
 
-[node name="ShockTrooper" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_tf1a4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1f4b"]
+size = Vector2(86, 90)
+
+[node name="ShockTrooper" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_8rt8p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tf1a4")
+disabled = true
+
+[node name="SelectionComponent" parent="." instance=ExtResource("2_o23id")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
+position = Vector2(0, -45)
+shape = SubResource("RectangleShape2D_b1f4b")
+debug_color = Color(0.370381, 0.477667, 1, 0.42)
 
 [node name="CommandComponent" parent="." instance=ExtResource("2_3dj8p")]
 supported = [0, 1, 2]

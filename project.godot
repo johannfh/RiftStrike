@@ -180,6 +180,7 @@ cycle_unit_types={
 2d_physics/layer_1="Units"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Selection"
+2d_physics/layer_4="Walls"
 
 [rendering]
 
