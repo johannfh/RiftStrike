@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3 uid="uid://mqoy58571w2p"]
+
+[ext_resource type="Script" path="res://scripts/units/ShockTrooperProjectile.cs" id="1_8ome6"]
+[ext_resource type="Texture2D" uid="uid://vmkfda50xefx" path="res://assets/units/shock_trooper/ShockProjectile.png" id="1_dg5ax"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpnrb"]
+size = Vector2(64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpnia"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg35y"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy5pc"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qico"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(192, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ankt1"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(256, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3g4x"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(320, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b7ma"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(384, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00vym"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(448, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqfxg"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(512, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nffn"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(576, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2dgo"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(640, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orwya"]
+atlas = ExtResource("1_dg5ax")
+region = Rect2(704, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hodil"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpnia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg35y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy5pc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qico")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ankt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3g4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1b7ma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00vym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqfxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nffn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2dgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_orwya")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="ShockTrooperProjectile" type="Area2D"]
+script = ExtResource("1_8ome6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_vpnrb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hodil")

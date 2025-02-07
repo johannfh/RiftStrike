@@ -13,14 +13,30 @@ namespace Riftstrike.scripts.ui {
 		private readonly List<Unit> selectedUnits = new();
 
 		[Export] private UnitManager unitManager;
-		[Export] private Camera2D playerCamera;
+
+		[ExportGroup("Camera Settings")]
+		[Export] private Camera2D camera;
+		[Export] private float cameraZoomSensitivity;
+		[Export] private float cameraZoomMinimum;
+		[Export] private float cameraZoomMaximum;
 
 		public override void _Ready() {
 			selectionBox = GetNode<SelectionBox>("SelectionBox");
 			selectionBox.OnSelection += OnSelection;
 		}
 
-		private void OnSelection(Array<SelectionComponent> selections, bool append) {
+        public override void _Process(double delta) {
+            var directionIn = Input.IsActionJustReleased("zoom_in") ? 1 : 0;
+			var directionOut = Input.IsActionJustReleased("zoom_out") ? -1 : 0;
+			var scrollDirection = directionIn + directionOut;
+			var scrollVelocity = scrollDirection * cameraZoomSensitivity;
+			camera.Zoom = (camera.Zoom + new Vector2(scrollVelocity, scrollVelocity)).Clamp(
+				new Vector2(cameraZoomMinimum, cameraZoomMinimum),
+				new Vector2(cameraZoomMaximum, cameraZoomMaximum)
+			);
+        }
+
+        private void OnSelection(Array<SelectionComponent> selections, bool append) {
 			GD.Print($"Units: []");
 
 			if (!append) {

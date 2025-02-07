@@ -6,9 +6,12 @@
 
 [node name="World" type="Node2D"]
 
-[node name="UI" parent="." node_paths=PackedStringArray("unitManager", "playerCamera") instance=ExtResource("1_nmlgs")]
+[node name="UI" parent="." node_paths=PackedStringArray("unitManager", "camera") instance=ExtResource("1_nmlgs")]
 unitManager = NodePath("../UnitManager")
-playerCamera = NodePath("../Camera2D")
+camera = NodePath("../Camera2D")
+cameraZoomSensitivity = 0.1
+cameraZoomMinimum = 0.1
+cameraZoomMaximum = 3.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

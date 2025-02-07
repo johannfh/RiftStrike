@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scripts/units/ShockTrooper.cs" id="1_8rt8p"]
 [ext_resource type="PackedScene" uid="uid://2s2j7h68riq3" path="res://scenes/components/command_component.tscn" id="2_3dj8p"]
 [ext_resource type="PackedScene" uid="uid://ljd2sxwh38r" path="res://scenes/components/selection_component.tscn" id="2_o23id"]
-[ext_resource type="Texture2D" uid="uid://cugenjp5upy8v" path="res://icon.svg" id="2_y1ase"]
+[ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://assets/units/shock_trooper/ShockTrooper.png" id="4_foj3x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tf1a4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1f4b"]
-size = Vector2(100, 100)
+size = Vector2(100, 140)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ofgl"]
 bg_color = Color(0.745098, 0.415686, 1, 0.176471)
@@ -32,17 +32,23 @@ script = ExtResource("1_8rt8p")
 shape = SubResource("CircleShape2D_tf1a4")
 disabled = true
 
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+position = Vector2(50, -78)
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="SelectionComponent" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_o23id")]
 unit = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
 visible = false
-position = Vector2(0, -50)
+position = Vector2(0, -70)
 shape = SubResource("RectangleShape2D_b1f4b")
 
 [node name="SelectionBox" type="Panel" parent="."]
 offset_left = -50.0
-offset_top = -100.0
+offset_top = -140.0
 offset_right = 50.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4ofgl")
 metadata/_edit_use_anchors_ = true
@@ -51,6 +57,6 @@ metadata/_edit_use_anchors_ = true
 supported = [0, 1, 2]
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -50)
-scale = Vector2(0.700417, 0.700417)
-texture = ExtResource("2_y1ase")
+position = Vector2(0, -68)
+scale = Vector2(0.519445, 0.519445)
+texture = ExtResource("4_foj3x")
