@@ -1,4 +1,5 @@
 using Godot;
+using Riftstrike.scripts.units;
 
 namespace Riftstrike.scripts.components {
     public interface ISelectable {
@@ -8,6 +9,8 @@ namespace Riftstrike.scripts.components {
     [GlobalClass]
     public partial class SelectionComponent : Area2D {
         [Signal] public delegate void SelectionChangedEventHandler(bool selected);
+
+        [Export] public Unit unit;
 
         private bool selected = false;
 

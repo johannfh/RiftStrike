@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhx5y3ahd8cw3"]
+
+[ext_resource type="PackedScene" uid="uid://b3dqew7y0cdfq" path="res://scenes/ui.tscn" id="1_nmlgs"]
+[ext_resource type="PackedScene" uid="uid://c00jkcawsyrn8" path="res://scenes/units/shock_trooper.tscn" id="2_mt8ak"]
+[ext_resource type="Script" path="res://scripts/units/UnitManager.cs" id="3_6jhjf"]
+
+[node name="World" type="Node2D"]
+
+[node name="UI" parent="." node_paths=PackedStringArray("unitManager", "playerCamera") instance=ExtResource("1_nmlgs")]
+unitManager = NodePath("../UnitManager")
+playerCamera = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="UnitManager" type="Node" parent="."]
+script = ExtResource("3_6jhjf")
+
+[node name="ShockTrooper" parent="UnitManager" instance=ExtResource("2_mt8ak")]
+position = Vector2(347, 300)
+
+[node name="ShockTrooper2" parent="UnitManager" instance=ExtResource("2_mt8ak")]
+position = Vector2(-236, -106)
+
+[node name="ShockTrooper3" parent="UnitManager" instance=ExtResource("2_mt8ak")]
+position = Vector2(-328, 216)
+
+[node name="ShockTrooper4" parent="UnitManager" instance=ExtResource("2_mt8ak")]
+position = Vector2(290, -136)
+
+[node name="ShockTrooper5" parent="UnitManager" instance=ExtResource("2_mt8ak")]
+position = Vector2(32, 134)

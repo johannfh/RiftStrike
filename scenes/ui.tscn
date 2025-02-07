@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3dqew7y0cdfq"]
 
 [ext_resource type="Script" path="res://scripts/ui/SelectionBox.cs" id="1_iy82a"]
-[ext_resource type="Script" path="res://scripts/ui/UnitControl.cs" id="1_rmpru"]
+[ext_resource type="Script" path="res://scripts/ui/UI.cs" id="1_rmpru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ucjfu"]
 
@@ -30,7 +30,6 @@ script = ExtResource("1_iy82a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionBox"]
 shape = SubResource("RectangleShape2D_ucjfu")
-debug_color = Color(0.370381, 0.477667, 1, 0.42)
 
 [node name="Panel" type="Panel" parent="SelectionBox"]
 offset_right = 40.0

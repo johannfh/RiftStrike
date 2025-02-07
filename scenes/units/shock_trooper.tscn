@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c00jkcawsyrn8"]
+[gd_scene load_steps=8 format=3 uid="uid://c00jkcawsyrn8"]
 
 [ext_resource type="Script" path="res://scripts/units/ShockTrooper.cs" id="1_8rt8p"]
 [ext_resource type="PackedScene" uid="uid://2s2j7h68riq3" path="res://scenes/components/command_component.tscn" id="2_3dj8p"]
@@ -8,7 +8,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_tf1a4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1f4b"]
-size = Vector2(86, 90)
+size = Vector2(100, 100)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ofgl"]
+bg_color = Color(0.745098, 0.415686, 1, 0.176471)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.694729, 0.212557, 0.999997, 0.537255)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ShockTrooper" type="CharacterBody2D"]
 collision_layer = 8
@@ -19,17 +32,25 @@ script = ExtResource("1_8rt8p")
 shape = SubResource("CircleShape2D_tf1a4")
 disabled = true
 
-[node name="SelectionComponent" parent="." instance=ExtResource("2_o23id")]
+[node name="SelectionComponent" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_o23id")]
+unit = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
-position = Vector2(0, -45)
+visible = false
+position = Vector2(0, -50)
 shape = SubResource("RectangleShape2D_b1f4b")
-debug_color = Color(0.370381, 0.477667, 1, 0.42)
+
+[node name="SelectionBox" type="Panel" parent="."]
+offset_left = -50.0
+offset_top = -100.0
+offset_right = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ofgl")
+metadata/_edit_use_anchors_ = true
 
 [node name="CommandComponent" parent="." instance=ExtResource("2_3dj8p")]
 supported = [0, 1, 2]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(0, -44)
-scale = Vector2(0.62632, 0.62632)
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -50)
+scale = Vector2(0.700417, 0.700417)
 texture = ExtResource("2_y1ase")

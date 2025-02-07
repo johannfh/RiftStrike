@@ -1,4 +1,3 @@
-using System.IO;
 using Godot;
 using Godot.Collections;
 using Riftstrike.scripts.commands;
@@ -6,7 +5,7 @@ using Riftstrike.scripts.components;
 
 namespace Riftstrike.scripts.ui {
     public partial class SelectionBox : Area2D {
-        [Signal] public delegate void OnSelectionEventHandler(Array<SelectionComponent> selections);
+        [Signal] public delegate void OnSelectionEventHandler(Array<SelectionComponent> selections, bool append);
 
         private Panel panel;
         private CollisionShape2D collisionShape;
@@ -53,8 +52,8 @@ namespace Riftstrike.scripts.ui {
             }
             if (Input.IsActionJustReleased("left_click")) {
                 var selections = GetOverlappingSelectionComponents();
-                EmitSignal(SignalName.OnSelection, selections);
-                GD.Print(selections);
+                var append = Input.IsActionPressed("shift");
+                EmitSignal(SignalName.OnSelection, selections, append);
                 Active = false;
             }
         }

@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cavxjgikd0faq"]
+
+[ext_resource type="Script" path="res://scripts/screens/TitleScreen.cs" id="1_tht8q"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_78enn"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_mkpfx"]
+events = [SubResource("InputEventKey_78enn")]
+
+[node name="TitleScreen" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("1_tht8q")
+metadata/_edit_use_anchors_ = true
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+shortcut = SubResource("Shortcut_mkpfx")
+text = "Start"
+flat = true

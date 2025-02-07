@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="CommandShortcut" load_steps=4 format=3 uid="uid://bssif0vldeh1w"]
+[gd_resource type="Resource" script_class="CommandShortcut" load_steps=6 format=3 uid="uid://bssif0vldeh1w"]
 
 [ext_resource type="Script" path="res://scripts/ui/CommandShortcut.cs" id="1_e2rki"]
+[ext_resource type="Texture2D" uid="uid://cyvxuldf2a4n4" path="res://assets/command_icons/Stop.png" id="1_l8wh8"]
+[ext_resource type="Texture2D" uid="uid://qy4npr3fofcf" path="res://assets/shortcut_icons/KeyS.png" id="3_mhsfp"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_l14cq"]
 device = -1
@@ -14,3 +16,5 @@ events = [SubResource("InputEventKey_l14cq")]
 script = ExtResource("1_e2rki")
 shortcut = SubResource("Shortcut_usq4a")
 type = 0
+commandIcon = ExtResource("1_l8wh8")
+shortcutIcon = ExtResource("3_mhsfp")
