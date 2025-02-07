@@ -16,9 +16,7 @@ namespace Riftstrike.scripts.units {
 			GD.Print("ShockTrooper reporting!");
 			selectionBox = GetNode<Panel>("SelectionBox");
 			selectionBox.Visible = false;
-			GetSelectionComponent().SelectionChanged += (bool value) => selectionBox.Visible = value;
+			GetSelectionComponent().SelectionChanged += value => selectionBox.Visible = value;
 		}
-
-
 	}
 }
