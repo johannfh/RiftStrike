@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3dqew7y0cdfq"]
+
+[ext_resource type="Script" path="res://scripts/ui/SelectionBox.cs" id="1_iy82a"]
+[ext_resource type="Script" path="res://scripts/ui/UnitControl.cs" id="1_rmpru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucjfu"]
+
+[node name="UnitControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rmpru")
+
+[node name="SelectionBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_iy82a")
+
+[node name="Panel" type="Panel" parent="SelectionBox"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionBox"]
+shape = SubResource("RectangleShape2D_ucjfu")
