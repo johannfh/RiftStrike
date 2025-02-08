@@ -37,8 +37,6 @@ namespace Riftstrike.scripts.ui {
         }
 
         private void OnSelection(Array<SelectionComponent> selections, bool append) {
-			GD.Print($"Units: []");
-
 			if (!append) {
 				var newSelectedUnits = selections.Select(s => s.unit);
 				// scan for units to deselect
