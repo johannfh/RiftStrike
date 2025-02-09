@@ -12,10 +12,10 @@ namespace Riftstrike.scripts.game.ui {
 
 		public override void _Ready() {
 			selectionBox = GetNode<SelectionBox>("SelectionBox");
-			selectionBox.OnSelection += OnSelectionUpdateSelection;
+			selectionBox.OnSelection += OnSelection;
 		}
 
-		private void OnSelectionUpdateSelection(Array<SelectionComponent> selections, bool append) {
+		private void OnSelection(Array<SelectionComponent> selections, bool append) {
 			if (!append) {
 				var newSelectedUnits = selections.Select(s => s.unit);
 				// scan for units to deselect
