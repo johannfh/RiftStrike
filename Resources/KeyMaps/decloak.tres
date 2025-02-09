@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="KeyMap" load_steps=2 format=3 uid="uid://bmilri86gi2iu"]
-
-[ext_resource type="Script" path="res://Scripts/KeyMap.gd" id="1_0p3ah"]
-
-[resource]
-script = ExtResource("1_0p3ah")
-type = 101
-input_action = "action_decloak"

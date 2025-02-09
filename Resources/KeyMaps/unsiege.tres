@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="KeyMap" load_steps=2 format=3 uid="uid://dev3i81pnj1hf"]
-
-[ext_resource type="Script" path="res://Scripts/KeyMap.gd" id="1_7yoo5"]
-
-[resource]
-script = ExtResource("1_7yoo5")
-type = 201
-input_action = "action_unsiege"
