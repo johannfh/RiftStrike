@@ -20,6 +20,5 @@ namespace Riftstrike.scripts.game.ui {
                 return null;
             }
         }
-
     }
 }

@@ -5,7 +5,7 @@ namespace Riftstrike.scripts.game {
 	public partial class Camera : Camera2D {
 		[ExportGroup("Move Parameters")]
 		[Export(PropertyHint.Range, "0.1,1,0.05")] public float MoveSensitivity;
-        [Export(PropertyHint.Range, "1,30,1")] public int MovePixelThresold;
+		[Export(PropertyHint.Range, "1,30,1")] public int MovePixelThresold;
 
 		[ExportGroup("Zoom Parameters")]
 		[Export(PropertyHint.Range, "0.05,0.5,0.05")] public float ZoomSensitivity;
@@ -13,19 +13,18 @@ namespace Riftstrike.scripts.game {
 		[Export(PropertyHint.Range, "1,3,0.1")] public float ZoomMaximum;
 
 		public override void _Process(double delta) {
-            base._Process(delta);
-            HandleZoom();
-            HandleMove();
+			base._Process(delta);
+			HandleZoom();
+			HandleMove();
 		}
 
-        private void HandleMove() {
-            var mousePos = GetGlobalMousePosition();
-            var screenRect = GetViewportRect();
-            // GD.Print(screenRect.Size);
-        }
+		private void HandleMove() {
+			var mousePos = GetGlobalMousePosition();
+			var screenRect = GetViewportRect();
+			// GD.Print(screenRect.Size);
+		}
 
-
-        private void HandleZoom() {
+		private void HandleZoom() {
 			var directionIn = Input.IsActionJustReleased("zoom_in") ? 1 : 0;
 			var directionOut = Input.IsActionJustReleased("zoom_out") ? -1 : 0;
 			var scrollDirection = directionIn + directionOut;
@@ -37,7 +36,7 @@ namespace Riftstrike.scripts.game {
 			);
 			if (Input.IsActionJustReleased("zoom_in") || Input.IsActionJustReleased("zoom_out")) {
 				GD.Print($"ZOOM to {Zoom}");
-			};
-        }
-    }
+			}
+		}
+	}
 }

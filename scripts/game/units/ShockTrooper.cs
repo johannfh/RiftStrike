@@ -15,7 +15,7 @@ namespace Riftstrike.scripts.game.units {
 		public CommandComponent GetCommandComponent()
 			=> commandComponent;
 
-        public SelectionComponent GetSelectionComponent()
+		public SelectionComponent GetSelectionComponent()
 			=> selectionComponent;
-    }
+	}
 }

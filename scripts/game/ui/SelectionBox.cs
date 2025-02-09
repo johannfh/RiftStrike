@@ -71,8 +71,6 @@ namespace Riftstrike.scripts.game.ui {
 			return selectionComponents;
 		}
 
-
-
 		private void SetDimensions(Vector2 position, Vector2 size) {
 			panel.Size = size;
 			(collisionShape.Shape as RectangleShape2D).Size = size;

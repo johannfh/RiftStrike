@@ -10,7 +10,6 @@ namespace Riftstrike.scripts.game.ui {
 		private SelectionBox selectionBox;
 		private readonly List<Unit> selectedUnits = new();
 
-
 		public override void _Ready() {
 			selectionBox = GetNode<SelectionBox>("SelectionBox");
 			selectionBox.OnSelection += OnSelection;
@@ -42,5 +41,4 @@ namespace Riftstrike.scripts.game.ui {
 			GD.Print($"Units selected ({selectedUnits.Count}): [{string.Join(", ", selectedUnits.Select(u => u.Name))}]");
 		}
 	}
-
 }
