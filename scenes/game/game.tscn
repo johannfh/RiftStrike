@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy3ijtqxqvfy2"]
+
+[ext_resource type="Script" path="res://scripts/game/Camera.cs" id="1_0y0ub"]
+[ext_resource type="PackedScene" uid="uid://dfv4l3arxb50t" path="res://scenes/game/ui.tscn" id="2_0d8an"]
+[ext_resource type="PackedScene" uid="uid://j3w4vpx4lety" path="res://scenes/game/units/shock_trooper.tscn" id="2_3jnfb"]
+[ext_resource type="Script" path="res://scripts/game/UnitManager.cs" id="3_5neby"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("1_0y0ub")
+ZoomSensitivity = 0.15
+ZoomMinimum = 0.4
+ZoomMaximum = 3.0
+
+[node name="UI" parent="." instance=ExtResource("2_0d8an")]
+
+[node name="UnitManager" type="Node" parent="."]
+script = ExtResource("3_5neby")
+
+[node name="ShockTrooper" parent="UnitManager" instance=ExtResource("2_3jnfb")]

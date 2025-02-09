@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CommandShortcut" load_steps=4 format=3 uid="uid://ibq24kyvoeki"]
+
+[ext_resource type="Script" path="res://scripts/game/ui/CommandShortcut.cs" id="1_7gud4"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4o1wf"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_oj8tv"]
+events = [SubResource("InputEventKey_4o1wf")]
+
+[resource]
+script = ExtResource("1_7gud4")
+shortcut = SubResource("Shortcut_oj8tv")
+command = "attack"
+shortcutType = 1

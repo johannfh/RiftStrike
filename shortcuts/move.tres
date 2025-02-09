@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CommandShortcut" load_steps=4 format=3 uid="uid://drkanh1jqkn4j"]
+
+[ext_resource type="Script" path="res://scripts/game/ui/CommandShortcut.cs" id="1_28qs3"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_xfisj"]
+device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_q0ok8"]
+events = [SubResource("InputEventKey_xfisj")]
+
+[resource]
+script = ExtResource("1_28qs3")
+shortcut = SubResource("Shortcut_q0ok8")
+command = "move"
+shortcutType = 1

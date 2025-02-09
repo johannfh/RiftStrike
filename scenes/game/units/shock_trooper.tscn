@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://j3w4vpx4lety"]
+
+[ext_resource type="Script" path="res://scripts/game/units/ShockTrooper.cs" id="1_62lvh"]
+[ext_resource type="PackedScene" uid="uid://bcsurmhyd4v24" path="res://scenes/game/components/command_component.tscn" id="2_jifcb"]
+[ext_resource type="Texture2D" uid="uid://cbutgngqt53dw" path="res://icon.svg" id="3_3motu"]
+[ext_resource type="PackedScene" uid="uid://dxxrioe7x1kwd" path="res://scenes/game/components/selection_component.tscn" id="3_vjxjc"]
+[ext_resource type="Script" path="res://scenes/game/units/selected_box.gd" id="4_4t3m6"]
+[ext_resource type="StyleBox" uid="uid://drn63acapcnoq" path="res://selected_box_theme.tres" id="4_pcjy5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d83ux"]
+size = Vector2(70, 70)
+
+[node name="ShockTrooper" type="Node2D"]
+script = ExtResource("1_62lvh")
+
+[node name="CommandComponent" parent="." instance=ExtResource("2_jifcb")]
+supportedCommandTypes = ["stop", "move", "attack"]
+
+[node name="SelectionComponent" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("3_vjxjc")]
+unit = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
+visible = false
+shape = SubResource("RectangleShape2D_d83ux")
+
+[node name="SelectedBox" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_pcjy5")
+script = ExtResource("4_4t3m6")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_3motu")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="SelectionChanged" from="SelectionComponent" to="SelectedBox" method="_on_selection_component_selection_changed"]

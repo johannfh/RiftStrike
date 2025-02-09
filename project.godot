@@ -11,14 +11,9 @@ config_version=5
 [application]
 
 config/name="RiftStrike"
-run/main_scene="res://Scenes/TitleScreen/title_screen.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://scenes/game/game.tscn"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
-
-[autoload]
-
-Utils="*res://Scripts/Utils.gd"
-UnitFactory="*res://Scripts/UnitFactory.gd"
 
 [dotnet]
 

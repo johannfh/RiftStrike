@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfv4l3arxb50t"]
+
+[ext_resource type="Script" path="res://scripts/game/ui/UI.cs" id="1_gt5av"]
+[ext_resource type="Script" path="res://scripts/game/ui/SelectionBox.cs" id="2_wslh3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxfjw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uriu3"]
+bg_color = Color(0.684259, 0.457724, 1, 0.321569)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.737532, 0.362449, 1, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gt5av")
+
+[node name="SelectionBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("2_wslh3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionBox"]
+visible = false
+shape = SubResource("RectangleShape2D_lxfjw")
+
+[node name="Panel" type="Panel" parent="SelectionBox"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uriu3")
