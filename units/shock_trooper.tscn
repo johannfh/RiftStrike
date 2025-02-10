@@ -12,23 +12,29 @@ size = Vector2(100, 100)
 radius = 25.0
 
 [node name="Unit" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_6iwcr")
 speed = 400.0
 
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -43.5645)
+scale = Vector2(0.756804, 0.756804)
+texture = ExtResource("4_yapam")
+
 [node name="ClickableComponent" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_ijwjb")]
+position = Vector2(0, 6.43546)
 unit = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableComponent"]
+visible = false
+position = Vector2(0, -50)
 shape = SubResource("RectangleShape2D_ngchn")
 
 [node name="PushComponent" parent="." instance=ExtResource("3_3apwo")]
+position = Vector2(0, -43.5645)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
 shape = SubResource("CircleShape2D_5na8r")
-
-[node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.756804, 0.756804)
-texture = ExtResource("4_yapam")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
