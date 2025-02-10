@@ -1,9 +1,11 @@
 using System;
+using System.Linq;
 using Godot;
+using Riftstrike.components;
 
 namespace Riftstrike {
     public partial class SelectionBox : Area2D {
-        private bool Active = false;
+        private bool IsDragging = false;
 
         private Panel Panel => GetNode<Panel>("Panel");
         private CollisionShape2D Collider
@@ -15,7 +17,7 @@ namespace Riftstrike {
             base._Ready();
             // Timer.Timeout is emitted when the UnitSelectionManager did not
             // handle the left_click (e.g. longer than X milliseconds debounce)
-            UnitSelectionManager.Instance.SelectUnitTimer.Timeout += () => Active = true;
+            UnitSelectionManager.Instance.DragStart += () => IsDragging = true;
         }
 
         private Vector2 start = Vector2.Zero;
@@ -28,23 +30,30 @@ namespace Riftstrike {
             end = mousePos;
 
             // TODO: HITBOX AND VISUAL UPDATES
-            Panel.Visible = Active;
-            Collider.Disabled = !Active;
+            Panel.Visible = IsDragging;
+            Collider.Disabled = !IsDragging;
 
             // Update shapes
-            var topLeft = start.Min(end);
-            var bottomRight = start.Max(end);
+            var topLeft = IsDragging ? start.Min(end) : Vector2.Zero;
+            var bottomRight = IsDragging ? start.Max(end) : Vector2.Zero;
 
-            if (Active) {
-                SetDimensions(topLeft, bottomRight - topLeft);
-            }
+            SetDimensions(topLeft, bottomRight - topLeft);
 
             if (Input.IsActionJustReleased("left_click")) {
-                Active = false;
-                var append = Input.IsKeyPressed(Key.Shift);
+                if (!IsDragging) return;
+                GD.Print("Drag end");
+                IsDragging = false;
+                var append = Input.IsActionPressed("shift");
+                var unitsSelected = UnitSelectionManager.Instance.unitsSelected;
+                if (!append) unitsSelected.Clear();
 
-                // TODO: SELECTION
+                var newUnitSelection = GetOverlappingAreas()
+                    .OfType<ClickableComponent>()
+                    .Select(c => c.unit)
+                    .Where(u => !unitsSelected.Contains(u));
                 
+                unitsSelected.AddRange(newUnitSelection);
+                GD.Print($"Units selected: [{string.Join(", ", unitsSelected.Select(u => u.Name))}]");;
             }
         }
 

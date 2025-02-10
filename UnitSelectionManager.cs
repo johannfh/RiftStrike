@@ -4,15 +4,22 @@ using Godot.Collections;
 using Riftstrike.components;
 
 namespace Riftstrike {
+	[GlobalClass]
 	public partial class UnitSelectionManager : Node2D {
+		// TODO: Create Instance when none is found?
+		// Also maybe not because it might not be intended that way.
+		// (More per-scene control)
 		public static UnitSelectionManager Instance { get; set; }
 
 		// The Timer instance specifies the max duration for a mouse down
 		// to count as a click. Longer actions will count as things like Dragging.
 		// TODO: Expose a signal that is connected to SelectUnitTimer.Timeout
 		// to hide the internals (private Timer; [Signal] public delegate).
-		private static readonly double SelectUnitsWaitTime = 0.15;
-		public Timer SelectUnitTimer;
+		[Export] private double dragThreshold = 5;
+		private Vector2 dragStartPos = Vector2.Zero;
+		private Vector2 dragEndPos = Vector2.Zero;
+		private bool IsDragging = false;
+		[Signal] public delegate void DragStartEventHandler();
 
 		public override void _Ready() {
 			base._Ready();
@@ -21,27 +28,26 @@ namespace Riftstrike {
 			} else {
 				Instance = this;
 			}
-            SelectUnitTimer = new Timer {
-                WaitTime = SelectUnitsWaitTime,
-				OneShot = true,
-            };
-            AddChild(SelectUnitTimer);
+			DragStart += () => GD.Print("Drag start");
 		}
 
 		public override void _Process(double delta) {
 			base._Process(delta);
+			var mousePos = GetGlobalMousePosition();
 			if (Input.IsActionJustPressed("left_click")) {
-				SelectUnitTimer.Start();
+				dragStartPos = mousePos;
+			}
+			dragEndPos = mousePos;
+			if (!IsDragging && Input.IsActionPressed("left_click") && dragStartPos.DistanceTo(dragEndPos) > dragThreshold) {
+				IsDragging = true;
+				EmitSignal(SignalName.DragStart);
 			}
 			if (Input.IsActionJustReleased("left_click")) {
-				if (!SelectUnitTimer.IsStopped()) {
-					SelectUnitTimer.Stop();
-					HandleSelectUnit();
-				}
+				if (!IsDragging) HandleSelectUnit();
+				else IsDragging = false;
 			}
 
 			if (Input.IsActionJustPressed("right_click")) {
-				var mousePos = GetGlobalMousePosition();
 				unitsSelected.OfType<IWalk>()
 					.ForEach(walkable => walkable.WalkTo(mousePos));
 			}
@@ -52,6 +58,7 @@ namespace Riftstrike {
 
 		public void HandleSelectUnit() {
 			var mousePos = GetGlobalMousePosition();
+			GD.Print($"Select unit at {mousePos}");
 
 			var space_state = GetWorld2D().DirectSpaceState;
 			var query = new PhysicsPointQueryParameters2D {

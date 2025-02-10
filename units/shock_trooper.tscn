@@ -34,6 +34,7 @@ shape = SubResource("RectangleShape2D_ngchn")
 position = Vector2(0, -43.5645)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+visible = false
 shape = SubResource("CircleShape2D_5na8r")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
