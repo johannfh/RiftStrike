@@ -10,7 +10,7 @@ namespace Riftstrike {
 
 		[Export] private float speed = 200;
 		[Export] private float pushSpeed = 50;
-		private bool targetReached => !targets.Any();
+		private bool AllTargetsCleared => !targets.Any();
 		private readonly List<Vector2> targets = new();
 
 		private NavigationAgent2D NavAgent
@@ -29,10 +29,10 @@ namespace Riftstrike {
 			if (targets.Any() && NavAgent.TargetPosition != targets.First()) {
 				NavAgent.TargetPosition = targets.First();
 			}
-			if (targets.Any() && NavAgent.IsTargetReached()) targets.RemoveAt(0);
+			if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) targets.RemoveAt(0);
 			var nextPos = NavAgent.GetNextPathPosition();
 
-			if (!targetReached) {
+			if (!AllTargetsCleared) {
 				GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
 			}
 			GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;
