@@ -48,8 +48,9 @@ namespace Riftstrike {
 			}
 
 			if (Input.IsActionJustPressed("right_click")) {
+				var append = Input.IsActionPressed("shift");
 				unitsSelected.OfType<IWalk>()
-					.ForEach(walkable => walkable.WalkTo(mousePos));
+					.ForEach(walkable => walkable.WalkTo(mousePos, append));
 			}
 		}
 

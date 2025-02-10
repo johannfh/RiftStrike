@@ -14,6 +14,6 @@ namespace Riftstrike {
 	}
 
 	public interface IWalk {
-		public void WalkTo(Vector2 targetPosition);
+		public void WalkTo(Vector2 targetPosition, bool append);
 	}
 }
