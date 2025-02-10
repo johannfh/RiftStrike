@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvljta2rymgto"]
-
-[ext_resource type="Script" path="res://Scenes/Components/SelectableComponent.gd" id="1_cjhnj"]
-
-[node name="SelectableComponent" type="Area2D" groups=["selectable_components"]]
-collision_layer = 4
-collision_mask = 0
-script = ExtResource("1_cjhnj")

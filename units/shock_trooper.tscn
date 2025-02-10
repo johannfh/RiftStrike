@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsq6u6jv05si4"]
+
+[ext_resource type="Script" path="res://units/ShockTrooper.cs" id="1_6iwcr"]
+[ext_resource type="PackedScene" uid="uid://dx6bdls8f6phy" path="res://components/clickable_component.tscn" id="2_ijwjb"]
+[ext_resource type="PackedScene" uid="uid://c4iyefkvp14pk" path="res://components/push_component.tscn" id="3_3apwo"]
+[ext_resource type="Texture2D" uid="uid://nypd10u7bu3u" path="res://icon.svg" id="4_yapam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngchn"]
+size = Vector2(100, 100)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5na8r"]
+radius = 25.0
+
+[node name="Unit" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_6iwcr")
+speed = 400.0
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -43.5645)
+scale = Vector2(0.756804, 0.756804)
+texture = ExtResource("4_yapam")
+
+[node name="ClickableComponent" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_ijwjb")]
+position = Vector2(0, 6.43546)
+unit = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableComponent"]
+visible = false
+position = Vector2(0, -50)
+shape = SubResource("RectangleShape2D_ngchn")
+
+[node name="PushComponent" parent="." instance=ExtResource("3_3apwo")]
+position = Vector2(0, -43.5645)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+shape = SubResource("CircleShape2D_5na8r")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
