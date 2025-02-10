@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Godot.NativeInterop;
 using Riftstrike.components;
 
 namespace Riftstrike {
@@ -44,6 +42,8 @@ namespace Riftstrike {
 				unitsSelected.OfType<IWalk>()
 					.ForEach(walkable => walkable.WalkTo(mousePos));
 			}
+
+
 		}
 
 		public readonly Array<Unit> units = new();
