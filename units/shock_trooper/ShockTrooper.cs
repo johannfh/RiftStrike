@@ -1,9 +1,7 @@
 using Godot;
 using Riftstrike.components;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Riftstrike {
 	public partial class ShockTrooper : Unit, IWalk {
@@ -13,11 +11,29 @@ namespace Riftstrike {
 		private bool AllTargetsCleared => !targets.Any();
 		private readonly List<Vector2> targets = new();
 
-		private NavigationAgent2D NavAgent
+        private NavigationAgent2D NavAgent
 			=> GetNode<NavigationAgent2D>("NavigationAgent2D");
-		
+
 		private PushComponent PushComponent
 			=> GetNode<PushComponent>("PushComponent");
+		
+		private SelectableComponent SelectableComponent
+			=> GetNode<SelectableComponent>("SelectableComponent");
+
+		private Sprite2D Sprite
+			=> GetNode<Sprite2D>("Sprite2D");
+
+		private Panel SelectedPanel
+			=> GetNode<Panel>("SelectedPanel");
+
+		private Panel HoveringPanel
+			=> GetNode<Panel>("HoveringPanel");
+
+		public override void _Process(double delta) {
+			base._Process(delta);
+			SelectedPanel.Visible = SelectableComponent.IsSelected;
+			HoveringPanel.Visible = !SelectableComponent.IsSelected && SelectableComponent.IsHovered;
+		}
 
 		public void WalkTo(Vector2 targetPosition, bool append) {
 			if (!append) targets.Clear();
@@ -33,6 +49,7 @@ namespace Riftstrike {
 			var nextPos = NavAgent.GetNextPathPosition();
 
 			if (!AllTargetsCleared) {
+				Sprite.FlipH = GlobalPosition.DirectionTo(NavAgent.TargetPosition).X < 0;
 				GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
 			}
 			GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;

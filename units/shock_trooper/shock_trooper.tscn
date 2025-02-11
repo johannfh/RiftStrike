@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsq6u6jv05si4"]
+
+[ext_resource type="Script" path="res://units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
+[ext_resource type="PackedScene" uid="uid://dx6bdls8f6phy" path="res://components/selectable_component.tscn" id="2_hi1tb"]
+[ext_resource type="PackedScene" uid="uid://xur2l4anbttr" path="res://components/hitbox_component.tscn" id="3_433u0"]
+[ext_resource type="PackedScene" uid="uid://c4iyefkvp14pk" path="res://components/push_component.tscn" id="4_s7l1k"]
+[ext_resource type="PackedScene" uid="uid://dssm0ryng3nw5" path="res://components/detectable_component.tscn" id="5_qeq2l"]
+[ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://units/selected_style_box.tres" id="6_7cpyp"]
+[ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://assets/ShockTrooper.png" id="6_kpmcn"]
+[ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://units/hovering_style_box.tres" id="7_gqle7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngchn"]
+size = Vector2(150, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2e8r"]
+size = Vector2(150, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5na8r"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jg2aw"]
+
+[node name="Unit" type="Node2D"]
+position = Vector2(0, 5)
+scale = Vector2(1, 0.75)
+script = ExtResource("1_uintk")
+speed = 400.0
+
+[node name="SelectableComponent" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_hi1tb")]
+unit = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableComponent"]
+visible = false
+shape = SubResource("RectangleShape2D_ngchn")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_433u0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_u2e8r")
+
+[node name="PushComponent" parent="." instance=ExtResource("4_s7l1k")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_5na8r")
+
+[node name="DetectableComponent" parent="." node_paths=PackedStringArray("Parent") instance=ExtResource("5_qeq2l")]
+Parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableComponent"]
+shape = SubResource("CircleShape2D_jg2aw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="SelectedPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("6_7cpyp")
+
+[node name="HoveringPanel" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_gqle7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -122.667)
+texture = ExtResource("6_kpmcn")

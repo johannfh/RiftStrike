@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Godot;
 
@@ -9,7 +8,8 @@ namespace Riftstrike {
         Units = 1 << 0,
         Enemies = 1 << 1,
 
-        Selection = 1 << 24,
+        Selectable = 1 << 24,
+        Selection = 1 << 25,
     }
 
     public static class IEnumerableExtensions {

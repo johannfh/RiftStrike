@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://plo54kmu88jf"]
+
+[ext_resource type="Texture2D" uid="uid://vmkfda50xefx" path="res://assets/ShockProjectile.png" id="1_tlabx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_770b7"]
+size = Vector2(60, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmqbf"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejeph"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mukc"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1rbq"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(192, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnx8r"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(256, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlau3"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(320, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5dmx"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(384, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgbg1"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(448, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmeex"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(512, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icd5o"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(576, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpbb4"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(640, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82a31"]
+atlas = ExtResource("1_tlabx")
+region = Rect2(704, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o0282"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmqbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejeph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mukc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1rbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnx8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlau3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5dmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgbg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmeex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icd5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpbb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82a31")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ShockTrooperProjectile" type="Area2D"]
+scale = Vector2(0.7, 0.7)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_770b7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o0282")

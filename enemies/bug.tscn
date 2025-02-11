@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://xepapvohrh5"]
+
+[ext_resource type="Script" path="res://enemies/Bug.cs" id="1_oqb0f"]
+[ext_resource type="PackedScene" uid="uid://c4iyefkvp14pk" path="res://components/push_component.tscn" id="2_sx4cp"]
+[ext_resource type="Texture2D" uid="uid://nypd10u7bu3u" path="res://icon.svg" id="3_r57bk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l62n"]
+size = Vector2(50, 50)
+
+[node name="Bug" type="Node2D"]
+script = ExtResource("1_oqb0f")
+
+[node name="PushComponent" parent="." instance=ExtResource("2_sx4cp")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_3l62n")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -25)
+scale = Vector2(0.36602, 0.36602)
+texture = ExtResource("3_r57bk")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

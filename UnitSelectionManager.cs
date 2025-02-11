@@ -52,6 +52,20 @@ namespace Riftstrike {
 				unitsSelected.OfType<IWalk>()
 					.ForEach(walkable => walkable.WalkTo(mousePos, append));
 			}
+
+			var space_state = GetWorld2D().DirectSpaceState;
+			var query = new PhysicsPointQueryParameters2D {
+				Position = mousePos,
+				CollisionMask = (uint)CollisionLayer.Selectable,
+				CollideWithAreas = true,
+				CollideWithBodies = false,
+			};
+			var result = space_state.IntersectPoint(query);
+			if (result.Any()) {
+				CursorSettings.Instance.Cursor = Cursor.Select;
+			} else {
+				CursorSettings.Instance.Cursor = Cursor.Default;
+			}
 		}
 
 		public readonly Array<Unit> units = new();
@@ -64,14 +78,14 @@ namespace Riftstrike {
 			var space_state = GetWorld2D().DirectSpaceState;
 			var query = new PhysicsPointQueryParameters2D {
 				Position = mousePos,
-				CollisionMask = (uint)CollisionLayer.Selection,
+				CollisionMask = (uint)CollisionLayer.Selectable,
 				CollideWithAreas = true,
 				CollideWithBodies = false,
 			};
 			var result = space_state.IntersectPoint(query);
 
 			var clickedUnits = result
-				.Select(v => v["collider"].As<ClickableComponent>().unit);
+				.Select(v => v["collider"].As<SelectableComponent>().unit);
 
 
 			if (!Input.IsActionPressed("shift")) unitsSelected.Clear();
