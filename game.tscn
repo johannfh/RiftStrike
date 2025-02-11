@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=12 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" path="res://UnitSelectionManager.cs" id="1_6ktgs"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://assets/stone_texture.png" id="1_coj4f"]
 [ext_resource type="Script" path="res://Camera.cs" id="1_fw2jn"]
 [ext_resource type="Script" path="res://SelectionBox.cs" id="2_hwfey"]
 [ext_resource type="PackedScene" uid="uid://dsq6u6jv05si4" path="res://units/shock_trooper/shock_trooper.tscn" id="3_veqau"]
+[ext_resource type="PackedScene" uid="uid://xepapvohrh5" path="res://enemies/festerkin/festerkin.tscn" id="6_p0g4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igf7"]
 
@@ -72,35 +73,5 @@ tile_set = SubResource("TileSet_8hu0s")
 [node name="Unit" parent="TileMapLayer" instance=ExtResource("3_veqau")]
 position = Vector2(-786, -207)
 
-[node name="Unit2" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(-716, 236)
-
-[node name="Unit3" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(561, 478)
-
-[node name="Unit4" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(379, -327)
-
-[node name="Unit5" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(-407, -319)
-
-[node name="Unit6" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(-670, 503)
-
-[node name="Unit7" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(-216, 262)
-
-[node name="Unit8" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(224, 169)
-
-[node name="Unit9" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(-494, 675)
-
-[node name="Unit10" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(616, 130)
-
-[node name="Unit11" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(-197, -563)
-
-[node name="Unit12" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(642, -565)
+[node name="Festerkin" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(312, -337)
