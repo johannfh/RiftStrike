@@ -10,10 +10,10 @@ namespace Riftstrike.components {
             target.RiftEnergy = source.RiftEnergy;
         }
     }
+
     public partial class UpgradeComponent : Node {
         [Export] public StatsComponent StatsComponentSource;
         [Export] public StatsComponent StatsComponentTarget;
-
 
         public void Update() {
             StatsComponentTarget.SetStats(StatsComponentSource);

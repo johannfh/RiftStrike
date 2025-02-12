@@ -3,7 +3,7 @@ using Riftstrike.components;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Riftstrike {
+namespace Riftstrike.units {
 	public partial class ShockTrooper : Unit, IWalk {
 
 		[Export] private float speed = 200;

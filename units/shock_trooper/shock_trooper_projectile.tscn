@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://plo54kmu88jf"]
+[gd_scene load_steps=17 format=3 uid="uid://plo54kmu88jf"]
 
+[ext_resource type="Script" path="res://units/shock_trooper/ShockTrooperProjectile.cs" id="1_h4p4m"]
 [ext_resource type="Texture2D" uid="uid://vmkfda50xefx" path="res://assets/ShockProjectile.png" id="1_tlabx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_770b7"]
@@ -101,6 +102,7 @@ animations = [{
 scale = Vector2(0.7, 0.7)
 collision_layer = 0
 collision_mask = 2
+script = ExtResource("1_h4p4m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_770b7")

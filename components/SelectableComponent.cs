@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using Riftstrike.units;
 
 namespace Riftstrike.components {
 	public partial class SelectableComponent : Area2D {
