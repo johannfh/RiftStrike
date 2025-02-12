@@ -73,5 +73,29 @@ tile_set = SubResource("TileSet_8hu0s")
 [node name="Unit" parent="TileMapLayer" instance=ExtResource("3_veqau")]
 position = Vector2(-786, -207)
 
-[node name="Festerkin" parent="." instance=ExtResource("6_p0g4b")]
+[node name="Festerkin" parent="TileMapLayer" instance=ExtResource("6_p0g4b")]
 position = Vector2(312, -337)
+
+[node name="Unit2" parent="TileMapLayer" instance=ExtResource("3_veqau")]
+position = Vector2(-640, -868)
+
+[node name="Unit3" parent="TileMapLayer" instance=ExtResource("3_veqau")]
+position = Vector2(-274, -439)
+
+[node name="Unit4" parent="TileMapLayer" instance=ExtResource("3_veqau")]
+position = Vector2(570, -590)
+
+[node name="Unit5" parent="TileMapLayer" instance=ExtResource("3_veqau")]
+position = Vector2(-227, -60)
+
+[node name="Unit6" parent="TileMapLayer" instance=ExtResource("3_veqau")]
+position = Vector2(549, 146)
+
+[node name="Festerkin2" parent="TileMapLayer" instance=ExtResource("6_p0g4b")]
+position = Vector2(-308, 202)
+
+[node name="Festerkin3" parent="TileMapLayer" instance=ExtResource("6_p0g4b")]
+position = Vector2(-310, 456)
+
+[node name="Festerkin4" parent="TileMapLayer" instance=ExtResource("6_p0g4b")]
+position = Vector2(1093, -193)

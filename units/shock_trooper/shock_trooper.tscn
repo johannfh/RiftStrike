@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsq6u6jv05si4"]
+[gd_scene load_steps=11 format=3 uid="uid://dsq6u6jv05si4"]
 
 [ext_resource type="Script" path="res://units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
 [ext_resource type="PackedScene" uid="uid://dx6bdls8f6phy" path="res://components/selectable_component.tscn" id="2_hi1tb"]
 [ext_resource type="PackedScene" uid="uid://xur2l4anbttr" path="res://components/hitbox_component.tscn" id="3_433u0"]
 [ext_resource type="PackedScene" uid="uid://c4iyefkvp14pk" path="res://components/push_component.tscn" id="4_s7l1k"]
-[ext_resource type="PackedScene" uid="uid://dssm0ryng3nw5" path="res://components/detectable_component.tscn" id="5_qeq2l"]
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://units/selected_style_box.tres" id="6_7cpyp"]
 [ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://assets/ShockTrooper.png" id="6_kpmcn"]
 [ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://units/hovering_style_box.tres" id="7_gqle7"]
@@ -17,8 +16,6 @@ size = Vector2(150, 50)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5na8r"]
 radius = 50.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jg2aw"]
 
 [node name="Unit" type="Node2D"]
 position = Vector2(0, 5)
@@ -34,6 +31,7 @@ visible = false
 shape = SubResource("RectangleShape2D_ngchn")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_433u0")]
+collision_layer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_u2e8r")
@@ -43,12 +41,6 @@ shape = SubResource("RectangleShape2D_u2e8r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_5na8r")
-
-[node name="DetectableComponent" parent="." node_paths=PackedStringArray("Parent") instance=ExtResource("5_qeq2l")]
-Parent = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableComponent"]
-shape = SubResource("CircleShape2D_jg2aw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

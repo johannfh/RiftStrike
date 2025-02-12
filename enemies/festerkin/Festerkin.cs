@@ -1,55 +1,71 @@
 using System.Linq;
 using Godot;
+using Riftstrike.components;
 
 namespace Riftstrike.enemies {
-    public partial class Festerkin : Node2D {
-        [Export] private double speed = 200;
+	public partial class Festerkin : Node2D {
+		[Export] private double speed = 200;
+		[Export] private double pushForce = 100;
+		[Export] private double targetOvershootDistance = 100;
+		[Export] public double damage = 100;
 
-        private NavigationAgent2D NavAgent
-            => GetNode<NavigationAgent2D>("NavigationAgent2D");
+		private NavigationAgent2D NavAgent
+			=> GetNode<NavigationAgent2D>("NavigationAgent2D");
 
-        private AnimationPlayer AnimationPlayer
-            => GetNode<AnimationPlayer>("AnimationPlayer");
+		private AnimationPlayer AnimationPlayer
+			=> GetNode<AnimationPlayer>("AnimationPlayer");
 
-        private Sprite2D Sprite
-            => GetNode<Sprite2D>("Sprite2D");
-        
-        private Timer RecalculateTargetTimer
-            => GetNode<Timer>("RecalculateTargetTimer");
+		private Sprite2D Sprite
+			=> GetNode<Sprite2D>("Sprite2D");
+		
+		private Timer RecalculateTargetTimer
+			=> GetNode<Timer>("RecalculateTargetTimer");
 
-        public override void _Ready() {
-            base._Ready();
-            AnimationPlayer.Play("walk");
-            lastFramePos = GlobalPosition;
-            RecalculateTargetTimer.Timeout += RecalculateTarget;
-        }
+		private PushComponent PushComponent
+			=> GetNode<PushComponent>("PushComponent");
+		
+		private HitboxComponent HitboxComponent
+			=> GetNode<HitboxComponent>("HitboxComponent");
+		
+		private Timer AttackTimer
+			=> GetNode<Timer>("AttackTimer");
+		
+		private RandomTimer BlinkTimer
+			=> GetNode<RandomTimer>("BlinkTimer");
 
-        private void RecalculateTarget() {
-            // TODO: implement calculation (first errors when none found; make it based on area and detection or closest player unit global?)
-            NavAgent.TargetPosition = UnitSelectionManager.Instance.units.First().GlobalPosition;
-        }
+		public override void _Ready() {
+			base._Ready();
+			AnimationPlayer.Play("walk");
+			RecalculateTargetTimer.Timeout += RecalculateTarget;
+			BlinkTimer.Timeout += () => AnimationPlayer.Play("blink");
+			AnimationPlayer.AnimationFinished += (_) => AnimationPlayer.Play("walk");
+			
+		}
 
-        public override void _Process(double delta) {
-            base._Process(delta);
-            UpdateSprite();
-        }
+		private void RecalculateTarget() {
+			// TODO: implement calculation (first errors when none found; make it based on area and detection or closest player unit global?)
+			var units = UnitSelectionManager.Instance.units
+				.OrderBy(u => GlobalPosition.DistanceTo(u.GlobalPosition));
+			
+			if (units.Any()) {
+				var targetPos = units.First().GlobalPosition;
+				NavAgent.TargetPosition = targetPos + (GlobalPosition.DirectionTo(targetPos) * (float)targetOvershootDistance);
+			}
+		}
 
-        private Vector2 lastFramePos;
-        private void UpdateSprite() {
-            var dir = lastFramePos.DirectionTo(GlobalPosition);
-            lastFramePos = GlobalPosition;
-            var flipH = dir.X < 0;
-            if (Sprite.FlipH != flipH) {
-                Sprite.FlipH = flipH;
-                AnimationPlayer.Advance(0);
-            }
-        }
+		public override void _PhysicsProcess(double delta) {
+			base._PhysicsProcess(delta);
+			var nextPos = NavAgent.GetNextPathPosition();
+			GlobalPosition = GlobalPosition.MoveToward(nextPos, (float)speed * (float)delta);
+			GlobalPosition += PushComponent.PushDirection * (float)pushForce * (float)delta;
+			if (NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) RecalculateTarget();
 
-        public override void _PhysicsProcess(double delta) {
-            base._PhysicsProcess(delta);
-            var nextPos = NavAgent.GetNextPathPosition();
-            var dir = GlobalPosition.DirectionTo(nextPos);
-            GlobalPosition += dir * (float)speed * (float)delta;
-        }
-    }
+			var hitboxes = HitboxComponent.OverlappingHitboxes;
+			if (hitboxes.Any() && AttackTimer.IsStopped()) {
+				hitboxes.First().Damage(damage);
+				AttackTimer.Start();
+				GD.Print($"attacking {hitboxes.First().GetParent().Name}");
+			}
+		}
+	}
 }
