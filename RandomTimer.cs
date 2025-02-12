@@ -1,7 +1,7 @@
 using Godot;
 
 namespace Riftstrike {
-    [Tool]
+	[Tool]
 	[GlobalClass]
 	public partial class RandomTimer : Timer {
 		[ExportGroup("Random Delay")]
@@ -14,13 +14,13 @@ namespace Riftstrike {
 			rng.Randomize();
 			
 			if (Autostart && !Engine.IsEditorHint()) {
-                GD.Print($"Starting {Name}: min({minimumDelay}) max({maximumDelay})");
+				GD.Print($"Starting {Name}: min({minimumDelay}) max({maximumDelay})");
 				StartRandom();
 			}
 		}
 
 		public void StartRandom() {
-            var rand = rng.RandfRange(minimumDelay, maximumDelay);
+			var rand = rng.RandfRange(minimumDelay, maximumDelay);
 			Start(rand);
 		}
 
