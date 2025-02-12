@@ -19,7 +19,6 @@ radius = 50.0
 
 [node name="Unit" type="Node2D"]
 position = Vector2(0, 5)
-scale = Vector2(1, 0.75)
 script = ExtResource("1_uintk")
 speed = 400.0
 
@@ -34,45 +33,39 @@ shape = SubResource("RectangleShape2D_ngchn")
 collision_layer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_u2e8r")
 
 [node name="PushComponent" parent="." instance=ExtResource("4_s7l1k")]
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
-position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_5na8r")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="SelectedPanel" type="Panel" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -75.0
-offset_top = -25.0
+offset_top = -33.0
 offset_right = 75.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = 17.0
 theme_override_styles/panel = ExtResource("6_7cpyp")
 
 [node name="HoveringPanel" type="Panel" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -75.0
-offset_top = -25.0
+offset_top = -33.0
 offset_right = 75.0
-offset_bottom = 25.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("7_gqle7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -122.667)
+position = Vector2(0, -128)
+scale = Vector2(4, 4)
 texture = ExtResource("6_kpmcn")
