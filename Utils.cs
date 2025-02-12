@@ -18,6 +18,31 @@ namespace Riftstrike {
                 action(item);
             }
         }
+
+        /// <summary>
+        /// Selects a random element from the given enumerable collection.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the collection.</typeparam>
+        /// <param name="source">The enumerable collection to select a random element from.</param>
+        /// <returns>A randomly selected element from the collection.</returns>
+        public static T RandomElement<T>(this IEnumerable<T> source) {
+            var rng = new RandomNumberGenerator();
+            rng.Randomize();
+            var idx = rng.RandiRange(0, source.Count());
+            return source.ElementAt(idx);
+        }
+
+        /// <summary>
+        /// Selects a random element from the given enumerable collection.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the collection.</typeparam>
+        /// <param name="source">The enumerable collection to select a random element from.</param>
+        /// <param name="rng">A randomized random number generator used to generate the index.</param>
+        /// <returns>A randomly selected element from the collection.</returns>
+        public static T RandomElement<T>(this IEnumerable<T> source, RandomNumberGenerator rng) {
+            var idx =  rng.RandiRange(0, source.Count());
+            return source.ElementAt(idx);
+        }
     }
 
     public static class Vector2Extensions {
