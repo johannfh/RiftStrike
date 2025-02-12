@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4iyefkvp14pk"]
-
-[ext_resource type="Script" path="res://components/PushComponent.cs" id="1_th1ij"]
-
-[node name="PushComponent" type="Area2D"]
-collision_layer = 65536
-collision_mask = 65536
-script = ExtResource("1_th1ij")

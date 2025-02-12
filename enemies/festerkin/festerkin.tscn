@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://xepapvohrh5"]
 
 [ext_resource type="Script" path="res://enemies/festerkin/Festerkin.cs" id="1_4b7xi"]
-[ext_resource type="PackedScene" uid="uid://c4iyefkvp14pk" path="res://components/push_component.tscn" id="2_jxd4l"]
+[ext_resource type="Script" path="res://components/PushComponent.cs" id="2_nr7fl"]
 [ext_resource type="Texture2D" uid="uid://bmcvbaehh3ie6" path="res://assets/enemies/festerkin/festerkin.png" id="3_1o71y"]
-[ext_resource type="PackedScene" uid="uid://xur2l4anbttr" path="res://components/hitbox_component.tscn" id="3_vadx5"]
+[ext_resource type="Script" path="res://components/HitboxComponent.cs" id="3_2iacg"]
 [ext_resource type="Script" path="res://RandomTimer.cs" id="5_pydac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3l62n"]
@@ -56,16 +56,17 @@ script = ExtResource("1_4b7xi")
 speed = 300.0
 targetOvershootDistance = 150.0
 
-[node name="PushComponent" parent="." instance=ExtResource("2_jxd4l")]
+[node name="PushComponent" type="Area2D" parent="."]
 collision_layer = 131072
 collision_mask = 131072
+script = ExtResource("2_nr7fl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
 shape = SubResource("RectangleShape2D_3l62n")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_vadx5")]
+[node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 1
+script = ExtResource("3_2iacg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_ndq3m")
