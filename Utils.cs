@@ -28,7 +28,7 @@ namespace Riftstrike {
         public static T RandomElement<T>(this IEnumerable<T> source) {
             var rng = new RandomNumberGenerator();
             rng.Randomize();
-            var idx = rng.RandiRange(0, source.Count());
+            var idx = rng.RandiRange(0, source.Count() - 1);
             return source.ElementAt(idx);
         }
 
@@ -40,7 +40,7 @@ namespace Riftstrike {
         /// <param name="rng">A randomized random number generator used to generate the index.</param>
         /// <returns>A randomly selected element from the collection.</returns>
         public static T RandomElement<T>(this IEnumerable<T> source, RandomNumberGenerator rng) {
-            var idx =  rng.RandiRange(0, source.Count());
+            var idx =  rng.RandiRange(0, source.Count() - 1);
             return source.ElementAt(idx);
         }
     }
