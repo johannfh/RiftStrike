@@ -3,6 +3,7 @@ using System.Linq;
 using Godot;
 
 namespace Riftstrike.components {
+    [GlobalClass]
     public partial class HitboxComponent : Area2D {
         [Signal] public delegate void HitEventHandler(double damage);
 

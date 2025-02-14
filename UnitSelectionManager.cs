@@ -26,9 +26,9 @@ namespace Riftstrike {
 			base._Ready();
 			if (Instance != null && Instance != this) {
 				QueueFree();
-			} else {
-				Instance = this;
+				return;
 			}
+			Instance = this;
 			DragStart += () => GD.Print("Drag start");
 		}
 

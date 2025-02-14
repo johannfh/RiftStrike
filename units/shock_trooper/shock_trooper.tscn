@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsq6u6jv05si4"]
+[gd_scene load_steps=17 format=3 uid="uid://dsq6u6jv05si4"]
 
 [ext_resource type="Script" path="res://units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
 [ext_resource type="Script" path="res://components/SelectableComponent.cs" id="2_wqyfo"]
@@ -8,6 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://assets/ShockTrooper.png" id="6_kpmcn"]
 [ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://units/hovering_style_box.tres" id="7_gqle7"]
 [ext_resource type="Script" path="res://components/StatsComponent.cs" id="7_hgvdb"]
+[ext_resource type="Script" path="res://components/UpgradeComponent.cs" id="9_6oqv4"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="10_7vpsq"]
+[ext_resource type="StyleBox" uid="uid://c53fmtxikqkca" path="res://health_bar_background.tres" id="11_h26fk"]
+[ext_resource type="Script" path="res://components/HealthBar.cs" id="11_nbfjh"]
+[ext_resource type="StyleBox" uid="uid://b84c53pw7thy6" path="res://health_bar_fill.tres" id="12_0fdlv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngchn"]
 size = Vector2(150, 50)
@@ -18,7 +23,7 @@ size = Vector2(150, 50)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5na8r"]
 radius = 50.0
 
-[node name="Unit" type="Node2D"]
+[node name="ShockTrooper" type="Node2D"]
 position = Vector2(0, 5)
 script = ExtResource("1_uintk")
 speed = 400.0
@@ -73,9 +78,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("7_gqle7")
 
-[node name="BaseStats" type="Node" parent="."]
-script = ExtResource("7_hgvdb")
-
 [node name="BulletSpawn" type="Marker2D" parent="."]
 position = Vector2(0, -150)
 
@@ -83,3 +85,35 @@ position = Vector2(0, -150)
 position = Vector2(0, -128)
 scale = Vector2(4, 4)
 texture = ExtResource("6_kpmcn")
+
+[node name="RegenerationTimer" type="Timer" parent="."]
+wait_time = 0.333
+autostart = true
+
+[node name="UpgradeComponent" type="Node" parent="." node_paths=PackedStringArray("StatsComponentSource", "StatsComponentTarget")]
+script = ExtResource("9_6oqv4")
+StatsComponentSource = NodePath("../BaseStatsComponent")
+StatsComponentTarget = NodePath("../TargetStatsComponent")
+
+[node name="BaseStatsComponent" type="Node" parent="."]
+script = ExtResource("7_hgvdb")
+
+[node name="TargetStatsComponent" type="Node" parent="."]
+script = ExtResource("7_hgvdb")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_7vpsq")
+
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent", "StatsComponent")]
+offset_left = -60.0
+offset_top = 10.0
+offset_right = 60.0
+offset_bottom = 40.0
+theme_override_styles/background = ExtResource("11_h26fk")
+theme_override_styles/fill = ExtResource("12_0fdlv")
+max_value = 50.0
+value = 25.0
+show_percentage = false
+script = ExtResource("11_nbfjh")
+HealthComponent = NodePath("../HealthComponent")
+StatsComponent = NodePath("../TargetStatsComponent")

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Godot;
 using Riftstrike.components;
+using Riftstrike.units;
 
 namespace Riftstrike {
 	public partial class SelectionBox : Area2D {

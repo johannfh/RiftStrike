@@ -3,6 +3,7 @@ using Godot;
 using Riftstrike.units;
 
 namespace Riftstrike.components {
+	[GlobalClass]
 	public partial class SelectableComponent : Area2D {
 		[Export] public Unit unit;
 		public bool IsHovered {

@@ -2,6 +2,7 @@ using Godot;
 using System.Linq;
 
 namespace Riftstrike.components {
+	[GlobalClass]
 	public partial class PushComponent : Area2D {
 		public Vector2 PushDirection {
 			get {

@@ -4,10 +4,13 @@ using Riftstrike.components;
 
 namespace Riftstrike.enemies {
 	public partial class Festerkin : Node2D {
+		[ExportGroup("Movement")]
 		[Export] private double speed = 200;
 		[Export] private double pushForce = 100;
 		[Export] private double targetOvershootDistance = 100;
-		[Export] public double damage = 100;
+		[ExportGroup("Attacks")]
+		[Export] public double attackDamage = 10;
+		[Export(PropertyHint.None, "suffix:s")] public double attackCooldown = 1;
 
 		private NavigationAgent2D NavAgent
 			=> GetNode<NavigationAgent2D>("NavigationAgent2D");
@@ -39,7 +42,7 @@ namespace Riftstrike.enemies {
 			RecalculateTargetTimer.Timeout += RecalculateTarget;
 			BlinkTimer.Timeout += () => AnimationPlayer.Play("blink");
 			AnimationPlayer.AnimationFinished += (_) => AnimationPlayer.Play("walk");
-			
+			AttackTimer.WaitTime = attackCooldown;
 		}
 
 		private void RecalculateTarget() {
@@ -62,7 +65,7 @@ namespace Riftstrike.enemies {
 
 			var hitboxes = HitboxComponent.OverlappingHitboxes;
 			if (hitboxes.Any() && AttackTimer.IsStopped()) {
-				hitboxes.First().Damage(damage);
+				hitboxes.First().Damage(attackDamage);
 				AttackTimer.Start();
 				GD.Print($"attacking {hitboxes.First().GetParent().Name}");
 			}

@@ -16,4 +16,8 @@ namespace Riftstrike.units {
 	public interface IWalk {
 		public void WalkTo(Vector2 targetPosition, bool append);
 	}
+
+	public interface IAlive {
+		public bool IsAlive();
+	}
 }

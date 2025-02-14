@@ -3,15 +3,9 @@ using Godot;
 using Riftstrike.upgrades;
 
 namespace Riftstrike.components {
-    public static class StatsComponentExtensions {
-        public static void SetStats(this StatsComponent target, StatsComponent source) {
-            target.Health = source.Health;
-            target.Regeneration = source.Regeneration;
-            target.RiftEnergy = source.RiftEnergy;
-        }
-    }
-
+    [GlobalClass]
     public partial class UpgradeComponent : Node {
+        [Signal] public delegate void StatsRecalculatedEventHandler();
         [Export] public StatsComponent StatsComponentSource;
         [Export] public StatsComponent StatsComponentTarget;
 
@@ -20,8 +14,17 @@ namespace Riftstrike.components {
             foreach (var upgrade in Upgrades) {
                 upgrade.Apply(StatsComponentTarget);
             }
+            EmitSignal(SignalName.StatsRecalculated);
         }
 
         public List<IUpgrade> Upgrades = new();
+    }
+
+    public static class StatsComponentExtensions {
+        public static void SetStats(this StatsComponent target, StatsComponent source) {
+            target.Health = source.Health;
+            target.Regeneration = source.Regeneration;
+            target.RiftEnergy = source.RiftEnergy;
+        }
     }
 }
