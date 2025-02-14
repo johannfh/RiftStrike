@@ -19,21 +19,21 @@ border_width_bottom = 2
 border_color = Color(0.800813, 0.304974, 1, 1)
 border_blend = true
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_3so0e"]
-vertices = PackedVector2Array(32, 24, -32, 24, -32, -24, 32, -24)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0x5jw"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -24, 32, -24, 32, 24, -32, 24)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 32, -32, 32)])
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exono"]
 texture = ExtResource("1_coj4f")
-texture_region_size = Vector2i(64, 48)
+texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/z_index = -1
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3so0e")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0x5jw")
 
 [sub_resource type="TileSet" id="TileSet_8hu0s"]
-tile_size = Vector2i(64, 48)
+tile_size = Vector2i(64, 64)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_exono")
 
