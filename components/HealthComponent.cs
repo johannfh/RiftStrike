@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Riftstrike.components {
@@ -23,7 +24,17 @@ namespace Riftstrike.components {
                     health = 0;
                     EmitSignal(SignalName.Death);
                 }
+                if (health > MaxHealth) {
+                    health = MaxHealth;
+                }
             }
+        }
+
+        [Export] public double MaxHealth;
+
+        public override void _Ready() {
+            base._Ready();
+            Health = MaxHealth;
         }
 
         public void Damage(double damage) {

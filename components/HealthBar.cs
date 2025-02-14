@@ -3,12 +3,17 @@ using Godot;
 namespace Riftstrike.components {
     [GlobalClass]
     public partial class HealthBar : ProgressBar {
-        [Export] private HealthComponent HealthComponent;
-        [Export] private StatsComponent StatsComponent;
+        [Export] public HealthComponent HealthComponent;
+
+        public override void _Ready() {
+            base._Ready();
+            MaxValue = HealthComponent.MaxHealth;
+            Value = HealthComponent.Health;
+        }
 
         public override void _Process(double delta) {
             base._Process(delta);
-            MaxValue = StatsComponent.Health;
+            MaxValue = HealthComponent.MaxHealth;
             Value = HealthComponent.Health;
         }
     }

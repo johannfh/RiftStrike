@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=13 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" path="res://UnitSelectionManager.cs" id="1_6ktgs"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://assets/stone_texture.png" id="1_coj4f"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://SelectionBox.cs" id="2_hwfey"]
 [ext_resource type="PackedScene" uid="uid://dsq6u6jv05si4" path="res://units/shock_trooper/shock_trooper.tscn" id="3_veqau"]
 [ext_resource type="PackedScene" uid="uid://xepapvohrh5" path="res://enemies/festerkin/festerkin.tscn" id="6_p0g4b"]
+[ext_resource type="Script" path="res://EnemyManager.cs" id="7_galhq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igf7"]
 
@@ -42,6 +43,9 @@ sources/0 = SubResource("TileSetAtlasSource_exono")
 script = ExtResource("1_6ktgs")
 dragThreshold = 10.0
 
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("7_galhq")
+
 [node name="Camera" type="Camera2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("1_fw2jn")
@@ -71,7 +75,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAA
 tile_set = SubResource("TileSet_8hu0s")
 
 [node name="ShockTrooper" parent="TileMapLayer" instance=ExtResource("3_veqau")]
-position = Vector2(0, 0)
+position = Vector2(-224, -130)
 
 [node name="Festerkin" parent="TileMapLayer" instance=ExtResource("6_p0g4b")]
 position = Vector2(312, -337)
@@ -84,3 +88,21 @@ position = Vector2(-310, 456)
 
 [node name="Festerkin4" parent="TileMapLayer" instance=ExtResource("6_p0g4b")]
 position = Vector2(1093, -193)
+
+[node name="Festerkin" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(701, 548)
+
+[node name="Festerkin2" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(-1179, -557)
+
+[node name="Festerkin3" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(-1220, 196)
+
+[node name="Festerkin4" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(193, 656)
+
+[node name="Festerkin5" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(1079, -674)
+
+[node name="Festerkin6" parent="." instance=ExtResource("6_p0g4b")]
+position = Vector2(-385, -757)

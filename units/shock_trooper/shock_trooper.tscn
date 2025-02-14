@@ -27,6 +27,8 @@ radius = 50.0
 position = Vector2(0, 5)
 script = ExtResource("1_uintk")
 speed = 400.0
+projectileSpeed = 600.0
+projectileBaseDamage = 20.0
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 collision_layer = 16777216
@@ -78,13 +80,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("7_gqle7")
 
-[node name="BulletSpawn" type="Marker2D" parent="."]
-position = Vector2(0, -150)
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -128)
 scale = Vector2(4, 4)
 texture = ExtResource("6_kpmcn")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.333
+one_shot = true
+autostart = true
 
 [node name="RegenerationTimer" type="Timer" parent="."]
 wait_time = 0.333
@@ -97,6 +101,8 @@ StatsComponentTarget = NodePath("../TargetStatsComponent")
 
 [node name="BaseStatsComponent" type="Node" parent="."]
 script = ExtResource("7_hgvdb")
+Regeneration = 5.0
+Range = 700.0
 
 [node name="TargetStatsComponent" type="Node" parent="."]
 script = ExtResource("7_hgvdb")
@@ -104,7 +110,7 @@ script = ExtResource("7_hgvdb")
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("10_7vpsq")
 
-[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent", "StatsComponent")]
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
 offset_left = -60.0
 offset_top = 10.0
 offset_right = 60.0
@@ -116,4 +122,3 @@ value = 25.0
 show_percentage = false
 script = ExtResource("11_nbfjh")
 HealthComponent = NodePath("../HealthComponent")
-StatsComponent = NodePath("../TargetStatsComponent")

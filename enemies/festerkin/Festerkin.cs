@@ -3,38 +3,45 @@ using Godot;
 using Riftstrike.components;
 
 namespace Riftstrike.enemies {
-	public partial class Festerkin : Node2D {
+	[GlobalClass]
+	public partial class Festerkin : Enemy {
+		[Export]
+		private NavigationAgent2D NavAgent;
+
+		[Export]
+		private AnimationPlayer AnimationPlayer;
+
+		[Export]
+		private Sprite2D Sprite;
+
+		[Export]
+		private Timer RecalculateTargetTimer;
+
+		[Export]
+		private PushComponent PushComponent;
+
+		[Export]
+		private HitboxComponent HitboxComponent;
+
+		[Export]
+		private Timer AttackTimer;
+
+		[Export]
+		private RandomTimer BlinkTimer;
+
+		[Export]
+		private HealthComponent HealthComponent;
 		[ExportGroup("Movement")]
 		[Export] private double speed = 200;
 		[Export] private double pushForce = 100;
 		[Export] private double targetOvershootDistance = 100;
+
 		[ExportGroup("Attacks")]
-		[Export] public double attackDamage = 10;
-		[Export(PropertyHint.None, "suffix:s")] public double attackCooldown = 1;
+		[Export]
+		public double attackDamage = 10;
 
-		private NavigationAgent2D NavAgent
-			=> GetNode<NavigationAgent2D>("NavigationAgent2D");
-
-		private AnimationPlayer AnimationPlayer
-			=> GetNode<AnimationPlayer>("AnimationPlayer");
-
-		private Sprite2D Sprite
-			=> GetNode<Sprite2D>("Sprite2D");
-		
-		private Timer RecalculateTargetTimer
-			=> GetNode<Timer>("RecalculateTargetTimer");
-
-		private PushComponent PushComponent
-			=> GetNode<PushComponent>("PushComponent");
-		
-		private HitboxComponent HitboxComponent
-			=> GetNode<HitboxComponent>("HitboxComponent");
-		
-		private Timer AttackTimer
-			=> GetNode<Timer>("AttackTimer");
-		
-		private RandomTimer BlinkTimer
-			=> GetNode<RandomTimer>("BlinkTimer");
+		[Export(PropertyHint.None, "suffix:s")]
+		public double attackCooldown = 1;
 
 		public override void _Ready() {
 			base._Ready();
@@ -43,6 +50,19 @@ namespace Riftstrike.enemies {
 			BlinkTimer.Timeout += () => AnimationPlayer.Play("blink");
 			AnimationPlayer.AnimationFinished += (_) => AnimationPlayer.Play("walk");
 			AttackTimer.WaitTime = attackCooldown;
+			HitboxComponent.Hit += HandleHit;
+			HealthComponent.Death += HandleDeath;
+		}
+
+		private void HandleHit(double damage) {
+			// NOTE: Apply damage modifiers here
+			GD.Print("HITTT!");
+			HealthComponent.Damage(damage);
+		}
+
+		private void HandleDeath() {
+			GD.Print($"{Name} killed!");
+			QueueFree();
 		}
 
 		private void RecalculateTarget() {
@@ -65,9 +85,9 @@ namespace Riftstrike.enemies {
 
 			var hitboxes = HitboxComponent.OverlappingHitboxes;
 			if (hitboxes.Any() && AttackTimer.IsStopped()) {
+				GD.Print($"attacking {hitboxes.First().GetParent().Name}");
 				hitboxes.First().Damage(attackDamage);
 				AttackTimer.Start();
-				GD.Print($"attacking {hitboxes.First().GetParent().Name}");
 			}
 		}
 	}

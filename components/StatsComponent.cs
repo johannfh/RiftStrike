@@ -6,7 +6,7 @@ namespace Riftstrike.components {
 		[Export(PropertyHint.None, "0,100,1,or_greater,suffix:hp")]
 		public float Health = 50;
 
-        [Export(PropertyHint.None, "0,100,1,or_greater,suffix:\u2715 1/3 per second")]
+        [Export(PropertyHint.None, "0,100,1,or_greater,suffix:per second")]
 		public float Regeneration = 0;
 
         [Export(PropertyHint.None, "0,100,1,or_greater,suffix:RE")]
@@ -14,5 +14,9 @@ namespace Riftstrike.components {
 
 		[Export(PropertyHint.Range, "0,100,1,or_greater,suffix:%")]
 		public float Damage = 100;
+		
+		
+		[Export(PropertyHint.Range, "0,100,1,or_greater,suffix:pixels")]
+		public float Range = 500;
 	}
 }

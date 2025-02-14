@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://vmkfda50xefx" path="res://assets/ShockProjectile.png" id="1_tlabx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_770b7"]
-size = Vector2(60, 30)
+size = Vector2(60, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dmqbf"]
 atlas = ExtResource("1_tlabx")
@@ -95,7 +95,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="ShockTrooperProjectile" type="Area2D"]
@@ -105,7 +105,9 @@ collision_mask = 2
 script = ExtResource("1_h4p4m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_770b7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_o0282")

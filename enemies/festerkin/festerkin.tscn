@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://xepapvohrh5"]
+[gd_scene load_steps=15 format=3 uid="uid://xepapvohrh5"]
 
 [ext_resource type="Script" path="res://enemies/festerkin/Festerkin.cs" id="1_4b7xi"]
 [ext_resource type="Script" path="res://components/PushComponent.cs" id="2_nr7fl"]
 [ext_resource type="Texture2D" uid="uid://bmcvbaehh3ie6" path="res://assets/enemies/festerkin/festerkin.png" id="3_1o71y"]
 [ext_resource type="Script" path="res://components/HitboxComponent.cs" id="3_2iacg"]
 [ext_resource type="Script" path="res://RandomTimer.cs" id="5_pydac"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="6_06vqm"]
+[ext_resource type="StyleBox" uid="uid://c53fmtxikqkca" path="res://health_bar_background.tres" id="7_e6l3h"]
+[ext_resource type="StyleBox" uid="uid://b84c53pw7thy6" path="res://health_bar_fill.tres" id="8_2fi66"]
+[ext_resource type="Script" path="res://components/HealthBar.cs" id="9_jc2f0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3l62n"]
 size = Vector2(76, 16)
@@ -51,8 +55,17 @@ _data = {
 "walk": SubResource("Animation_p541c")
 }
 
-[node name="Festerkin" type="Node2D"]
+[node name="Festerkin" type="Node2D" node_paths=PackedStringArray("NavAgent", "AnimationPlayer", "Sprite", "RecalculateTargetTimer", "PushComponent", "HitboxComponent", "AttackTimer", "BlinkTimer", "HealthComponent")]
 script = ExtResource("1_4b7xi")
+NavAgent = NodePath("NavigationAgent2D")
+AnimationPlayer = NodePath("AnimationPlayer")
+Sprite = NodePath("Sprite2D")
+RecalculateTargetTimer = NodePath("RecalculateTargetTimer")
+PushComponent = NodePath("PushComponent")
+HitboxComponent = NodePath("HitboxComponent")
+AttackTimer = NodePath("AttackTimer")
+BlinkTimer = NodePath("BlinkTimer")
+HealthComponent = NodePath("HealthComponent")
 speed = 300.0
 targetOvershootDistance = 150.0
 
@@ -99,3 +112,19 @@ autostart = true
 script = ExtResource("5_pydac")
 minimumDelay = 2.0
 maximumDelay = 5.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_06vqm")
+MaxHealth = 50.0
+
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 30.0
+theme_override_styles/background = ExtResource("7_e6l3h")
+theme_override_styles/fill = ExtResource("8_2fi66")
+value = 50.0
+show_percentage = false
+script = ExtResource("9_jc2f0")
+HealthComponent = NodePath("../HealthComponent")

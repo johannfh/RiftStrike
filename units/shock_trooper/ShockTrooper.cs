@@ -1,16 +1,21 @@
 using Godot;
 using Riftstrike.components;
-using System;
+using Riftstrike.enemies;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Riftstrike.units {
-	public partial class ShockTrooper : Unit, IWalk, IAlive {
-
+	[GlobalClass]
+	public partial class ShockTrooper : Unit, IWalk {
+		[ExportGroup("Movement")]
 		[Export] private float speed = 200;
 		[Export] private float pushSpeed = 50;
 		private bool AllTargetsCleared => !targets.Any();
 		private readonly List<Vector2> targets = new();
+
+		[ExportGroup("Attacks")]
+		[Export] private float projectileSpeed = 300;
+		[Export] private float projectileBaseDamage = 10;
 
         private NavigationAgent2D NavAgent
 			=> GetNode<NavigationAgent2D>("NavigationAgent2D");
@@ -47,6 +52,11 @@ namespace Riftstrike.units {
 
 		private Panel HoveringPanel
 			=> GetNode<Panel>("HoveringPanel");
+		
+		private Timer AttackTimer
+			=> GetNode<Timer>("AttackTimer");
+		
+		private bool AttackReady = false;
 
         public override void _Ready() {
             base._Ready();
@@ -56,17 +66,19 @@ namespace Riftstrike.units {
 			UpgradeComponent.Update();
 			HitboxComponent.Hit += HandleHit;
 			HealthComponent.Death += HandleDeath;
+			AttackTimer.Timeout += () => AttackReady = true;
 		}
 
         private void HandleDeath() {
-			UnitSelectionManager.Instance.units.Remove(this);
-			UnitSelectionManager.Instance.unitsSelected.Remove(this);
 			GD.Print($"{Name} died!");
 			QueueFree();
         }
 
         private void HandleRegen() {
-			HealthComponent.Health = Mathf.Min(HealthComponent.Health + TargetStatsComponent.Regeneration, TargetStatsComponent.Health);
+			HealthComponent.Health = Mathf.Min(
+				HealthComponent.Health + TargetStatsComponent.Regeneration * RegenerationTimer.WaitTime,
+				TargetStatsComponent.Health
+			);
 		}
 
 		private void HandleHit(double damage) {
@@ -75,7 +87,9 @@ namespace Riftstrike.units {
 		}
 
 		private void HandleStatsRecalculated() {
-			
+			// heal up to new max health on upgrade
+			HealthComponent.MaxHealth = TargetStatsComponent.Health;
+			HealthComponent.Health = TargetStatsComponent.Health;
 		}
 
         public override void _Process(double delta) {
@@ -97,15 +111,60 @@ namespace Riftstrike.units {
 				GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
 			}
 			GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;
+
+			if (AttackReady) {
+				var enemies = EnemyManager.Instance.enemies;
+				if (enemies.Any()) {
+					var closestTarget = enemies
+						.OrderBy(e => e.GlobalPosition.DistanceTo(GlobalPosition))
+						.First();
+					
+					if (IsInRange(closestTarget)) {
+						ShootTowards(closestTarget);
+						AttackTimer.Start();
+						AttackReady = false;
+					}
+				}
+			}
+		}
+
+		private bool IsInRange(Node2D node2D) {
+			return IsInRange(node2D.GlobalPosition);
+		}
+
+		private bool IsInRange(Vector2 position) {
+			return GlobalPosition.DistanceTo(position) < TargetStatsComponent.Range;
+		}
+
+		private void ShootTowards(Node2D node2D) {
+			ShootTowards(node2D.GlobalPosition);
+		}
+
+		private void ShootTowards(Vector2 target) {
+			// calculate parameters
+			var bulletPos = GlobalPosition;
+			var bulletDir = GlobalPosition.DirectionTo(target);
+			var bulletVelocity = bulletDir * projectileSpeed;
+			var bulletRange = TargetStatsComponent.Range * 2;
+
+			// NOTE: apply damage modifiers here
+			var bulletDamage = projectileBaseDamage * (TargetStatsComponent.Damage / 100);
+
+
+			// instantiate bullet
+			var bullet = ShockTrooperProjectile.New();
+			bullet.GlobalPosition = bulletPos;
+			bullet.Velocity = bulletVelocity;
+			bullet.Damage = bulletDamage;
+			bullet.Range = bulletRange;
+
+			// spawn in tree
+			AddSibling(bullet);
 		}
 
 		public void WalkTo(Vector2 targetPosition, bool append) {
 			if (!append) targets.Clear();
 			targets.Add(targetPosition);
 		}
-
-        public bool IsAlive() {
-			return HealthComponent.Health > 0;
-        }
     }
 }
