@@ -8,13 +8,11 @@ namespace Riftstrike
 {
     public partial class Game : Node2D
     {
-        private readonly List<SpawnLocation> spawnLocations = new();
-
         [Export]
         private RandomTimer SpawnEnemiesTimer;
 
         [Export]
-        private int unitSpawnCount = 3;
+        private int enemySpawnCount = 3;
 
         [Export]
         private TileMapLayer Map;
@@ -33,94 +31,71 @@ namespace Riftstrike
             return pos;
         }
 
+        private void SpawnEnemies()
+        {
+            var positions = GetSafeEnemySpawnPoints(5);
+            foreach (var pos in positions)
+            {
+                var enemy = GD.Load<PackedScene>("res://enemies/festerkin/festerkin.tscn")
+                    .Instantiate<Enemy>();
+                enemy.GlobalPosition = pos;
+                Map.AddChild(enemy);
+            }
+        }
+
+        private static IEnumerable<Vector2> GetSafeEnemySpawnPoints(int count)
+        {
+            var map = GetNavMap();
+            var result = new List<Vector2>();
+            for (int i = 0; i < count; i++)
+            {
+                result.Add(GetSafeEnemySpawnPoint(map));
+            }
+            return result;
+        }
+
+        private static Vector2 GetSafeEnemySpawnPoint(Rid map)
+        {
+            while (true)
+            {
+                // get a random navigable position
+                var position = NavigationServer2D.MapGetRandomPoint(
+                    map,
+                    (uint)NavigationLayer.Main,
+                    true
+                );
+
+                // check if position is safe
+                var isSafe = true;
+                foreach (var unit in UnitSelectionManager.Instance.units)
+                {
+                    if (unit.GlobalPosition.DistanceTo(position) <= unit.SafeDistance)
+                    {
+                        isSafe = false;
+                        break;
+                    }
+                }
+
+                // return first safe position that is found
+                if (isSafe)
+                {
+                    return position;
+                }
+            }
+        }
+
+        private static Rid GetNavMap()
+        {
+            var maps = NavigationServer2D.GetMaps();
+            Debug.Assert(maps.Count == 1, "There must be exactly one nav map.");
+            return maps.First();
+        }
+
         public override void _Ready()
         {
             base._Ready();
 
-            var spawnLocationScene = GD.Load<PackedScene>("res://spawn_location.tscn");
-            foreach (var cell in Map.GetUsedCells())
-            {
-                var pos = MapCellToPosition(cell);
-                var spawnLocation = spawnLocationScene.Instantiate<SpawnLocation>();
-                spawnLocation.GlobalPosition = pos;
-                Map.AddChild(spawnLocation);
-            }
-
-            spawnLocations.AddRange(GetTree()
-                .GetNodesInGroup("spawn_location")
-                .OfType<SpawnLocation>());
-
-            SpawnEnemiesTimer.Timeout += () =>
-            {
-                var locations = new List<SpawnLocation>();
-                if (!UnitSelectionManager.Instance.units.Any())
-                {
-                    return;
-                }
-                var perUnit = Math.Min(unitSpawnCount, spawnLocations.Count) / UnitSelectionManager.Instance.units.Count;
-
-                foreach (var unit in UnitSelectionManager.Instance.units)
-                {
-                    locations.AddRange(GetRandomSpawnLocations(perUnit, unit.GlobalPosition));
-                }
-
-                GD.Print($"[{string.Join(", ", locations.Select(l => l.GlobalPosition))}]");
-                locations.ForEach(l => l.Spawn(() =>
-                {
-                    GD.Print($"Spawning for {l.Name}");
-                    var pos = l.GlobalPosition;
-                    var enemy = GD.Load<PackedScene>("res://enemies/festerkin/festerkin.tscn")
-                        .Instantiate() as Enemy;
-                    enemy.GlobalPosition = pos;
-                    Map.AddChild(enemy);
-                }));
-            };
-        }
-
-        public IEnumerable<SpawnLocation> GetRandomSpawnLocations(
-            int count,
-            Vector2 center
-        )
-        {
-            Debug.Assert(spawnLocations.Count >= count, "Not enough spawn locations exist");
-
-            // calculate weights
-            var weights = new Dictionary<double, SpawnLocation>();
-            foreach (var location in spawnLocations)
-            {
-                var distance = location.GlobalPosition.DistanceTo(center);
-                var timeFactor = Mathf.Sqrt(location.MsecSinceLastUsed);
-                var weight = 1 / (distance + 1) * timeFactor;
-                weights[weight] = location;
-            }
-
-            // normalize weights
-            var totalWeight = weights.Keys.Sum();
-            var normalizedWeights = weights
-                .ToDictionary(
-                    kvp => kvp.Key / totalWeight,
-                    kvp => kvp.Value
-                );
-
-
-            var random = new Random();
-            var selectedLocations = new List<SpawnLocation>();
-            for (int i = 0; i < count; i++)
-            {
-                var randomValue = random.NextDouble();
-                var cumulativeWeight = 0.0;
-                foreach (var kvp in normalizedWeights)
-                {
-                    cumulativeWeight += kvp.Key;
-                    if (randomValue <= cumulativeWeight)
-                    {
-                        selectedLocations.Add(kvp.Value);
-                        break;
-                    }
-                }
-            }
-
-            return selectedLocations;
+            SpawnEnemiesTimer.Timeout += SpawnEnemies;
         }
     }
 }

@@ -14,6 +14,11 @@ namespace Riftstrike
         Selection = 1 << 25,
     }
 
+    public enum NavigationLayer
+    {
+        Main = 1 << 0,
+    }
+
     public static class IEnumerableExtensions
     {
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)

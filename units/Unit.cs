@@ -5,6 +5,9 @@ namespace Riftstrike.units
 	[GlobalClass]
 	public abstract partial class Unit : Node2D
 	{
+		[Export(PropertyHint.None, "suffix:pixels")]
+		public double SafeDistance = 300;
+
 		public override void _Ready()
 		{
 			base._Ready();

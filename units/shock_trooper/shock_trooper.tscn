@@ -29,6 +29,7 @@ script = ExtResource("1_uintk")
 speed = 400.0
 projectileSpeed = 600.0
 projectileBaseDamage = 20.0
+SafeDistance = 500.0
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 collision_layer = 16777216
