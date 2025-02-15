@@ -16,9 +16,9 @@ namespace Riftstrike.units
 
 		public override void _ExitTree()
 		{
-			base._ExitTree();
 			UnitSelectionManager.Instance.units.Remove(this);
 			UnitSelectionManager.Instance.unitsSelected.Remove(this);
+			base._ExitTree();
 		}
 	}
 

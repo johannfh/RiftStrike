@@ -33,7 +33,14 @@ namespace Riftstrike
 
         private void SpawnEnemies()
         {
+#if DEBUG
+            var start = DateTime.Now;
+#endif
             var positions = GetSafeEnemySpawnPoints(5);
+#if DEBUG
+            var end = DateTime.Now;
+            GD.Print($"Time taken for spawn: {(end - start).TotalMilliseconds}ms");
+#endif
             foreach (var pos in positions)
             {
                 var enemy = GD.Load<PackedScene>("res://enemies/festerkin/festerkin.tscn")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0q24l6v2qxio"]
+
+[ext_resource type="Script" path="res://Experience.cs" id="1_67soi"]
+[ext_resource type="Texture2D" uid="uid://ctdfitpvi6lne" path="res://assets/Experience.png" id="2_mqg0s"]
+
+[node name="Experience" type="Node2D"]
+script = ExtResource("1_67soi")
+
+[node name="Experience" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_mqg0s")

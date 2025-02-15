@@ -65,7 +65,6 @@ namespace Riftstrike.enemies
 
 		private void HandleDeath()
 		{
-			GD.Print($"{Name} killed!");
 			QueueFree();
 		}
 
