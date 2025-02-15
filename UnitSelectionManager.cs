@@ -4,9 +4,11 @@ using Godot.Collections;
 using Riftstrike.components;
 using Riftstrike.units;
 
-namespace Riftstrike {
+namespace Riftstrike
+{
 	[GlobalClass]
-	public partial class UnitSelectionManager : Node2D {
+	public partial class UnitSelectionManager : Node2D
+	{
 		// TODO: Create Instance when none is found?
 		// Also maybe not because it might not be intended that way.
 		// (More per-scene control)
@@ -22,9 +24,11 @@ namespace Riftstrike {
 		private bool IsDragging = false;
 		[Signal] public delegate void DragStartEventHandler();
 
-		public override void _Ready() {
+		public override void _Ready()
+		{
 			base._Ready();
-			if (Instance != null && Instance != this) {
+			if (Instance != null && Instance != this)
+			{
 				QueueFree();
 				return;
 			}
@@ -32,39 +36,48 @@ namespace Riftstrike {
 			DragStart += () => GD.Print("Drag start");
 		}
 
-		public override void _Process(double delta) {
+		public override void _Process(double delta)
+		{
 			base._Process(delta);
 			var mousePos = GetGlobalMousePosition();
-			if (Input.IsActionJustPressed("left_click")) {
+			if (Input.IsActionJustPressed("left_click"))
+			{
 				dragStartPos = mousePos;
 			}
 			dragEndPos = mousePos;
-			if (!IsDragging && Input.IsActionPressed("left_click") && dragStartPos.DistanceTo(dragEndPos) > dragThreshold) {
+			if (!IsDragging && Input.IsActionPressed("left_click") && dragStartPos.DistanceTo(dragEndPos) > dragThreshold)
+			{
 				IsDragging = true;
 				EmitSignal(SignalName.DragStart);
 			}
-			if (Input.IsActionJustReleased("left_click")) {
+			if (Input.IsActionJustReleased("left_click"))
+			{
 				if (!IsDragging) HandleSelectUnit();
 				else IsDragging = false;
 			}
 
-			if (Input.IsActionJustPressed("right_click")) {
+			if (Input.IsActionJustPressed("right_click"))
+			{
 				var append = Input.IsActionPressed("shift");
 				unitsSelected.OfType<IWalk>()
 					.ForEach(walkable => walkable.WalkTo(mousePos, append));
 			}
 
 			var space_state = GetWorld2D().DirectSpaceState;
-			var query = new PhysicsPointQueryParameters2D {
+			var query = new PhysicsPointQueryParameters2D
+			{
 				Position = mousePos,
 				CollisionMask = (uint)CollisionLayer.Selectable,
 				CollideWithAreas = true,
 				CollideWithBodies = false,
 			};
 			var result = space_state.IntersectPoint(query);
-			if (result.Any()) {
+			if (result.Any())
+			{
 				CursorSettings.Instance.Cursor = Cursor.Select;
-			} else {
+			}
+			else
+			{
 				CursorSettings.Instance.Cursor = Cursor.Default;
 			}
 		}
@@ -72,12 +85,14 @@ namespace Riftstrike {
 		public readonly Array<Unit> units = new();
 		public readonly Array<Unit> unitsSelected = new();
 
-		public void HandleSelectUnit() {
+		public void HandleSelectUnit()
+		{
 			var mousePos = GetGlobalMousePosition();
 			GD.Print($"Select unit at {mousePos}");
 
 			var space_state = GetWorld2D().DirectSpaceState;
-			var query = new PhysicsPointQueryParameters2D {
+			var query = new PhysicsPointQueryParameters2D
+			{
 				Position = mousePos,
 				CollisionMask = (uint)CollisionLayer.Selectable,
 				CollideWithAreas = true,
@@ -94,8 +109,9 @@ namespace Riftstrike {
 			var closestUnit = clickedUnits
 				.OrderBy(unit => -unit.GlobalPosition.Y)
 				.Where(unit => !unitsSelected.Contains(unit));
-			
-			if (clickedUnits.Any()) {
+
+			if (clickedUnits.Any())
+			{
 				unitsSelected.Add(closestUnit.First());
 			}
 

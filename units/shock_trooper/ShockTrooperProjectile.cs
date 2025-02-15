@@ -2,12 +2,18 @@ using System.Linq;
 using Godot;
 using Riftstrike.components;
 
-namespace Riftstrike.units {
-	public partial class ShockTrooperProjectile : Area2D {
-		public static ShockTrooperProjectile New() {
-			return GD.Load<PackedScene>("res://units/shock_trooper/shock_trooper_projectile.tscn")
+namespace Riftstrike.units
+{
+	public partial class ShockTrooperProjectile : Area2D
+	{
+		public static ShockTrooperProjectile New()
+		{
+			return GD.Load<PackedScene>(
+				"res://units/shock_trooper/shock_trooper_projectile.tscn"
+				)
 				.Instantiate() as ShockTrooperProjectile;
 		}
+
 		public Vector2 Velocity = Vector2.Zero;
 
 		public double Damage;
@@ -18,18 +24,22 @@ namespace Riftstrike.units {
 			=> GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
 		private int remainingHits;
-		public int RemainingHits {
+		public int RemainingHits
+		{
 			get => remainingHits;
-			set {
+			set
+			{
 				remainingHits = value;
-				if (remainingHits <= 0) {
+				if (remainingHits <= 0)
+				{
 					QueueFree();
 				}
 			}
 		}
 
 		private double distanceTravelled;
-		public override void _PhysicsProcess(double delta) {
+		public override void _PhysicsProcess(double delta)
+		{
 			base._PhysicsProcess(delta);
 			GlobalPosition += Velocity * (float)delta;
 			distanceTravelled += Velocity.Length() * (float)delta;
@@ -37,26 +47,28 @@ namespace Riftstrike.units {
 				.OfType<HitboxComponent>()
 				.Where(h => h != lastCollision)
 				.OrderBy(h => h.GlobalPosition.DistanceTo(GlobalPosition));
-			
-			if (overlappingHitboxes.Any()) {
-				GD.Print($"collision with {string.Join(", ", overlappingHitboxes.Select(e => e.Owner.Name))}");
+
+			if (overlappingHitboxes.Any())
+			{
 				var target = overlappingHitboxes.First();
 				target.Damage(Damage);
 				lastCollision = target;
 				distanceTravelled = 0;
-				GD.Print($"hit: {target.Owner.Name}");
 				RemainingHits--;
 			}
-			if (distanceTravelled > Range) {
+			if (distanceTravelled > Range)
+			{
 				QueueFree();
 			}
 		}
 
-		private void UpdateRotation() {
+		private void UpdateRotation()
+		{
 			Rotation = Velocity.Normalized().Angle();
 		}
 
-		public override void _Ready() {
+		public override void _Ready()
+		{
 			base._Ready();
 			UpdateRotation();
 			AnimatedSprite.Play();

@@ -4,8 +4,10 @@ using Godot;
 using Riftstrike.components;
 using Riftstrike.units;
 
-namespace Riftstrike {
-	public partial class SelectionBox : Area2D {
+namespace Riftstrike
+{
+	public partial class SelectionBox : Area2D
+	{
 		private bool IsDragging = false;
 
 		private Panel Panel => GetNode<Panel>("Panel");
@@ -14,7 +16,8 @@ namespace Riftstrike {
 		private RectangleShape2D CollisionShape
 			=> Collider.Shape as RectangleShape2D;
 
-		public override void _Ready() {
+		public override void _Ready()
+		{
 			base._Ready();
 			// Timer.Timeout is emitted when the UnitSelectionManager did not
 			// handle the left_click (e.g. longer than X milliseconds debounce)
@@ -24,7 +27,8 @@ namespace Riftstrike {
 		private Vector2 start = Vector2.Zero;
 		private Vector2 end = Vector2.Zero;
 
-		public override void _Process(double delta) {
+		public override void _Process(double delta)
+		{
 			base._Process(delta);
 			var mousePos = GetGlobalMousePosition();
 			if (Input.IsActionJustPressed("left_click")) start = mousePos;
@@ -40,7 +44,8 @@ namespace Riftstrike {
 
 			SetDimensions(topLeft, bottomRight - topLeft);
 
-			if (Input.IsActionJustReleased("left_click")) {
+			if (Input.IsActionJustReleased("left_click"))
+			{
 				if (!IsDragging) return;
 				GD.Print("Drag end");
 				IsDragging = false;
@@ -52,13 +57,14 @@ namespace Riftstrike {
 					.OfType<SelectableComponent>()
 					.Select(c => c.unit)
 					.Where(u => !unitsSelected.Contains(u));
-				
+
 				unitsSelected.AddRange(newUnitSelection);
-				GD.Print($"Units selected: [{string.Join(", ", unitsSelected.Select(u => u.Name))}]");;
+				GD.Print($"Units selected: [{string.Join(", ", unitsSelected.Select(u => u.Name))}]"); ;
 			}
 		}
 
-		private void SetDimensions(Vector2 position, Vector2 size) {
+		private void SetDimensions(Vector2 position, Vector2 size)
+		{
 			Panel.Size = size;
 			CollisionShape.Size = size;
 

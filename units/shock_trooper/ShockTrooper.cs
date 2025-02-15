@@ -4,9 +4,11 @@ using Riftstrike.enemies;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Riftstrike.units {
+namespace Riftstrike.units
+{
 	[GlobalClass]
-	public partial class ShockTrooper : Unit, IWalk {
+	public partial class ShockTrooper : Unit, IWalk
+	{
 		[ExportGroup("Movement")]
 		[Export] private float speed = 200;
 		[Export] private float pushSpeed = 50;
@@ -17,12 +19,12 @@ namespace Riftstrike.units {
 		[Export] private float projectileSpeed = 300;
 		[Export] private float projectileBaseDamage = 10;
 
-        private NavigationAgent2D NavAgent
+		private NavigationAgent2D NavAgent
 			=> GetNode<NavigationAgent2D>("NavigationAgent2D");
 
 		private PushComponent PushComponent
 			=> GetNode<PushComponent>("PushComponent");
-		
+
 		private SelectableComponent SelectableComponent
 			=> GetNode<SelectableComponent>("SelectableComponent");
 
@@ -34,13 +36,13 @@ namespace Riftstrike.units {
 
 		private UpgradeComponent UpgradeComponent
 			=> GetNode<UpgradeComponent>("UpgradeComponent");
-		
+
 		private StatsComponent BaseStatsComponent
 			=> GetNode<StatsComponent>("BaseStatsComponent");
 
 		private StatsComponent TargetStatsComponent
 			=> GetNode<StatsComponent>("TargetStatsComponent");
-		
+
 		private Timer RegenerationTimer
 			=> GetNode<Timer>("RegenerationTimer");
 
@@ -52,14 +54,15 @@ namespace Riftstrike.units {
 
 		private Panel HoveringPanel
 			=> GetNode<Panel>("HoveringPanel");
-		
+
 		private Timer AttackTimer
 			=> GetNode<Timer>("AttackTimer");
-		
+
 		private bool AttackReady = false;
 
-        public override void _Ready() {
-            base._Ready();
+		public override void _Ready()
+		{
+			base._Ready();
 			HealthComponent.Health = TargetStatsComponent.Health;
 			RegenerationTimer.Timeout += HandleRegen;
 			UpgradeComponent.StatsRecalculated += HandleStatsRecalculated;
@@ -69,57 +72,68 @@ namespace Riftstrike.units {
 			AttackTimer.Timeout += () => AttackReady = true;
 		}
 
-        private void HandleDeath() {
+		private void HandleDeath()
+		{
 			GD.Print($"{Name} died!");
 			QueueFree();
-        }
+		}
 
-        private void HandleRegen() {
+		private void HandleRegen()
+		{
 			HealthComponent.Health = Mathf.Min(
 				HealthComponent.Health + TargetStatsComponent.Regeneration * RegenerationTimer.WaitTime,
 				TargetStatsComponent.Health
 			);
 		}
 
-		private void HandleHit(double damage) {
+		private void HandleHit(double damage)
+		{
 			// NOTE: Damage absorbtion goes here
 			HealthComponent.Damage(damage);
 		}
 
-		private void HandleStatsRecalculated() {
+		private void HandleStatsRecalculated()
+		{
 			// heal up to new max health on upgrade
 			HealthComponent.MaxHealth = TargetStatsComponent.Health;
 			HealthComponent.Health = TargetStatsComponent.Health;
 		}
 
-        public override void _Process(double delta) {
+		public override void _Process(double delta)
+		{
 			base._Process(delta);
 			SelectedPanel.Visible = SelectableComponent.IsSelected;
 			HoveringPanel.Visible = !SelectableComponent.IsSelected && SelectableComponent.IsHovered;
 		}
 
-		public override void _PhysicsProcess(double delta) {
+		public override void _PhysicsProcess(double delta)
+		{
 			base._PhysicsProcess(delta);
-			if (targets.Any() && NavAgent.TargetPosition != targets.First()) {
+			if (targets.Any() && NavAgent.TargetPosition != targets.First())
+			{
 				NavAgent.TargetPosition = targets.First();
 			}
 			if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) targets.RemoveAt(0);
 			var nextPos = NavAgent.GetNextPathPosition();
 
-			if (!AllTargetsCleared) {
+			if (!AllTargetsCleared)
+			{
 				Sprite.FlipH = GlobalPosition.DirectionTo(NavAgent.TargetPosition).X < 0;
 				GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
 			}
 			GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;
 
-			if (AttackReady) {
+			if (AttackReady)
+			{
 				var enemies = EnemyManager.Instance.enemies;
-				if (enemies.Any()) {
+				if (enemies.Any())
+				{
 					var closestTarget = enemies
 						.OrderBy(e => e.GlobalPosition.DistanceTo(GlobalPosition))
 						.First();
-					
-					if (IsInRange(closestTarget)) {
+
+					if (IsInRange(closestTarget))
+					{
 						ShootTowards(closestTarget);
 						AttackTimer.Start();
 						AttackReady = false;
@@ -128,19 +142,23 @@ namespace Riftstrike.units {
 			}
 		}
 
-		private bool IsInRange(Node2D node2D) {
+		private bool IsInRange(Node2D node2D)
+		{
 			return IsInRange(node2D.GlobalPosition);
 		}
 
-		private bool IsInRange(Vector2 position) {
+		private bool IsInRange(Vector2 position)
+		{
 			return GlobalPosition.DistanceTo(position) < TargetStatsComponent.Range;
 		}
 
-		private void ShootTowards(Node2D node2D) {
+		private void ShootTowards(Node2D node2D)
+		{
 			ShootTowards(node2D.GlobalPosition);
 		}
 
-		private void ShootTowards(Vector2 target) {
+		private void ShootTowards(Vector2 target)
+		{
 			// calculate parameters
 			var bulletPos = GlobalPosition;
 			var bulletDir = GlobalPosition.DirectionTo(target);
@@ -162,9 +180,10 @@ namespace Riftstrike.units {
 			AddSibling(bullet);
 		}
 
-		public void WalkTo(Vector2 targetPosition, bool append) {
+		public void WalkTo(Vector2 targetPosition, bool append)
+		{
 			if (!append) targets.Clear();
 			targets.Add(targetPosition);
 		}
-    }
+	}
 }

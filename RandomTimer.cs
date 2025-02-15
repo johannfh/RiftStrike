@@ -1,31 +1,37 @@
 using Godot;
 
-namespace Riftstrike {
+namespace Riftstrike
+{
 	[Tool]
 	[GlobalClass]
-	public partial class RandomTimer : Timer {
+	public partial class RandomTimer : Timer
+	{
 		[ExportGroup("Random Delay")]
 		[Export(PropertyHint.Range, "0,60,0.1,or_greater,suffix:s")] public float minimumDelay;
 		[Export(PropertyHint.Range, "0,60,0.1,or_greater,suffix:s")] public float maximumDelay;
 
 		private RandomNumberGenerator rng = new();
 
-		public override void _Ready() {
+		public override void _Ready()
+		{
 			rng.Randomize();
-			
-			if (Autostart && !Engine.IsEditorHint()) {
-				GD.Print($"Starting {Name}: min({minimumDelay}) max({maximumDelay})");
+
+			if (Autostart && !Engine.IsEditorHint())
+			{
 				StartRandom();
 			}
 		}
 
-		public void StartRandom() {
+		public void StartRandom()
+		{
 			var rand = rng.RandfRange(minimumDelay, maximumDelay);
 			Start(rand);
 		}
 
-		private void OnTimeout() {
-			if (!OneShot) {
+		private void OnTimeout()
+		{
+			if (!OneShot)
+			{
 				StartRandom();
 			}
 		}

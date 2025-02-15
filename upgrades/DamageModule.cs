@@ -1,13 +1,17 @@
 using Godot;
 using Riftstrike.components;
 
-namespace Riftstrike.upgrades {
-    public class DamageModule : IUpgrade {
-        public void Apply(StatsComponent target) {
+namespace Riftstrike.upgrades
+{
+    public class DamageModule : IUpgrade
+    {
+        public void Apply(StatsComponent target)
+        {
             target.Damage += 5;
         }
 
-        public Texture2D GetIcon() {
+        public Texture2D GetIcon()
+        {
             throw new System.NotImplementedException();
         }
     }

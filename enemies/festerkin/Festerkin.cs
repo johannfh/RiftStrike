@@ -2,9 +2,11 @@ using System.Linq;
 using Godot;
 using Riftstrike.components;
 
-namespace Riftstrike.enemies {
+namespace Riftstrike.enemies
+{
 	[GlobalClass]
-	public partial class Festerkin : Enemy {
+	public partial class Festerkin : Enemy
+	{
 		[Export]
 		private NavigationAgent2D NavAgent;
 
@@ -43,7 +45,8 @@ namespace Riftstrike.enemies {
 		[Export(PropertyHint.None, "suffix:s")]
 		public double attackCooldown = 1;
 
-		public override void _Ready() {
+		public override void _Ready()
+		{
 			base._Ready();
 			AnimationPlayer.Play("walk");
 			RecalculateTargetTimer.Timeout += RecalculateTarget;
@@ -54,29 +57,33 @@ namespace Riftstrike.enemies {
 			HealthComponent.Death += HandleDeath;
 		}
 
-		private void HandleHit(double damage) {
+		private void HandleHit(double damage)
+		{
 			// NOTE: Apply damage modifiers here
-			GD.Print("HITTT!");
 			HealthComponent.Damage(damage);
 		}
 
-		private void HandleDeath() {
+		private void HandleDeath()
+		{
 			GD.Print($"{Name} killed!");
 			QueueFree();
 		}
 
-		private void RecalculateTarget() {
+		private void RecalculateTarget()
+		{
 			// TODO: implement calculation (first errors when none found; make it based on area and detection or closest player unit global?)
 			var units = UnitSelectionManager.Instance.units
 				.OrderBy(u => GlobalPosition.DistanceTo(u.GlobalPosition));
-			
-			if (units.Any()) {
+
+			if (units.Any())
+			{
 				var targetPos = units.First().GlobalPosition;
 				NavAgent.TargetPosition = targetPos + (GlobalPosition.DirectionTo(targetPos) * (float)targetOvershootDistance);
 			}
 		}
 
-		public override void _PhysicsProcess(double delta) {
+		public override void _PhysicsProcess(double delta)
+		{
 			base._PhysicsProcess(delta);
 			var nextPos = NavAgent.GetNextPathPosition();
 			GlobalPosition = GlobalPosition.MoveToward(nextPos, (float)speed * (float)delta);
@@ -84,8 +91,8 @@ namespace Riftstrike.enemies {
 			if (NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) RecalculateTarget();
 
 			var hitboxes = HitboxComponent.OverlappingHitboxes;
-			if (hitboxes.Any() && AttackTimer.IsStopped()) {
-				GD.Print($"attacking {hitboxes.First().GetParent().Name}");
+			if (hitboxes.Any() && AttackTimer.IsStopped())
+			{
 				hitboxes.First().Damage(attackDamage);
 				AttackTimer.Start();
 			}

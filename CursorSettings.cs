@@ -1,11 +1,15 @@
 using Godot;
 
-namespace Riftstrike {
-    public partial class CursorSettings : Node {
+namespace Riftstrike
+{
+    public partial class CursorSettings : Node
+    {
         public static CursorSettings Instance { get; private set; }
-        public override void _Ready() {
+        public override void _Ready()
+        {
             base._Ready();
-            if (Instance != null && Instance != this) {
+            if (Instance != null && Instance != this)
+            {
                 QueueFree();
                 return;
             }
@@ -20,11 +24,14 @@ namespace Riftstrike {
         private Texture2D cursorPointer;
         private Texture2D cursorSelect;
         private Cursor cursor = Cursor.Default;
-        public Cursor Cursor {
+        public Cursor Cursor
+        {
             get => cursor;
-            set {
+            set
+            {
                 cursor = value;
-                Texture2D cursorTexture = cursor switch {
+                Texture2D cursorTexture = cursor switch
+                {
                     Cursor.Pointer => cursorPointer,
                     Cursor.Select => cursorSelect,
                     _ => cursorDefault,
@@ -35,7 +42,8 @@ namespace Riftstrike {
             }
         }
     }
-    public enum Cursor {
+    public enum Cursor
+    {
         Default,
         Pointer,
         Select,

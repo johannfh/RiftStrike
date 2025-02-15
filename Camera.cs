@@ -1,7 +1,9 @@
 using Godot;
 
-namespace Riftstrike {
-    public partial class Camera : Camera2D {
+namespace Riftstrike
+{
+    public partial class Camera : Camera2D
+    {
         [Export] private float movePixelThreshold = 80;
         [Export] private float moveSpeed = 300;
 
@@ -12,7 +14,8 @@ namespace Riftstrike {
 
         private static bool IsDragging = false;
 
-        public override void _Process(double delta) {
+        public override void _Process(double delta)
+        {
             HandleDragging();
             // only react to corner movement when
             // not dragging the camera with the mouse
@@ -21,7 +24,8 @@ namespace Riftstrike {
         }
 
 
-        private void UpdatePosition(double delta) {
+        private void UpdatePosition(double delta)
+        {
             if (!GetWindow().HasFocus()) return;
             var screenRect = GetViewportRect();
             var mousePosV = GetViewportTransform() * GetGlobalMousePosition();
@@ -35,7 +39,7 @@ namespace Riftstrike {
             var rightDir = (mousePosV.X > screenRect.Size.X - movePixelThreshold && mousePosV.X < screenRect.Size.X + rightOvershoot) ||
                 Input.IsActionPressed("camera_right") ? 1 : 0;
             var horizontalDir = leftDir + rightDir;
-            
+
             var upDir = (mousePosV.Y > -upOvershoot && mousePosV.Y < movePixelThreshold) ||
                 Input.IsActionPressed("camera_up") ? -1 : 0;
             var downDir = (mousePosV.Y > screenRect.Size.Y - movePixelThreshold && mousePosV.Y < screenRect.Size.Y + downOvershoot) ||
@@ -49,25 +53,30 @@ namespace Riftstrike {
 
         private Vector2 dragLastPos = Vector2.Zero;
 
-        private void HandleDragging() {
+        private void HandleDragging()
+        {
             var mousePos = GetGlobalMousePosition();
-            if (Input.IsActionJustPressed("drag_camera")) {
+            if (Input.IsActionJustPressed("drag_camera"))
+            {
                 IsDragging = true;
                 dragLastPos = mousePos;
                 GD.Print($"Started dragging at {dragLastPos}");
             }
-            if (Input.IsActionJustReleased("drag_camera")) {
+            if (Input.IsActionJustReleased("drag_camera"))
+            {
                 IsDragging = false;
                 GD.Print($"Stopped dragging at {mousePos}");
             }
-            if (IsDragging) {
+            if (IsDragging)
+            {
                 var dragDiff = mousePos - dragLastPos;
                 GlobalPosition -= dragDiff;
                 dragLastPos = mousePos - dragDiff;
             }
         }
 
-        private void HandleZooming() {
+        private void HandleZooming()
+        {
             var directionIn = Input.IsActionJustReleased("zoom_in") ? 1 : 0;
             var directionOut = Input.IsActionJustReleased("zoom_out") ? -1 : 0;
             var zoomDirection = directionIn + directionOut;

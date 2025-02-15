@@ -2,19 +2,23 @@ using System.Collections.Generic;
 using Godot;
 using Riftstrike.enemies;
 
-namespace Riftstrike {
+namespace Riftstrike
+{
     [GlobalClass]
-    public partial class EnemyManager : Node2D {
+    public partial class EnemyManager : Node2D
+    {
         public static EnemyManager Instance { get; private set; }
-        public override void _Ready() {
+        public override void _Ready()
+        {
             base._Ready();
-            if (Instance != null && Instance != this) {
+            if (Instance != null && Instance != this)
+            {
                 QueueFree();
                 return;
             }
             Instance = this;
         }
-        
+
         public readonly List<Enemy> enemies = new();
     }
 }

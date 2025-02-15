@@ -29,7 +29,7 @@ project/assembly_name="RiftStrike"
 
 [global_group]
 
-selectable_components="All `SelectableComponent`s are part of this group"
+spawn_location=""
 
 [input]
 
@@ -187,7 +187,9 @@ cycle_unit_types={
 [layer_names]
 
 2d_physics/layer_1="Units"
+2d_navigation/layer_1="Units"
 2d_physics/layer_2="Enemies"
+2d_navigation/layer_2="Enemies"
 2d_physics/layer_3="Layer 3"
 2d_physics/layer_4="Detection"
 2d_physics/layer_17="Push Collisions"
