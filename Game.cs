@@ -53,6 +53,10 @@ namespace Riftstrike
             SpawnEnemiesTimer.Timeout += () =>
             {
                 var locations = new List<SpawnLocation>();
+                if (!UnitSelectionManager.Instance.units.Any())
+                {
+                    return;
+                }
                 var perUnit = Math.Min(unitSpawnCount, spawnLocations.Count) / UnitSelectionManager.Instance.units.Count;
 
                 foreach (var unit in UnitSelectionManager.Instance.units)
