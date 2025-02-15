@@ -4,13 +4,21 @@ namespace Riftstrike
 {
     public partial class Camera : Camera2D
     {
-        [Export] private float movePixelThreshold = 80;
-        [Export] private float moveSpeed = 300;
+        [Export]
+        private float movePixelThreshold = 80;
+
+        [Export]
+        private float moveSpeed = 300;
 
         [ExportCategory("Camera Zoom")]
-        [Export(PropertyHint.Range, "0.1,1,0.05,or_greater")] private double zoomMinimum = 0.1;
-        [Export(PropertyHint.Range, "1,3,0.05,or_greater")] private double zoomMaximum = 2;
-        [Export(PropertyHint.Range, "0.05,0.5,0.05")] private double zoomSensitivity = 0.05;
+        [Export(PropertyHint.Range, "0.1,1,0.05,or_greater")]
+        private double zoomMinimum = 0.1;
+
+        [Export(PropertyHint.Range, "1,3,0.05,or_greater")]
+        private double zoomMaximum = 2;
+
+        [Export(PropertyHint.Range, "0.05,0.5,0.05")]
+        private double zoomSensitivity = 0.05;
 
         private static bool IsDragging = false;
 
