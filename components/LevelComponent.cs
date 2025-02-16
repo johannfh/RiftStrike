@@ -14,7 +14,7 @@ namespace Riftstrike.components
             private set
             {
                 experience = value;
-                var requirements = GetExperienceNeeded(Level);
+                var requirements = GetExperienceNeeded(Level + 1);
                 if (experience >= requirements)
                 {
                     experience -= requirements;
