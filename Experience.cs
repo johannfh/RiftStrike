@@ -2,8 +2,9 @@ using Godot;
 
 namespace Riftstrike
 {
-    public partial class Experience : Node2D
+    public partial class Experience : Area2D
     {
         public double Value;
+        public bool Collected = false;
     }
 }

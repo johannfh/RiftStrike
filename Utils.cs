@@ -10,6 +10,11 @@ namespace Riftstrike
         Units = 1 << 0,
         Enemies = 1 << 1,
 
+        UnitPushCollisions = 1 << 16,
+        EnemyPushCollisions = 1 << 17,
+
+        Experience = 1 << 8,
+
         Selectable = 1 << 24,
         Selection = 1 << 25,
     }
