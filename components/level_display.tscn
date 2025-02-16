@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7yshd5tbajmv"]
+
+[ext_resource type="Script" path="res://components/LevelDisplay.cs" id="1_iwb74"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e7rqf"]
+font_size = 24
+
+[node name="LevelDisplay" type="Control" node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_iwb74")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "LevelDisplay"
+label_settings = SubResource("LabelSettings_e7rqf")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -50,6 +50,7 @@ namespace Riftstrike.enemies
 			base._Ready();
 			AnimationPlayer.Play("walk");
 			RecalculateTargetTimer.Timeout += RecalculateTarget;
+			RecalculateTarget();
 			BlinkTimer.Timeout += () => AnimationPlayer.Play("blink");
 			AnimationPlayer.AnimationFinished += (_) => AnimationPlayer.Play("walk");
 			AttackTimer.WaitTime = attackCooldown;

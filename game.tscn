@@ -41,14 +41,13 @@ sources/0 = SubResource("TileSetAtlasSource_exono")
 [node name="Game" type="Node2D" node_paths=PackedStringArray("SpawnEnemiesTimer", "Map")]
 script = ExtResource("1_1yase")
 SpawnEnemiesTimer = NodePath("SpawnEnemiesTimer")
-enemySpawnCount = 5
 Map = NodePath("Map")
 
 [node name="SpawnEnemiesTimer" type="Timer" parent="."]
 autostart = true
 script = ExtResource("2_88g8b")
-minimumDelay = 0.5
-maximumDelay = 1.0
+minimumDelay = 2.0
+maximumDelay = 4.0
 
 [node name="UnitManager" type="Node2D" parent="."]
 script = ExtResource("3_4v1vs")
