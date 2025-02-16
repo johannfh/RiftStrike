@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_1yase"]
-[ext_resource type="Script" path="res://UnitSelectionManager.cs" id="1_6ktgs"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://assets/stone_texture.png" id="1_coj4f"]
 [ext_resource type="Script" path="res://Camera.cs" id="1_fw2jn"]
 [ext_resource type="Script" path="res://RandomTimer.cs" id="2_88g8b"]
 [ext_resource type="Script" path="res://SelectionBox.cs" id="2_hwfey"]
+[ext_resource type="Script" path="res://UnitManager.cs" id="3_4v1vs"]
 [ext_resource type="PackedScene" uid="uid://dsq6u6jv05si4" path="res://units/shock_trooper/shock_trooper.tscn" id="3_veqau"]
 [ext_resource type="Script" path="res://EnemyManager.cs" id="7_galhq"]
 
@@ -50,9 +50,8 @@ script = ExtResource("2_88g8b")
 minimumDelay = 0.5
 maximumDelay = 1.0
 
-[node name="UnitSelectionManager" type="Node2D" parent="."]
-script = ExtResource("1_6ktgs")
-dragThreshold = 10.0
+[node name="UnitManager" type="Node2D" parent="."]
+script = ExtResource("3_4v1vs")
 
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("7_galhq")

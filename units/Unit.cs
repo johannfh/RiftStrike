@@ -11,13 +11,13 @@ namespace Riftstrike.units
 		public override void _Ready()
 		{
 			base._Ready();
-			UnitSelectionManager.Instance.units.Add(this);
+			UnitManager.Instance.units.Add(this);
 		}
 
 		public override void _ExitTree()
 		{
-			UnitSelectionManager.Instance.units.Remove(this);
-			UnitSelectionManager.Instance.unitsSelected.Remove(this);
+			UnitManager.Instance.units.Remove(this);
+			UnitManager.Instance.unitsSelected.Remove(this);
 			base._ExitTree();
 		}
 	}

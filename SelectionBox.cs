@@ -21,7 +21,7 @@ namespace Riftstrike
 			base._Ready();
 			// Timer.Timeout is emitted when the UnitSelectionManager did not
 			// handle the left_click (e.g. longer than X milliseconds debounce)
-			UnitSelectionManager.Instance.DragStart += () => IsDragging = true;
+			UnitManager.Instance.DragStart += () => IsDragging = true;
 		}
 
 		private Vector2 start = Vector2.Zero;
@@ -50,7 +50,7 @@ namespace Riftstrike
 				GD.Print("Drag end");
 				IsDragging = false;
 				var append = Input.IsActionPressed("shift");
-				var unitsSelected = UnitSelectionManager.Instance.unitsSelected;
+				var unitsSelected = UnitManager.Instance.unitsSelected;
 				if (!append) unitsSelected.Clear();
 
 				var newUnitSelection = GetOverlappingAreas()

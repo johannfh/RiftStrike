@@ -7,12 +7,12 @@ using Riftstrike.units;
 namespace Riftstrike
 {
 	[GlobalClass]
-	public partial class UnitSelectionManager : Node2D
+	public partial class UnitManager : Node2D
 	{
 		// TODO: Create Instance when none is found?
 		// Also maybe not because it might not be intended that way.
 		// (More per-scene control)
-		public static UnitSelectionManager Instance { get; private set; }
+		public static UnitManager Instance { get; private set; }
 
 		// The Timer instance specifies the max duration for a mouse down
 		// to count as a click. Longer actions will count as things like Dragging.

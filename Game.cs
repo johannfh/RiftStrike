@@ -74,7 +74,7 @@ namespace Riftstrike
 
                 // check if position is safe
                 var isSafe = true;
-                foreach (var unit in UnitSelectionManager.Instance.units)
+                foreach (var unit in UnitManager.Instance.units)
                 {
                     if (unit.GlobalPosition.DistanceTo(position) <= unit.SafeDistance)
                     {

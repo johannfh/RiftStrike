@@ -2,14 +2,19 @@ using System.Linq;
 using Godot;
 using Riftstrike.units;
 
-namespace Riftstrike.components {
+namespace Riftstrike.components
+{
 	[GlobalClass]
-	public partial class SelectableComponent : Area2D {
+	public partial class SelectableComponent : Area2D
+	{
 		[Export] public Unit unit;
-		public bool IsHovered {
-			get {
+		public bool IsHovered
+		{
+			get
+			{
 				var units = GetWorld2D().DirectSpaceState
-				.IntersectPoint(new() {
+				.IntersectPoint(new()
+				{
 					Position = GetGlobalMousePosition(),
 					CollideWithAreas = true,
 					CollideWithBodies = false,
@@ -22,6 +27,6 @@ namespace Riftstrike.components {
 			}
 		}
 		public bool IsSelected
-			=> UnitSelectionManager.Instance.unitsSelected.Contains(unit);
+			=> UnitManager.Instance.unitsSelected.Contains(unit);
 	}
 }

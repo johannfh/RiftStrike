@@ -71,7 +71,7 @@ namespace Riftstrike.enemies
 		private void RecalculateTarget()
 		{
 			// TODO: implement calculation (first errors when none found; make it based on area and detection or closest player unit global?)
-			var units = UnitSelectionManager.Instance.units
+			var units = UnitManager.Instance.units
 				.OrderBy(u => GlobalPosition.DistanceTo(u.GlobalPosition));
 
 			if (units.Any())
