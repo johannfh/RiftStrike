@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dsq6u6jv05si4"]
+[gd_scene load_steps=18 format=3 uid="uid://dsq6u6jv05si4"]
 
 [ext_resource type="Script" path="res://units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
 [ext_resource type="Script" path="res://components/SelectableComponent.cs" id="2_wqyfo"]
@@ -12,9 +12,7 @@
 [ext_resource type="Script" path="res://components/StatsComponent.cs" id="7_hgvdb"]
 [ext_resource type="Script" path="res://components/UpgradeComponent.cs" id="9_6oqv4"]
 [ext_resource type="Script" path="res://components/HealthComponent.cs" id="10_7vpsq"]
-[ext_resource type="StyleBox" uid="uid://c53fmtxikqkca" path="res://health_bar_background.tres" id="11_h26fk"]
-[ext_resource type="Script" path="res://components/HealthBar.cs" id="11_nbfjh"]
-[ext_resource type="StyleBox" uid="uid://b84c53pw7thy6" path="res://health_bar_fill.tres" id="12_0fdlv"]
+[ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://components/health_bar.tscn" id="12_7ipeg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngchn"]
 size = Vector2(150, 50)
@@ -122,17 +120,9 @@ script = ExtResource("7_hgvdb")
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("10_7vpsq")
 
-[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
-offset_left = -60.0
-offset_top = 10.0
-offset_right = 60.0
-offset_bottom = 40.0
-theme_override_styles/background = ExtResource("11_h26fk")
-theme_override_styles/fill = ExtResource("12_0fdlv")
-max_value = 50.0
-value = 25.0
-show_percentage = false
-script = ExtResource("11_nbfjh")
+[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("12_7ipeg")]
+offset_top = 20.0
+offset_bottom = 50.0
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="LevelDisplay" parent="." node_paths=PackedStringArray("levelComponent") instance=ExtResource("6_pffs3")]

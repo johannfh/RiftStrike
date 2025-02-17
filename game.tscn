@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=15 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" path="res://Game.cs" id="1_1yase"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://assets/stone_texture.png" id="1_coj4f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://UnitManager.cs" id="3_4v1vs"]
 [ext_resource type="PackedScene" uid="uid://dsq6u6jv05si4" path="res://units/shock_trooper/shock_trooper.tscn" id="3_veqau"]
 [ext_resource type="Script" path="res://EnemyManager.cs" id="7_galhq"]
+[ext_resource type="PackedScene" uid="uid://c3jkjsjw8dxpm" path="res://units/rift_assasin/rift_assassin.tscn" id="9_k61ni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igf7"]
 
@@ -85,14 +86,16 @@ tile_map_data = PackedByteArray("AADo/+7/AAAAAAAAAADo/+3/AAAAAAAAAADo/+z/AAAAAAA
 tile_set = SubResource("TileSet_8hu0s")
 
 [node name="ShockTrooper" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(-288, -323)
+position = Vector2(-416, -417)
 projectileBaseDamage = 50.0
 
 [node name="ShockTrooper2" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(1189, -695)
+position = Vector2(433, -377)
 
 [node name="ShockTrooper3" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(-1202, 947)
+position = Vector2(-416, 351)
 
 [node name="ShockTrooper4" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(1105, 1205)
+position = Vector2(433, 343)
+
+[node name="RiftAssasin" parent="Map" instance=ExtResource("9_k61ni")]

@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://c3jkjsjw8dxpm"]
+
+[ext_resource type="Script" path="res://units/rift_assasin/RiftAssassin.cs" id="1_qxonp"]
+[ext_resource type="Script" path="res://components/SelectableComponent.cs" id="2_8foun"]
+[ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://units/selected_style_box.tres" id="3_d7amh"]
+[ext_resource type="Script" path="res://components/PushComponent.cs" id="3_rgmc3"]
+[ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://units/hovering_style_box.tres" id="4_03xrw"]
+[ext_resource type="Script" path="res://components/LevelComponent.cs" id="4_c2ekv"]
+[ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://assets/ShockTrooper.png" id="5_l1px6"]
+[ext_resource type="Script" path="res://components/UpgradeComponent.cs" id="8_y5x7i"]
+[ext_resource type="Script" path="res://components/StatsComponent.cs" id="9_fulix"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="10_8voh0"]
+[ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://components/health_bar.tscn" id="11_huejp"]
+[ext_resource type="PackedScene" uid="uid://b7yshd5tbajmv" path="res://components/level_display.tscn" id="12_2ng7f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wo14j"]
+size = Vector2(150, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f4d6g"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8kwl"]
+radius = 500.0
+
+[node name="RiftAssassin" type="Node2D"]
+script = ExtResource("1_qxonp")
+speed = 400.0
+pushSpeed = 50.0
+
+[node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
+collision_layer = 16777216
+collision_mask = 33554432
+script = ExtResource("2_8foun")
+unit = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableComponent"]
+shape = SubResource("RectangleShape2D_wo14j")
+
+[node name="PushComponent" type="Area2D" parent="."]
+script = ExtResource("3_rgmc3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+shape = SubResource("CircleShape2D_f4d6g")
+
+[node name="LevelComponent" type="Area2D" parent="."]
+script = ExtResource("4_c2ekv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelComponent"]
+shape = SubResource("CircleShape2D_v8kwl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="SelectedPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_d7amh")
+
+[node name="HoveringPanel" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -25.0
+offset_right = 75.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_03xrw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.55, 0.88, 1, 1)
+position = Vector2(0, -112)
+scale = Vector2(4, 4)
+texture = ExtResource("5_l1px6")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.333
+
+[node name="RegenerationTimer" type="Timer" parent="."]
+
+[node name="UpgradeComponent" type="Node" parent="."]
+script = ExtResource("8_y5x7i")
+
+[node name="BaseStatsComponent" type="Node" parent="."]
+script = ExtResource("9_fulix")
+
+[node name="TargetStatsComponent" type="Node" parent="."]
+script = ExtResource("9_fulix")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_8voh0")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("11_huejp")]
+offset_top = 20.0
+offset_bottom = 50.0
+value = 50.0
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="LevelDisplay" parent="." node_paths=PackedStringArray("levelComponent") instance=ExtResource("12_2ng7f")]
+offset_top = -267.0
+offset_bottom = -267.0
+levelComponent = NodePath("../LevelComponent")
