@@ -12,7 +12,6 @@ namespace Riftstrike.units
         [ExportGroup("Movement")]
         [Export] private float speed = 200;
         [Export] private float pushSpeed = 50;
-        private bool AllTargetsCleared => !targets.Any();
         private readonly List<Vector2> targets = new();
 
         [ExportGroup("Attacks")]
@@ -116,7 +115,7 @@ namespace Riftstrike.units
             if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) targets.RemoveAt(0);
             var nextPos = NavAgent.GetNextPathPosition();
 
-            if (!AllTargetsCleared)
+            if (targets.Any())
             {
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
             }
