@@ -118,7 +118,6 @@ namespace Riftstrike.units
 
             if (!AllTargetsCleared)
             {
-                Sprite.FlipH = GlobalPosition.DirectionTo(NavAgent.TargetPosition).X < 0;
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
             }
             GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;
