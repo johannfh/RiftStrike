@@ -112,7 +112,10 @@ namespace Riftstrike.units
             {
                 NavAgent.TargetPosition = targets.First();
             }
-            if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) targets.RemoveAt(0);
+            if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5)
+            {
+                targets.RemoveAt(0);
+            }
             var nextPos = NavAgent.GetNextPathPosition();
 
             if (targets.Any())
