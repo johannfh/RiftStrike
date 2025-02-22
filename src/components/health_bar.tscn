@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi8s5pyj2m5nl"]
+
+[ext_resource type="Script" path="res://components/HealthBar.cs" id="1_53b1w"]
+[ext_resource type="StyleBox" uid="uid://c53fmtxikqkca" path="res://health_bar_background.tres" id="1_eo6b5"]
+[ext_resource type="StyleBox" uid="uid://b84c53pw7thy6" path="res://health_bar_fill.tres" id="2_ey141"]
+
+[node name="HealthBar" type="ProgressBar"]
+offset_left = -50.0
+offset_top = -15.0
+offset_right = 50.0
+offset_bottom = 15.0
+theme_override_styles/background = ExtResource("1_eo6b5")
+theme_override_styles/fill = ExtResource("2_ey141")
+show_percentage = false
+script = ExtResource("1_53b1w")

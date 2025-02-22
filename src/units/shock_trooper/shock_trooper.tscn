@@ -1,0 +1,131 @@
+[gd_scene load_steps=18 format=3 uid="uid://dsq6u6jv05si4"]
+
+[ext_resource type="Script" path="res://units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
+[ext_resource type="Script" path="res://components/SelectableComponent.cs" id="2_wqyfo"]
+[ext_resource type="Script" path="res://components/HitboxComponent.cs" id="3_piex0"]
+[ext_resource type="Script" path="res://components/PushComponent.cs" id="4_4m88o"]
+[ext_resource type="Script" path="res://components/LevelComponent.cs" id="5_5acuh"]
+[ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://units/selected_style_box.tres" id="6_7cpyp"]
+[ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://assets/ShockTrooper.png" id="6_kpmcn"]
+[ext_resource type="PackedScene" uid="uid://b7yshd5tbajmv" path="res://components/level_display.tscn" id="6_pffs3"]
+[ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://units/hovering_style_box.tres" id="7_gqle7"]
+[ext_resource type="Script" path="res://components/StatsComponent.cs" id="7_hgvdb"]
+[ext_resource type="Script" path="res://components/UpgradeComponent.cs" id="9_6oqv4"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="10_7vpsq"]
+[ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://components/health_bar.tscn" id="12_7ipeg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngchn"]
+size = Vector2(150, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2e8r"]
+size = Vector2(150, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5na8r"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_066bd"]
+radius = 500.0
+
+[node name="ShockTrooper" type="Node2D"]
+position = Vector2(0, 5)
+script = ExtResource("1_uintk")
+speed = 400.0
+projectileSpeed = 600.0
+projectileBaseDamage = 20.0
+SafeDistance = 500.0
+
+[node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
+collision_layer = 16777216
+collision_mask = 33554432
+script = ExtResource("2_wqyfo")
+unit = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableComponent"]
+visible = false
+shape = SubResource("RectangleShape2D_ngchn")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("3_piex0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_u2e8r")
+
+[node name="PushComponent" type="Area2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 65536
+collision_mask = 65536
+script = ExtResource("4_4m88o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+shape = SubResource("CircleShape2D_5na8r")
+
+[node name="LevelComponent" type="Area2D" parent="."]
+script = ExtResource("5_5acuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelComponent"]
+shape = SubResource("CircleShape2D_066bd")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="SelectedPanel" type="Panel" parent="."]
+offset_left = -75.0
+offset_top = -33.0
+offset_right = 75.0
+offset_bottom = 17.0
+theme_override_styles/panel = ExtResource("6_7cpyp")
+
+[node name="HoveringPanel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -33.0
+offset_right = 75.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_gqle7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -128)
+scale = Vector2(4, 4)
+texture = ExtResource("6_kpmcn")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.333
+one_shot = true
+autostart = true
+
+[node name="RegenerationTimer" type="Timer" parent="."]
+wait_time = 0.333
+autostart = true
+
+[node name="UpgradeComponent" type="Node" parent="." node_paths=PackedStringArray("StatsComponentSource", "StatsComponentTarget")]
+script = ExtResource("9_6oqv4")
+StatsComponentSource = NodePath("../BaseStatsComponent")
+StatsComponentTarget = NodePath("../TargetStatsComponent")
+
+[node name="BaseStatsComponent" type="Node" parent="."]
+script = ExtResource("7_hgvdb")
+Regeneration = 5.0
+Range = 700.0
+
+[node name="TargetStatsComponent" type="Node" parent="."]
+script = ExtResource("7_hgvdb")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_7vpsq")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("12_7ipeg")]
+offset_top = 20.0
+offset_bottom = 50.0
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="LevelDisplay" parent="." node_paths=PackedStringArray("levelComponent") instance=ExtResource("6_pffs3")]
+offset_top = -291.0
+offset_bottom = -291.0
+levelComponent = NodePath("../LevelComponent")

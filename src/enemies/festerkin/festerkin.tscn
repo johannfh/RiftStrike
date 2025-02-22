@@ -1,0 +1,130 @@
+[gd_scene load_steps=15 format=3 uid="uid://xepapvohrh5"]
+
+[ext_resource type="Script" path="res://enemies/festerkin/Festerkin.cs" id="1_4b7xi"]
+[ext_resource type="Script" path="res://components/PushComponent.cs" id="2_nr7fl"]
+[ext_resource type="Texture2D" uid="uid://bmcvbaehh3ie6" path="res://assets/enemies/festerkin/festerkin.png" id="3_1o71y"]
+[ext_resource type="Script" path="res://components/HitboxComponent.cs" id="3_2iacg"]
+[ext_resource type="Script" path="res://RandomTimer.cs" id="5_pydac"]
+[ext_resource type="Script" path="res://components/HealthComponent.cs" id="6_06vqm"]
+[ext_resource type="StyleBox" uid="uid://c53fmtxikqkca" path="res://health_bar_background.tres" id="7_e6l3h"]
+[ext_resource type="StyleBox" uid="uid://b84c53pw7thy6" path="res://health_bar_fill.tres" id="8_2fi66"]
+[ext_resource type="Script" path="res://components/HealthBar.cs" id="9_jc2f0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l62n"]
+size = Vector2(76, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndq3m"]
+size = Vector2(80, 20)
+
+[sub_resource type="Animation" id="Animation_a56l6"]
+resource_name = "blink"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_p541c"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mk3da"]
+_data = {
+"blink": SubResource("Animation_a56l6"),
+"walk": SubResource("Animation_p541c")
+}
+
+[node name="Festerkin" type="Node2D" node_paths=PackedStringArray("NavAgent", "AnimationPlayer", "Sprite", "RecalculateTargetTimer", "PushComponent", "HitboxComponent", "AttackTimer", "BlinkTimer", "HealthComponent")]
+script = ExtResource("1_4b7xi")
+NavAgent = NodePath("NavigationAgent2D")
+AnimationPlayer = NodePath("AnimationPlayer")
+Sprite = NodePath("Sprite2D")
+RecalculateTargetTimer = NodePath("RecalculateTargetTimer")
+PushComponent = NodePath("PushComponent")
+HitboxComponent = NodePath("HitboxComponent")
+AttackTimer = NodePath("AttackTimer")
+BlinkTimer = NodePath("BlinkTimer")
+HealthComponent = NodePath("HealthComponent")
+speed = 300.0
+targetOvershootDistance = 150.0
+
+[node name="PushComponent" type="Area2D" parent="."]
+collision_layer = 131072
+collision_mask = 131072
+script = ExtResource("2_nr7fl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
+shape = SubResource("RectangleShape2D_3l62n")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("3_2iacg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_ndq3m")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+scale = Vector2(4, 4)
+texture = ExtResource("3_1o71y")
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_mk3da")
+}
+speed_scale = 0.5
+
+[node name="RecalculateTargetTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="BlinkTimer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("5_pydac")
+minimumDelay = 2.0
+maximumDelay = 5.0
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_06vqm")
+MaxHealth = 50.0
+
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 30.0
+theme_override_styles/background = ExtResource("7_e6l3h")
+theme_override_styles/fill = ExtResource("8_2fi66")
+value = 50.0
+show_percentage = false
+script = ExtResource("9_jc2f0")
+HealthComponent = NodePath("../HealthComponent")
