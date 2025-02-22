@@ -53,13 +53,11 @@ namespace Riftstrike.components
         {
             base._Ready();
             Health = MaxHealth;
-            GD.Print($"{Health}/{MaxHealth}hp");
         }
 
         public void Damage(double damage)
         {
             Health -= damage;
-            GD.Print($"{GetParent().Name} took {damage} damage!");
         }
 
         public void Heal(double health)

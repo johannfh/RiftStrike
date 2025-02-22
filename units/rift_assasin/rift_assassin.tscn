@@ -47,6 +47,8 @@ script = ExtResource("3_c6sin")
 shape = SubResource("RectangleShape2D_357if")
 
 [node name="PushComponent" type="Area2D" parent="."]
+collision_layer = 65536
+collision_mask = 65536
 script = ExtResource("3_rgmc3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]

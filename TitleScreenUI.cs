@@ -10,6 +10,7 @@ namespace Riftstrike
         public override void _Ready()
         {
             base._Ready();
+            CursorSettings.Instance.Cursor = Cursor.Default;
             // TODO: handle scene changes centralized
             PlayButton.Pressed += () => GetTree().ChangeSceneToFile("res://game.tscn");
         }
