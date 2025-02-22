@@ -167,6 +167,7 @@ namespace Riftstrike.units
             var bulletRange = TargetStatsComponent.Range * 2;
 
             // NOTE: apply damage modifiers here
+            GD.Print($"{projectileBaseDamage} * ({TargetStatsComponent.Damage} / 100)");
             var bulletDamage = projectileBaseDamage * (TargetStatsComponent.Damage / 100);
 
 
@@ -176,6 +177,7 @@ namespace Riftstrike.units
             bullet.Velocity = bulletVelocity;
             bullet.Damage = bulletDamage;
             bullet.Range = bulletRange;
+            GD.Print($"Shot bullet with {bullet.Damage} damage!");
 
             // spawn in tree
             AddSibling(bullet);

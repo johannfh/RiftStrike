@@ -86,16 +86,7 @@ tile_map_data = PackedByteArray("AADo/+7/AAAAAAAAAADo/+3/AAAAAAAAAADo/+z/AAAAAAA
 tile_set = SubResource("TileSet_8hu0s")
 
 [node name="ShockTrooper" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(-416, -417)
-projectileBaseDamage = 50.0
-
-[node name="ShockTrooper2" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(433, -377)
-
-[node name="ShockTrooper3" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(-416, 351)
-
-[node name="ShockTrooper4" parent="Map" instance=ExtResource("3_veqau")]
-position = Vector2(433, 343)
+position = Vector2(-246, 125)
 
 [node name="RiftAssasin" parent="Map" instance=ExtResource("9_k61ni")]
+position = Vector2(195, -102)

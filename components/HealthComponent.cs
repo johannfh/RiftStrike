@@ -1,9 +1,11 @@
 using System;
 using Godot;
 
-namespace Riftstrike.components {
+namespace Riftstrike.components
+{
     [GlobalClass]
-    public partial class HealthComponent : Node {
+    public partial class HealthComponent : Node
+    {
 
         /// <summary>
         /// Emitted when Health reaches 0.
@@ -16,32 +18,52 @@ namespace Riftstrike.components {
         /// Controls health points for this component.
         /// This should be managed from the owner (Unit/Enemy) Node after initialization.
         /// </summary>
-        public double Health {
+        public double Health
+        {
             get => health;
-            set {
+            set
+            {
                 health = value;
-                if (health <= 0) {
+                if (health <= 0)
+                {
                     health = 0;
                     EmitSignal(SignalName.Death);
                 }
-                if (health > MaxHealth) {
+                if (health > MaxHealth)
+                {
                     health = MaxHealth;
                 }
             }
         }
 
-        [Export] public double MaxHealth;
+        private double maxHealth;
 
-        public override void _Ready() {
+        [Export]
+        public double MaxHealth
+        {
+            get => maxHealth;
+            set
+            {
+                maxHealth = value;
+                Health = value;
+            }
+        }
+
+        public override void _Ready()
+        {
             base._Ready();
             Health = MaxHealth;
+            GD.Print($"{Health}/{MaxHealth}hp");
         }
 
-        public void Damage(double damage) {
+        public void Damage(double damage)
+        {
             Health -= damage;
+            GD.Print($"{GetParent().Name} took {damage} damage!");
         }
 
-        public void Heal(double health) {
+        public void Heal(double health)
+        {
             Damage(-health);
         }
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Riftstrike.components;
 using Riftstrike.enemies;
 
 namespace Riftstrike
@@ -16,6 +17,9 @@ namespace Riftstrike
 
         [Export]
         private TileMapLayer Map;
+
+        private bool gameOver;
+
 
         private static Vector2 MapCellToPosition(Vector2I Cell)
         {
@@ -103,6 +107,22 @@ namespace Riftstrike
             base._Ready();
 
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
+        }
+
+        public override void _Process(double delta)
+        {
+            base._Process(delta);
+            if (!UnitManager.Instance.units.Any() && !gameOver)
+            {
+                gameOver = true;
+                HandleGameOver();
+            }
+        }
+
+        private void HandleGameOver()
+        {
+            var titleScreenScene = GD.Load<PackedScene>("res://title_screen_ui.tscn");
+            GetTree().ChangeSceneToPacked(titleScreenScene);
         }
     }
 }

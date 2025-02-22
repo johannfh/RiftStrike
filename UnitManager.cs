@@ -36,6 +36,12 @@ namespace Riftstrike
 			DragStart += () => GD.Print("Drag start");
 		}
 
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			if (Instance == this) Instance = null;
+		}
+
 		public override void _Process(double delta)
 		{
 			base._Process(delta);
