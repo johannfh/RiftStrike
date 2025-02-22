@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RiftStrike"
-run/main_scene="res://game.tscn"
+run/main_scene="res://title_screen_ui.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ CursorSettings="*res://CursorSettings.cs"
 
 [display]
 
+window/stretch/aspect="expand"
 mouse_cursor/custom_image_hotspot=Vector2(24, 24)
 
 [dotnet]

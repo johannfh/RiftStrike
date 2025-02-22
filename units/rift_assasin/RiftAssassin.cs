@@ -36,9 +36,23 @@ namespace Riftstrike.units
         private Panel HoveringPanel;
         #endregion
 
-        public override void _Ready()
+        #region Health Points
+        private HitboxComponent HitboxComponent;
+        private HealthComponent HealthComponent;
+        #endregion
+
+        #region Stats
+        private StatsComponent BaseStatsComponent;
+        private StatsComponent TargetStatsComponent;
+        #endregion
+
+        #region Upgrades
+        private UpgradeComponent UpgradeComponent;
+        #endregion
+
+
+        private void AssignNodeReferences()
         {
-            base._Ready();
             #region Movement
             NavAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
             PushComponent = GetNode<PushComponent>("PushComponent");
@@ -49,6 +63,50 @@ namespace Riftstrike.units
             HoveringPanel = GetNode<Panel>("HoveringPanel");
             SelectedPanel = GetNode<Panel>("SelectedPanel");
             #endregion
+
+            #region Health Points
+            HitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
+            HealthComponent = GetNode<HealthComponent>("HealthComponent");
+            #endregion
+
+            #region Stats
+            BaseStatsComponent = GetNode<StatsComponent>("BaseStatsComponent");
+            TargetStatsComponent = GetNode<StatsComponent>("TargetStatsComponent");
+            #endregion
+
+            #region Upgrades
+            UpgradeComponent = GetNode<UpgradeComponent>("UpgradeComponent");
+            #endregion
+        }
+
+        public override void _Ready()
+        {
+            base._Ready();
+            AssignNodeReferences();
+            HitboxComponent.Hit += HandleHit;
+            HealthComponent.Death += HandleDeath;
+            UpgradeComponent.StatsRecalculated += HandleStatsRecalculated;
+            UpgradeComponent.Update();
+        }
+
+        private void HandleHit(double damage)
+        {
+            // NOTE: Damage absorbtion goes here
+            GD.Print("AHH");
+            HealthComponent.Damage(damage);
+        }
+
+        private void HandleDeath()
+        {
+            GD.Print($"{Name} died!");
+            QueueFree();
+        }
+
+        private void HandleStatsRecalculated()
+        {
+            // heal up to new max health on upgrade
+            HealthComponent.MaxHealth = TargetStatsComponent.Health;
+            HealthComponent.Health = TargetStatsComponent.Health;
         }
 
         public override void _Process(double delta)

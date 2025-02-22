@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3jkjsjw8dxpm"]
+[gd_scene load_steps=18 format=3 uid="uid://c3jkjsjw8dxpm"]
 
 [ext_resource type="Script" path="res://units/rift_assasin/RiftAssassin.cs" id="1_qxonp"]
 [ext_resource type="Script" path="res://components/SelectableComponent.cs" id="2_8foun"]
+[ext_resource type="Script" path="res://components/HitboxComponent.cs" id="3_c6sin"]
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://units/selected_style_box.tres" id="3_d7amh"]
 [ext_resource type="Script" path="res://components/PushComponent.cs" id="3_rgmc3"]
 [ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://units/hovering_style_box.tres" id="4_03xrw"]
@@ -14,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://b7yshd5tbajmv" path="res://components/level_display.tscn" id="12_2ng7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wo14j"]
+size = Vector2(150, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_357if"]
 size = Vector2(150, 50)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f4d6g"]
@@ -35,6 +39,12 @@ unit = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableComponent"]
 shape = SubResource("RectangleShape2D_wo14j")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+script = ExtResource("3_c6sin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_357if")
 
 [node name="PushComponent" type="Area2D" parent="."]
 script = ExtResource("3_rgmc3")
@@ -90,8 +100,10 @@ wait_time = 0.333
 
 [node name="RegenerationTimer" type="Timer" parent="."]
 
-[node name="UpgradeComponent" type="Node" parent="."]
+[node name="UpgradeComponent" type="Node" parent="." node_paths=PackedStringArray("StatsComponentSource", "StatsComponentTarget")]
 script = ExtResource("8_y5x7i")
+StatsComponentSource = NodePath("../BaseStatsComponent")
+StatsComponentTarget = NodePath("../TargetStatsComponent")
 
 [node name="BaseStatsComponent" type="Node" parent="."]
 script = ExtResource("9_fulix")

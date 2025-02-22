@@ -17,7 +17,7 @@ namespace Riftstrike
             cursorDefault = GD.Load<Texture2D>($"{cursorPath}/cursor_default.png");
             cursorPointer = GD.Load<Texture2D>($"{cursorPath}/cursor_pointer.png");
             cursorSelect = GD.Load<Texture2D>($"{cursorPath}/cursor_select.png");
-            Cursor = Cursor.Select;
+            Cursor = Cursor.Default;
         }
         private static readonly string cursorPath = "res://assets/cursors";
         private Texture2D cursorDefault;
