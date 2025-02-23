@@ -25,7 +25,7 @@ env:
   APPLICATION_NAME: RiftStrike
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
