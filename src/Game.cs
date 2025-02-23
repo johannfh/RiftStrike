@@ -122,7 +122,7 @@ namespace Riftstrike
         private void HandleGameOver()
         {
             var titleScreenScene = GD.Load<PackedScene>("res://src/title_screen_ui.tscn");
-            // GetTree().ChangeSceneToPacked(titleScreenScene);
+            GetTree().ChangeSceneToPacked(titleScreenScene);
         }
     }
 }
