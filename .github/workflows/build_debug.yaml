@@ -49,7 +49,7 @@ jobs:
           unzip godot_export_templates.tpz -d ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable.mono
           mv ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable.mono/templates/* ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable.mono
           echo "Configuring version: ${{ github.event.inputs.release_version }}"
-          sed -i 's/config\/version="[^"]*"/config\/version="${{ github.event.inputs.release_version }}-debug"/' ${{ env.GODOT_PROJECT_LOCATION }}
+          sed -i 's/config\/version="[^"]*"/config\/version="${{ github.event.inputs.release_version }}.debug"/' ${{ env.GODOT_PROJECT_LOCATION }}
 
       - name: Building debug Linux
         if: ${{ github.event.inputs.job_target == 'linux' || github.event.inputs.job_target == 'all' }}
