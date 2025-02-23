@@ -1,33 +1,50 @@
+using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
+using System.Linq;
 using Godot;
 using Riftstrike.components;
 
 namespace Riftstrike.upgrades
 {
-    public interface IUpgrade
+    [GlobalClass]
+    public abstract partial class Upgrade : Resource
     {
-        void Apply(StatsComponent target);
-        Texture2D GetIcon();
+        [Export]
+        public Texture2D Icon;
+
+        /// <summary>
+        /// Applies the upgrade to the specified target's stats.
+        /// </summary>
+        /// <param name="target">The stats component to which the upgrade will be applied.</param>
+        public abstract void Apply(Stats target);
     }
 
-    public static class Upgrades
+    public static class UpgradesFactory
     {
-        public static IUpgrade RandomUpgrade()
+        private static readonly Upgrade[] LevelupUpgrades;
+        private static readonly RandomNumberGenerator randomNumberGenerator;
+
+        static UpgradesFactory()
         {
-            var rng = new RandomNumberGenerator();
-            rng.Randomize();
-            return RandomUpgrade(rng);
+            const string LEVELUP_UPGRADES_PATH = "res://src/resources/levelup_upgrades";
+            var paths = DirAccess.GetFilesAt(LEVELUP_UPGRADES_PATH)
+                .Select(f => $"{LEVELUP_UPGRADES_PATH}/{f}");
+
+            GD.Print($"Upgrades: {string.Join(", ", paths)}");
+
+            LevelupUpgrades = paths
+                .Select(p => GD.Load<Upgrade>(p))
+                .ToArray();
+
+            randomNumberGenerator = new RandomNumberGenerator();
+            randomNumberGenerator.Randomize();
         }
 
-        public static IUpgrade RandomUpgrade(RandomNumberGenerator rng)
-        {
-            return new List<IUpgrade> {
-                new HealthModule(),
-                new VitalityModule(),
-                new DamageModule(),
-                new RiftEnergyModule(),
-            }.RandomElement(rng);
-        }
+        public static Upgrade RandomLevelupUpgrade()
+            => RandomLevelupUpgrade(randomNumberGenerator);
+
+
+        public static Upgrade RandomLevelupUpgrade(RandomNumberGenerator rng)
+            => LevelupUpgrades.RandomElement(rng);
     }
 }

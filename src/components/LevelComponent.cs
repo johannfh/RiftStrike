@@ -6,7 +6,16 @@ namespace Riftstrike.components
     [GlobalClass]
     public partial class LevelComponent : Area2D
     {
-        public ulong Level = 1;
+        [Signal]
+        public delegate void LevelupEventHandler(ulong level);
+
+        private ulong level = 1;
+        public ulong Level
+        {
+            get => level;
+            private set => level = value;
+        }
+
         private double experience;
         public double Experience
         {
@@ -20,9 +29,11 @@ namespace Riftstrike.components
                     experience -= requirements;
                     Level++;
                     GD.Print($"{GetParent().Name} leveled up to level {Level}!");
+                    EmitSignal(SignalName.Levelup, Level);
                 }
             }
         }
+
 
         public static double GetExperienceNeeded(ulong level)
         {

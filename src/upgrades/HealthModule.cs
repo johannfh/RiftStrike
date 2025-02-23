@@ -3,19 +3,14 @@ using Riftstrike.components;
 
 namespace Riftstrike.upgrades
 {
-    /// <summary>
-    /// Increases max health by 10. 
-    /// </summary>
-    public partial class HealthModule : IUpgrade
+    [GlobalClass]
+    public partial class HealthModule : Upgrade
     {
-        public void Apply(StatsComponent target)
+        [Export]
+        public float Health = 10;
+        public override void Apply(Stats target)
         {
-            target.Health += 10;
-        }
-
-        public Texture2D GetIcon()
-        {
-            throw new System.NotImplementedException();
+            target.Health += Health;
         }
     }
 }

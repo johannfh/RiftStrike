@@ -57,6 +57,7 @@ namespace Riftstrike
         /// <returns>A randomly selected element from the collection.</returns>
         public static T RandomElement<T>(this IEnumerable<T> source, RandomNumberGenerator rng)
         {
+            if (!source.Any()) return default;
             var idx = rng.RandiRange(0, source.Count() - 1);
             return source.ElementAt(idx);
         }
@@ -76,4 +77,25 @@ namespace Riftstrike
             return sum / count;
         }
     }
+
+    /// <summary>
+    /// Contains extension methods for Godot's <seealso cref="Resource"/> <see langword="type"/>.
+    /// </summary>
+    public static class ResourceExtensions
+    {
+        /// <summary>
+        /// A utility wrapper for <see cref="Resource.Duplicate(bool)"/> that casts to <typeparamref name="T"/>.
+        /// </summary>
+        /// 
+        /// <typeparam name="T">
+        /// The <see langword="type"/> that the <paramref name="resource"/> will be casted to.
+        /// </typeparam>
+        /// 
+        /// <seealso cref="Resource.Duplicate(bool)"/>
+        public static T Duplicate<T>(this T resource, bool subresources = false) where T : Resource
+        {
+            return (T)resource.Duplicate();
+        }
+    }
+
 }

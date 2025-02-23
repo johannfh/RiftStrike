@@ -3,7 +3,7 @@ using System.Linq;
 using Godot;
 using Riftstrike.components;
 
-namespace Riftstrike.units
+namespace Riftstrike.src.units
 {
     public partial class RiftAssassin : Unit, IWalk
     {
@@ -41,16 +41,6 @@ namespace Riftstrike.units
         private HealthComponent HealthComponent;
         #endregion
 
-        #region Stats
-        private StatsComponent BaseStatsComponent;
-        private StatsComponent TargetStatsComponent;
-        #endregion
-
-        #region Upgrades
-        private UpgradeComponent UpgradeComponent;
-        #endregion
-
-
         private void AssignNodeReferences()
         {
             #region Movement
@@ -68,15 +58,6 @@ namespace Riftstrike.units
             HitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
             HealthComponent = GetNode<HealthComponent>("HealthComponent");
             #endregion
-
-            #region Stats
-            BaseStatsComponent = GetNode<StatsComponent>("BaseStatsComponent");
-            TargetStatsComponent = GetNode<StatsComponent>("TargetStatsComponent");
-            #endregion
-
-            #region Upgrades
-            UpgradeComponent = GetNode<UpgradeComponent>("UpgradeComponent");
-            #endregion
         }
 
         public override void _Ready()
@@ -85,14 +66,13 @@ namespace Riftstrike.units
             AssignNodeReferences();
             HitboxComponent.Hit += HandleHit;
             HealthComponent.Death += HandleDeath;
-            UpgradeComponent.StatsRecalculated += HandleStatsRecalculated;
-            UpgradeComponent.Update();
+            StatsRecalculated += HandleStatsRecalculated;
+            UpdateStats();
         }
 
         private void HandleHit(double damage)
         {
             // NOTE: Damage absorbtion goes here
-            GD.Print("AHH");
             HealthComponent.Damage(damage);
         }
 
@@ -104,9 +84,7 @@ namespace Riftstrike.units
 
         private void HandleStatsRecalculated()
         {
-            // heal up to new max health on upgrade
-            HealthComponent.MaxHealth = TargetStatsComponent.Health;
-            HealthComponent.Health = TargetStatsComponent.Health;
+            HealthComponent.MaxHealth = TargetStats.Health;
         }
 
         public override void _Process(double delta)

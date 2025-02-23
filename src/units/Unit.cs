@@ -1,15 +1,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Godot.Collections;
+using Riftstrike.components;
 using Riftstrike.enemies;
+using Riftstrike.upgrades;
 
-namespace Riftstrike.units
+namespace Riftstrike.src.units
 {
     [GlobalClass]
     public abstract partial class Unit : Node2D
     {
+        [Signal]
+        public delegate void StatsRecalculatedEventHandler();
+
+        [Export]
+        public Stats BaseStats { get; private set; } = new();
+        public Stats TargetStats { get; set; } = new();
+
+        [Export]
+        public Array<Upgrade> Upgrades = new();
+
         [Export(PropertyHint.None, "suffix:pixels")]
         public double SafeDistance = 300;
+
+        public void UpdateStats()
+        {
+            TargetStats.SetValuesTo(BaseStats);
+            foreach (var upgrade in Upgrades)
+            {
+                upgrade.Apply(TargetStats);
+            }
+            EmitSignal(SignalName.StatsRecalculated);
+        }
 
         public override void _Ready()
         {
@@ -25,7 +48,6 @@ namespace Riftstrike.units
             UnitManager.Instance.unitsSelected.Remove(this);
             base._ExitTree();
         }
-
     }
 
     public static class Vector2Extensions

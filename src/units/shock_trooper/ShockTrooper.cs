@@ -1,10 +1,11 @@
 using Godot;
+using Godot.Collections;
 using Riftstrike.components;
-using Riftstrike.enemies;
+using Riftstrike.upgrades;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Riftstrike.units
+namespace Riftstrike.src.units
 {
     [GlobalClass]
     public partial class ShockTrooper : Unit, IWalk
@@ -33,43 +34,48 @@ namespace Riftstrike.units
         private HealthComponent HealthComponent
             => GetNode<HealthComponent>("HealthComponent");
 
-        private UpgradeComponent UpgradeComponent
-            => GetNode<UpgradeComponent>("UpgradeComponent");
-
-        private StatsComponent BaseStatsComponent
-            => GetNode<StatsComponent>("BaseStatsComponent");
-
-        private StatsComponent TargetStatsComponent
-            => GetNode<StatsComponent>("TargetStatsComponent");
-
         private Timer RegenerationTimer
             => GetNode<Timer>("RegenerationTimer");
 
         private Sprite2D Sprite
             => GetNode<Sprite2D>("Sprite2D");
 
-        private Panel SelectedPanel
-            => GetNode<Panel>("SelectedPanel");
-
-        private Panel HoveringPanel
-            => GetNode<Panel>("HoveringPanel");
-
-        private Timer AttackTimer
-            => GetNode<Timer>("AttackTimer");
+        private Panel selectedPanel;
+        private Panel hoveringPanel;
+        private Timer attackTimer;
+        private LevelComponent levelComponent;
 
         private bool AttackReady = false;
+
+        private void AssignNodeReferences()
+        {
+            selectedPanel = GetNode<Panel>("SelectedPanel");
+            hoveringPanel = GetNode<Panel>("HoveringPanel");
+            attackTimer = GetNode<Timer>("AttackTimer");
+            levelComponent = GetNode<LevelComponent>("LevelComponent");
+        }
 
         public override void _Ready()
         {
             base._Ready();
-            HealthComponent.Health = TargetStatsComponent.Health;
+            AssignNodeReferences();
+            StatsRecalculated += HandleStatsRecalculated;
+            UpdateStats();
             RegenerationTimer.Timeout += HandleRegen;
-            UpgradeComponent.StatsRecalculated += HandleStatsRecalculated;
-            UpgradeComponent.Update();
             HitboxComponent.Hit += HandleHit;
             HealthComponent.Death += HandleDeath;
-            AttackTimer.Timeout += () => AttackReady = true;
+            attackTimer.Timeout += () => AttackReady = true;
+            levelComponent.Levelup += HandleLevelup;
         }
+
+        private void HandleLevelup(ulong level)
+        {
+            var upgrade = UpgradesFactory.RandomLevelupUpgrade();
+            GD.Print($"Got random upgrade: {upgrade.ResourcePath}");
+            Upgrades.Add(upgrade);
+            UpdateStats();
+        }
+
 
         private void HandleDeath()
         {
@@ -80,8 +86,8 @@ namespace Riftstrike.units
         private void HandleRegen()
         {
             HealthComponent.Health = Mathf.Min(
-                HealthComponent.Health + TargetStatsComponent.Regeneration * RegenerationTimer.WaitTime,
-                TargetStatsComponent.Health
+                HealthComponent.Health + TargetStats.Regeneration * RegenerationTimer.WaitTime,
+                TargetStats.Health
             );
         }
 
@@ -93,16 +99,14 @@ namespace Riftstrike.units
 
         private void HandleStatsRecalculated()
         {
-            // heal up to new max health on upgrade
-            HealthComponent.MaxHealth = TargetStatsComponent.Health;
-            HealthComponent.Health = TargetStatsComponent.Health;
+            HealthComponent.MaxHealth = TargetStats.Health;
         }
 
         public override void _Process(double delta)
         {
             base._Process(delta);
-            SelectedPanel.Visible = SelectableComponent.IsSelected;
-            HoveringPanel.Visible = !SelectableComponent.IsSelected && SelectableComponent.IsHovered;
+            selectedPanel.Visible = SelectableComponent.IsSelected;
+            hoveringPanel.Visible = !SelectableComponent.IsSelected && SelectableComponent.IsHovered;
         }
 
         public override void _PhysicsProcess(double delta)
@@ -136,7 +140,7 @@ namespace Riftstrike.units
                     if (IsInRange(closestTarget))
                     {
                         ShootTowards(closestTarget);
-                        AttackTimer.Start();
+                        attackTimer.Start();
                         AttackReady = false;
                     }
                 }
@@ -150,7 +154,7 @@ namespace Riftstrike.units
 
         private bool IsInRange(Vector2 position)
         {
-            return GlobalPosition.DistanceTo(position) < TargetStatsComponent.Range;
+            return GlobalPosition.DistanceTo(position) < TargetStats.Range;
         }
 
         private void ShootTowards(Node2D node2D)
@@ -164,10 +168,10 @@ namespace Riftstrike.units
             var bulletPos = GlobalPosition;
             var bulletDir = GlobalPosition.DirectionTo(target);
             var bulletVelocity = bulletDir * projectileSpeed;
-            var bulletRange = TargetStatsComponent.Range * 2;
+            var bulletRange = TargetStats.Range * 2;
 
             // NOTE: apply damage modifiers here
-            var bulletDamage = projectileBaseDamage * (TargetStatsComponent.Damage / 100);
+            var bulletDamage = projectileBaseDamage * (TargetStats.Damage / 100);
 
 
             // instantiate bullet

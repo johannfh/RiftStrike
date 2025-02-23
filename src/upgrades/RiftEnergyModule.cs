@@ -1,18 +1,16 @@
+// Some Node
 using Godot;
 using Riftstrike.components;
 
 namespace Riftstrike.upgrades
 {
-    public class RiftEnergyModule : IUpgrade
+    [GlobalClass]
+    public partial class RiftEnergyModule : Upgrade
     {
-        public void Apply(StatsComponent target)
+        [Export] float RiftEnergy = 5;
+        public override void Apply(Stats target)
         {
-            target.Damage += 5;
-        }
-
-        public Texture2D GetIcon()
-        {
-            throw new System.NotImplementedException();
+            target.RiftEnergy += RiftEnergy;
         }
     }
 }

@@ -1,13 +1,15 @@
 using System.Linq;
 using Godot;
-using Riftstrike.units;
+using Riftstrike.src.units;
 
 namespace Riftstrike.components
 {
 	[GlobalClass]
 	public partial class SelectableComponent : Area2D
 	{
-		[Export] public Unit unit;
+		[Export]
+		public Unit unit;
+
 		public bool IsHovered
 		{
 			get

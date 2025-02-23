@@ -2,7 +2,7 @@ using System.Linq;
 using Godot;
 using Riftstrike.components;
 
-namespace Riftstrike.units
+namespace Riftstrike.src.units
 {
 	public partial class ShockTrooperProjectile : Area2D
 	{

@@ -2,7 +2,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using Riftstrike.components;
-using Riftstrike.units;
+using Riftstrike.src.units;
 
 namespace Riftstrike
 {

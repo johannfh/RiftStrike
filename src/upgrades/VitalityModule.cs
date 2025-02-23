@@ -3,19 +3,15 @@ using Riftstrike.components;
 
 namespace Riftstrike.upgrades
 {
-    /// <summary>
-    /// Increases regeneration by 3. 
-    /// </summary>
-    public partial class VitalityModule : IUpgrade
+    [GlobalClass]
+    public partial class VitalityModule : Upgrade
     {
-        public void Apply(StatsComponent target)
-        {
-            target.Regeneration += 3;
-        }
+        [Export]
+        public float Regeneration = 3;
 
-        public Texture2D GetIcon()
+        public override void Apply(Stats target)
         {
-            throw new System.NotImplementedException();
+            target.Regeneration += Regeneration;
         }
     }
 }

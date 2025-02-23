@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RiftEnergyModule" load_steps=2 format=3 uid="uid://du85ofy6s3sxx"]
+
+[ext_resource type="Script" path="res://src/upgrades/RiftEnergyModule.cs" id="1_3ll75"]
+
+[resource]
+script = ExtResource("1_3ll75")
+RiftEnergy = 5.0

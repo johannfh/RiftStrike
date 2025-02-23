@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="VitalityModule" load_steps=2 format=3 uid="uid://dfod3jbtyqo4m"]
+
+[ext_resource type="Script" path="res://src/upgrades/VitalityModule.cs" id="1_o3dik"]
+
+[resource]
+script = ExtResource("1_o3dik")
+Regeneration = 3.0

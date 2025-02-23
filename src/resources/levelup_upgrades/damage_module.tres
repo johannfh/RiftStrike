@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DamageModule" load_steps=3 format=3 uid="uid://dbiew6kfalyxq"]
+
+[ext_resource type="Script" path="res://src/upgrades/DamageModule.cs" id="1_g480m"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b74y0"]
+
+[resource]
+script = ExtResource("1_g480m")
+Damage = 5.0
+Icon = SubResource("PlaceholderTexture2D_b74y0")

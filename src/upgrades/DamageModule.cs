@@ -3,16 +3,15 @@ using Riftstrike.components;
 
 namespace Riftstrike.upgrades
 {
-    public class DamageModule : IUpgrade
+    [GlobalClass]
+    public partial class DamageModule : Upgrade
     {
-        public void Apply(StatsComponent target)
-        {
-            target.Damage += 5;
-        }
+        [Export]
+        float Damage = 5;
 
-        public Texture2D GetIcon()
+        public override void Apply(Stats target)
         {
-            throw new System.NotImplementedException();
+            target.Damage += Damage;
         }
     }
 }

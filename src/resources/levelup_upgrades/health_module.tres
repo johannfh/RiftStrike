@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="HealthModule" load_steps=2 format=3 uid="uid://di5gnov0wp3hw"]
+
+[ext_resource type="Script" path="res://src/upgrades/HealthModule.cs" id="1_rqomf"]
+
+[resource]
+script = ExtResource("1_rqomf")
+Health = 10.0
