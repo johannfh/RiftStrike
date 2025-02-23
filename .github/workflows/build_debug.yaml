@@ -19,7 +19,7 @@ on:
 
 env:
   GODOT_VERSION: 4.3
-  GODOT_PROJECT_LOCATION: src/project.godot
+  GODOT_PROJECT_LOCATION: project.godot
   EXPORT_FOLDER_LINUX: build/Linux
   EXPORT_FOLDER_WINDOWS: build/Windows
   APPLICATION_NAME: RiftStrike
