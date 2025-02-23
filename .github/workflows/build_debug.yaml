@@ -56,7 +56,7 @@ jobs:
         run: |
           mkdir -p ${{ env.EXPORT_FOLDER_LINUX }}
           ./Godot_v${{ env.GODOT_VERSION }}-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64 --import ${{ env.GODOT_PROJECT_LOCATION }} --quiet --headless --export-debug Linux ${{ env.MAIN_FOLDER }}/${{ env.EXPORT_FOLDER_LINUX }}/${{ env.APPLICATION_NAME }}.${{ github.event.inputs.release_version }}.linux_debug.x86_64.zip
-      - name: Upload artifact debug Linux
+      - name: Uploading artifact debug Linux
         if: ${{ github.event.inputs.job_target == 'linux' || github.event.inputs.job_target == 'all' }}
         uses: actions/upload-artifact@v4
         with:
@@ -68,7 +68,7 @@ jobs:
         run: |
           mkdir -p ${{ env.EXPORT_FOLDER_WINDOWS }}
           ./Godot_v${{ env.GODOT_VERSION }}-stable_mono_linux_x86_64/Godot_v4.3-stable_mono_linux.x86_64 --import ${{ env.GODOT_PROJECT_LOCATION }} --quiet --headless --export-debug Windows ${{ env.MAIN_FOLDER }}/${{ env.EXPORT_FOLDER_WINDOWS }}/${{ env.APPLICATION_NAME }}.${{ github.event.inputs.release_version }}.windows_debug.x86_64.zip
-      - name: Upload artifact debug Windows
+      - name: Uploading artifact debug Windows
         if: ${{ github.event.inputs.job_target == 'windows' || github.event.inputs.job_target == 'all' }}
         uses: actions/upload-artifact@v4
         with:
