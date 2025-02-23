@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b37bdaunpavbi"]
 
-[ext_resource type="Script" path="res://TitleScreenUI.cs" id="1_6clsk"]
+[ext_resource type="Script" path="res://src/TitleScreenUI.cs" id="1_6clsk"]
 
 [node name="TitleScreenUI" type="Control" node_paths=PackedStringArray("PlayButton")]
 layout_mode = 3

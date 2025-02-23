@@ -9,7 +9,7 @@ namespace Riftstrike.units
 		public static ShockTrooperProjectile New()
 		{
 			return GD.Load<PackedScene>(
-				"res://units/shock_trooper/shock_trooper_projectile.tscn"
+				"res://src/units/shock_trooper/shock_trooper_projectile.tscn"
 				)
 				.Instantiate() as ShockTrooperProjectile;
 		}

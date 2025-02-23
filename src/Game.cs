@@ -47,7 +47,7 @@ namespace Riftstrike
 #endif
             foreach (var pos in positions)
             {
-                var enemy = GD.Load<PackedScene>("res://enemies/festerkin/festerkin.tscn")
+                var enemy = GD.Load<PackedScene>("res://src/enemies/festerkin/festerkin.tscn")
                     .Instantiate<Enemy>();
                 enemy.GlobalPosition = pos;
                 Map.AddChild(enemy);
@@ -121,8 +121,8 @@ namespace Riftstrike
 
         private void HandleGameOver()
         {
-            var titleScreenScene = GD.Load<PackedScene>("res://title_screen_ui.tscn");
-            GetTree().ChangeSceneToPacked(titleScreenScene);
+            var titleScreenScene = GD.Load<PackedScene>("res://src/title_screen_ui.tscn");
+            // GetTree().ChangeSceneToPacked(titleScreenScene);
         }
     }
 }

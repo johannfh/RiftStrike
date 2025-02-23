@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmcvbaehh3ie6"
-path="res://.godot/imported/festerkin.png-a89ce43d4ccb1b6d7d7c5adfe608cf07.ctex"
+path="res://.godot/imported/festerkin.png-f338051d028bfc4e7c64934c4fe3e439.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/festerkin/festerkin.png"
-dest_files=["res://.godot/imported/festerkin.png-a89ce43d4ccb1b6d7d7c5adfe608cf07.ctex"]
+source_file="res://src/assets/enemies/festerkin/festerkin.png"
+dest_files=["res://.godot/imported/festerkin.png-f338051d028bfc4e7c64934c4fe3e439.ctex"]
 
 [params]
 

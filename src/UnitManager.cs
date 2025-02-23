@@ -34,6 +34,8 @@ namespace Riftstrike
 			}
 			Instance = this;
 			DragStart += () => GD.Print("Drag start");
+			GD.Print($"Initialized {nameof(UnitManager)}");
+			GD.Print($"Units: [{string.Join(", ", units.Select(u => u.Name))}]");
 		}
 
 		public override void _ExitTree()

@@ -15,6 +15,8 @@ namespace Riftstrike.units
         {
             base._Ready();
             UnitManager.Instance.units.Add(this);
+            GD.Print(UnitManager.Instance.Name);
+            GD.Print($"Units: [{string.Join(", ", UnitManager.Instance.units.Select(u => u.Name))}]");
         }
 
         public override void _ExitTree()

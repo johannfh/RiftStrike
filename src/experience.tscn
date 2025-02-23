@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0q24l6v2qxio"]
 
-[ext_resource type="Script" path="res://Experience.cs" id="1_67soi"]
-[ext_resource type="Texture2D" uid="uid://ctdfitpvi6lne" path="res://assets/Experience.png" id="2_mqg0s"]
+[ext_resource type="Script" path="res://src/Experience.cs" id="1_67soi"]
+[ext_resource type="Texture2D" uid="uid://ctdfitpvi6lne" path="res://src/assets/Experience.png" id="2_mqg0s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xehyu"]
 radius = 15.0

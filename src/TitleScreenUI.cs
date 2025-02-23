@@ -12,7 +12,7 @@ namespace Riftstrike
             base._Ready();
             CursorSettings.Instance.Cursor = Cursor.Default;
             // TODO: handle scene changes centralized
-            PlayButton.Pressed += () => GetTree().ChangeSceneToFile("res://game.tscn");
+            PlayButton.Pressed += () => GetTree().ChangeSceneToFile("res://src/game.tscn");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Riftstrike.enemies
 
         public new void QueueFree()
         {
-            var experience = GD.Load<PackedScene>("res://experience.tscn")
+            var experience = GD.Load<PackedScene>("res://src/experience.tscn")
                 .Instantiate<Experience>();
             experience.Value = Experience;
             experience.GlobalPosition = GlobalPosition;
