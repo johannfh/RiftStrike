@@ -60,7 +60,7 @@ jobs:
         if: ${{ github.event.inputs.job_target == 'linux' || github.event.inputs.job_target == 'all' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.MAIN_FOLDER }}/${{ env.EXPORT_FOLDER_LINUX }}/${{ env.APPLICATION_NAME }}.${{ github.event.inputs.release_version }}.linux_debug.x86_64.zip
+          name: ${{ env.APPLICATION_NAME }}_${{ github.event.inputs.release_version }}.linux_debug.x86_64.zip
           path: ${{ env.MAIN_FOLDER }}/${{ env.EXPORT_FOLDER_LINUX }}/${{ env.APPLICATION_NAME }}.${{ github.event.inputs.release_version }}.linux_debug.x86_64.zip
 
       - name: Building debug Windows
@@ -72,5 +72,5 @@ jobs:
         if: ${{ github.event.inputs.job_target == 'windows' || github.event.inputs.job_target == 'all' }}
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.MAIN_FOLDER }}/${{ env.EXPORT_FOLDER_LINUX }}/${{ env.APPLICATION_NAME }}.${{ github.event.inputs.release_version }}.windows_debug.x86_64.zip
+          name: ${{ env.APPLICATION_NAME }}_${{ github.event.inputs.release_version }}.windows_debug.x86_64.zip
           path: ${{ env.MAIN_FOLDER }}/${{ env.EXPORT_FOLDER_LINUX }}/${{ env.APPLICATION_NAME }}.${{ github.event.inputs.release_version }}.windows_debug.x86_64.zip
