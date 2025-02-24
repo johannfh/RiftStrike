@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://c3jkjsjw8dxpm"]
 
-[ext_resource type="Script" path="res://src/units/rift_assasin/RiftAssassin.cs" id="1_qxonp"]
+[ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassin.cs" id="1_qxonp"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_8foun"]
 [ext_resource type="Script" path="res://src/components/Stats.cs" id="2_c3rlj"]
 [ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_c6sin"]
@@ -62,8 +62,9 @@ script = ExtResource("3_rgmc3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
 shape = SubResource("CircleShape2D_f4d6g")
 
-[node name="LevelComponent" type="Area2D" parent="."]
+[node name="LevelComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 script = ExtResource("4_c2ekv")
+unit = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelComponent"]
 shape = SubResource("CircleShape2D_v8kwl")
@@ -119,7 +120,7 @@ offset_bottom = 50.0
 value = 50.0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="LevelDisplay" parent="." node_paths=PackedStringArray("levelComponent") instance=ExtResource("12_2ng7f")]
+[node name="LevelDisplay" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("12_2ng7f")]
 offset_top = -267.0
 offset_bottom = -267.0
-levelComponent = NodePath("../LevelComponent")
+unit = NodePath("..")

@@ -2,13 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Riftstrike.components;
 using Riftstrike.enemies;
+using Riftstrike.src;
+using Riftstrike.src.units;
 
 namespace Riftstrike
 {
     public partial class Game : Node2D
     {
+        const float WAVE_DURATION_SECS = 10.0F;
+
+        [Export]
+        private Timer WaveEndTimer;
+
         [Export]
         private RandomTimer SpawnEnemiesTimer;
 
@@ -105,8 +111,37 @@ namespace Riftstrike
         public override void _Ready()
         {
             base._Ready();
+            LoadGameData();
 
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
+            WaveEndTimer.WaitTime = WAVE_DURATION_SECS;
+            WaveEndTimer.Timeout += EndWave;
+            WaveEndTimer.Start();
+        }
+
+        private void LoadGameData()
+        {
+            foreach (var entry in DataManager.Instance.UnitData)
+            {
+                var unit = entry.Type.Instantiate();
+                unit.Upgrades = entry.Upgrades;
+                GetNode<Node>("%Map").AddChild(unit);
+            }
+        }
+
+        private static void SaveGameData()
+        {
+            var unitData = UnitManager.Instance.units
+                .Select(u => new UnitData(u));
+            DataManager.OverwriteUnitData(unitData);
+        }
+
+        private void EndWave()
+        {
+            GD.Print("Wave ended!");
+            SaveGameData();
+            GD.Print("Opening wave shop!");
+            GetTree().ChangeSceneToPacked(SceneLoader.WaveShopScene);
         }
 
         public override void _Process(double delta)
@@ -121,8 +156,8 @@ namespace Riftstrike
 
         private void HandleGameOver()
         {
-            var titleScreenScene = GD.Load<PackedScene>("res://src/title_screen_ui.tscn");
-            GetTree().ChangeSceneToPacked(titleScreenScene);
+            GD.Print("Game Over!");
+            GetTree().ChangeSceneToPacked(SceneLoader.TitleScreenScene);
         }
     }
 }

@@ -68,8 +68,9 @@ script = ExtResource("4_4m88o")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
 shape = SubResource("CircleShape2D_5na8r")
 
-[node name="LevelComponent" type="Area2D" parent="."]
+[node name="LevelComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 script = ExtResource("5_5acuh")
+unit = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelComponent"]
 shape = SubResource("CircleShape2D_066bd")
@@ -119,7 +120,7 @@ offset_top = 20.0
 offset_bottom = 50.0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="LevelDisplay" parent="." node_paths=PackedStringArray("levelComponent") instance=ExtResource("6_pffs3")]
+[node name="LevelDisplay" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("6_pffs3")]
 offset_top = -291.0
 offset_bottom = -291.0
-levelComponent = NodePath("../LevelComponent")
+unit = NodePath("..")

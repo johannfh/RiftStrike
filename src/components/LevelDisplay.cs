@@ -1,4 +1,5 @@
 using Godot;
+using Riftstrike.src.units;
 using System;
 
 namespace Riftstrike.components
@@ -6,7 +7,7 @@ namespace Riftstrike.components
     public partial class LevelDisplay : Control
     {
         [Export]
-        private LevelComponent levelComponent;
+        private Unit unit;
 
         private Label label;
         private ProgressBar progressBar;
@@ -21,9 +22,9 @@ namespace Riftstrike.components
         public override void _Process(double delta)
         {
             base._Process(delta);
-            label.Text = $"{levelComponent.Level}";
-            progressBar.MaxValue = LevelComponent.GetExperienceNeeded(levelComponent.Level + 1);
-            progressBar.Value = levelComponent.Experience;
+            label.Text = $"{unit.Level}";
+            progressBar.MaxValue = Unit.GetExperienceNeeded(unit.Level + 1);
+            progressBar.Value = unit.Experience;
         }
     }
 }

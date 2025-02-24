@@ -65,7 +65,7 @@ namespace Riftstrike.src.units
             HitboxComponent.Hit += HandleHit;
             HealthComponent.Death += HandleDeath;
             attackTimer.Timeout += () => AttackReady = true;
-            levelComponent.Levelup += HandleLevelup;
+            Levelup += HandleLevelup;
         }
 
         private void HandleLevelup(ulong level)

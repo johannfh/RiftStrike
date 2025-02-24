@@ -1,44 +1,14 @@
 using System.Collections.Generic;
 using Godot;
+using Riftstrike.src.units;
 
 namespace Riftstrike.components
 {
     [GlobalClass]
     public partial class LevelComponent : Area2D
     {
-        [Signal]
-        public delegate void LevelupEventHandler(ulong level);
-
-        private ulong level = 1;
-        public ulong Level
-        {
-            get => level;
-            private set => level = value;
-        }
-
-        private double experience;
-        public double Experience
-        {
-            get => experience;
-            private set
-            {
-                experience = value;
-                var requirements = GetExperienceNeeded(Level + 1);
-                if (experience >= requirements)
-                {
-                    experience -= requirements;
-                    Level++;
-                    GD.Print($"{GetParent().Name} leveled up to level {Level}!");
-                    EmitSignal(SignalName.Levelup, Level);
-                }
-            }
-        }
-
-
-        public static double GetExperienceNeeded(ulong level)
-        {
-            return (10 * Mathf.Pow(level, 2)) + (5 * level);
-        }
+        [Export]
+        private Unit unit;
 
         public override void _Ready()
         {
@@ -54,7 +24,7 @@ namespace Riftstrike.components
             {
                 experiences.Add(exp);
                 exp.Collected = true;
-                Experience += exp.Value;
+                unit.Experience += exp.Value;
             }
         }
 

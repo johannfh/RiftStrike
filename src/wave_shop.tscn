@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://blbvcgw6jlgsr"]
+
+[ext_resource type="PackedScene" uid="uid://bysjryy4cixjh" path="res://src/wave_shop_ui.tscn" id="1_x3un3"]
+
+[node name="WaveShop" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="WaveShopUI" parent="UI" instance=ExtResource("1_x3un3")]
