@@ -17,13 +17,14 @@ namespace Riftstrike
 
             PlayButton.Pressed += () =>
             {
+                GlobalState.Wave = 1;
                 GetTree().ChangeSceneToPacked(SceneLoader.GameScene);
             };
 
             DataManager.Instance.UnitData.AddRange(new List<UnitData>(){
                 new() { Type = UnitType.ShockTrooper },
                 new() { Type = UnitType.ShockTrooper },
-                new() { Type = UnitType.RiftAssassin },
+                // new() { Type = UnitType.RiftAssassin },
             });
         }
     }

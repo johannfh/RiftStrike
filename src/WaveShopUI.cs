@@ -9,6 +9,7 @@ namespace Riftstrike.src
             base._Ready();
             GetNode<Button>("%NextWaveButton").Pressed += () =>
             {
+                GlobalState.Wave++;
                 GetTree().ChangeSceneToPacked(SceneLoader.GameScene);
             };
         }

@@ -26,6 +26,8 @@ namespace Riftstrike
 
         private bool gameOver;
 
+        [Export]
+        public Counter counter;
 
         private static Vector2 MapCellToPosition(Vector2I Cell)
         {
@@ -57,6 +59,7 @@ namespace Riftstrike
                     .Instantiate<Enemy>();
                 enemy.GlobalPosition = pos;
                 Map.AddChild(enemy);
+                GlobalState.IncrementEnemySpawnCounter();
             }
         }
 
@@ -111,35 +114,28 @@ namespace Riftstrike
         public override void _Ready()
         {
             base._Ready();
-            LoadGameData();
-
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
-            WaveEndTimer.WaitTime = WAVE_DURATION_SECS;
+            WaveEndTimer.WaitTime = WAVE_DURATION_SECS * GlobalState.Wave;
             WaveEndTimer.Timeout += EndWave;
             WaveEndTimer.Start();
+            GD.Print($"Starting wave {GlobalState.Wave}!");
+            SpawnUnits();
         }
 
-        private void LoadGameData()
+        private void SpawnUnits()
         {
             foreach (var entry in DataManager.Instance.UnitData)
             {
                 var unit = entry.Type.Instantiate();
-                unit.Upgrades = entry.Upgrades;
+                unit.Data = entry;
                 GetNode<Node>("%Map").AddChild(unit);
             }
-        }
-
-        private static void SaveGameData()
-        {
-            var unitData = UnitManager.Instance.units
-                .Select(u => new UnitData(u));
-            DataManager.OverwriteUnitData(unitData);
         }
 
         private void EndWave()
         {
             GD.Print("Wave ended!");
-            SaveGameData();
+            GD.Print($"Enemies spawned: {GlobalState.EnemySpawnCounter}");
             GD.Print("Opening wave shop!");
             GetTree().ChangeSceneToPacked(SceneLoader.WaveShopScene);
         }

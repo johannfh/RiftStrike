@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=16 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" path="res://src/Game.cs" id="1_1yase"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://src/assets/stone_texture.png" id="1_coj4f"]
@@ -6,8 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://tneid4vp0caj" path="res://src/game_ui.tscn" id="2_76pyg"]
 [ext_resource type="Script" path="res://src/RandomTimer.cs" id="2_88g8b"]
 [ext_resource type="Script" path="res://src/SelectionBox.cs" id="2_hwfey"]
+[ext_resource type="Script" path="res://src/Counter.cs" id="2_xi5ac"]
 [ext_resource type="Script" path="res://src/UnitManager.cs" id="3_4v1vs"]
 [ext_resource type="Script" path="res://src/EnemyManager.cs" id="7_galhq"]
+
+[sub_resource type="Resource" id="Resource_4dvgi"]
+script = ExtResource("2_xi5ac")
+Value = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igf7"]
 
@@ -43,6 +48,7 @@ script = ExtResource("1_1yase")
 WaveEndTimer = NodePath("WaveEndTimer")
 SpawnEnemiesTimer = NodePath("SpawnEnemiesTimer")
 Map = NodePath("Map")
+counter = SubResource("Resource_4dvgi")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

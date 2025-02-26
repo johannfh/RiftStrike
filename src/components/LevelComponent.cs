@@ -24,7 +24,7 @@ namespace Riftstrike.components
             {
                 experiences.Add(exp);
                 exp.Collected = true;
-                unit.Experience += exp.Value;
+                unit.Data.Experience += exp.Value;
             }
         }
 

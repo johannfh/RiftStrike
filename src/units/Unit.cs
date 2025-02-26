@@ -15,47 +15,11 @@ namespace Riftstrike.src.units
         public delegate void StatsRecalculatedEventHandler();
 
         [Export]
-        public Stats BaseStats { get; private set; } = new();
-        public Stats TargetStats { get; set; } = new();
-
-        [Signal]
-        public delegate void LevelupEventHandler(ulong level);
-
-        private ulong level = 1;
-        public ulong Level
-        {
-            get => level;
-            private set => level = value;
-        }
-
-        private double experience;
-        public double Experience
-        {
-            get => experience;
-            set
-            {
-                experience = value;
-                var requirements = GetExperienceNeeded(Level + 1);
-                if (experience >= requirements)
-                {
-                    experience -= requirements;
-                    Level++;
-                    GD.Print($"{GetParent().Name} leveled up to level {Level}!");
-                    EmitSignal(SignalName.Levelup, Level);
-                }
-            }
-        }
-
-
-        public static double GetExperienceNeeded(ulong level)
-        {
-            return (10 * Mathf.Pow(level, 2)) + (5 * level);
-        }
-
-
+        public UnitData Data = new();
 
         [Export]
-        public Array<Upgrade> Upgrades = new();
+        public Stats BaseStats { get; private set; } = new();
+        public Stats TargetStats { get; set; } = new();
 
         [Export(PropertyHint.None, "suffix:pixels")]
         public double SafeDistance = 300;
@@ -63,7 +27,7 @@ namespace Riftstrike.src.units
         public void UpdateStats()
         {
             TargetStats.SetValuesTo(BaseStats);
-            foreach (var upgrade in Upgrades)
+            foreach (var upgrade in Data.Upgrades)
             {
                 upgrade.Apply(TargetStats);
             }
@@ -74,7 +38,6 @@ namespace Riftstrike.src.units
         {
             base._Ready();
             UnitManager.Instance.units.Add(this);
-            GD.Print(UnitManager.Instance.Name);
             GD.Print($"Units: [{string.Join(", ", UnitManager.Instance.units.Select(u => u.Name))}]");
         }
 

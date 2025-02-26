@@ -65,14 +65,13 @@ namespace Riftstrike.src.units
             HitboxComponent.Hit += HandleHit;
             HealthComponent.Death += HandleDeath;
             attackTimer.Timeout += () => AttackReady = true;
-            Levelup += HandleLevelup;
         }
 
-        private void HandleLevelup(ulong level)
+        private void HandleLevelup(ulong levelup)
         {
             var upgrade = UpgradesFactory.RandomLevelupUpgrade();
             GD.Print($"Got random upgrade: {upgrade.ResourcePath}");
-            Upgrades.Add(upgrade);
+            Data.Upgrades.Add(upgrade);
             UpdateStats();
         }
 
@@ -107,6 +106,13 @@ namespace Riftstrike.src.units
             base._Process(delta);
             selectedPanel.Visible = SelectableComponent.IsSelected;
             hoveringPanel.Visible = !SelectableComponent.IsSelected && SelectableComponent.IsHovered;
+
+            if (Data.RemainingLevelups.Any())
+            {
+                var levelup = Data.RemainingLevelups.First();
+                Data.RemainingLevelups.RemoveAt(0);
+                HandleLevelup(levelup);
+            }
         }
 
         public override void _PhysicsProcess(double delta)

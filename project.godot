@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 UnitFactory="*res://src/units/UnitFactory.cs"
 DataManager="*res://src/DataManager.cs"
 CursorSettings="*res://src/CursorSettings.cs"
+GlobalState="*res://src/global_state.tscn"
 
 [display]
 

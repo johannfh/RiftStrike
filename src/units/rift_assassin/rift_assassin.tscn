@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3jkjsjw8dxpm"]
+[gd_scene load_steps=20 format=3 uid="uid://c3jkjsjw8dxpm"]
 
 [ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassin.cs" id="1_qxonp"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_8foun"]
 [ext_resource type="Script" path="res://src/components/Stats.cs" id="2_c3rlj"]
+[ext_resource type="Script" path="res://src/units/UnitData.cs" id="2_rvl2u"]
 [ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_c6sin"]
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://src/units/selected_style_box.tres" id="3_d7amh"]
 [ext_resource type="Script" path="res://src/components/PushComponent.cs" id="3_rgmc3"]
@@ -12,6 +13,11 @@
 [ext_resource type="Script" path="res://src/components/HealthComponent.cs" id="10_8voh0"]
 [ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://src/components/health_bar.tscn" id="11_huejp"]
 [ext_resource type="PackedScene" uid="uid://b7yshd5tbajmv" path="res://src/components/level_display.tscn" id="12_2ng7f"]
+
+[sub_resource type="Resource" id="Resource_v4qtv"]
+script = ExtResource("2_rvl2u")
+Type = 1
+Upgrades = []
 
 [sub_resource type="Resource" id="Resource_cknpq"]
 script = ExtResource("2_c3rlj")
@@ -37,6 +43,7 @@ radius = 500.0
 script = ExtResource("1_qxonp")
 speed = 400.0
 pushSpeed = 50.0
+Data = SubResource("Resource_v4qtv")
 BaseStats = SubResource("Resource_cknpq")
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]

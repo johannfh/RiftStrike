@@ -22,9 +22,9 @@ namespace Riftstrike.components
         public override void _Process(double delta)
         {
             base._Process(delta);
-            label.Text = $"{unit.Level}";
-            progressBar.MaxValue = Unit.GetExperienceNeeded(unit.Level + 1);
-            progressBar.Value = unit.Experience;
+            label.Text = $"{unit.Data.Level}";
+            progressBar.MaxValue = UnitData.GetExperienceNeeded(unit.Data.Level + 1);
+            progressBar.Value = unit.Data.Experience;
         }
     }
 }
