@@ -1,6 +1,5 @@
 using Godot;
 using Riftstrike.src.units;
-using System;
 
 namespace Riftstrike.components
 {

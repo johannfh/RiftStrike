@@ -1,8 +1,6 @@
-using System;
 using System.Linq;
 using Godot;
 using Riftstrike.components;
-using Riftstrike.src.units;
 
 namespace Riftstrike
 {

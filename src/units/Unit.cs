@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Godot.Collections;
 using Riftstrike.components;
 using Riftstrike.enemies;
-using Riftstrike.upgrades;
 
 namespace Riftstrike.src.units
 {
