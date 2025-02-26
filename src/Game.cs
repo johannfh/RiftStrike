@@ -124,7 +124,7 @@ namespace Riftstrike
 
         private void SpawnUnits()
         {
-            foreach (var entry in DataManager.Instance.UnitData)
+            foreach (var entry in GlobalState.Instance.UnitData)
             {
                 var unit = entry.Type.Instantiate();
                 unit.Data = entry;

@@ -18,8 +18,8 @@ namespace Riftstrike
             PlayButton.Pressed += () =>
             {
                 GlobalState.Wave = 1;
-                DataManager.Instance.UnitData.Clear();
-                DataManager.Instance.UnitData.AddRange(new List<UnitData>(){
+                GlobalState.Instance.UnitData.Clear();
+                GlobalState.Instance.UnitData.AddRange(new List<UnitData>(){
                     new() { Type = UnitType.ShockTrooper },
                     new() { Type = UnitType.ShockTrooper },
                     // new() { Type = UnitType.RiftAssassin },

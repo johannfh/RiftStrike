@@ -1,10 +1,14 @@
 using Godot;
+using Godot.Collections;
+using Riftstrike.src.units;
 
 namespace Riftstrike.src
 {
     public partial class GlobalState : Node
     {
         public static GlobalState Instance { get; private set; }
+
+        public readonly Array<UnitData> UnitData = new();
 
         [Export]
         private int enemySpawnCounter = 0;
