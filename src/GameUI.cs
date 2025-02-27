@@ -13,6 +13,7 @@ namespace Riftstrike.src
             base._Process(delta);
             var secondsLeft = (int)Math.Round(WaveEndTimer.TimeLeft);
             GetNode<Label>("%WaveDurationLabel").Text = $"{secondsLeft}";
+            GetNode<Label>("%RiftShardsLabel").Text = $"{GlobalState.RiftShards}";
         }
     }
 }

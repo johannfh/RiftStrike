@@ -10,7 +10,7 @@ namespace Riftstrike
 {
     public partial class Game : Node2D
     {
-        const float WAVE_DURATION_SECS = 10.0F;
+        const float WAVE_DURATION_SCALE = 5.0F;
 
         [Export]
         private Timer WaveEndTimer;
@@ -25,6 +25,8 @@ namespace Riftstrike
         private TileMapLayer Map;
 
         private bool gameOver;
+
+        private double riftShardsAtStart;
 
         [Export]
         public Counter counter;
@@ -59,7 +61,6 @@ namespace Riftstrike
                     .Instantiate<Enemy>();
                 enemy.GlobalPosition = pos;
                 Map.AddChild(enemy);
-                GlobalState.IncrementEnemySpawnCounter();
             }
         }
 
@@ -115,16 +116,17 @@ namespace Riftstrike
         {
             base._Ready();
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
-            WaveEndTimer.WaitTime = WAVE_DURATION_SECS * GlobalState.Wave;
+            WaveEndTimer.WaitTime = 10 + WAVE_DURATION_SCALE * GlobalState.Wave;
             WaveEndTimer.Timeout += EndWave;
             WaveEndTimer.Start();
+            riftShardsAtStart = GlobalState.RiftShards;
             GD.Print($"Starting wave {GlobalState.Wave}!");
             SpawnUnits();
         }
 
         private void SpawnUnits()
         {
-            foreach (var entry in GlobalState.Instance.UnitData)
+            foreach (var entry in GlobalState.UnitData)
             {
                 var unit = entry.Type.Instantiate();
                 unit.Data = entry;
@@ -135,7 +137,10 @@ namespace Riftstrike
         private void EndWave()
         {
             GD.Print("Wave ended!");
-            GD.Print($"Enemies spawned: {GlobalState.EnemySpawnCounter}");
+
+            var riftShardsDiff = GlobalState.RiftShards - riftShardsAtStart;
+            GD.Print($"Rift Shards: {GlobalState.RiftShards} (+{riftShardsDiff})");
+
             GD.Print("Opening wave shop!");
             GetTree().ChangeSceneToPacked(SceneLoader.WaveShopScene);
         }

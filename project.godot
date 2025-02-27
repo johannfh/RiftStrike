@@ -33,11 +33,15 @@ project/assembly_name="RiftStrike"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg")
 
 [global_group]
 
 spawn_location=""
+
+[godot_resource_groups]
+
+auto_rebuild=true
 
 [input]
 

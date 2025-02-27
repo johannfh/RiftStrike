@@ -1,8 +1,8 @@
 using Godot;
 
-namespace Riftstrike.src
+namespace Riftstrike.src.WaveShop
 {
-    public partial class WaveShopUI : Control
+    public partial class ItemShopUI : Control
     {
         public override void _Ready()
         {

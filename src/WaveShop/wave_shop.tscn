@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://blbvcgw6jlgsr"]
+
+[ext_resource type="Script" path="res://src/WaveShop/WaveShop.cs" id="1_gp6wo"]
+[ext_resource type="PackedScene" uid="uid://bysjryy4cixjh" path="res://src/WaveShop/item_shop_ui.tscn" id="2_ju5hc"]
+[ext_resource type="PackedScene" uid="uid://blu3anibidvoy" path="res://src/WaveShop/upgrade_shop_ui.tscn" id="3_pkkoi"]
+
+[node name="WaveShop" type="Node2D" node_paths=PackedStringArray("ItemShopUI", "UpgradeShopUI")]
+script = ExtResource("1_gp6wo")
+ItemShopUI = NodePath("UI/ItemShopUI")
+UpgradeShopUI = NodePath("UI/UpgradeShopUI")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ItemShopUI" parent="UI" instance=ExtResource("2_ju5hc")]
+unique_name_in_owner = true
+visible = false
+
+[node name="UpgradeShopUI" parent="UI" instance=ExtResource("3_pkkoi")]
+unique_name_in_owner = true

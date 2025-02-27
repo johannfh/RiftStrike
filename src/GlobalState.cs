@@ -8,14 +8,18 @@ namespace Riftstrike.src
     {
         public static GlobalState Instance { get; private set; }
 
-        public readonly Array<UnitData> UnitData = new();
+        private readonly Array<UnitData> unitData = new();
+        public static Array<UnitData> UnitData
+        {
+            get => Instance.unitData;
+        }
 
         [Export]
-        private int enemySpawnCounter = 0;
-        public static int EnemySpawnCounter
+        private double riftShards = 0;
+        public static double RiftShards
         {
-            get => Instance.enemySpawnCounter;
-            set => Instance.enemySpawnCounter = value;
+            get => Instance.riftShards;
+            set => Instance.riftShards = value;
         }
 
         private int wave = 1;
@@ -23,12 +27,6 @@ namespace Riftstrike.src
         {
             get => Instance.wave;
             set => Instance.wave = value;
-        }
-
-        public static void IncrementEnemySpawnCounter()
-        {
-            EnemySpawnCounter++;
-            GD.Print($"Total enemies spawned: {EnemySpawnCounter}!");
         }
 
         public override void _Ready()

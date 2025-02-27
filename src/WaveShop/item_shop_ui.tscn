@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bysjryy4cixjh"]
 
-[ext_resource type="Script" path="res://src/WaveShopUI.cs" id="1_n6yem"]
+[ext_resource type="Script" path="res://src/WaveShop/ItemShopUI.cs" id="1_n6yem"]
 
-[node name="WaveShopUI" type="Control"]
+[node name="ItemShopUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
