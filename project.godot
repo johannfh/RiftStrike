@@ -31,6 +31,10 @@ mouse_cursor/custom_image_hotspot=Vector2(24, 24)
 
 project/assembly_name="RiftStrike"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+
 [global_group]
 
 spawn_location=""
