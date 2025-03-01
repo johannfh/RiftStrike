@@ -3,7 +3,6 @@ using Godot.Collections;
 
 namespace Riftstrike.upgrades
 {
-    [GlobalClass]
     public partial class UpgradeFactory : Node
     {
         public static UpgradeFactory Instance { get; private set; }
