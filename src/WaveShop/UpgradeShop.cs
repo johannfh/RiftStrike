@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 using Riftstrike.src.units;
 using Riftstrike.upgrades;
 
@@ -8,30 +9,30 @@ namespace Riftstrike.src.WaveShop
 {
     public partial class UpgradeShop : MarginContainer
     {
-        const int UPGRADE_COUNT = 4;
+        [Export]
+        private Array<UpgradeBox> UpgradeBoxes = new();
 
         [Signal]
         public delegate void AllUpgradesPurchasedEventHandler();
 
+#nullable enable
+
         public override void _Ready()
         {
             base._Ready();
-            GetNode<Button>("%RerollUpgradesButton").Pressed += RerollUpgrades;
-        }
+            foreach (var upgradeBox in UpgradeBoxes)
+            {
+                upgradeBox.ChooseUpgrade += ChooseUpgradeHandler;
+            }
 
-        private void RerollUpgrades()
-        {
+            GetNode<Button>("%RerollUpgradesButton").Pressed += () => GetNextUpgrades();
             GetNextUpgrades();
         }
 
+        private UnitData? currentUnitData;
+
         public void GetNextUpgrades()
         {
-            var upgradesContainer = GetNode<HBoxContainer>("%UpgradesContainer");
-
-            // remove old upgrades
-            upgradesContainer.GetChildren()
-                .ForEach(node => node.QueueFree());
-
             var unitsWithLevelups = GlobalState.UnitData
                 .Where(u => u.RemainingLevelups.Any());
 
@@ -44,40 +45,55 @@ namespace Riftstrike.src.WaveShop
                 return;
             }
 
-            var unitData = unitsWithLevelups.First();
+            currentUnitData = unitsWithLevelups.First();
 
-            GD.Print($"Levelups: {unitData.RemainingLevelups.Count}");
+            GD.Print($"Levelups: {currentUnitData.RemainingLevelups.Count}");
 
             // generate upgrades for levelup
             var upgrades = new List<Upgrade>();
-            for (int i = 0; i < UPGRADE_COUNT; i++)
+            for (int i = 0; i < UpgradeBoxes.Count; i++)
             {
-                var randomUpgrade = UpgradeFactory.RandomLevelupUpgrade();
-                Debug.Assert(randomUpgrade != null, $"{nameof(randomUpgrade)} is null");
+                Upgrade randomUpgrade;
+                while (true)
+                {
+                    randomUpgrade = UpgradeFactory.RandomLevelupUpgrade();
+                    // ensure unique upgrades
+                    if (upgrades.Contains(randomUpgrade)) continue;
+                    break;
+                }
                 GD.Print($"Got upgrade: {randomUpgrade.ResourcePath}");
                 upgrades.Add(randomUpgrade);
             }
 
-            // render new upgrades
-            foreach (var upgrade in upgrades)
+            Debug.Assert(
+                upgrades.Count == UpgradeBoxes.Count,
+                $"Not enough {nameof(upgrades)} for {nameof(UpgradeBoxes)}"
+            );
+
+            // set new upgrades
+            for (int i = 0; i < UpgradeBoxes.Count; i++)
             {
-                var upgradeBox = UpgradeBox.New(upgrade);
-
-                upgradeBox.ChooseUpgrade += upgrade =>
-                {
-                    // apply upgrade
-                    unitData.Upgrades.Add(upgrade);
-
-                    // pop levelup from array
-                    unitData.RemainingLevelups.RemoveAt(0);
-
-                    // get new upgrades
-                    GetNextUpgrades();
-                };
-
-                // render upgrade option
-                upgradesContainer.AddChild(upgradeBox);
+                var upgradeBox = UpgradeBoxes.ElementAt(i);
+                upgradeBox.Upgrade = upgrades.ElementAt(i);
             }
+        }
+
+        private void ChooseUpgradeHandler(Upgrade upgrade)
+        {
+            if (currentUnitData == null || !currentUnitData.RemainingLevelups.Any()) return;
+            GD.Print($"Upgrade {upgrade.ResourcePath} chosen");
+
+            // apply upgrade
+            currentUnitData.Upgrades.Add(upgrade);
+
+            // pop levelup from array
+            currentUnitData.RemainingLevelups.RemoveAt(0);
+
+            // reset value
+            currentUnitData = null;
+
+            // get new upgrades
+            GetNextUpgrades();
         }
     }
 }

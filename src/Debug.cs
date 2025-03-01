@@ -1,4 +1,3 @@
-
 using System;
 using Godot;
 
@@ -14,7 +13,21 @@ namespace Riftstrike
             throw new ApplicationException($"Assert failed: {message}");
         }
 #else
-        {}
+        { } // does not effect binary in release mode
+#endif
+
+        internal static void Print(string what)
+#if DEBUG
+        => GD.Print(what);
+#else
+        { } // does not effect binary in release mode
+#endif
+
+        internal static void Print(params object[] what)
+#if DEBUG
+        => GD.Print(what);
+#else
+        { } // does not effect binary in release mode
 #endif
     }
 }

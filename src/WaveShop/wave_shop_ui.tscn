@@ -17,7 +17,7 @@ UpgradeShop = NodePath("UpgradeShop")
 ItemShop = NodePath("ItemShop")
 metadata/_edit_use_anchors_ = true
 
-[node name="UpgradeShop" type="MarginContainer" parent="."]
+[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -26,6 +26,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u35hc")
+UpgradeBoxes = [NodePath("VBoxContainer/UpgradesContainer/UpgradeBox"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox2"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox3"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox4")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop"]
 custom_minimum_size = Vector2(50, 150)
@@ -34,7 +35,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="UpgradesContainer" type="HBoxContainer" parent="UpgradeShop/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 64)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -43,11 +43,15 @@ alignment = 1
 
 [node name="UpgradeBox" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
 layout_mode = 2
-script = null
 
 [node name="UpgradeBox2" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
 layout_mode = 2
-script = null
+
+[node name="UpgradeBox3" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
+layout_mode = 2
+
+[node name="UpgradeBox4" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
+layout_mode = 2
 
 [node name="RerollUpgradesButton" type="Button" parent="UpgradeShop/VBoxContainer"]
 unique_name_in_owner = true
@@ -72,3 +76,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 text = "Next Wave!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true

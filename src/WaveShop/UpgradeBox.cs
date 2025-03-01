@@ -7,8 +7,7 @@ namespace Riftstrike.src.WaveShop
 {
     public partial class UpgradeBox : Control
     {
-        [Export]
-        public Upgrade Upgrade;
+        private Upgrade upgrade;
 
         [Export]
         private Array<RarityToTexture2D> RarityTextures = new();
@@ -16,32 +15,30 @@ namespace Riftstrike.src.WaveShop
         [Signal]
         public delegate void ChooseUpgradeEventHandler(Upgrade upgrade);
 
-#nullable enable
+        [Export]
+        public Upgrade Upgrade
+        {
+            get => upgrade;
+            set
+            {
+                upgrade = value;
+
+                // upgrade icon texture
+                GetNode<TextureRect>("%IconTextureRect").Texture = Upgrade.Icon;
+
+                // upgrade rarity texture
+                var rarityTexture = RarityTextures.First(rt => rt.Rarity == Upgrade.Rarity);
+                GetNode<TextureRect>("%RarityTextureRect").Texture = rarityTexture.Texture;
+            }
+        }
 
         public override void _Ready()
         {
             base._Ready();
-            GetNode<TextureRect>("%IconTextureRect").Texture = Upgrade.Icon;
-
-            var rarityTexture = RarityTextures.First(rt => rt.Rarity == Upgrade.Rarity);
-            GetNode<TextureRect>("%RarityTextureRect").Texture = rarityTexture.Texture;
-
             GetNode<Button>("%ChooseUpgradeButton").Pressed += () =>
             {
                 EmitSignal(SignalName.ChooseUpgrade, Upgrade);
             };
-
-            ChooseUpgrade += u => GD.Print($"Upgrade {u.ResourcePath} chosen");
-        }
-
-        public static UpgradeBox New(Upgrade upgrade)
-        {
-            var upgradeBoxScene = GD.Load<PackedScene>("res://src/WaveShop/upgrade_box.tscn");
-
-            var upgradeBox = upgradeBoxScene.Instantiate<UpgradeBox>();
-            upgradeBox.Upgrade = upgrade;
-
-            return upgradeBox;
         }
     }
 }

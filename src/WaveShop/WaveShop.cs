@@ -1,6 +1,8 @@
 using Godot;
-using System;
 
-public partial class WaveShop : Node2D
+namespace Riftstrike.src.WaveShop
 {
+    public partial class WaveShop : Node2D
+    {
+    }
 }
