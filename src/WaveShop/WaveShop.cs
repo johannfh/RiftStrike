@@ -13,6 +13,7 @@ namespace Riftstrike.src.WaveShop
         public override void _Ready()
         {
             base._Ready();
+            CursorSettings.Instance.Cursor = Cursor.Default;
             UpgradeShopUI.AllUpgradesPurchased += ToItemShop;
             UpgradeShopUI.GetNextUpgrades();
         }

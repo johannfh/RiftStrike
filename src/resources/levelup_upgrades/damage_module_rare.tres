@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DamageModule" load_steps=4 format=3 uid="uid://dqgojj6uby3s6"]
+
+[ext_resource type="Script" path="res://src/upgrades/DamageModule.cs" id="1_wgu65"]
+
+[sub_resource type="Gradient" id="Gradient_fdwfo"]
+colors = PackedColorArray(0.870588, 0, 0, 1, 0.513726, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_giqrf"]
+gradient = SubResource("Gradient_fdwfo")
+fill_to = Vector2(1, 0.820513)
+
+[resource]
+script = ExtResource("1_wgu65")
+Damage = 15.0
+Icon = SubResource("GradientTexture2D_giqrf")
+Rarity = 3

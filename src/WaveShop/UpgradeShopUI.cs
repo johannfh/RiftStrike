@@ -23,7 +23,7 @@ namespace Riftstrike.src.WaveShop
 
         private void RerollUpgrades()
         {
-            GD.Print("Rerolling upgrades!");
+            GetNextUpgrades();
         }
 
         public void GetNextUpgrades()
@@ -50,14 +50,13 @@ namespace Riftstrike.src.WaveShop
 
             GD.Print($"Levelups: {unitData.RemainingLevelups.Count}");
 
-            // pop levelup from array
-            unitData.RemainingLevelups.RemoveAt(0);
-
             // generate upgrades for levelup
             var upgrades = new List<Upgrade>();
             for (int i = 0; i < UPGRADE_COUNT; i++)
             {
-                upgrades.Add(UpgradesFactory.RandomLevelupUpgrade());
+                var randomUpgrade = UpgradesFactory.RandomLevelupUpgrade();
+                GD.Print($"Got upgrade: {randomUpgrade.ResourcePath}");
+                upgrades.Add(randomUpgrade);
             }
 
             // render new upgrades
@@ -69,6 +68,9 @@ namespace Riftstrike.src.WaveShop
                 {
                     // apply upgrade
                     unitData.Upgrades.Add(upgrade);
+
+                    // pop levelup from array
+                    unitData.RemainingLevelups.RemoveAt(0);
 
                     // get new upgrades
                     GetNextUpgrades();

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RiftEnergyModule" load_steps=4 format=3 uid="uid://6b7svbnneqbo"]
+
+[ext_resource type="Script" path="res://src/upgrades/RiftEnergyModule.cs" id="1_1euui"]
+
+[sub_resource type="Gradient" id="Gradient_avpbl"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0.262745, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u1uyr"]
+gradient = SubResource("Gradient_avpbl")
+fill_to = Vector2(1, 0.491453)
+
+[resource]
+script = ExtResource("1_1euui")
+RiftEnergy = 10.0
+Icon = SubResource("GradientTexture2D_u1uyr")
+Rarity = 2

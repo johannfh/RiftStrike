@@ -13,3 +13,4 @@ fill_to = Vector2(1, 0.491453)
 script = ExtResource("1_o3dik")
 Regeneration = 3.0
 Icon = SubResource("GradientTexture2D_r8rf3")
+Rarity = 0

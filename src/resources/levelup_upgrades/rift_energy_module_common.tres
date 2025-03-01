@@ -13,3 +13,4 @@ fill_to = Vector2(1, 0.491453)
 script = ExtResource("1_3ll75")
 RiftEnergy = 5.0
 Icon = SubResource("GradientTexture2D_q2reg")
+Rarity = 0
