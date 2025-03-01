@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6b0gfprytoww"]
+
+[ext_resource type="Script" path="res://src/Globals.cs" id="1_w4w4o"]
+[ext_resource type="PackedScene" uid="uid://cd08hrtd4jn6d" path="res://src/upgrades/upgrade_factory.tscn" id="2_83qwt"]
+
+[node name="Globals" type="Node"]
+script = ExtResource("1_w4w4o")
+loadedScenes = [ExtResource("2_83qwt")]

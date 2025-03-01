@@ -1,4 +1,5 @@
 using Godot;
+using Riftstrike.upgrades;
 
 namespace Riftstrike.src.WaveShop
 {

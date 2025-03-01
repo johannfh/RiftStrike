@@ -1,0 +1,18 @@
+[gd_scene load_steps=13 format=3 uid="uid://cd08hrtd4jn6d"]
+
+[ext_resource type="Script" path="res://src/upgrades/UpgradeFactory.cs" id="1_3xec5"]
+[ext_resource type="Resource" uid="uid://dbiew6kfalyxq" path="res://src/resources/levelup_upgrades/damage_module_common.tres" id="2_vda4i"]
+[ext_resource type="Resource" uid="uid://cjnpchms32tv1" path="res://src/resources/levelup_upgrades/damage_module_uncommon.tres" id="3_q58t1"]
+[ext_resource type="Resource" uid="uid://dqgojj6uby3s6" path="res://src/resources/levelup_upgrades/damage_module_rare.tres" id="4_mwol0"]
+[ext_resource type="Resource" uid="uid://dkxvwm26yms2v" path="res://src/resources/levelup_upgrades/damage_module_epic.tres" id="5_8odcj"]
+[ext_resource type="Resource" uid="uid://1glel7il0uu8" path="res://src/resources/levelup_upgrades/damage_module_legendary.tres" id="6_evftw"]
+[ext_resource type="Resource" uid="uid://di5gnov0wp3hw" path="res://src/resources/levelup_upgrades/health_module_common.tres" id="7_l5eyy"]
+[ext_resource type="Resource" uid="uid://brcbx0r44y874" path="res://src/resources/levelup_upgrades/health_module_uncommon.tres" id="8_i5fi3"]
+[ext_resource type="Resource" uid="uid://du85ofy6s3sxx" path="res://src/resources/levelup_upgrades/rift_energy_module_common.tres" id="9_c2oxx"]
+[ext_resource type="Resource" uid="uid://6b7svbnneqbo" path="res://src/resources/levelup_upgrades/rift_energy_module_uncommon.tres" id="10_1ysde"]
+[ext_resource type="Resource" uid="uid://dfod3jbtyqo4m" path="res://src/resources/levelup_upgrades/vitality_module_common.tres" id="11_sgu8n"]
+[ext_resource type="Resource" uid="uid://ckqo81t3w8a5u" path="res://src/resources/levelup_upgrades/vitality_module_uncommon.tres" id="12_281gl"]
+
+[node name="UpgradeFactory" type="Node"]
+script = ExtResource("1_3xec5")
+LevelupUpgrades = [ExtResource("2_vda4i"), ExtResource("5_8odcj"), ExtResource("6_evftw"), ExtResource("4_mwol0"), ExtResource("3_q58t1"), ExtResource("7_l5eyy"), ExtResource("8_i5fi3"), ExtResource("9_c2oxx"), ExtResource("10_1ysde"), ExtResource("11_sgu8n"), ExtResource("12_281gl")]

@@ -29,33 +29,4 @@ namespace Riftstrike.upgrades
         Epic = 4,
         Legendary = 5,
     }
-
-    public static class UpgradesFactory
-    {
-        private static readonly Upgrade[] LevelupUpgrades;
-        private static readonly RandomNumberGenerator randomNumberGenerator;
-
-        static UpgradesFactory()
-        {
-            const string LEVELUP_UPGRADES_PATH = "res://src/resources/levelup_upgrades";
-            var paths = DirAccess.GetFilesAt(LEVELUP_UPGRADES_PATH)
-                .Select(f => $"{LEVELUP_UPGRADES_PATH}/{f}");
-
-            GD.Print($"Upgrades: {string.Join(", ", paths)}");
-
-            LevelupUpgrades = paths
-                .Select(p => GD.Load<Upgrade>(p))
-                .ToArray();
-
-            randomNumberGenerator = new RandomNumberGenerator();
-            randomNumberGenerator.Randomize();
-        }
-
-        public static Upgrade RandomLevelupUpgrade()
-            => RandomLevelupUpgrade(randomNumberGenerator);
-
-
-        public static Upgrade RandomLevelupUpgrade(RandomNumberGenerator rng)
-            => LevelupUpgrades.RandomElement(rng);
-    }
 }

@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 UnitFactory="*res://src/units/UnitFactory.cs"
 CursorSettings="*res://src/CursorSettings.cs"
 GlobalState="*res://src/global_state.tscn"
+Globals="*res://src/globals.tscn"
 
 [display]
 
@@ -34,10 +35,6 @@ project/assembly_name="RiftStrike"
 [editor_plugins]
 
 enabled=PackedStringArray()
-
-[global_group]
-
-spawn_location=""
 
 [godot_resource_groups]
 

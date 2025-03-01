@@ -13,8 +13,6 @@ namespace Riftstrike.src.WaveShop
         [Signal]
         public delegate void AllUpgradesPurchasedEventHandler();
 
-#nullable enable
-
         public override void _Ready()
         {
             base._Ready();
@@ -54,7 +52,8 @@ namespace Riftstrike.src.WaveShop
             var upgrades = new List<Upgrade>();
             for (int i = 0; i < UPGRADE_COUNT; i++)
             {
-                var randomUpgrade = UpgradesFactory.RandomLevelupUpgrade();
+                var randomUpgrade = UpgradeFactory.RandomLevelupUpgrade();
+                Debug.Assert(randomUpgrade != null, $"{nameof(randomUpgrade)} is null");
                 GD.Print($"Got upgrade: {randomUpgrade.ResourcePath}");
                 upgrades.Add(randomUpgrade);
             }
