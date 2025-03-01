@@ -6,7 +6,7 @@ using Riftstrike.upgrades;
 
 namespace Riftstrike.src.WaveShop
 {
-    public partial class UpgradeShopUI : Control
+    public partial class UpgradeShop : MarginContainer
     {
         const int UPGRADE_COUNT = 4;
 

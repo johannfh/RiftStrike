@@ -2,7 +2,7 @@ using Godot;
 
 namespace Riftstrike.src.WaveShop
 {
-    public partial class ItemShopUI : Control
+    public partial class ItemShop : CenterContainer
     {
         public override void _Ready()
         {

@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://byjv7jtoirsp3"]
+
+[ext_resource type="Script" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
+[ext_resource type="Script" path="res://src/WaveShop/UpgradeShop.cs" id="2_u35hc"]
+[ext_resource type="PackedScene" uid="uid://bevjk7bpcj3jl" path="res://src/WaveShop/upgrade_box.tscn" id="3_n2kgm"]
+[ext_resource type="Script" path="res://src/WaveShop/ItemShop.cs" id="4_fjoik"]
+
+[node name="WaveShopUI" type="Control" node_paths=PackedStringArray("UpgradeShop", "ItemShop")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ub60g")
+UpgradeShop = NodePath("UpgradeShop")
+ItemShop = NodePath("ItemShop")
+metadata/_edit_use_anchors_ = true
+
+[node name="UpgradeShop" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_u35hc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop"]
+custom_minimum_size = Vector2(50, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="UpgradesContainer" type="HBoxContainer" parent="UpgradeShop/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+alignment = 1
+
+[node name="UpgradeBox" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
+layout_mode = 2
+script = null
+
+[node name="UpgradeBox2" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
+layout_mode = 2
+script = null
+
+[node name="RerollUpgradesButton" type="Button" parent="UpgradeShop/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reroll"
+
+[node name="ItemShop" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_fjoik")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemShop"]
+layout_mode = 2
+
+[node name="NextWaveButton" type="Button" parent="ItemShop/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Next Wave!"
