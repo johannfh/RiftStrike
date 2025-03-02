@@ -78,6 +78,10 @@ namespace Riftstrike.src.WaveShop
                     AnimationPlayer.AnimationFinished += (_) => EmitSignal(SignalName.AllUpgradesPurchased);
                     AnimationPlayer.Play("hide_UpgradeBoxes");
                 }
+                else
+                {
+                    EmitSignal(SignalName.AllUpgradesPurchased);
+                }
 
                 return;
             }
