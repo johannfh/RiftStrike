@@ -7,28 +7,39 @@ namespace Riftstrike.src.WaveShop
 {
     public partial class UpgradeBox : Control
     {
-        private Upgrade upgrade;
 
         [Export]
         private Array<RarityToTexture2D> RarityTextures = new();
 
+        [Export]
+        private TextureRect IconTextureRect;
+
+        [Export]
+        private TextureRect RarityTextureRect;
+
         [Signal]
         public delegate void ChooseUpgradeEventHandler(Upgrade upgrade);
 
+#nullable enable
+
+        private Upgrade? upgrade;
+
         [Export]
-        public Upgrade Upgrade
+        public Upgrade? Upgrade
         {
             get => upgrade;
             set
             {
                 upgrade = value;
 
+                Debug.Print($"{nameof(Upgrade)} set to {value?.ResourcePath ?? "UNKNOWN"}!");
+
                 // upgrade icon texture
-                GetNode<TextureRect>("%IconTextureRect").Texture = Upgrade.Icon;
+                IconTextureRect.Texture = value?.Icon;
 
                 // upgrade rarity texture
-                var rarityTexture = RarityTextures.First(rt => rt.Rarity == Upgrade.Rarity);
-                GetNode<TextureRect>("%RarityTextureRect").Texture = rarityTexture.Texture;
+                var rarityTexture = RarityTextures.First(rt => rt.Rarity == value?.Rarity);
+                RarityTextureRect.Texture = rarityTexture.Texture;
             }
         }
 
@@ -37,6 +48,7 @@ namespace Riftstrike.src.WaveShop
             base._Ready();
             GetNode<Button>("%ChooseUpgradeButton").Pressed += () =>
             {
+                if (Upgrade == null) return;
                 EmitSignal(SignalName.ChooseUpgrade, Upgrade);
             };
         }

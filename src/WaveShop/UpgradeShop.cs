@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -11,6 +12,12 @@ namespace Riftstrike.src.WaveShop
     {
         [Export]
         private Array<UpgradeBox> UpgradeBoxes = new();
+
+        [Export]
+        private Button RerollUpgradesButton;
+
+        [Export]
+        private AnimationPlayer AnimationPlayer;
 
         [Signal]
         public delegate void AllUpgradesPurchasedEventHandler();
@@ -25,11 +32,13 @@ namespace Riftstrike.src.WaveShop
                 upgradeBox.ChooseUpgrade += ChooseUpgradeHandler;
             }
 
-            GetNode<Button>("%RerollUpgradesButton").Pressed += () => GetNextUpgrades();
+            RerollUpgradesButton.Pressed += () => GetNextUpgrades();
             GetNextUpgrades();
         }
 
         private UnitData? currentUnitData;
+
+        private bool hadUpgrades = false;
 
         public void GetNextUpgrades()
         {
@@ -41,9 +50,19 @@ namespace Riftstrike.src.WaveShop
             if (!unitsWithLevelups.Any())
             {
                 GD.Print("No more units with levelups!");
-                EmitSignal(SignalName.AllUpgradesPurchased);
+
+                if (hadUpgrades)
+                {
+                    // wait for animation to finish before completing scene stage
+                    AnimationPlayer.Stop();
+                    AnimationPlayer.AnimationFinished += (_) => EmitSignal(SignalName.AllUpgradesPurchased);
+                    AnimationPlayer.Play("hide_UpgradeBoxes");
+                }
+
                 return;
             }
+
+            hadUpgrades = true;
 
             currentUnitData = unitsWithLevelups.First();
 
@@ -76,6 +95,8 @@ namespace Riftstrike.src.WaveShop
                 var upgradeBox = UpgradeBoxes.ElementAt(i);
                 upgradeBox.Upgrade = upgrades.ElementAt(i);
             }
+
+            AnimationPlayer.Play("show_UpgradeBoxes");
         }
 
         private void ChooseUpgradeHandler(Upgrade upgrade)
