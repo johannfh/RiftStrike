@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bevjk7bpcj3jl"]
+[gd_scene load_steps=18 format=3 uid="uid://bevjk7bpcj3jl"]
 
 [ext_resource type="Script" path="res://src/WaveShop/UpgradeBox.cs" id="1_kbrbs"]
 [ext_resource type="Texture2D" uid="uid://bm5kwmtqqmruk" path="res://src/resources/rarity_textures/common.tres" id="2_2vcoh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://pdvhtp40bq86" path="res://src/resources/rarity_textures/rare.tres" id="4_gg7ht"]
 [ext_resource type="Texture2D" uid="uid://d3l7jhb5nbbcv" path="res://src/resources/rarity_textures/epic.tres" id="5_qepo7"]
 [ext_resource type="Texture2D" uid="uid://c4a5bverkdcci" path="res://src/resources/rarity_textures/legendary.tres" id="6_41m4a"]
+[ext_resource type="Texture2D" uid="uid://bjxbm211f62bw" path="res://src/assets/AttackModule.png" id="8_p6gta"]
 
 [sub_resource type="Resource" id="Resource_goo15"]
 script = ExtResource("2_se2r3")
@@ -33,68 +34,97 @@ script = ExtResource("2_se2r3")
 Rarity = 5
 Texture = ExtResource("6_41m4a")
 
-[sub_resource type="Animation" id="Animation_0nxgm"]
-resource_name = "click_ChooseUpgradeButton"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(3, 1),
-"update": 0,
-"values": [0.0, 3.14159]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(3, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
+[sub_resource type="LabelSettings" id="LabelSettings_yflln"]
+font_size = 12
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_cme28"]
+[sub_resource type="Animation" id="Animation_xg53a"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:rotation")
+tracks/0/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:modulate")
+tracks/1/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_txl7b"]
-_data = {
-"RESET": SubResource("Animation_cme28"),
-"click_ChooseUpgradeButton": SubResource("Animation_0nxgm")
+[sub_resource type="Animation" id="Animation_7v2fy"]
+resource_name = "click_ChooseUpgradeButton"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [0.0, -1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/Control/ChooseUpgradeButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[node name="UpgradeBox" type="AspectRatioContainer" node_paths=PackedStringArray("RarityTextureRect", "ChooseUpgradeButton", "AnimationPlayer")]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4xjk"]
+_data = {
+"RESET": SubResource("Animation_xg53a"),
+"click_ChooseUpgradeButton": SubResource("Animation_7v2fy")
+}
+
+[node name="UpgradeBox" type="AspectRatioContainer" node_paths=PackedStringArray("RarityTextureRect", "ChooseUpgradeButton", "UpgradeLabel", "AnimationPlayer")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -110,6 +140,7 @@ script = ExtResource("1_kbrbs")
 RarityTextures = [SubResource("Resource_goo15"), SubResource("Resource_sl6wr"), SubResource("Resource_42vdb"), SubResource("Resource_03vlr"), SubResource("Resource_7p2yy")]
 RarityTextureRect = NodePath("CenterContainer/RarityTextureRect")
 ChooseUpgradeButton = NodePath("CenterContainer/Control/ChooseUpgradeButton")
+UpgradeLabel = NodePath("CenterContainer/Control/Label")
 AnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -136,12 +167,31 @@ pivot_offset = Vector2(32, 32)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
-icon = ExtResource("5_qepo7")
+icon = ExtResource("8_p6gta")
 flat = true
 icon_alignment = 1
 expand_icon = true
 
+[node name="Label" type="Label" parent="CenterContainer/Control"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -48.0
+offset_right = 46.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+10%"
+label_settings = SubResource("LabelSettings_yflln")
+horizontal_alignment = 2
+vertical_alignment = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_txl7b")
+"": SubResource("AnimationLibrary_w4xjk")
 }

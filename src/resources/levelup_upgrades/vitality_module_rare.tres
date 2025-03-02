@@ -1,16 +1,11 @@
-[gd_resource type="Resource" script_class="VitalityModule" load_steps=4 format=3 uid="uid://dcr0e4cmapnwe"]
+[gd_resource type="Resource" script_class="VitalityModule" load_steps=3 format=3 uid="uid://dcr0e4cmapnwe"]
 
 [ext_resource type="Script" path="res://src/upgrades/VitalityModule.cs" id="1_gfxv3"]
-
-[sub_resource type="Gradient" id="Gradient_nx5tm"]
-colors = PackedColorArray(0, 0, 0, 1, 2.21401e-06, 0.571325, 0.124324, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g8flp"]
-gradient = SubResource("Gradient_nx5tm")
-fill_to = Vector2(1, 0.491453)
+[ext_resource type="Texture2D" uid="uid://durq4ngcnedpl" path="res://src/assets/VitalityModule.png" id="1_iawdk"]
 
 [resource]
 script = ExtResource("1_gfxv3")
 Regeneration = 9.0
-Icon = SubResource("GradientTexture2D_g8flp")
+Icon = ExtResource("1_iawdk")
+Label = "+9"
 Rarity = 3

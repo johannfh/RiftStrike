@@ -1,16 +1,11 @@
-[gd_resource type="Resource" script_class="HealthModule" load_steps=4 format=3 uid="uid://brcbx0r44y874"]
+[gd_resource type="Resource" script_class="HealthModule" load_steps=3 format=3 uid="uid://brcbx0r44y874"]
 
 [ext_resource type="Script" path="res://src/upgrades/HealthModule.cs" id="1_rikgh"]
-
-[sub_resource type="Gradient" id="Gradient_o1i4e"]
-colors = PackedColorArray(0.929412, 0, 0, 1, 0, 0.796078, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x25gp"]
-gradient = SubResource("Gradient_o1i4e")
-fill_to = Vector2(1, 0.696581)
+[ext_resource type="Texture2D" uid="uid://dmw662abx4se3" path="res://src/assets/HealthModule.png" id="1_v7g3y"]
 
 [resource]
 script = ExtResource("1_rikgh")
 Health = 10.0
-Icon = SubResource("GradientTexture2D_x25gp")
+Icon = ExtResource("1_v7g3y")
+Label = "+10"
 Rarity = 2

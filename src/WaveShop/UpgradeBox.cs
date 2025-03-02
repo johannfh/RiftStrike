@@ -18,6 +18,9 @@ namespace Riftstrike.src.WaveShop
         private Button ChooseUpgradeButton;
 
         [Export]
+        private Label UpgradeLabel;
+
+        [Export]
         private AnimationPlayer AnimationPlayer;
 
         [Signal]
@@ -35,12 +38,13 @@ namespace Riftstrike.src.WaveShop
             {
                 upgrade = value;
 
-                Debug.Print($"{nameof(Upgrade)} set to {value?.ResourcePath ?? "UNKNOWN"}!");
+                Debug.Print($"{nameof(Upgrade)} set to {value?.ResourcePath ?? "UNKNOWN"}");
                 AnimationPlayer.Play("RESET");
 
                 // upgrade icon texture
                 ChooseUpgradeButton.Icon = value?.Icon;
                 ChooseUpgradeButton.Scale = Vector2.One;
+                UpgradeLabel.Text = Upgrade?.Label ?? "";
 
                 // upgrade rarity texture
                 var rarityTexture = RarityTextures.First(rt => rt.Rarity == value?.Rarity);

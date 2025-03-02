@@ -1,16 +1,11 @@
-[gd_resource type="Resource" script_class="DamageModule" load_steps=4 format=3 uid="uid://dbiew6kfalyxq"]
+[gd_resource type="Resource" script_class="DamageModule" load_steps=3 format=3 uid="uid://dbiew6kfalyxq"]
 
 [ext_resource type="Script" path="res://src/upgrades/DamageModule.cs" id="1_i0py0"]
-
-[sub_resource type="Gradient" id="Gradient_fdwfo"]
-colors = PackedColorArray(0.870588, 0, 0, 1, 0.513726, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wx2jf"]
-gradient = SubResource("Gradient_fdwfo")
-fill_to = Vector2(1, 0.820513)
+[ext_resource type="Texture2D" uid="uid://bjxbm211f62bw" path="res://src/assets/AttackModule.png" id="1_if4j5"]
 
 [resource]
 script = ExtResource("1_i0py0")
 Damage = 5.0
-Icon = SubResource("GradientTexture2D_wx2jf")
+Icon = ExtResource("1_if4j5")
+Label = "+5%"
 Rarity = 0

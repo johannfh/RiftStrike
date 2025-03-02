@@ -11,6 +11,9 @@ namespace Riftstrike.upgrades
         public Texture2D Icon;
 
         [Export]
+        public string Label = "";
+
+        [Export]
         public Rarity Rarity = Rarity.Common;
 
         /// <summary>
