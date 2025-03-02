@@ -33,7 +33,6 @@ namespace Riftstrike.src.WaveShop
             }
 
             RerollUpgradesButton.Pressed += () => GetNextUpgrades();
-            GetNextUpgrades();
         }
 
         public override void _Process(double delta)

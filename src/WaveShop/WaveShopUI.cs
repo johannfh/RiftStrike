@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace Riftstrike.src.WaveShop
@@ -15,6 +16,10 @@ namespace Riftstrike.src.WaveShop
             base._Ready();
             CursorSettings.Instance.Cursor = Cursor.Default;
             UpgradeShop.AllUpgradesPurchased += ToItemShop;
+
+            // directly jump to item shop when there are no remaining levelups
+            if (GlobalState.UnitData.Select(ud => ud.RemainingLevelups.Any()).Any()) UpgradeShop.GetNextUpgrades();
+            else ToItemShop();
         }
 
         private void ToItemShop()
