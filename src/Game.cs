@@ -16,7 +16,7 @@ namespace Riftstrike
         private Timer WaveEndTimer;
 
         [Export]
-        private RandomTimer SpawnEnemiesTimer;
+        private Timer SpawnEnemiesTimer;
 
         [Export]
         private int enemySpawnCount = 3;
@@ -50,7 +50,7 @@ namespace Riftstrike
 #if DEBUG
             var start = DateTime.Now;
 #endif
-            var positions = GetSafeEnemySpawnPoints(5);
+            var positions = GetSafeEnemySpawnPoints(enemySpawnCount);
 #if DEBUG
             var end = DateTime.Now;
             GD.Print($"Time taken for spawn: {(end - start).TotalMilliseconds}ms");
@@ -130,7 +130,7 @@ namespace Riftstrike
             {
                 var unit = entry.Type.Instantiate();
                 unit.Data = entry;
-                GetNode<Node>("%Map").AddChild(unit);
+                Map.AddChild(unit);
             }
         }
 
