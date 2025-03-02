@@ -1,61 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://byjv7jtoirsp3"]
+[gd_scene load_steps=10 format=3 uid="uid://byjv7jtoirsp3"]
 
 [ext_resource type="Script" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
 [ext_resource type="Script" path="res://src/WaveShop/UpgradeShop.cs" id="2_u35hc"]
 [ext_resource type="PackedScene" uid="uid://bevjk7bpcj3jl" path="res://src/WaveShop/upgrade_box.tscn" id="3_n2kgm"]
+[ext_resource type="Texture2D" uid="uid://djp7w5i8d176" path="res://src/assets/random-icon.png" id="4_4n5em"]
 [ext_resource type="Script" path="res://src/WaveShop/ItemShop.cs" id="4_fjoik"]
-
-[sub_resource type="Animation" id="Animation_50fx4"]
-resource_name = "show_UpgradeBoxes"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox2:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox3:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox4:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_n3ahh"]
 length = 0.001
@@ -112,6 +61,58 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_50fx4"]
+resource_name = "show_UpgradeBoxes"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UpgradeShop/VBoxContainer/UpgradesContainer/UpgradeBox4:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vj0nn"]
 _data = {
 "RESET": SubResource("Animation_n3ahh"),
@@ -140,7 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u35hc")
 UpgradeBoxes = [NodePath("VBoxContainer/UpgradesContainer/UpgradeBox"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox2"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox3"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox4")]
-RerollUpgradesButton = NodePath("VBoxContainer/RerollUpgradesButton")
+RerollUpgradesButton = NodePath("VBoxContainer/Control/RerollUpgradesButton")
 AnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeShop"]
@@ -150,7 +151,7 @@ libraries = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop"]
-custom_minimum_size = Vector2(50, 150)
+custom_minimum_size = Vector2(50, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -186,9 +187,30 @@ layout_mode = 2
 focus_neighbor_left = NodePath("../UpgradeBox3")
 focus_neighbor_right = NodePath("../UpgradeBox")
 
-[node name="RerollUpgradesButton" type="Button" parent="UpgradeShop/VBoxContainer"]
+[node name="Control" type="Control" parent="UpgradeShop/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-text = "Reroll"
+size_flags_vertical = 4
+
+[node name="RerollUpgradesButton" type="Button" parent="UpgradeShop/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(40, 40)
+focus_mode = 0
+icon = ExtResource("4_4n5em")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="ItemShop" type="CenterContainer" parent="." node_paths=PackedStringArray("NextWaveButton")]
 visible = false

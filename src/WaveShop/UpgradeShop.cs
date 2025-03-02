@@ -36,6 +36,26 @@ namespace Riftstrike.src.WaveShop
             GetNextUpgrades();
         }
 
+        public override void _Process(double delta)
+        {
+            base._Process(delta);
+            if (RerollUpgradesButton.IsHovered())
+            {
+                Tween(RerollUpgradesButton, "scale", Vector2.One * 1.2F, 0.2);
+            }
+            else
+            {
+                Tween(RerollUpgradesButton, "scale", Vector2.One, 0.1);
+            }
+        }
+
+        private void Tween(GodotObject obj, NodePath property, Variant amount, double duration)
+        {
+            var tween = CreateTween();
+            tween.TweenProperty(obj, property, amount, duration);
+        }
+
+
         private UnitData? currentUnitData;
 
         private bool hadUpgrades = false;

@@ -12,10 +12,13 @@ namespace Riftstrike.src.WaveShop
         private Array<RarityToTexture2D> RarityTextures = new();
 
         [Export]
-        private TextureRect IconTextureRect;
+        private TextureRect RarityTextureRect;
 
         [Export]
-        private TextureRect RarityTextureRect;
+        private Button ChooseUpgradeButton;
+
+        [Export]
+        private AnimationPlayer AnimationPlayer;
 
         [Signal]
         public delegate void ChooseUpgradeEventHandler(Upgrade upgrade);
@@ -33,9 +36,11 @@ namespace Riftstrike.src.WaveShop
                 upgrade = value;
 
                 Debug.Print($"{nameof(Upgrade)} set to {value?.ResourcePath ?? "UNKNOWN"}!");
+                AnimationPlayer.Play("RESET");
 
                 // upgrade icon texture
-                IconTextureRect.Texture = value?.Icon;
+                ChooseUpgradeButton.Icon = value?.Icon;
+                ChooseUpgradeButton.Scale = Vector2.One;
 
                 // upgrade rarity texture
                 var rarityTexture = RarityTextures.First(rt => rt.Rarity == value?.Rarity);
@@ -43,12 +48,37 @@ namespace Riftstrike.src.WaveShop
             }
         }
 
+        public override void _Process(double delta)
+        {
+            base._Process(delta);
+            if (ChooseUpgradeButton.IsHovered())
+            {
+                Tween(ChooseUpgradeButton, "scale", Vector2.One * 1.5F, 0.2);
+            }
+            else
+            {
+                Tween(ChooseUpgradeButton, "scale", Vector2.One, 0.2);
+            }
+        }
+
+        private void Tween(GodotObject obj, NodePath property, Variant amount, double duration)
+        {
+            var tween = CreateTween();
+            tween.TweenProperty(obj, property, amount, duration);
+        }
+
         public override void _Ready()
         {
             base._Ready();
-            GetNode<Button>("%ChooseUpgradeButton").Pressed += () =>
+            ChooseUpgradeButton.Pressed += () =>
             {
-                if (Upgrade == null) return;
+                AnimationPlayer.Stop();
+                AnimationPlayer.Play("click_ChooseUpgradeButton");
+            };
+
+            AnimationPlayer.AnimationFinished += anim =>
+            {
+                if (anim != "click_ChooseUpgradeButton" || Upgrade == null) return;
                 EmitSignal(SignalName.ChooseUpgrade, Upgrade);
             };
         }

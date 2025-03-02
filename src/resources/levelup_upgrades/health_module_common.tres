@@ -11,6 +11,6 @@ fill_to = Vector2(1, 0.696581)
 
 [resource]
 script = ExtResource("1_rqomf")
-Health = 10.0
+Health = 5.0
 Icon = SubResource("GradientTexture2D_13vrf")
 Rarity = 0
