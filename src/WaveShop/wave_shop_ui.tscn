@@ -207,6 +207,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(40, 40)
 focus_mode = 0
+mouse_default_cursor_shape = 2
 icon = ExtResource("4_4n5em")
 flat = true
 icon_alignment = 1

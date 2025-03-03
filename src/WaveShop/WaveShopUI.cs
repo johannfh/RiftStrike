@@ -14,7 +14,6 @@ namespace Riftstrike.src.WaveShop
         public override void _Ready()
         {
             base._Ready();
-            CursorSettings.Instance.Cursor = Cursor.Default;
             UpgradeShop.AllUpgradesPurchased += ToItemShop;
 
             // directly jump to item shop when there are no remaining levelups

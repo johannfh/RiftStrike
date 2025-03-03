@@ -115,6 +115,8 @@ namespace Riftstrike
         public override void _Ready()
         {
             base._Ready();
+            CursorSettings.LoadCursors();
+
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
             WaveEndTimer.WaitTime = 10 + WAVE_DURATION_SCALE * GlobalState.Wave;
             WaveEndTimer.Timeout += EndWave;

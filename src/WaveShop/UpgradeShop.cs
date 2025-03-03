@@ -38,13 +38,22 @@ namespace Riftstrike.src.WaveShop
         public override void _Process(double delta)
         {
             base._Process(delta);
-            if (RerollUpgradesButton.IsHovered())
+            ButtonScaleTweenHover(RerollUpgradesButton, 1.2F, 0.2, 0.1);
+        }
+
+        private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)
+        {
+            if (button.ButtonPressed)
             {
-                Tween(RerollUpgradesButton, "scale", Vector2.One * 1.2F, 0.2);
+                Tween(button, "scale", Vector2.One * ((scale - 1) / 2 + 1), duration);
+            }
+            else if (button.IsHovered())
+            {
+                Tween(button, "scale", Vector2.One * scale, duration);
             }
             else
             {
-                Tween(RerollUpgradesButton, "scale", Vector2.One, 0.1);
+                Tween(button, "scale", Vector2.One, revertDuration);
             }
         }
 

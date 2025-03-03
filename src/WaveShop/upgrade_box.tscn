@@ -167,6 +167,7 @@ pivot_offset = Vector2(64, 64)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
+mouse_default_cursor_shape = 2
 icon = ExtResource("8_p6gta")
 flat = true
 icon_alignment = 1

@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 
 UnitFactory="*res://src/units/UnitFactory.cs"
 UpgradeFactory="*res://src/upgrades/upgrade_factory.tscn"
-CursorSettings="*res://src/CursorSettings.cs"
 GlobalState="*res://src/global_state.tscn"
 
 [display]

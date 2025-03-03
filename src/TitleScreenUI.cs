@@ -13,7 +13,7 @@ namespace Riftstrike
         public override void _Ready()
         {
             base._Ready();
-            CursorSettings.Instance.Cursor = Cursor.Default;
+            CursorSettings.LoadCursors();
 
             PlayButton.Pressed += () =>
             {
@@ -40,7 +40,11 @@ namespace Riftstrike
 
         private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)
         {
-            if (button.IsHovered())
+            if (button.ButtonPressed)
+            {
+                Tween(button, "scale", Vector2.One * ((scale - 1) / 2 + 1), duration);
+            }
+            else if (button.IsHovered())
             {
                 Tween(button, "scale", Vector2.One * scale, duration);
             }

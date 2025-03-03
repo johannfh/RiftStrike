@@ -55,15 +55,25 @@ namespace Riftstrike.src.WaveShop
         public override void _Process(double delta)
         {
             base._Process(delta);
-            if (ChooseUpgradeButton.IsHovered())
+            ButtonScaleTweenHover(ChooseUpgradeButton, 1.5F, 0.3, 0.1);
+        }
+
+        private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)
+        {
+            if (button.ButtonPressed)
             {
-                Tween(ChooseUpgradeButton, "scale", Vector2.One * 1.5F, 0.2);
+                Tween(button, "scale", Vector2.One * ((scale - 1) / 2 + 1), duration);
+            }
+            else if (button.IsHovered())
+            {
+                Tween(button, "scale", Vector2.One * scale, duration);
             }
             else
             {
-                Tween(ChooseUpgradeButton, "scale", Vector2.One, 0.2);
+                Tween(button, "scale", Vector2.One, revertDuration);
             }
         }
+
 
         private void Tween(GodotObject obj, NodePath property, Variant amount, double duration)
         {
