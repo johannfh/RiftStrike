@@ -1,14 +1,31 @@
-[gd_scene load_steps=11 format=3 uid="uid://byjv7jtoirsp3"]
+[gd_scene load_steps=17 format=3 uid="uid://byjv7jtoirsp3"]
 
 [ext_resource type="Script" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
 [ext_resource type="Script" path="res://src/WaveShop/UpgradeShop.cs" id="2_u35hc"]
 [ext_resource type="PackedScene" uid="uid://bevjk7bpcj3jl" path="res://src/WaveShop/upgrade_box.tscn" id="3_n2kgm"]
-[ext_resource type="Texture2D" uid="uid://djp7w5i8d176" path="res://src/assets/random-icon.png" id="4_4n5em"]
+[ext_resource type="Texture2D" uid="uid://doycmygklvpau" path="res://src/assets/dice/Dice_5.png" id="4_dvyqb"]
 [ext_resource type="Script" path="res://src/WaveShop/ItemShop.cs" id="4_fjoik"]
+[ext_resource type="Texture2D" uid="uid://cnr7570h14fn3" path="res://src/assets/dice/Dice_1.png" id="4_j577d"]
+[ext_resource type="Texture2D" uid="uid://dunaoqsntqrth" path="res://src/assets/dice/Dice_2.png" id="4_tvl4p"]
+[ext_resource type="Texture2D" uid="uid://chfx7lcfkk0bx" path="res://src/assets/dice/Dice_3.png" id="5_evfsw"]
 [ext_resource type="Texture2D" uid="uid://cxav51bm748yf" path="res://src/assets/ArrowRightGreen.png" id="6_aiqw2"]
+[ext_resource type="Texture2D" uid="uid://ld7x8euadmmu" path="res://src/assets/dice/Dice_4.png" id="6_jyrnu"]
+[ext_resource type="Texture2D" uid="uid://b08t5v6uooogj" path="res://src/assets/dice/Dice_6.png" id="8_skjtv"]
 
 [sub_resource type="Animation" id="Animation_n3ahh"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeShop/VBoxContainer/Control/RerollUpgradesButton:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_dvyqb")]
+}
 
 [sub_resource type="Animation" id="Animation_vkwhp"]
 resource_name = "hide_UpgradeBoxes"
@@ -114,9 +131,27 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_n6bgl"]
+resource_name = "click_RerollUpgradesButton"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeShop/VBoxContainer/Control/RerollUpgradesButton:icon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_dvyqb"), ExtResource("4_tvl4p"), ExtResource("8_skjtv"), ExtResource("6_jyrnu"), ExtResource("4_j577d"), ExtResource("4_dvyqb"), ExtResource("4_tvl4p"), ExtResource("5_evfsw"), ExtResource("4_j577d"), ExtResource("8_skjtv")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vj0nn"]
 _data = {
 "RESET": SubResource("Animation_n3ahh"),
+"click_RerollUpgradesButton": SubResource("Animation_n6bgl"),
 "hide_UpgradeBoxes": SubResource("Animation_vkwhp"),
 "show_UpgradeBoxes": SubResource("Animation_50fx4")
 }
@@ -189,7 +224,7 @@ focus_neighbor_left = NodePath("../UpgradeBox3")
 focus_neighbor_right = NodePath("../UpgradeBox")
 
 [node name="Control" type="Control" parent="UpgradeShop/VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -200,16 +235,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(40, 40)
 focus_mode = 0
 mouse_default_cursor_shape = 2
-icon = ExtResource("4_4n5em")
+icon = ExtResource("4_dvyqb")
 flat = true
 icon_alignment = 1
 expand_icon = true

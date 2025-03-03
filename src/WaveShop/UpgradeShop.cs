@@ -32,7 +32,16 @@ namespace Riftstrike.src.WaveShop
                 upgradeBox.ChooseUpgrade += ChooseUpgradeHandler;
             }
 
-            RerollUpgradesButton.Pressed += () => GetNextUpgrades();
+            RerollUpgradesButton.Pressed += () =>
+            {
+                AnimationPlayer.Stop();
+                AnimationPlayer.Play("click_RerollUpgradesButton");
+            };
+
+            AnimationPlayer.AnimationFinished += anim =>
+            {
+                if (anim == "click_RerollUpgradesButton") GetNextUpgrades();
+            };
         }
 
         public override void _Process(double delta)
