@@ -35,7 +35,7 @@ Rarity = 5
 Texture = ExtResource("6_41m4a")
 
 [sub_resource type="LabelSettings" id="LabelSettings_yflln"]
-font_size = 12
+font_size = 20
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
@@ -130,10 +130,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -48.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kbrbs")
@@ -144,16 +144,16 @@ UpgradeLabel = NodePath("CenterContainer/Control/Label")
 AnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 
 [node name="RarityTextureRect" type="TextureRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 texture = ExtResource("4_ainsd")
 
 [node name="Control" type="Control" parent="CenterContainer"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
 [node name="ChooseUpgradeButton" type="Button" parent="CenterContainer/Control"]
@@ -163,7 +163,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(32, 32)
+pivot_offset = Vector2(64, 64)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
@@ -173,17 +173,17 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Label" type="Label" parent="CenterContainer/Control"]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -48.0
-offset_right = 46.0
-offset_bottom = 48.0
+offset_left = -92.0
+offset_top = -96.0
+offset_right = 92.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "+10%"
