@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3jkjsjw8dxpm"]
+[gd_scene load_steps=18 format=3 uid="uid://c3jkjsjw8dxpm"]
 
 [ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassin.cs" id="1_qxonp"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_8foun"]
@@ -8,7 +8,6 @@
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://src/units/selected_style_box.tres" id="3_d7amh"]
 [ext_resource type="Script" path="res://src/components/PushComponent.cs" id="3_rgmc3"]
 [ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://src/units/hovering_style_box.tres" id="4_03xrw"]
-[ext_resource type="Script" path="res://src/components/LevelComponent.cs" id="4_c2ekv"]
 [ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://src/assets/ShockTrooper.png" id="5_l1px6"]
 [ext_resource type="Script" path="res://src/components/HealthComponent.cs" id="10_8voh0"]
 [ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://src/components/health_bar.tscn" id="11_huejp"]
@@ -35,9 +34,6 @@ size = Vector2(150, 50)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f4d6g"]
 radius = 50.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_v8kwl"]
-radius = 500.0
 
 [node name="RiftAssassin" type="Node2D"]
 script = ExtResource("1_qxonp")
@@ -68,13 +64,6 @@ script = ExtResource("3_rgmc3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PushComponent"]
 shape = SubResource("CircleShape2D_f4d6g")
-
-[node name="LevelComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
-script = ExtResource("4_c2ekv")
-unit = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelComponent"]
-shape = SubResource("CircleShape2D_v8kwl")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

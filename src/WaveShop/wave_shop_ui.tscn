@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://byjv7jtoirsp3"]
+[gd_scene load_steps=20 format=3 uid="uid://byjv7jtoirsp3"]
 
 [ext_resource type="Script" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
+[ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_c1im7"]
 [ext_resource type="Script" path="res://src/WaveShop/UpgradeShop.cs" id="2_u35hc"]
 [ext_resource type="PackedScene" uid="uid://bevjk7bpcj3jl" path="res://src/WaveShop/upgrade_box.tscn" id="3_n2kgm"]
 [ext_resource type="Texture2D" uid="uid://doycmygklvpau" path="res://src/assets/dice/Dice_5.png" id="4_dvyqb"]
@@ -11,13 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://cxav51bm748yf" path="res://src/assets/ArrowRightGreen.png" id="6_aiqw2"]
 [ext_resource type="Texture2D" uid="uid://ld7x8euadmmu" path="res://src/assets/dice/Dice_4.png" id="6_jyrnu"]
 [ext_resource type="Texture2D" uid="uid://b08t5v6uooogj" path="res://src/assets/dice/Dice_6.png" id="8_skjtv"]
+[ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="11_61kk1"]
 
 [sub_resource type="Animation" id="Animation_n3ahh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UpgradeShop/VBoxContainer/Control/RerollUpgradesButton:icon")
+tracks/0/path = NodePath("UpgradeShop/VBoxContainer/HBoxContainer/Control/RerollUpgradesButton:icon")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -34,7 +36,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UpgradeShop/VBoxContainer/Control/RerollUpgradesButton:icon")
+tracks/0/path = NodePath("UpgradeShop/VBoxContainer/HBoxContainer/Control/RerollUpgradesButton:icon")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -156,6 +158,11 @@ _data = {
 "show_UpgradeBoxes": SubResource("Animation_50fx4")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_okpg4"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [node name="WaveShopUI" type="Control" node_paths=PackedStringArray("UpgradeShop", "ItemShop")]
 layout_mode = 3
 anchors_preset = 15
@@ -168,7 +175,10 @@ UpgradeShop = NodePath("UpgradeShop")
 ItemShop = NodePath("ItemShop")
 metadata/_edit_use_anchors_ = true
 
-[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer")]
+[node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
+layout_mode = 0
+
+[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,8 +187,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u35hc")
 UpgradeBoxes = [NodePath("VBoxContainer/UpgradesContainer/UpgradeBox"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox2"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox3"), NodePath("VBoxContainer/UpgradesContainer/UpgradeBox4")]
-RerollUpgradesButton = NodePath("VBoxContainer/Control/RerollUpgradesButton")
+RerollUpgradesButton = NodePath("VBoxContainer/HBoxContainer/Control/RerollUpgradesButton")
 AnimationPlayer = NodePath("AnimationPlayer")
+RerollCostsLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/RerollCostsLabel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeShop"]
 root_node = NodePath("../..")
@@ -223,22 +234,26 @@ layout_mode = 2
 focus_neighbor_left = NodePath("../UpgradeBox3")
 focus_neighbor_right = NodePath("../UpgradeBox")
 
-[node name="Control" type="Control" parent="UpgradeShop/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeShop/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
+alignment = 1
 
-[node name="RerollUpgradesButton" type="Button" parent="UpgradeShop/VBoxContainer/Control"]
+[node name="Control" type="Control" parent="UpgradeShop/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="RerollUpgradesButton" type="Button" parent="UpgradeShop/VBoxContainer/HBoxContainer/Control"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(40, 40)
@@ -248,6 +263,25 @@ icon = ExtResource("4_dvyqb")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeShop/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RerollCostsLabel" type="Label" parent="UpgradeShop/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "$REROLL_COSTS"
+label_settings = SubResource("LabelSettings_okpg4")
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeShop/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("11_61kk1")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="ItemShop" type="CenterContainer" parent="." node_paths=PackedStringArray("NextWaveButton")]
 visible = false

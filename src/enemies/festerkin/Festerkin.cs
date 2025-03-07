@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using Riftstrike.components;
+using Riftstrike.src.units;
 
 namespace Riftstrike.enemies
 {
@@ -58,14 +59,21 @@ namespace Riftstrike.enemies
 			HealthComponent.Death += HandleDeath;
 		}
 
-		private void HandleHit(double damage)
+		private UnitData lastAttacker;
+
+		private void HandleHit(double damage, Variant attacker)
 		{
 			// NOTE: Apply damage modifiers here
 			HealthComponent.Damage(damage);
+			lastAttacker = attacker.As<UnitData>();
 		}
 
 		private void HandleDeath()
 		{
+			if (lastAttacker != null)
+			{
+				lastAttacker.Experience += ExperienceReward;
+			}
 			QueueFree();
 		}
 
@@ -93,7 +101,7 @@ namespace Riftstrike.enemies
 			var hitboxes = HitboxComponent.OverlappingHitboxes;
 			if (hitboxes.Any() && AttackTimer.IsStopped())
 			{
-				hitboxes.First().Damage(attackDamage);
+				hitboxes.First().Damage(attackDamage, this);
 				AttackTimer.Start();
 			}
 		}

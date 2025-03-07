@@ -19,10 +19,15 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private AnimationPlayer AnimationPlayer;
 
+        [Export]
+        private Label RerollCostsLabel;
+
         [Signal]
         public delegate void AllUpgradesPurchasedEventHandler();
 
 #nullable enable
+
+        private ulong NextRerollCosts = 1;
 
         public override void _Ready()
         {
@@ -34,6 +39,11 @@ namespace Riftstrike.src.WaveShop
 
             RerollUpgradesButton.Pressed += () =>
             {
+                if (GlobalState.RiftShards < NextRerollCosts) return;
+                GlobalState.RiftShards -= NextRerollCosts;
+
+                NextRerollCosts += 1;
+
                 AnimationPlayer.Stop();
                 AnimationPlayer.Play("click_RerollUpgradesButton");
             };
@@ -48,6 +58,7 @@ namespace Riftstrike.src.WaveShop
         {
             base._Process(delta);
             ButtonScaleTweenHover(RerollUpgradesButton, 1.2F, 0.2, 0.1);
+            RerollCostsLabel.Text = $"{NextRerollCosts}";
         }
 
         private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)

@@ -15,8 +15,8 @@ namespace Riftstrike.src
         }
 
         [Export]
-        private double riftShards = 0;
-        public static double RiftShards
+        private ulong riftShards = 0;
+        public static ulong RiftShards
         {
             get => Instance.riftShards;
             set => Instance.riftShards = value;

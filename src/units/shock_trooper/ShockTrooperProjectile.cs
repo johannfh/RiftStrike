@@ -19,6 +19,8 @@ namespace Riftstrike.src.units
 		public double Damage;
 		public double Range;
 
+		public UnitData UnitData;
+
 		private HitboxComponent lastCollision = null;
 		private AnimatedSprite2D AnimatedSprite
 			=> GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -51,7 +53,7 @@ namespace Riftstrike.src.units
 			if (overlappingHitboxes.Any())
 			{
 				var target = overlappingHitboxes.First();
-				target.Damage(Damage);
+				target.Damage(Damage, UnitData);
 				lastCollision = target;
 				distanceTravelled = 0;
 				RemainingHits--;

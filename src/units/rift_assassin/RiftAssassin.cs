@@ -70,7 +70,7 @@ namespace Riftstrike.src.units
             UpdateStats();
         }
 
-        private void HandleHit(double damage)
+        private void HandleHit(double damage, Variant attacker)
         {
             // NOTE: Damage absorbtion goes here
             HealthComponent.Damage(damage);

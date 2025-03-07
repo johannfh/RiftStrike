@@ -1,5 +1,7 @@
+using System;
 using Godot;
 using Riftstrike.src;
+using Riftstrike.src.RiftShard;
 
 namespace Riftstrike.enemies
 {
@@ -9,23 +11,32 @@ namespace Riftstrike.enemies
         [Export(PropertyHint.None, "suffix:xp")]
         public double ExperienceReward = 10;
 
-        [Export(PropertyHint.None, "suffix:rs")]
-        public double RiftShardReward = 1;
+        [Export(PropertyHint.None)]
+        public ulong RiftShardReward = 1;
+
+        static readonly RandomNumberGenerator rng = new();
 
         public override void _Ready()
         {
             base._Ready();
+            rng.Randomize();
             EnemyManager.Instance.enemies.Add(this);
         }
 
+        const float RANDOM_DROP_OFFSET = 50;
+
         public new void QueueFree()
         {
-            var experience = GD.Load<PackedScene>("res://src/experience.tscn")
-                .Instantiate<Experience>();
-            experience.Value = ExperienceReward;
-            experience.GlobalPosition = GlobalPosition;
-            AddSibling(experience);
-            GlobalState.RiftShards += RiftShardReward;
+            // drop rift shard
+            var riftShard = GD.Load<PackedScene>("res://src/RiftShard/rift_shard.tscn")
+                .Instantiate<RiftShard>();
+            riftShard.GlobalPosition = GlobalPosition + new Vector2(
+                rng.RandfRange(-RANDOM_DROP_OFFSET, RANDOM_DROP_OFFSET),
+                rng.RandfRange(-RANDOM_DROP_OFFSET, RANDOM_DROP_OFFSET)
+            );
+            riftShard.Reward = RiftShardReward;
+            AddSibling(riftShard);
+
             base.QueueFree();
         }
 

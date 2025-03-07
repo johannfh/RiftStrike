@@ -200,6 +200,7 @@ cycle_unit_types={
 2d_navigation/layer_2="Enemies"
 2d_physics/layer_4="Detection"
 2d_physics/layer_9="Experience"
+2d_physics/layer_10="Rift Shards"
 2d_physics/layer_17="Unit Push Collisions"
 2d_physics/layer_18="Enemy Push Collisions"
 2d_physics/layer_25="Selectable"

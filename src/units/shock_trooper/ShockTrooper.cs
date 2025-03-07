@@ -42,7 +42,6 @@ namespace Riftstrike.src.units
         private Panel selectedPanel;
         private Panel hoveringPanel;
         private Timer attackTimer;
-        private LevelComponent levelComponent;
 
         private bool AttackReady = false;
 
@@ -51,7 +50,6 @@ namespace Riftstrike.src.units
             selectedPanel = GetNode<Panel>("SelectedPanel");
             hoveringPanel = GetNode<Panel>("HoveringPanel");
             attackTimer = GetNode<Timer>("AttackTimer");
-            levelComponent = GetNode<LevelComponent>("LevelComponent");
         }
 
         public override void _Ready()
@@ -80,7 +78,7 @@ namespace Riftstrike.src.units
             );
         }
 
-        private void HandleHit(double damage)
+        private void HandleHit(double damage, Variant attacker)
         {
             // NOTE: Damage absorbtion goes here
             HealthComponent.Damage(damage);
@@ -169,6 +167,7 @@ namespace Riftstrike.src.units
             bullet.Velocity = bulletVelocity;
             bullet.Damage = bulletDamage;
             bullet.Range = bulletRange;
+            bullet.UnitData = Data;
 
             // spawn in tree
             AddSibling(bullet);

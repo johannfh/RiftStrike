@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://tneid4vp0caj"]
+[gd_scene load_steps=4 format=3 uid="uid://tneid4vp0caj"]
 
 [ext_resource type="Script" path="res://src/GameUI.cs" id="1_fqu6f"]
+[ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_ucs57"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wn3co"]
-font_size = 32
+font_size = 48
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -27,15 +28,8 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="GlobalStatsDisplay" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_ucs57")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="RiftShardsLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "RiftShards: 10"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckuy380lqlri4"]
+
+[ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="1_ch18j"]
+[ext_resource type="Script" path="res://src/GlobalStatsDisplay.cs" id="1_wwl74"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gb0gn"]
+font_size = 32
+
+[node name="GlobalStatsDisplay" type="VBoxContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_wwl74")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_ch18j")
+
+[node name="RiftShardsLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$RIFT_SHARDS"
+label_settings = SubResource("LabelSettings_gb0gn")
