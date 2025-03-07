@@ -39,14 +39,13 @@ namespace Riftstrike.src.WaveShop
 
             RerollUpgradesButton.Pressed += () =>
             {
-                var isUpgradePoolEmpty = !GlobalState.UnitData.Any(u => u.RemainingLevelups.Any());
-                var isAnimationPlaying = AnimationPlayer.CurrentAnimation == "click_RerollUpgradesButton";
-                var hasSufficientShards = GlobalState.RiftShards >= NextRerollCosts;
+                var insufficientShards = GlobalState.RiftShards < NextRerollCosts;
+                var animationPlaying = AnimationPlayer.CurrentAnimation == "click_RerollUpgradesButton";
+                var upgradeChosen = UpgradeBoxes.Any(u => u.Chosen);
+                var upgradePoolEmpty = !GlobalState.UnitData.Any(u => u.RemainingLevelups.Any());
 
-                if (!hasSufficientShards || isAnimationPlaying || isUpgradePoolEmpty) return;
-
+                if (insufficientShards || animationPlaying || upgradeChosen || upgradePoolEmpty) return;
                 GlobalState.RiftShards -= NextRerollCosts;
-
                 NextRerollCosts += 1;
 
                 AnimationPlayer.Stop();

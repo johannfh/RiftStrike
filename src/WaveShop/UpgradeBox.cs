@@ -30,6 +30,11 @@ namespace Riftstrike.src.WaveShop
 
         private Upgrade? upgrade;
 
+        public bool Chosen
+        {
+            get => AnimationPlayer.CurrentAnimation == "click_ChooseUpgradeButton";
+        }
+
         [Export]
         public Upgrade? Upgrade
         {
