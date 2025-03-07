@@ -39,7 +39,7 @@ namespace Riftstrike.src.WaveShop
 
             RerollUpgradesButton.Pressed += () =>
             {
-                if (GlobalState.RiftShards < NextRerollCosts) return;
+                if (GlobalState.RiftShards < NextRerollCosts || AnimationPlayer.CurrentAnimation == "click_RerollUpgradesButton") return;
                 GlobalState.RiftShards -= NextRerollCosts;
 
                 NextRerollCosts += 1;
