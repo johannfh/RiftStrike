@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b37bdaunpavbi"]
 
 [ext_resource type="Script" path="res://src/TitleScreenUI.cs" id="1_6clsk"]
-[ext_resource type="Texture2D" uid="uid://b2asucpphtpow" path="res://src/assets/PlayGameIcon.png" id="2_u6sbs"]
+[ext_resource type="Texture2D" uid="uid://dl7dpsv2j7uo0" path="res://src/assets/PlayIcon.png" id="2_j502q"]
 
 [node name="TitleScreenUI" type="Control" node_paths=PackedStringArray("PlayButton")]
 layout_mode = 3
@@ -48,7 +48,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_mode = 0
 mouse_default_cursor_shape = 2
-icon = ExtResource("2_u6sbs")
+icon = ExtResource("2_j502q")
 flat = true
 expand_icon = true
 

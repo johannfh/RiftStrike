@@ -19,5 +19,9 @@ namespace Riftstrike.src
         private static PackedScene? waveShopScene;
         public static PackedScene WaveShopScene
             => waveShopScene ??= GD.Load<PackedScene>("res://src/WaveShop/wave_shop.tscn");
+
+        private static PackedScene? gameSetupScene;
+        public static PackedScene GameSetupScene
+            => gameSetupScene ??= GD.Load<PackedScene>("res://src/GameSetup/game_setup.tscn");
     }
 }

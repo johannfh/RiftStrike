@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://d1nebduqf7mf2"]
+
+[ext_resource type="Texture2D" uid="uid://ddfvvqprlm0s7" path="res://src/assets/ShockTrooperIcon.png" id="1_1g73p"]
+[ext_resource type="Script" path="res://src/units/UnitData.cs" id="2_wsbvn"]
+
+[resource]
+script = ExtResource("2_wsbvn")
+Type = 0
+Icon = ExtResource("1_1g73p")
+Upgrades = []

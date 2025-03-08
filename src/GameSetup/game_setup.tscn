@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgh8gos5isflh"]
+
+[ext_resource type="PackedScene" uid="uid://cutt816bwo4ar" path="res://src/GameSetup/game_setup_ui.tscn" id="1_0cmrg"]
+
+[node name="GameSetup" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameSetupUI" parent="CanvasLayer" instance=ExtResource("1_0cmrg")]

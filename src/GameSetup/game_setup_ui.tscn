@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cutt816bwo4ar"]
+
+[ext_resource type="Script" path="res://src/GameSetup/GameSetupUI.cs" id="1_pxduv"]
+[ext_resource type="Resource" uid="uid://d1nebduqf7mf2" path="res://src/UnitData/shock_trooper.tres" id="2_27mko"]
+[ext_resource type="Resource" uid="uid://buwcxq0qnw73f" path="res://src/UnitData/shock_trooper_test.tres" id="3_2k5iv"]
+[ext_resource type="Texture2D" uid="uid://b2asucpphtpow" path="res://src/assets/PlayGameIcon.png" id="3_kvr5e"]
+
+[node name="GameSetupUI" type="Control" node_paths=PackedStringArray("UnitSelectionBoxesContainer", "FightButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxduv")
+UnitData = [ExtResource("2_27mko"), ExtResource("2_27mko"), ExtResource("3_2k5iv"), ExtResource("2_27mko")]
+UnitSelectionBoxesContainer = NodePath("UnitSelectionMenu/ScrollContainer/UnitSelectionBoxContainer")
+FightButton = NodePath("UnitSelectionMenu/Control/FightButton")
+
+[node name="UnitSelectionMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UnitSelectionMenu"]
+custom_minimum_size = Vector2(256, 300)
+layout_mode = 2
+
+[node name="UnitSelectionBoxContainer" type="HBoxContainer" parent="UnitSelectionMenu/ScrollContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Control" type="Control" parent="UnitSelectionMenu"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="FightButton" type="Button" parent="UnitSelectionMenu/Control"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("3_kvr5e")
+flat = true
+expand_icon = true

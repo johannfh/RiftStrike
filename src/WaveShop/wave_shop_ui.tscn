@@ -178,7 +178,7 @@ metadata/_edit_use_anchors_ = true
 [node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
 layout_mode = 0
 
-[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel")]
+[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,6 +190,19 @@ UpgradeBoxes = [NodePath("VBoxContainer/UpgradesContainer/UpgradeBox"), NodePath
 RerollUpgradesButton = NodePath("VBoxContainer/HBoxContainer/Control/RerollUpgradesButton")
 AnimationPlayer = NodePath("AnimationPlayer")
 RerollCostsLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/RerollCostsLabel")
+CurrentUnitIconTextureRect = NodePath("Control/CurrentUnitIcon")
+
+[node name="Control" type="Control" parent="UpgradeShop"]
+layout_mode = 2
+
+[node name="CurrentUnitIcon" type="TextureRect" parent="UpgradeShop/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeShop"]
 root_node = NodePath("../..")

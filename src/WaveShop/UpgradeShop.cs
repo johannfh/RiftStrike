@@ -22,6 +22,9 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private Label RerollCostsLabel;
 
+        [Export]
+        private TextureRect CurrentUnitIconTextureRect;
+
         [Signal]
         public delegate void AllUpgradesPurchasedEventHandler();
 
@@ -121,6 +124,7 @@ namespace Riftstrike.src.WaveShop
             hadUpgrades = true;
 
             currentUnitData = unitsWithLevelups.First();
+            CurrentUnitIconTextureRect.Texture = currentUnitData.Icon;
 
             GD.Print($"Levelups: {currentUnitData.RemainingLevelups.Count}");
 

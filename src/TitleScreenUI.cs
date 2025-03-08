@@ -17,15 +17,7 @@ namespace Riftstrike
 
             PlayButton.Pressed += () =>
             {
-                GlobalState.Wave = 1;
-                GlobalState.RiftShards = 0;
-                GlobalState.UnitData.Clear();
-                GlobalState.UnitData.AddRange(new List<UnitData>(){
-                    new() { Type = UnitType.ShockTrooper },
-                    new() { Type = UnitType.ShockTrooper },
-                    // new() { Type = UnitType.RiftAssassin },
-                });
-                GetTree().ChangeSceneToPacked(SceneLoader.GameScene);
+                GetTree().ChangeSceneToPacked(SceneLoader.GameSetupScene);
             };
         }
 

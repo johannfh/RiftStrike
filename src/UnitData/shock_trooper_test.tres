@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://buwcxq0qnw73f"]
+
+[ext_resource type="Texture2D" uid="uid://djp7w5i8d176" path="res://src/assets/random-icon.png" id="1_h8mht"]
+[ext_resource type="Script" path="res://src/units/UnitData.cs" id="2_pyfbv"]
+
+[resource]
+script = ExtResource("2_pyfbv")
+Type = 0
+Icon = ExtResource("1_h8mht")
+Upgrades = []
