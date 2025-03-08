@@ -12,6 +12,9 @@ namespace Riftstrike.src.units
         public UnitType Type;
 
         [Export]
+        public Texture2D Icon;
+
+        [Export]
         public Array<Upgrade> Upgrades = new();
 
         public ulong Level { get; private set; } = 1;
