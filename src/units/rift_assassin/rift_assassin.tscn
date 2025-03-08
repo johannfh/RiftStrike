@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassin.cs" id="1_qxonp"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_8foun"]
-[ext_resource type="Script" path="res://src/components/Stats.cs" id="2_c3rlj"]
+[ext_resource type="Script" path="res://src/units/Stats.cs" id="2_c3rlj"]
 [ext_resource type="Script" path="res://src/units/UnitData.cs" id="2_rvl2u"]
 [ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_c6sin"]
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://src/units/selected_style_box.tres" id="3_d7amh"]

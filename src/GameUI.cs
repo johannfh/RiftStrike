@@ -11,7 +11,7 @@ namespace Riftstrike.src
         public override void _Process(double delta)
         {
             base._Process(delta);
-            var secondsLeft = (int)Math.Round(WaveEndTimer.TimeLeft);
+            var secondsLeft = (int)Math.Ceiling(WaveEndTimer.TimeLeft);
             GetNode<Label>("%WaveDurationLabel").Text = $"{secondsLeft}";
         }
     }

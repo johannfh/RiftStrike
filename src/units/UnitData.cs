@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Godot.Collections;
+using Riftstrike.components;
 using Riftstrike.upgrades;
 
 namespace Riftstrike.src.units
@@ -16,6 +17,9 @@ namespace Riftstrike.src.units
 
         [Export]
         public Array<Upgrade> Upgrades = new();
+
+        [Export]
+        public Stats BaseStats { get; private set; } = new();
 
         public ulong Level { get; private set; } = 1;
 

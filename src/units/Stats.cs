@@ -1,7 +1,6 @@
-
 using Godot;
 
-namespace Riftstrike.components
+namespace Riftstrike.src.units
 {
     [GlobalClass]
     public partial class Stats : Resource

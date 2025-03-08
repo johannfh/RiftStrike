@@ -60,7 +60,7 @@ namespace Riftstrike.src.WaveShop
         public override void _Process(double delta)
         {
             base._Process(delta);
-            ButtonScaleTweenHover(ChooseUpgradeButton, 1.5F, 0.3, 0.1);
+            ButtonScaleTweenHover(ChooseUpgradeButton, 1.3F, 0.3, 0.1);
         }
 
         private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)

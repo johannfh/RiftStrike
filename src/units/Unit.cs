@@ -15,19 +15,17 @@ namespace Riftstrike.src.units
         [Export]
         public UnitData Data = new();
 
-        [Export]
-        public Stats BaseStats { get; private set; } = new();
-        public Stats TargetStats { get; set; } = new();
+        public Stats CurrentStats { get; set; } = new();
 
         [Export(PropertyHint.None, "suffix:pixels")]
         public double SafeDistance = 300;
 
         public void UpdateStats()
         {
-            TargetStats.SetValuesTo(BaseStats);
+            CurrentStats.SetValuesTo(Data.BaseStats);
             foreach (var upgrade in Data.Upgrades)
             {
-                upgrade.Apply(TargetStats);
+                upgrade.Apply(CurrentStats);
             }
             EmitSignal(SignalName.StatsRecalculated);
         }

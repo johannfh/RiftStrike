@@ -84,7 +84,7 @@ namespace Riftstrike.src.units
 
         private void HandleStatsRecalculated()
         {
-            HealthComponent.MaxHealth = TargetStats.Health;
+            HealthComponent.MaxHealth = CurrentStats.Health;
         }
 
         public override void _Process(double delta)

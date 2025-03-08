@@ -73,8 +73,8 @@ namespace Riftstrike.src.units
         private void HandleRegen()
         {
             HealthComponent.Health = Mathf.Min(
-                HealthComponent.Health + TargetStats.Regeneration * RegenerationTimer.WaitTime,
-                TargetStats.Health
+                HealthComponent.Health + CurrentStats.Regeneration * RegenerationTimer.WaitTime,
+                CurrentStats.Health
             );
         }
 
@@ -86,7 +86,7 @@ namespace Riftstrike.src.units
 
         private void HandleStatsRecalculated()
         {
-            HealthComponent.MaxHealth = TargetStats.Health;
+            HealthComponent.MaxHealth = CurrentStats.Health;
         }
 
         public override void _Process(double delta)
@@ -141,7 +141,7 @@ namespace Riftstrike.src.units
 
         private bool IsInRange(Vector2 position)
         {
-            return GlobalPosition.DistanceTo(position) < TargetStats.Range;
+            return GlobalPosition.DistanceTo(position) < CurrentStats.Range;
         }
 
         private void ShootTowards(Node2D node2D)
@@ -155,10 +155,10 @@ namespace Riftstrike.src.units
             var bulletPos = GlobalPosition;
             var bulletDir = GlobalPosition.DirectionTo(target);
             var bulletVelocity = bulletDir * projectileSpeed;
-            var bulletRange = TargetStats.Range * 2;
+            var bulletRange = CurrentStats.Range * 2;
 
             // NOTE: apply damage modifiers here
-            var bulletDamage = projectileBaseDamage * (TargetStats.Damage / 100);
+            var bulletDamage = projectileBaseDamage * (CurrentStats.Damage / 100);
 
 
             // instantiate bullet

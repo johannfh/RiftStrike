@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dsq6u6jv05si4"]
+[gd_scene load_steps=17 format=3 uid="uid://dsq6u6jv05si4"]
 
 [ext_resource type="Script" path="res://src/units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
 [ext_resource type="Resource" uid="uid://d1nebduqf7mf2" path="res://src/UnitData/shock_trooper.tres" id="2_8wpj4"]
-[ext_resource type="Script" path="res://src/components/Stats.cs" id="2_fqsu5"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_wqyfo"]
 [ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_piex0"]
 [ext_resource type="Script" path="res://src/components/PushComponent.cs" id="4_4m88o"]
@@ -13,14 +12,6 @@
 [ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://src/units/hovering_style_box.tres" id="7_gqle7"]
 [ext_resource type="Script" path="res://src/components/HealthComponent.cs" id="10_7vpsq"]
 [ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://src/components/health_bar.tscn" id="12_7ipeg"]
-
-[sub_resource type="Resource" id="Resource_4qjox"]
-script = ExtResource("2_fqsu5")
-Health = 50.0
-Regeneration = 0.0
-RiftEnergy = 0.0
-Damage = 100.0
-Range = 500.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngchn"]
 size = Vector2(150, 50)
@@ -41,7 +32,6 @@ speed = 400.0
 projectileSpeed = 500.0
 projectileBaseDamage = 20.0
 Data = ExtResource("2_8wpj4")
-BaseStats = SubResource("Resource_4qjox")
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 collision_layer = 16777216
