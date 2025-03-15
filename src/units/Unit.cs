@@ -64,7 +64,6 @@ namespace Riftstrike.src.units
 
                 // check if in range of prior position
                 var lastPos = i == 0 ? position : result[i - 1].GlobalPosition;
-                Debug.Print($"Distance: {closest.GlobalPosition.DistanceTo(lastPos)}, Remaining shots: {count - i - 1}");
                 if (closest.GlobalPosition.DistanceTo(lastPos) > range) break;
 
                 result.Add(closest);
