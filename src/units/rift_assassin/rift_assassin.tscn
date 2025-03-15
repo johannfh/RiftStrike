@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3jkjsjw8dxpm"]
+[gd_scene load_steps=16 format=3 uid="uid://c3jkjsjw8dxpm"]
 
 [ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassin.cs" id="1_qxonp"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_8foun"]
-[ext_resource type="Resource" uid="uid://dul04wsxj83j2" path="res://src/UnitData/rift_assassin.tres" id="2_wquyi"]
 [ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_c6sin"]
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://src/units/selected_style_box.tres" id="3_d7amh"]
 [ext_resource type="Script" path="res://src/components/PushComponent.cs" id="3_rgmc3"]
@@ -32,7 +31,6 @@ pushSpeed = 50.0
 baseAttackRange = 1000.0
 AttackTimer = NodePath("AttackTimer")
 projectileBaseDamage = 40.0
-Data = ExtResource("2_wquyi")
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 collision_layer = 16777216

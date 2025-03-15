@@ -1,5 +1,4 @@
 using Godot;
-using Riftstrike.src.units;
 
 namespace Riftstrike.src.GameSetup
 {

@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Godot;
 using Riftstrike.src;
-using Riftstrike.src.units;
 
 namespace Riftstrike
 {

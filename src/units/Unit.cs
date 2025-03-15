@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Riftstrike.components;
 using Riftstrike.enemies;
 
 namespace Riftstrike.src.units
@@ -12,8 +11,7 @@ namespace Riftstrike.src.units
         [Signal]
         public delegate void StatsRecalculatedEventHandler();
 
-        [Export]
-        public UnitData Data = new();
+        public UnitData Data;
 
         public Stats CurrentStats { get; set; } = new();
 

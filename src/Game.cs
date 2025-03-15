@@ -4,7 +4,6 @@ using System.Linq;
 using Godot;
 using Riftstrike.enemies;
 using Riftstrike.src;
-using Riftstrike.src.units;
 
 namespace Riftstrike
 {
@@ -127,14 +126,11 @@ namespace Riftstrike
         }
 
         private void SpawnUnits()
-        {
-            foreach (var entry in GlobalState.UnitData)
-            {
-                var unit = entry.Type.Instantiate();
-                unit.Data = entry;
-                Map.AddChild(unit);
-            }
-        }
+            => GlobalState.UnitData
+                // instantiate units from data
+                .Select(d => d.InstantiateUnit())
+                // spawn units
+                .ForEach(u => Map.AddChild(u));
 
         private void EndWave()
         {

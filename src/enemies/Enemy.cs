@@ -1,6 +1,4 @@
-using System;
 using Godot;
-using Riftstrike.src;
 using Riftstrike.src.RiftShard;
 
 namespace Riftstrike.enemies

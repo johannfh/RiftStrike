@@ -1,6 +1,5 @@
 using Godot;
 using Riftstrike.components;
-using Riftstrike.upgrades;
 using System.Collections.Generic;
 using System.Linq;
 

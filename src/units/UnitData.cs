@@ -1,7 +1,5 @@
-using System;
 using Godot;
 using Godot.Collections;
-using Riftstrike.components;
 using Riftstrike.upgrades;
 
 namespace Riftstrike.src.units
@@ -10,7 +8,7 @@ namespace Riftstrike.src.units
     public partial class UnitData : Resource
     {
         [Export]
-        public UnitType Type;
+        public PackedScene Scene;
 
         [Export]
         public Texture2D Icon;
@@ -47,44 +45,10 @@ namespace Riftstrike.src.units
             return (10 * Mathf.Pow(level, 2)) + (5 * level);
         }
 
-        /// <summary>
-        /// A mapping between every existing <see cref="Unit"/> implementation
-        /// and the corresponding <see cref="UnitType"/>.
-        /// </summary>
-        private static readonly System.Collections.Generic.Dictionary<Type, UnitType> UnitTypeMap = new()
+        public Unit InstantiateUnit()
         {
-            { typeof(RiftAssassin), UnitType.RiftAssassin },
-            { typeof(ShockTrooper), UnitType.ShockTrooper },
-        };
-
-        public UnitData() { }
-
-        public UnitData(Unit unit)
-        {
-            if (!UnitTypeMap.TryGetValue(unit.GetType(), out UnitType unitType))
-            {
-                throw new ArgumentOutOfRangeException(nameof(unit), unit, "Unknown unit type");
-            }
-            Type = unitType;
-        }
-    }
-
-    public enum UnitType
-    {
-        ShockTrooper,
-        RiftAssassin,
-    }
-
-    public static class UnitTypeExtensions
-    {
-        public static Unit Instantiate(this UnitType unitType)
-        {
-            Unit unit = unitType switch
-            {
-                UnitType.ShockTrooper => UnitFactory.CreateShockTrooper(),
-                UnitType.RiftAssassin => UnitFactory.CreateRiftAssassin(),
-                _ => throw new ArgumentOutOfRangeException(nameof(unitType), unitType, "Unhandled unit type"),
-            };
+            var unit = Scene.Instantiate<Unit>();
+            unit.Data = this;
             return unit;
         }
     }

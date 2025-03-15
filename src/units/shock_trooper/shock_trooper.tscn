@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://dsq6u6jv05si4"]
+[gd_scene load_steps=16 format=3 uid="uid://dsq6u6jv05si4"]
 
 [ext_resource type="Script" path="res://src/units/shock_trooper/ShockTrooper.cs" id="1_uintk"]
-[ext_resource type="Resource" uid="uid://d1nebduqf7mf2" path="res://src/UnitData/shock_trooper.tres" id="2_8wpj4"]
 [ext_resource type="Script" path="res://src/components/SelectableComponent.cs" id="2_wqyfo"]
 [ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_piex0"]
 [ext_resource type="Script" path="res://src/components/PushComponent.cs" id="4_4m88o"]
@@ -31,7 +30,6 @@ script = ExtResource("1_uintk")
 speed = 400.0
 projectileSpeed = 500.0
 projectileBaseDamage = 20.0
-Data = ExtResource("2_8wpj4")
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
 collision_layer = 16777216

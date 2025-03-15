@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Godot;
 using Riftstrike.components;
@@ -71,9 +70,10 @@ namespace Riftstrike.enemies
 
 		public void Hit(double damage, UnitData attacker)
 		{
+			lastAttacker = attacker;
+
 			// NOTE: Apply damage modifiers here
 			HealthComponent.Damage(damage);
-			lastAttacker = attacker;
 		}
 
 		private void HandleDeath()
