@@ -21,6 +21,9 @@ namespace Riftstrike.src.units
         [Export(PropertyHint.Range, "0,100,1,or_greater,suffix:pixels")]
         public float Range = 500;
 
+        [Export]
+        public int ProjectileBounces = 0;
+
         public void SetValuesTo(Stats stats)
         {
             Health = stats.Health;
@@ -28,6 +31,7 @@ namespace Riftstrike.src.units
             RiftEnergy = stats.RiftEnergy;
             Damage = stats.Damage;
             Range = stats.Range;
+            ProjectileBounces = stats.ProjectileBounces;
         }
     }
 }

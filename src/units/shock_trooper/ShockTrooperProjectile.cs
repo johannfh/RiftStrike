@@ -6,13 +6,11 @@ namespace Riftstrike.src.units
 {
 	public partial class ShockTrooperProjectile : Area2D
 	{
+		public const string SCENE_PATH = "res://src/units/shock_trooper/shock_trooper_projectile.tscn";
+
 		public static ShockTrooperProjectile New()
-		{
-			return GD.Load<PackedScene>(
-				"res://src/units/shock_trooper/shock_trooper_projectile.tscn"
-				)
-				.Instantiate() as ShockTrooperProjectile;
-		}
+			=> GD.Load<PackedScene>(SCENE_PATH)
+				.Instantiate<ShockTrooperProjectile>();
 
 		public Vector2 Velocity = Vector2.Zero;
 

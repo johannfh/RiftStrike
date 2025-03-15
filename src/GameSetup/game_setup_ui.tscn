@@ -13,7 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pxduv")
-UnitData = [ExtResource("2_27mko"), ExtResource("2_27mko"), ExtResource("3_3t43i")]
+UnitData = [ExtResource("2_27mko"), ExtResource("3_3t43i")]
 UnitSelectionBoxesContainer = NodePath("UnitSelectionMenu/ScrollContainer/UnitSelectionBoxContainer")
 FightButton = NodePath("UnitSelectionMenu/Control/FightButton")
 

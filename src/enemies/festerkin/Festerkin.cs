@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Riftstrike.components;
@@ -6,7 +7,7 @@ using Riftstrike.src.units;
 namespace Riftstrike.enemies
 {
 	[GlobalClass]
-	public partial class Festerkin : Enemy
+	public partial class Festerkin : Enemy, IHitable
 	{
 		[Export]
 		private NavigationAgent2D NavAgent;
@@ -55,25 +56,30 @@ namespace Riftstrike.enemies
 			BlinkTimer.Timeout += () => AnimationPlayer.Play("blink");
 			AnimationPlayer.AnimationFinished += (_) => AnimationPlayer.Play("walk");
 			AttackTimer.WaitTime = attackCooldown;
-			HitboxComponent.Hit += HandleHit;
+			HitboxComponent.Hit += (dmg, attacker) =>
+			{
+				if (attacker.As<GodotObject>() is UnitData unitData)
+				{
+					Debug.Print(unitData.ResourcePath);
+					Hit(dmg, unitData);
+				}
+			};
 			HealthComponent.Death += HandleDeath;
 		}
 
 		private UnitData lastAttacker;
 
-		private void HandleHit(double damage, Variant attacker)
+		public void Hit(double damage, UnitData attacker)
 		{
 			// NOTE: Apply damage modifiers here
 			HealthComponent.Damage(damage);
-			lastAttacker = attacker.As<UnitData>();
+			lastAttacker = attacker;
 		}
 
 		private void HandleDeath()
 		{
-			if (lastAttacker != null)
-			{
-				lastAttacker.Experience += ExperienceReward;
-			}
+			// give last attacker (if any) the experience on death
+			if (lastAttacker != null) lastAttacker.Experience += ExperienceReward;
 			QueueFree();
 		}
 

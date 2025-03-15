@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rmql3iwcalul"]
+
+[ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassinProjectile.cs" id="1_qiyjp"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p2k22"]
+
+[node name="RiftAssassinProjectile" type="Node2D"]
+script = ExtResource("1_qiyjp")
+Speed = 2500.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, 0)
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_p2k22")

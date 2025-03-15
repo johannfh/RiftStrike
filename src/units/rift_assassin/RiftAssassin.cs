@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Riftstrike.components;
+using Riftstrike.enemies;
 
 namespace Riftstrike.src.units
 {
@@ -40,6 +42,12 @@ namespace Riftstrike.src.units
         private HitboxComponent HitboxComponent;
         private HealthComponent HealthComponent;
         #endregion
+
+        [Export]
+        private Timer AttackTimer;
+
+        [Export]
+        private double projectileBaseDamage = 10;
 
         private void AssignNodeReferences()
         {
@@ -115,27 +123,40 @@ namespace Riftstrike.src.units
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, (float)(speed * delta));
             }
             #endregion
+
+            if (AttackTimer.IsStopped()) Attack();
         }
 
         #region Attacks
         public void Attack()
         {
-            var enemies = GlobalPosition.GetNearbyEnemyChain(5, baseAttackRange);
+            // account for possibility of negative ProjectileBounces stat
+            var count = 1 + Math.Max(CurrentStats.ProjectileBounces, 0);
+            Debug.Print($"Target count: {count}");
+            var enemies = GlobalPosition.GetNearbyEnemyChain(count, baseAttackRange);
+
             if (!enemies.Any()) return;
-            var positions = enemies.Select(enemy => enemy.GlobalPosition).ToList();
-            positions.Insert(0, GlobalPosition);
-            ShootBullet(positions);
+            AttackTimer.Start();
+            ShootBullet(enemies);
         }
 
-        public void ShootBullet(IEnumerable<Vector2> positions)
+        public void ShootBullet(IEnumerable<Enemy> enemies)
         {
-            Debug.Assert(positions.Count() >= 2, "There have to be at least 2 positions to shoot.");
-            for (int i = 1; i < positions.Count(); i++)
-            {
-                var from = positions.ElementAt(i - 1);
-                var to = positions.ElementAt(i);
-            }
             // TODO: Spawn bullet that flies by each position
+            var bullet = RiftAssassinProjectile.New();
+            bullet.UnitData = Data;
+
+            bullet.Enemies = enemies.ToList();
+
+            // NOTE: apply damage modifiers here
+            // NOTE: limit to 0 (e.g. if negative damage modifiers from items)
+            // to prevent healing enemies
+            bullet.Damage = Math.Max(projectileBaseDamage * (CurrentStats.Damage / 100), 0);
+
+            bullet.GlobalPosition = GlobalPosition;
+            Debug.Print($"Enemies to shoot: [{string.Join(", ", enemies.Select(e => e.Name))}]");
+
+            AddSibling(bullet);
         }
         #endregion
 

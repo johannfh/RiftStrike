@@ -117,7 +117,7 @@ namespace Riftstrike.src.units
 
             if (AttackReady)
             {
-                var enemies = EnemyManager.Instance.enemies;
+                var enemies = EnemyManager.Enemies;
                 if (enemies.Any())
                 {
                     var closestTarget = enemies

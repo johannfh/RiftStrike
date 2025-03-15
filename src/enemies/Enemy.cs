@@ -20,7 +20,7 @@ namespace Riftstrike.enemies
         {
             base._Ready();
             rng.Randomize();
-            EnemyManager.Instance.enemies.Add(this);
+            EnemyManager.Enemies.Add(this);
         }
 
         const float RANDOM_DROP_OFFSET = 50;
@@ -43,7 +43,7 @@ namespace Riftstrike.enemies
         public override void _ExitTree()
         {
             base._ExitTree();
-            EnemyManager.Instance.enemies.Remove(this);
+            EnemyManager.Enemies.Remove(this);
         }
     }
 }

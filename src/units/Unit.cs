@@ -49,23 +49,26 @@ namespace Riftstrike.src.units
     {
         public static List<Enemy> GetNearbyEnemyChain(this Vector2 position, int count, double range)
         {
-            var result = new List<Enemy>() {
-                new EmptyEnemy {
-                    GlobalPosition = position,
-                },
-            };
-            for (int i = 1; i < count + 1; i++)
+            var result = new List<Enemy>();
+            for (int i = 0; i < count; i++)
             {
-                var prior = result.ElementAt(i - 1);
-                var nearest = prior.GetNearestEnemyTo();
-                if (nearest == null
-                    || prior.GlobalPosition.DistanceTo(nearest.GlobalPosition) > range)
-                {
-                    break;
-                }
-                result.Add(nearest);
+                var enemies = EnemyManager.Enemies
+                    .Where(e => !result.Contains(e));
+
+                if (!enemies.Any()) break;
+
+                // get closest enemy
+                var closest = enemies
+                    .OrderBy((e) => e.GlobalPosition.DistanceTo(position))
+                    .First();
+
+                // check if in range of prior position
+                var lastPos = i == 0 ? position : result[i - 1].GlobalPosition;
+                Debug.Print($"Distance: {closest.GlobalPosition.DistanceTo(lastPos)}, Remaining shots: {count - i - 1}");
+                if (closest.GlobalPosition.DistanceTo(lastPos) > range) break;
+
+                result.Add(closest);
             }
-            result.RemoveAt(0);
             return result;
         }
     }
@@ -74,7 +77,7 @@ namespace Riftstrike.src.units
     {
         public static Enemy GetNearestEnemyTo(this Enemy enemy)
         {
-            var enemies = EnemyManager.Instance.enemies.Where(e => e != enemy);
+            var enemies = EnemyManager.Enemies.Where(e => e != enemy);
             if (!enemies.Any()) return null;
 
             Enemy nearest = null;
