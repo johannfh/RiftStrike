@@ -1,6 +1,6 @@
 # RiftStrike
 
-(A game made for the [Juice gamejam](https://github.com/hackclub/juice) [juice.hackclub.com](https://juice.hackclub.com))
+(A game made for the [Juice gamejam](https://github.com/hackclub/juice); see also: [juice.hackclub.com](https://juice.hackclub.com))
 
 **Team Members:** [@johannfh](https://github/johannfh)
 
