@@ -1,5 +1,4 @@
-
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -17,6 +16,9 @@ namespace Riftstrike.src.units
 
         [Export]
         private double Speed;
+
+        [Export]
+        private bool Debug;
 
         public UnitData UnitData;
 
@@ -48,6 +50,39 @@ namespace Riftstrike.src.units
                 // apply damage if hitable
                 if (first is IHitable hitable) hitable.Hit(Damage, UnitData);
                 Enemies.RemoveAt(0);
+            }
+        }
+
+        public override void _Process(double delta)
+        {
+            base._Process(delta);
+            QueueRedraw();
+        }
+
+        public override void _Draw()
+        {
+            base._Draw();
+            if (Debug) DrawDebugTargetLine();
+        }
+
+        private void DrawDebugTargetLine()
+        {
+            if (Enemies.Count == 0) return;
+            var firstEnemy = Enemies[0];
+            if (IsInstanceValid(firstEnemy))
+                DrawLine(Vector2.Zero, Enemies[0].GlobalPosition - GlobalPosition, Colors.Red);
+
+            if (Enemies.Count < 2) return;
+            for (int i = 1; i < Enemies.Count; i++)
+            {
+                var fromEnemy = Enemies[i - 1];
+                var toEnemy = Enemies[i];
+
+                if (!IsInstanceValid(fromEnemy) || !IsInstanceValid(toEnemy)) continue;
+
+                var from = fromEnemy.GlobalPosition - GlobalPosition;
+                var to = toEnemy.GlobalPosition - GlobalPosition;
+                DrawLine(from, to, Colors.Red);
             }
         }
     }
