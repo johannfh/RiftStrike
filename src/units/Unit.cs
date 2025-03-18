@@ -50,20 +50,25 @@ namespace Riftstrike.src.units
             var result = new List<Enemy>();
             for (int i = 0; i < count; i++)
             {
+                // retrieve enemies not yet in result
                 var enemies = EnemyManager.Enemies
                     .Where(e => !result.Contains(e));
 
+                // if there are no enemies, return current result
                 if (!enemies.Any()) break;
+
+                // get last position
+                var lastPos = i == 0 ? position : result[i - 1].GlobalPosition;
 
                 // get closest enemy
                 var closest = enemies
-                    .OrderBy((e) => e.GlobalPosition.DistanceTo(position))
+                    .OrderBy((e) => e.GlobalPosition.DistanceTo(lastPos))
                     .First();
 
-                // check if in range of prior position
-                var lastPos = i == 0 ? position : result[i - 1].GlobalPosition;
+                // check if in range
                 if (closest.GlobalPosition.DistanceTo(lastPos) > range) break;
 
+                // append to result
                 result.Add(closest);
             }
             return result;
