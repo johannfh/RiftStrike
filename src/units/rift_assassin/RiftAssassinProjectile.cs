@@ -18,6 +18,9 @@ namespace Riftstrike.src.units
         private double Speed;
 
         [Export]
+        private Sprite2D Sprite;
+
+        [Export]
         private bool Debug;
 
         public UnitData UnitData;
@@ -56,8 +59,17 @@ namespace Riftstrike.src.units
         public override void _Process(double delta)
         {
             base._Process(delta);
+            UpdateSpriteRotation();
             QueueRedraw();
         }
+
+        private void UpdateSpriteRotation()
+        {
+            if (!Enemies.Any()) return;
+            var nextTarget = Enemies.First();
+            Sprite.Rotation = GlobalPosition.AngleToPoint(nextTarget.GlobalPosition);
+        }
+
 
         public override void _Draw()
         {
