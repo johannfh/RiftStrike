@@ -132,10 +132,10 @@ namespace Riftstrike.src.units
         {
             // account for possibility of negative ProjectileBounces stat
             var count = 1 + Math.Max(CurrentStats.ProjectileBounces, 0);
-            Debug.Print($"Target count: {count}");
             var enemies = GlobalPosition.GetNearbyEnemyChain(count, baseAttackRange);
 
             if (!enemies.Any()) return;
+            Debug.Print($"Got {enemies.Count}/{count} targets to shoot at");
             AttackTimer.Start();
             ShootBullet(enemies);
         }
