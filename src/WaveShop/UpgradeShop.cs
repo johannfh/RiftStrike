@@ -27,6 +27,9 @@ namespace Riftstrike.src.WaveShop
         [Signal]
         public delegate void AllUpgradesPurchasedEventHandler();
 
+        [Export]
+        private UnitStatsDisplay UnitStatsDisplay;
+
 #nullable enable
 
         private ulong NextRerollCosts = 1;
@@ -91,6 +94,28 @@ namespace Riftstrike.src.WaveShop
 
 
         private UnitData? currentUnitData;
+        private UnitData? CurrentUnitData
+        {
+            get => currentUnitData;
+            set
+            {
+                currentUnitData = value;
+                if (value == null)
+                {
+                    // hide ui elements
+                    UnitStatsDisplay.Hide();
+                    CurrentUnitIconTextureRect.Hide();
+                }
+                else
+                {
+                    // show ui elements
+                    UnitStatsDisplay.Show();
+                    CurrentUnitIconTextureRect.Show();
+
+                    UnitStatsDisplay.Stats = Stats.From(value.BaseStats, value.Upgrades);
+                }
+            }
+        }
 
         private bool hadUpgrades = false;
 
@@ -122,10 +147,10 @@ namespace Riftstrike.src.WaveShop
 
             hadUpgrades = true;
 
-            currentUnitData = unitsWithLevelups.First();
-            CurrentUnitIconTextureRect.Texture = currentUnitData.Icon;
+            CurrentUnitData = unitsWithLevelups.First();
+            CurrentUnitIconTextureRect.Texture = CurrentUnitData.Icon;
 
-            GD.Print($"Levelups: {currentUnitData.RemainingLevelups.Count}");
+            GD.Print($"Levelups: {CurrentUnitData.RemainingLevelups.Count}");
 
             // generate upgrades for levelup
             var upgrades = new List<Upgrade>();
@@ -160,17 +185,17 @@ namespace Riftstrike.src.WaveShop
 
         private void ChooseUpgradeHandler(Upgrade upgrade)
         {
-            if (currentUnitData == null || !currentUnitData.RemainingLevelups.Any()) return;
+            if (CurrentUnitData == null || !CurrentUnitData.RemainingLevelups.Any()) return;
             GD.Print($"Upgrade {upgrade.ResourcePath} chosen");
 
             // apply upgrade
-            currentUnitData.Upgrades.Add(upgrade);
+            CurrentUnitData.Upgrades.Add(upgrade);
 
             // pop levelup from array
-            currentUnitData.RemainingLevelups.RemoveAt(0);
+            CurrentUnitData.RemainingLevelups.RemoveAt(0);
 
             // reset value
-            currentUnitData = null;
+            CurrentUnitData = null;
 
             // get new upgrades
             GetNextUpgrades();

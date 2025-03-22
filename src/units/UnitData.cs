@@ -19,8 +19,10 @@ namespace Riftstrike.src.units
         [Export]
         public Stats BaseStats { get; private set; } = new();
 
+        [Export]
         public ulong Level { get; private set; } = 1;
 
+        [Export]
         public Array<ulong> RemainingLevelups = new();
 
         private double experience;

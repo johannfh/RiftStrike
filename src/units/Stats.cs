@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Godot;
+using Riftstrike.upgrades;
 
 namespace Riftstrike.src.units
 {
@@ -32,6 +34,14 @@ namespace Riftstrike.src.units
             Damage = stats.Damage;
             Range = stats.Range;
             ProjectileBounces = stats.ProjectileBounces;
+        }
+
+        public static Stats From(Stats baseStats, IEnumerable<Upgrade> upgrades)
+        {
+            Stats result = new();
+            result.SetValuesTo(baseStats);
+            upgrades.ForEach(upgrade => upgrade.Apply(result));
+            return result;
         }
     }
 }

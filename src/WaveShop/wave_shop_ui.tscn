@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://byjv7jtoirsp3"]
+[gd_scene load_steps=21 format=3 uid="uid://byjv7jtoirsp3"]
 
 [ext_resource type="Script" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
 [ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_c1im7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/WaveShop/ItemShop.cs" id="4_fjoik"]
 [ext_resource type="Texture2D" uid="uid://cnr7570h14fn3" path="res://src/assets/dice/Dice_1.png" id="4_j577d"]
 [ext_resource type="Texture2D" uid="uid://dunaoqsntqrth" path="res://src/assets/dice/Dice_2.png" id="4_tvl4p"]
+[ext_resource type="PackedScene" uid="uid://blh5lulg8kdkc" path="res://src/unit_stats_display.tscn" id="4_udbws"]
 [ext_resource type="Texture2D" uid="uid://chfx7lcfkk0bx" path="res://src/assets/dice/Dice_3.png" id="5_evfsw"]
 [ext_resource type="Texture2D" uid="uid://cxav51bm748yf" path="res://src/assets/ArrowRightGreen.png" id="6_aiqw2"]
 [ext_resource type="Texture2D" uid="uid://ld7x8euadmmu" path="res://src/assets/dice/Dice_4.png" id="6_jyrnu"]
@@ -178,7 +179,7 @@ metadata/_edit_use_anchors_ = true
 [node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
 layout_mode = 0
 
-[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect")]
+[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect", "UnitStatsDisplay")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -190,19 +191,53 @@ UpgradeBoxes = [NodePath("VBoxContainer/UpgradesContainer/UpgradeBox"), NodePath
 RerollUpgradesButton = NodePath("VBoxContainer/HBoxContainer/Control/RerollUpgradesButton")
 AnimationPlayer = NodePath("AnimationPlayer")
 RerollCostsLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/RerollCostsLabel")
-CurrentUnitIconTextureRect = NodePath("Control/CurrentUnitIcon")
+CurrentUnitIconTextureRect = NodePath("UnitDataDisplay/MarginContainer/VBoxContainer/Control/CurrentUnitIcon")
+UnitStatsDisplay = NodePath("UnitDataDisplay/MarginContainer/VBoxContainer/UnitStatsDisplay")
 
-[node name="Control" type="Control" parent="UpgradeShop"]
+[node name="UnitDataDisplay" type="Control" parent="UpgradeShop"]
 layout_mode = 2
+size_flags_horizontal = 8
 
-[node name="CurrentUnitIcon" type="TextureRect" parent="UpgradeShop/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeShop/UnitDataDisplay"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -128.0
-offset_bottom = 128.0
+anchor_bottom = 1.0
+offset_left = -204.0
 grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop/UnitDataDisplay/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Control" type="Control" parent="UpgradeShop/UnitDataDisplay/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="CurrentUnitIcon" type="TextureRect" parent="UpgradeShop/UnitDataDisplay/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UnitStatsDisplay" parent="UpgradeShop/UnitDataDisplay/MarginContainer/VBoxContainer" instance=ExtResource("4_udbws")]
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeShop"]
 root_node = NodePath("../..")
