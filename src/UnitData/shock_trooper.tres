@@ -20,3 +20,5 @@ Scene = ExtResource("3_oxyv6")
 Icon = ExtResource("1_1g73p")
 Upgrades = []
 BaseStats = SubResource("Resource_i3g6t")
+Level = 1
+RemainingLevelups = []
