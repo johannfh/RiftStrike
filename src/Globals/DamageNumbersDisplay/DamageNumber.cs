@@ -71,6 +71,6 @@ namespace Riftstrike.Src.Globals.DamageNumbersDisplay
             => DamageNumberLabel.LabelSettings.FontColor = FontColor;
 
         private void UpdateDamageNumberText()
-            => DamageNumberLabel.Text = DamageValue.ToString();
+            => DamageNumberLabel.Text = $"{Mathf.Round(DamageValue)}";
     }
 }
