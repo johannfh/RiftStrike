@@ -6,9 +6,9 @@ namespace Riftstrike.src
 {
     public partial class GlobalState : Node
     {
-        private const int DEFAULT_WAVE = 1;
-        private const int DEFAULT_HIGHEST_DAMAGE = 0;
-        private const ulong DEFAULT_RIFT_SHARDS = 0;
+        public const int DEFAULT_WAVE = 1;
+        public const int DEFAULT_HIGHEST_DAMAGE = 0;
+        public const ulong DEFAULT_RIFT_SHARDS = 0;
 
         public static GlobalState Instance { get; private set; }
 

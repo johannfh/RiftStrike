@@ -48,6 +48,7 @@ sources/0 = SubResource("TileSetAtlasSource_exono")
 script = ExtResource("1_1yase")
 WaveEndTimer = NodePath("WaveEndTimer")
 SpawnEnemiesTimer = NodePath("SpawnEnemiesTimer")
+EnemySpawnCountScale = 2
 Map = NodePath("Map")
 counter = SubResource("Resource_4dvgi")
 

@@ -19,7 +19,7 @@ namespace Riftstrike
         private Timer SpawnEnemiesTimer;
 
         [Export]
-        private int enemySpawnCount = 3;
+        private int EnemySpawnCountScale = 3;
 
         [Export]
         private TileMapLayer Map;
@@ -51,6 +51,7 @@ namespace Riftstrike
 #if DEBUG
             var start = DateTime.Now;
 #endif
+            var enemySpawnCount = 2 + EnemySpawnCountScale * (GlobalState.Wave - GlobalState.DEFAULT_WAVE);
             var positions = GetSafeEnemySpawnPoints(enemySpawnCount);
 #if DEBUG
             var end = DateTime.Now;
