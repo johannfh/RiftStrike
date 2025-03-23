@@ -11,7 +11,7 @@ Regeneration = 0.0
 RiftEnergy = 0.0
 Damage = 100.0
 Range = 500.0
-ProjectileBounces = 2
+ProjectileBounces = 1
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lrjve"]
 
