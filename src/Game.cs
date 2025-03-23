@@ -9,7 +9,8 @@ namespace Riftstrike
 {
     public partial class Game : Node2D
     {
-        const float WAVE_DURATION_SCALE = 5.0F;
+        const float WAVE_DURATION_SCALE = 5;
+        const float MAX_WAVE_DURATION = 60;
 
         [Export]
         private Timer WaveEndTimer;
@@ -29,6 +30,7 @@ namespace Riftstrike
 
         [Export]
         public Counter counter;
+
 
         private static Vector2 MapCellToPosition(Vector2I Cell)
         {
@@ -117,7 +119,7 @@ namespace Riftstrike
             CursorSettings.LoadCursors();
 
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
-            WaveEndTimer.WaitTime = 10 + WAVE_DURATION_SCALE * GlobalState.Wave;
+            WaveEndTimer.WaitTime = Math.Min(10 + WAVE_DURATION_SCALE * GlobalState.Wave, MAX_WAVE_DURATION);
             WaveEndTimer.Timeout += EndWave;
             WaveEndTimer.Start();
             riftShardsAtStart = GlobalState.RiftShards;
