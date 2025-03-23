@@ -16,11 +16,9 @@ namespace Riftstrike.src.units
         private double speed;
 
         [Export]
-        private double pushSpeed;
+        private float pushSpeed;
 
         private NavigationAgent2D NavAgent;
-
-        private PushComponent PushComponent;
 
         #region Attacks
         [Export]
@@ -47,13 +45,15 @@ namespace Riftstrike.src.units
         private Timer AttackTimer;
 
         [Export]
+        private PushComponent PushComponent;
+
+        [Export]
         private double projectileBaseDamage = 10;
 
         private void AssignNodeReferences()
         {
             #region Movement
             NavAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-            PushComponent = GetNode<PushComponent>("PushComponent");
             #endregion
 
             #region Selection
@@ -122,6 +122,7 @@ namespace Riftstrike.src.units
             {
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, (float)(speed * delta));
             }
+            GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;
             #endregion
 
             if (AttackTimer.IsStopped()) Attack();

@@ -24,12 +24,13 @@ radius = 50.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_po1eq"]
 radius = 500.0
 
-[node name="RiftAssassin" type="Node2D" node_paths=PackedStringArray("AttackTimer")]
+[node name="RiftAssassin" type="Node2D" node_paths=PackedStringArray("AttackTimer", "PushComponent")]
 script = ExtResource("1_qxonp")
 speed = 400.0
 pushSpeed = 50.0
 baseAttackRange = 1000.0
 AttackTimer = NodePath("AttackTimer")
+PushComponent = NodePath("PushComponent")
 projectileBaseDamage = 40.0
 
 [node name="SelectableComponent" type="Area2D" parent="." node_paths=PackedStringArray("unit")]
