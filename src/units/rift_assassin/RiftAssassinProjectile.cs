@@ -67,6 +67,7 @@ namespace Riftstrike.src.units
         {
             if (!Enemies.Any()) return;
             var nextTarget = Enemies.First();
+            if (!IsInstanceValid(nextTarget)) return;
             Sprite.Rotation = GlobalPosition.AngleToPoint(nextTarget.GlobalPosition);
         }
 

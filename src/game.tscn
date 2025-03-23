@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=17 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" path="res://src/Game.cs" id="1_1yase"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://src/assets/stone_texture.png" id="1_coj4f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/SelectionBox.cs" id="2_hwfey"]
 [ext_resource type="Script" path="res://src/Counter.cs" id="2_xi5ac"]
 [ext_resource type="Script" path="res://src/UnitManager.cs" id="3_4v1vs"]
+[ext_resource type="PackedScene" uid="uid://cnusoylj055ft" path="res://src/Globals/DamageNumbersDisplay/damage_numbers_display.tscn" id="7_fh3ds"]
 [ext_resource type="Script" path="res://src/EnemyManager.cs" id="7_galhq"]
 
 [sub_resource type="Resource" id="Resource_4dvgi"]
@@ -68,6 +69,8 @@ script = ExtResource("3_4v1vs")
 
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("7_galhq")
+
+[node name="DamageNumbersDisplay" parent="." instance=ExtResource("7_fh3ds")]
 
 [node name="Camera" type="Camera2D" parent="."]
 y_sort_enabled = true

@@ -2,6 +2,7 @@ using System.Linq;
 using Godot;
 using Riftstrike.components;
 using Riftstrike.src.units;
+using Riftstrike.Src.Globals.DamageNumbersDisplay;
 
 namespace Riftstrike.enemies
 {
@@ -74,6 +75,7 @@ namespace Riftstrike.enemies
 
 			// NOTE: Apply damage modifiers here
 			HealthComponent.Damage(damage);
+			DamageNumbersDisplay.DisplayNumber(damage, GlobalPosition + new Vector2(0, 50));
 		}
 
 		private void HandleDeath()

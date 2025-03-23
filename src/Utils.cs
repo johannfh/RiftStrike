@@ -98,4 +98,26 @@ namespace Riftstrike
         }
     }
 
+    public static class ColorUtils
+    {
+        public static Color Lerp(Color value1, Color value2, double amount)
+            => new(
+                r: MathUtils.Lerp(value1.R, value2.R, amount),
+                g: MathUtils.Lerp(value1.G, value2.G, amount),
+                b: MathUtils.Lerp(value1.B, value2.B, amount),
+                a: MathUtils.Lerp(value1.A, value2.A, amount)
+            );
+    }
+
+    public static class MathUtils
+    {
+        public static float Lerp(float value1, float value2, double amount)
+            => value1 * (1 - (float)amount) + value2 * (float)amount;
+
+        public static double Lerp(double value1, double value2, double amount)
+            => value1 * (1 - amount) + value2 * amount;
+
+        public static int Lerp(int value1, int value2, double amount)
+            => (int)(value1 * (1 - amount)) + (int)(value2 * amount);
+    }
 }

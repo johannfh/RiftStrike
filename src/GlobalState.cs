@@ -7,6 +7,7 @@ namespace Riftstrike.src
     public partial class GlobalState : Node
     {
         private const int DEFAULT_WAVE = 1;
+        private const int DEFAULT_HIGHEST_DAMAGE = 0;
         private const ulong DEFAULT_RIFT_SHARDS = 0;
 
         public static GlobalState Instance { get; private set; }
@@ -31,11 +32,18 @@ namespace Riftstrike.src
             get => Instance.wave;
             set => Instance.wave = value;
         }
+        private double highestDamage = DEFAULT_HIGHEST_DAMAGE;
+        public static double HighestDamage
+        {
+            get => Instance.highestDamage;
+            set => Instance.highestDamage = value;
+        }
 
         public static void Reset()
         {
             Wave = DEFAULT_WAVE;
             RiftShards = DEFAULT_RIFT_SHARDS;
+            HighestDamage = DEFAULT_HIGHEST_DAMAGE;
             UnitData.Clear();
         }
 

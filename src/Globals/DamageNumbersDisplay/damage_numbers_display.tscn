@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnusoylj055ft"]
+
+[ext_resource type="Script" path="res://src/Globals/DamageNumbersDisplay/DamageNumbersDisplay.cs" id="1_tg841"]
+[ext_resource type="PackedScene" uid="uid://c606w6rfhrhlf" path="res://src/Globals/DamageNumbersDisplay/damage_number.tscn" id="2_g2xrb"]
+
+[node name="DamageNumbersDisplay" type="Node"]
+script = ExtResource("1_tg841")
+DamageNumberScene = ExtResource("2_g2xrb")
+LowestColor = Color(1, 1, 1, 1)
+LowestFontSize = 24
+HighestColor = Color(1, 0, 0, 1)
+HighestFontSize = 32
