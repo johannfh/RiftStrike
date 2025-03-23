@@ -55,6 +55,22 @@ namespace Riftstrike.src.units
                 lastCollision = target;
                 distanceTravelled = 0;
                 RemainingHits--;
+
+                // get enemies ordered by distance
+                // var enemies = EnemyManager.Enemies
+                //     .OrderBy(e => e.GlobalPosition.DistanceTo(GlobalPosition));
+
+                // retarget closest next enemy
+                // if (enemies.Any())
+                // {
+                //     Debug.Print("Retargeting");
+                //     var closestEnemy = enemies.First();
+                //     if (closestEnemy.GlobalPosition.DistanceTo(GlobalPosition) < Range)
+                //     {
+                //         var speed = Velocity.Length();
+                //         Velocity = GlobalPosition.DirectionTo(closestEnemy.GlobalPosition) * speed;
+                //     }
+                // }
             }
             if (distanceTravelled > Range)
             {
