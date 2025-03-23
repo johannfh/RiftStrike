@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnusoylj055ft"]
+[gd_scene load_steps=4 format=3 uid="uid://cnusoylj055ft"]
 
 [ext_resource type="Script" path="res://src/Globals/DamageNumbersDisplay/DamageNumbersDisplay.cs" id="1_tg841"]
 [ext_resource type="PackedScene" uid="uid://c606w6rfhrhlf" path="res://src/Globals/DamageNumbersDisplay/damage_number.tscn" id="2_g2xrb"]
 
+[sub_resource type="Gradient" id="Gradient_2i5p6"]
+offsets = PackedFloat32Array(0, 0.45515, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.860425, 0.478212, 1.92523e-07, 1, 1, 0, 0, 1)
+
 [node name="DamageNumbersDisplay" type="Node"]
 script = ExtResource("1_tg841")
+FontDamageGradient = SubResource("Gradient_2i5p6")
 DamageNumberScene = ExtResource("2_g2xrb")
-LowestColor = Color(1, 1, 1, 1)
 LowestFontSize = 24
-HighestColor = Color(1, 0, 0, 1)
 HighestFontSize = 32

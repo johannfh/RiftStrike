@@ -23,7 +23,10 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+text = "50"
 label_settings = SubResource("LabelSettings_ft8ou")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DecayTimer" type="Timer" parent="."]
 one_shot = true

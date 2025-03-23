@@ -54,6 +54,10 @@ namespace Riftstrike.Src.Globals.DamageNumbersDisplay
         public override void _Ready()
         {
             base._Ready();
+
+            // duplicate resource before modification to keep colors etc unique per damage number
+            DamageNumberLabel.LabelSettings = DamageNumberLabel.LabelSettings.Duplicate<LabelSettings>();
+
             if (updateDamageNumberTextQueued) UpdateDamageNumberText();
             if (updateFontColorQueued) UpdateFontColor();
             if (updateFontSizeQueued) UpdateFontSize();

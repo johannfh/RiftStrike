@@ -9,16 +9,13 @@ namespace Riftstrike.Src.Globals.DamageNumbersDisplay
         private static DamageNumbersDisplay Instance;
 
         [Export]
+        private Gradient FontDamageGradient;
+
+        [Export]
         private PackedScene DamageNumberScene;
 
         [Export]
-        private Color LowestColor;
-
-        [Export]
         private int LowestFontSize;
-
-        [Export]
-        private Color HighestColor;
 
         [Export]
         private int HighestFontSize;
@@ -47,7 +44,7 @@ namespace Riftstrike.Src.Globals.DamageNumbersDisplay
 
             var delta = damage / GlobalState.HighestDamage;
 
-            var color = ColorUtils.Lerp(Instance.LowestColor, Instance.HighestColor, delta);
+            var color = Instance.FontDamageGradient.Sample((float)delta);
             var fontSize = MathUtils.Lerp(Instance.LowestFontSize, Instance.HighestFontSize, delta);
 
             damageNumber.GlobalPosition = position;
