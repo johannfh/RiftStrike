@@ -99,19 +99,16 @@ namespace Riftstrike.src.units
         {
             base._PhysicsProcess(delta);
             if (targets.Count != 0 && NavAgent.TargetPosition != targets.First())
-            {
                 NavAgent.TargetPosition = targets.First();
-            }
+
             if (targets.Count != 0 && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5)
-            {
                 targets.RemoveAt(0);
-            }
+
             var nextPos = NavAgent.GetNextPathPosition();
 
             if (targets.Count != 0)
-            {
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
-            }
+
             GlobalPosition += PushComponent.PushDirection * pushSpeed * (float)delta;
 
             if (AttackReady)
