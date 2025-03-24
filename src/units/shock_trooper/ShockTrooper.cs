@@ -98,17 +98,17 @@ namespace Riftstrike.src.units
         public override void _PhysicsProcess(double delta)
         {
             base._PhysicsProcess(delta);
-            if (targets.Any() && NavAgent.TargetPosition != targets.First())
+            if (targets.Count != 0 && NavAgent.TargetPosition != targets.First())
             {
                 NavAgent.TargetPosition = targets.First();
             }
-            if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5)
+            if (targets.Count != 0 && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5)
             {
                 targets.RemoveAt(0);
             }
             var nextPos = NavAgent.GetNextPathPosition();
 
-            if (targets.Any())
+            if (targets.Count != 0)
             {
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, speed * (float)delta);
             }
@@ -117,7 +117,7 @@ namespace Riftstrike.src.units
             if (AttackReady)
             {
                 var enemies = EnemyManager.Enemies;
-                if (enemies.Any())
+                if (enemies.Count != 0)
                 {
                     var closestTarget = enemies
                         .OrderBy(e => e.GlobalPosition.DistanceTo(GlobalPosition))
