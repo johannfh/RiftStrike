@@ -134,31 +134,28 @@ namespace Riftstrike.src.units
         }
 
         private bool IsInRange(Node2D node2D)
-        {
-            return IsInRange(node2D.GlobalPosition);
-        }
+            => IsInRange(node2D.GlobalPosition);
+
 
         private bool IsInRange(Vector2 position)
-        {
-            return GlobalPosition.DistanceTo(position) < CurrentStats.Range;
-        }
+            => GlobalPosition.DistanceTo(position) < CurrentStats.Range;
+
 
         private void ShootTowards(Node2D node2D)
-        {
-            ShootTowards(node2D.GlobalPosition);
-        }
+            => ShootTowards(node2D.GlobalPosition);
+
 
         private void ShootTowards(Vector2 target)
         {
             // calculate parameters
             var bulletPos = GlobalPosition;
-            var bulletDir = GlobalPosition.DirectionTo(target);
+            var bulletDir = bulletPos.DirectionTo(target);
             var bulletVelocity = bulletDir * projectileSpeed;
             var bulletRange = CurrentStats.Range * 2;
+            var remainingHits = 1 + CurrentStats.ProjectileBounces;
 
             // NOTE: apply damage modifiers here
             var bulletDamage = projectileBaseDamage * (CurrentStats.Damage / 100);
-
 
             // instantiate bullet
             var bullet = ShockTrooperProjectile.New();
@@ -167,8 +164,9 @@ namespace Riftstrike.src.units
             bullet.Damage = bulletDamage;
             bullet.Range = bulletRange;
             bullet.UnitData = Data;
+            bullet.RemainingHits = remainingHits;
 
-            // spawn in tree
+            // spawn bullet in tree
             AddSibling(bullet);
         }
 
