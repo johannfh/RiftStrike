@@ -95,8 +95,6 @@ namespace Riftstrike.src.units
         }
     }
 
-    public partial class EmptyEnemy : Enemy { }
-
     public interface IWalk
     {
         public void WalkTo(Vector2 targetPosition, bool append);
