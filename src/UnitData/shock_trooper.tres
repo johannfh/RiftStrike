@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="UnitData" load_steps=6 format=3 uid="uid://d1nebduqf7mf2"]
+[gd_resource type="Resource" script_class="UnitData" load_steps=7 format=3 uid="uid://d1nebduqf7mf2"]
 
 [ext_resource type="Texture2D" uid="uid://ddfvvqprlm0s7" path="res://src/assets/ShockTrooperIcon.png" id="1_1g73p"]
-[ext_resource type="Script" path="res://src/units/Stats.cs" id="1_ocwhu"]
-[ext_resource type="Script" path="res://src/units/UnitData.cs" id="2_wsbvn"]
+[ext_resource type="Script" uid="uid://ubbf0250otwl" path="res://src/units/Stats.cs" id="1_ocwhu"]
+[ext_resource type="Script" uid="uid://cwag2ccfoefq4" path="res://src/units/UnitData.cs" id="2_wsbvn"]
 [ext_resource type="PackedScene" uid="uid://dsq6u6jv05si4" path="res://src/units/shock_trooper/shock_trooper.tscn" id="3_oxyv6"]
+[ext_resource type="Script" uid="uid://clhaugbvg0ea7" path="res://src/upgrades/Upgrade.cs" id="4_jx4fe"]
 
 [sub_resource type="Resource" id="Resource_i3g6t"]
 script = ExtResource("1_ocwhu")
@@ -18,7 +19,7 @@ ProjectileBounces = 4
 script = ExtResource("2_wsbvn")
 Scene = ExtResource("3_oxyv6")
 Icon = ExtResource("1_1g73p")
-Upgrades = []
+Upgrades = Array[ExtResource("4_jx4fe")]([])
 BaseStats = SubResource("Resource_i3g6t")
 Level = 1
-RemainingLevelups = []
+RemainingLevelups = Array[int]([])

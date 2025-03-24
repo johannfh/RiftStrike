@@ -1,15 +1,15 @@
 [gd_scene load_steps=17 format=4 uid="uid://pmn15t2bu3qh"]
 
-[ext_resource type="Script" path="res://src/Game.cs" id="1_1yase"]
+[ext_resource type="Script" uid="uid://cg3041kcxxvlq" path="res://src/Game.cs" id="1_1yase"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://src/assets/stone_texture.png" id="1_coj4f"]
-[ext_resource type="Script" path="res://src/Camera.cs" id="1_fw2jn"]
+[ext_resource type="Script" uid="uid://hgl82kq7vg6f" path="res://src/Camera.cs" id="1_fw2jn"]
 [ext_resource type="PackedScene" uid="uid://tneid4vp0caj" path="res://src/game_ui.tscn" id="2_76pyg"]
-[ext_resource type="Script" path="res://src/RandomTimer.cs" id="2_88g8b"]
-[ext_resource type="Script" path="res://src/SelectionBox.cs" id="2_hwfey"]
-[ext_resource type="Script" path="res://src/Counter.cs" id="2_xi5ac"]
-[ext_resource type="Script" path="res://src/UnitManager.cs" id="3_4v1vs"]
+[ext_resource type="Script" uid="uid://dbj47raw5m83x" path="res://src/RandomTimer.cs" id="2_88g8b"]
+[ext_resource type="Script" uid="uid://dby8far46deba" path="res://src/SelectionBox.cs" id="2_hwfey"]
+[ext_resource type="Script" uid="uid://bn7i2l27i2hi7" path="res://src/Counter.cs" id="2_xi5ac"]
+[ext_resource type="Script" uid="uid://dhub8cf0b501g" path="res://src/UnitManager.cs" id="3_4v1vs"]
 [ext_resource type="PackedScene" uid="uid://cnusoylj055ft" path="res://src/Globals/DamageNumbersDisplay/damage_numbers_display.tscn" id="7_fh3ds"]
-[ext_resource type="Script" path="res://src/EnemyManager.cs" id="7_galhq"]
+[ext_resource type="Script" uid="uid://cws6ifgwm4p6a" path="res://src/EnemyManager.cs" id="7_galhq"]
 
 [sub_resource type="Resource" id="Resource_4dvgi"]
 script = ExtResource("2_xi5ac")

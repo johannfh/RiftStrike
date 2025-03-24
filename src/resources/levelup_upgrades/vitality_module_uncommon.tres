@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="VitalityModule" load_steps=3 format=3 uid="uid://ckqo81t3w8a5u"]
 
-[ext_resource type="Script" path="res://src/upgrades/VitalityModule.cs" id="1_7uhgf"]
+[ext_resource type="Script" uid="uid://huv2n568b4t7" path="res://src/upgrades/VitalityModule.cs" id="1_7uhgf"]
 [ext_resource type="Texture2D" uid="uid://durq4ngcnedpl" path="res://src/assets/VitalityModule.png" id="1_gcv58"]
 
 [resource]

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="UnitData" load_steps=6 format=3 uid="uid://dul04wsxj83j2"]
+[gd_resource type="Resource" script_class="UnitData" load_steps=7 format=3 uid="uid://dul04wsxj83j2"]
 
-[ext_resource type="Script" path="res://src/units/Stats.cs" id="1_fqgc6"]
+[ext_resource type="Script" uid="uid://ubbf0250otwl" path="res://src/units/Stats.cs" id="1_fqgc6"]
 [ext_resource type="PackedScene" uid="uid://c3jkjsjw8dxpm" path="res://src/units/rift_assassin/rift_assassin.tscn" id="2_qv7f3"]
-[ext_resource type="Script" path="res://src/units/UnitData.cs" id="2_snsru"]
+[ext_resource type="Script" uid="uid://cwag2ccfoefq4" path="res://src/units/UnitData.cs" id="2_snsru"]
+[ext_resource type="Script" uid="uid://clhaugbvg0ea7" path="res://src/upgrades/Upgrade.cs" id="3_n3l1l"]
 
 [sub_resource type="Resource" id="Resource_gjq0w"]
 script = ExtResource("1_fqgc6")
@@ -19,7 +20,7 @@ ProjectileBounces = 1
 script = ExtResource("2_snsru")
 Scene = ExtResource("2_qv7f3")
 Icon = SubResource("PlaceholderTexture2D_lrjve")
-Upgrades = []
+Upgrades = Array[ExtResource("3_n3l1l")]([])
 BaseStats = SubResource("Resource_gjq0w")
 Level = 1
-RemainingLevelups = []
+RemainingLevelups = Array[int]([])

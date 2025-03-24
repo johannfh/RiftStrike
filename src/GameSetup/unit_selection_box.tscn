@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://saila0ft3bii"]
 
-[ext_resource type="Script" path="res://src/GameSetup/UnitSelectionBox.cs" id="1_2g8de"]
+[ext_resource type="Script" uid="uid://qrke6sstdit7" path="res://src/GameSetup/UnitSelectionBox.cs" id="1_2g8de"]
 [ext_resource type="Texture2D" uid="uid://ddfvvqprlm0s7" path="res://src/assets/ShockTrooperIcon.png" id="2_v68fo"]
 [ext_resource type="Texture2D" uid="uid://cxg8xsdpl6t8b" path="res://src/assets/PlusIconWhite.png" id="3_sxide"]
 
@@ -127,9 +127,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_61hld"]
 _data = {
-"RESET": SubResource("Animation_h1srn"),
-"selected_False": SubResource("Animation_8ck71"),
-"selected_True": SubResource("Animation_arbk6")
+&"RESET": SubResource("Animation_h1srn"),
+&"selected_False": SubResource("Animation_8ck71"),
+&"selected_True": SubResource("Animation_arbk6")
 }
 
 [node name="UnitSelectionBox" type="AspectRatioContainer" node_paths=PackedStringArray("TextureRect", "SelectButton", "AnimationPlayer")]

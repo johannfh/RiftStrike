@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://bevjk7bpcj3jl"]
 
-[ext_resource type="Script" path="res://src/WaveShop/UpgradeBox.cs" id="1_kbrbs"]
+[ext_resource type="Script" uid="uid://d4bny0ukeyp6n" path="res://src/WaveShop/UpgradeBox.cs" id="1_kbrbs"]
 [ext_resource type="Texture2D" uid="uid://bm5kwmtqqmruk" path="res://src/resources/rarity_textures/common.tres" id="2_2vcoh"]
-[ext_resource type="Script" path="res://src/WaveShop/RarityToTexture2D.cs" id="2_se2r3"]
+[ext_resource type="Script" uid="uid://mvxaiu3rh6vp" path="res://src/WaveShop/RarityToTexture2D.cs" id="2_se2r3"]
 [ext_resource type="Texture2D" uid="uid://b8bqn4gb5wisd" path="res://src/resources/rarity_textures/uncommon.tres" id="4_ainsd"]
 [ext_resource type="Texture2D" uid="uid://pdvhtp40bq86" path="res://src/resources/rarity_textures/rare.tres" id="4_gg7ht"]
 [ext_resource type="Texture2D" uid="uid://d3l7jhb5nbbcv" path="res://src/resources/rarity_textures/epic.tres" id="5_qepo7"]
@@ -120,8 +120,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w4xjk"]
 _data = {
-"RESET": SubResource("Animation_xg53a"),
-"click_ChooseUpgradeButton": SubResource("Animation_7v2fy")
+&"RESET": SubResource("Animation_xg53a"),
+&"click_ChooseUpgradeButton": SubResource("Animation_7v2fy")
 }
 
 [node name="UpgradeBox" type="AspectRatioContainer" node_paths=PackedStringArray("RarityTextureRect", "ChooseUpgradeButton", "UpgradeLabel", "AnimationPlayer")]

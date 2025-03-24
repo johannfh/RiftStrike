@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnusoylj055ft"]
 
-[ext_resource type="Script" path="res://src/Globals/DamageNumbersDisplay/DamageNumbersDisplay.cs" id="1_tg841"]
+[ext_resource type="Script" uid="uid://ce30kkivmfyaw" path="res://src/Globals/DamageNumbersDisplay/DamageNumbersDisplay.cs" id="1_tg841"]
 [ext_resource type="PackedScene" uid="uid://c606w6rfhrhlf" path="res://src/Globals/DamageNumbersDisplay/damage_number.tscn" id="2_g2xrb"]
 
 [sub_resource type="Gradient" id="Gradient_2i5p6"]

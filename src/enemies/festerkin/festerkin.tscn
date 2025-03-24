@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://xepapvohrh5"]
 
-[ext_resource type="Script" path="res://src/enemies/festerkin/Festerkin.cs" id="1_4b7xi"]
-[ext_resource type="Script" path="res://src/components/PushComponent.cs" id="2_nr7fl"]
+[ext_resource type="Script" uid="uid://djak47gflkfbj" path="res://src/enemies/festerkin/Festerkin.cs" id="1_4b7xi"]
+[ext_resource type="Script" uid="uid://dv4wvjyl8cb6o" path="res://src/components/PushComponent.cs" id="2_nr7fl"]
 [ext_resource type="Texture2D" uid="uid://bmcvbaehh3ie6" path="res://src/assets/enemies/festerkin/festerkin.png" id="3_1o71y"]
-[ext_resource type="Script" path="res://src/components/HitboxComponent.cs" id="3_2iacg"]
-[ext_resource type="Script" path="res://src/RandomTimer.cs" id="5_pydac"]
-[ext_resource type="Script" path="res://src/components/HealthComponent.cs" id="6_06vqm"]
+[ext_resource type="Script" uid="uid://bd2vb71x1f35v" path="res://src/components/HitboxComponent.cs" id="3_2iacg"]
+[ext_resource type="Script" uid="uid://dbj47raw5m83x" path="res://src/RandomTimer.cs" id="5_pydac"]
+[ext_resource type="Script" uid="uid://caqwiouhfoms2" path="res://src/components/HealthComponent.cs" id="6_06vqm"]
 [ext_resource type="StyleBox" uid="uid://c53fmtxikqkca" path="res://src/health_bar_background.tres" id="7_e6l3h"]
 [ext_resource type="StyleBox" uid="uid://b84c53pw7thy6" path="res://src/health_bar_fill.tres" id="8_2fi66"]
-[ext_resource type="Script" path="res://src/components/HealthBar.cs" id="9_jc2f0"]
+[ext_resource type="Script" uid="uid://c8v8ydyo6fnhu" path="res://src/components/HealthBar.cs" id="9_jc2f0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3l62n"]
 size = Vector2(76, 16)
@@ -51,8 +51,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mk3da"]
 _data = {
-"blink": SubResource("Animation_a56l6"),
-"walk": SubResource("Animation_p541c")
+&"blink": SubResource("Animation_a56l6"),
+&"walk": SubResource("Animation_p541c")
 }
 
 [node name="Festerkin" type="Node2D" node_paths=PackedStringArray("NavAgent", "AnimationPlayer", "Sprite", "RecalculateTargetTimer", "PushComponent", "HitboxComponent", "AttackTimer", "BlinkTimer", "HealthComponent")]

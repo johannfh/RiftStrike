@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c606w6rfhrhlf"]
 
-[ext_resource type="Script" path="res://src/Globals/DamageNumbersDisplay/DamageNumber.cs" id="1_d5yri"]
-[ext_resource type="Script" path="res://src/RandomTimer.cs" id="2_uccrs"]
+[ext_resource type="Script" uid="uid://de6xjq0y6gufo" path="res://src/Globals/DamageNumbersDisplay/DamageNumber.cs" id="1_d5yri"]
+[ext_resource type="Script" uid="uid://dbj47raw5m83x" path="res://src/RandomTimer.cs" id="2_uccrs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ft8ou"]
 font_size = 24

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://rmql3iwcalul"]
 
-[ext_resource type="Script" path="res://src/units/rift_assassin/RiftAssassinProjectile.cs" id="1_qiyjp"]
+[ext_resource type="Script" uid="uid://d1nlm3k2v6rnf" path="res://src/units/rift_assassin/RiftAssassinProjectile.cs" id="1_qiyjp"]
 [ext_resource type="Texture2D" uid="uid://b4tyiw8m61vvb" path="res://src/assets/OrangeProjectile.png" id="2_vytkp"]
 
 [node name="RiftAssassinProjectile" type="Node2D" node_paths=PackedStringArray("Sprite")]

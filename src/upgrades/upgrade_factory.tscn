@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cd08hrtd4jn6d"]
 
-[ext_resource type="Script" path="res://src/upgrades/UpgradeFactory.cs" id="1_3xec5"]
+[ext_resource type="Script" uid="uid://cqowrrncw7lfh" path="res://src/upgrades/UpgradeFactory.cs" id="1_3xec5"]
 [ext_resource type="Resource" uid="uid://dbiew6kfalyxq" path="res://src/resources/levelup_upgrades/damage_module_common.tres" id="2_vda4i"]
 [ext_resource type="Resource" uid="uid://cjnpchms32tv1" path="res://src/resources/levelup_upgrades/damage_module_uncommon.tres" id="3_q58t1"]
 [ext_resource type="Resource" uid="uid://dqgojj6uby3s6" path="res://src/resources/levelup_upgrades/damage_module_rare.tres" id="4_mwol0"]

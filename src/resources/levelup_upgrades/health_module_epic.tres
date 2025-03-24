@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HealthModule" load_steps=3 format=3 uid="uid://b3tidwdkali47"]
 
 [ext_resource type="Texture2D" uid="uid://dmw662abx4se3" path="res://src/assets/HealthModule.png" id="1_ei1ye"]
-[ext_resource type="Script" path="res://src/upgrades/HealthModule.cs" id="1_mir6s"]
+[ext_resource type="Script" uid="uid://72vqkrd3nxg8" path="res://src/upgrades/HealthModule.cs" id="1_mir6s"]
 
 [resource]
 script = ExtResource("1_mir6s")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DamageModule" load_steps=3 format=3 uid="uid://dkxvwm26yms2v"]
 
 [ext_resource type="Texture2D" uid="uid://bjxbm211f62bw" path="res://src/assets/AttackModule.png" id="1_0va3w"]
-[ext_resource type="Script" path="res://src/upgrades/DamageModule.cs" id="1_p7u67"]
+[ext_resource type="Script" uid="uid://tq1sckloy2mq" path="res://src/upgrades/DamageModule.cs" id="1_p7u67"]
 
 [resource]
 script = ExtResource("1_p7u67")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b37bdaunpavbi"]
 
-[ext_resource type="Script" path="res://src/TitleScreenUI.cs" id="1_6clsk"]
+[ext_resource type="Script" uid="uid://dl056abdssrsc" path="res://src/TitleScreenUI.cs" id="1_6clsk"]
 [ext_resource type="Texture2D" uid="uid://dl7dpsv2j7uo0" path="res://src/assets/PlayIcon.png" id="2_j502q"]
 
 [node name="TitleScreenUI" type="Control" node_paths=PackedStringArray("PlayButton")]

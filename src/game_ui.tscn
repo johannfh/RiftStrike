@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://tneid4vp0caj"]
 
-[ext_resource type="Script" path="res://src/GameUI.cs" id="1_fqu6f"]
+[ext_resource type="Script" uid="uid://d0wk1jyrxo8ma" path="res://src/GameUI.cs" id="1_fqu6f"]
 [ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_ucs57"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wn3co"]

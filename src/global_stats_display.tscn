@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckuy380lqlri4"]
 
 [ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="1_ch18j"]
-[ext_resource type="Script" path="res://src/GlobalStatsDisplay.cs" id="1_wwl74"]
+[ext_resource type="Script" uid="uid://duwuk3yh2k2bv" path="res://src/GlobalStatsDisplay.cs" id="1_wwl74"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gb0gn"]
 font_size = 32
