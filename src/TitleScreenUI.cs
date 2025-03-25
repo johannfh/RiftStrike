@@ -1,4 +1,3 @@
-using Godot;
 using Riftstrike.src;
 using Riftstrike.src.GameSetup;
 

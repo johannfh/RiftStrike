@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Riftstrike.Src.Globals.DamageNumbersDisplay
 {
     public partial class DamageNumber : Node2D

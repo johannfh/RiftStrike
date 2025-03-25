@@ -6,8 +6,8 @@
 [ext_resource type="StyleBox" uid="uid://co3tqausi8f65" path="res://src/units/selected_style_box.tres" id="3_d7amh"]
 [ext_resource type="Script" uid="uid://dv4wvjyl8cb6o" path="res://src/components/PushComponent.cs" id="3_rgmc3"]
 [ext_resource type="StyleBox" uid="uid://diuummav67ebu" path="res://src/units/hovering_style_box.tres" id="4_03xrw"]
-[ext_resource type="Texture2D" uid="uid://q11k2b3fcdfp" path="res://src/assets/ShockTrooper.png" id="5_l1px6"]
 [ext_resource type="Script" uid="uid://bv5cahbrfxip8" path="res://src/components/RiftShardComponent.cs" id="6_b6g5c"]
+[ext_resource type="Texture2D" uid="uid://ci37edc7vfy7s" path="res://src/assets/RiftAssassin.png" id="8_ahl7x"]
 [ext_resource type="Script" uid="uid://caqwiouhfoms2" path="res://src/components/HealthComponent.cs" id="10_8voh0"]
 [ext_resource type="PackedScene" uid="uid://bi8s5pyj2m5nl" path="res://src/components/health_bar.tscn" id="11_huejp"]
 [ext_resource type="PackedScene" uid="uid://b7yshd5tbajmv" path="res://src/components/level_display.tscn" id="12_2ng7f"]
@@ -96,10 +96,9 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_03xrw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.55, 0.88, 1, 1)
 position = Vector2(0, -112)
 scale = Vector2(4, 4)
-texture = ExtResource("5_l1px6")
+texture = ExtResource("8_ahl7x")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Godot;
 using Riftstrike.enemies;
 using Riftstrike.src;
 using Riftstrike.src.WaveShop;
@@ -17,6 +16,15 @@ namespace Riftstrike
 
         const float WAVE_DURATION_SCALE = 5;
         const float MAX_WAVE_DURATION = 60;
+
+        [Export]
+        private Panel PauseBlurPanel;
+
+        [Export]
+        private PauseMenu PauseMenu;
+
+        [Export]
+        private AnimationPlayer UIAnimationPlayer;
 
         [Export]
         private Timer WaveEndTimer;
@@ -36,7 +44,6 @@ namespace Riftstrike
 
         [Export]
         public Counter counter;
-
 
         private static Vector2 MapCellToPosition(Vector2I Cell)
         {
@@ -123,6 +130,26 @@ namespace Riftstrike
         {
             base._Ready();
             CursorSettings.LoadCursors();
+
+            PauseMenu.PausedChanged += paused =>
+            {
+                if (paused == true)
+                {
+                    UIAnimationPlayer.Play("show_pause_menu");
+                    GetTree().Paused = true;
+                }
+                // continue after animation has finished
+                else UIAnimationPlayer.Play("hide_pause_menu");
+            };
+
+            UIAnimationPlayer.AnimationFinished += name =>
+            {
+                if (name == "hide_pause_menu")
+                {
+                    GetTree().Paused = false;
+
+                }
+            };
 
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
             WaveEndTimer.WaitTime = Math.Min(10 + WAVE_DURATION_SCALE * GlobalState.Wave, MAX_WAVE_DURATION);

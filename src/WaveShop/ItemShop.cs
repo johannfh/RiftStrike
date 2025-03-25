@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Riftstrike.src.WaveShop
 {
     public partial class ItemShop : CenterContainer

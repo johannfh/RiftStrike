@@ -1,4 +1,3 @@
-using Godot;
 using Riftstrike.src.units;
 
 namespace Riftstrike.upgrades

@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Riftstrike.src.RiftShard
 {
     public partial class RiftShard : Area2D

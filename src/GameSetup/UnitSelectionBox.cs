@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Riftstrike.src.GameSetup
 {
     public partial class UnitSelectionBox : AspectRatioContainer

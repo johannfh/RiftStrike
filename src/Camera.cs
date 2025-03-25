@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Riftstrike
 {
     public partial class Camera : Camera2D

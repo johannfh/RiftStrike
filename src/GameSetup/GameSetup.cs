@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 namespace Riftstrike.src.GameSetup
 {
     public partial class GameSetup : Node2D

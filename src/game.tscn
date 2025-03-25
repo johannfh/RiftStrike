@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=26 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" uid="uid://cg3041kcxxvlq" path="res://src/Game.cs" id="1_1yase"]
 [ext_resource type="Texture2D" uid="uid://c28b0xvctm6lv" path="res://src/assets/stone_texture.png" id="1_coj4f"]
@@ -8,12 +8,227 @@
 [ext_resource type="Script" uid="uid://dby8far46deba" path="res://src/SelectionBox.cs" id="2_hwfey"]
 [ext_resource type="Script" uid="uid://bn7i2l27i2hi7" path="res://src/Counter.cs" id="2_xi5ac"]
 [ext_resource type="Script" uid="uid://dhub8cf0b501g" path="res://src/UnitManager.cs" id="3_4v1vs"]
+[ext_resource type="Shader" uid="uid://bmffyr5cffe3y" path="res://src/gausian_blur.gdshader" id="4_qiocs"]
+[ext_resource type="PackedScene" uid="uid://bhlel76cfebxt" path="res://src/pause_menu.tscn" id="4_y2hwx"]
 [ext_resource type="PackedScene" uid="uid://cnusoylj055ft" path="res://src/Globals/DamageNumbersDisplay/damage_numbers_display.tscn" id="7_fh3ds"]
 [ext_resource type="Script" uid="uid://cws6ifgwm4p6a" path="res://src/EnemyManager.cs" id="7_galhq"]
 
 [sub_resource type="Resource" id="Resource_4dvgi"]
 script = ExtResource("2_xi5ac")
 Value = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdrfk"]
+shader = ExtResource("4_qiocs")
+shader_parameter/blur_radius = 8
+shader_parameter/Darkness = 0.4
+shader_parameter/R = 0.4
+shader_parameter/G = 0.4
+shader_parameter/B = 0.4
+shader_parameter/blur_strength = 4.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y2hwx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qiocs"]
+texture = SubResource("CanvasTexture_y2hwx")
+modulate_color = Color(0.27451, 0.27451, 0.27451, 0.470588)
+
+[sub_resource type="Animation" id="Animation_qiocs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PauseMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PauseBlurPanel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PauseBlurPanel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.0]
+}
+
+[sub_resource type="Animation" id="Animation_xdrfk"]
+resource_name = "hide_pause_menu"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PauseMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PauseBlurPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PauseBlurPanel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.0, 0.1]
+}
+
+[sub_resource type="Animation" id="Animation_y2hwx"]
+resource_name = "show_pause_menu"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PauseMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PauseBlurPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PauseBlurPanel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.1, 6.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qiocs"]
+_data = {
+&"RESET": SubResource("Animation_qiocs"),
+&"hide_pause_menu": SubResource("Animation_xdrfk"),
+&"show_pause_menu": SubResource("Animation_y2hwx")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igf7"]
 
@@ -44,8 +259,11 @@ tile_size = Vector2i(64, 64)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_exono")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("WaveEndTimer", "SpawnEnemiesTimer", "Map")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("PauseBlurPanel", "PauseMenu", "UIAnimationPlayer", "WaveEndTimer", "SpawnEnemiesTimer", "Map")]
 script = ExtResource("1_1yase")
+PauseBlurPanel = NodePath("UI/PauseBlurPanel")
+PauseMenu = NodePath("UI/PauseMenu")
+UIAnimationPlayer = NodePath("UI/UIAnimationPlayer")
 WaveEndTimer = NodePath("WaveEndTimer")
 SpawnEnemiesTimer = NodePath("SpawnEnemiesTimer")
 EnemySpawnCountScale = 2
@@ -56,6 +274,26 @@ counter = SubResource("Resource_4dvgi")
 
 [node name="GameUI" parent="UI" node_paths=PackedStringArray("WaveEndTimer") instance=ExtResource("2_76pyg")]
 WaveEndTimer = NodePath("../../WaveEndTimer")
+
+[node name="PauseBlurPanel" type="Panel" parent="UI"]
+visible = false
+material = SubResource("ShaderMaterial_xdrfk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qiocs")
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("4_y2hwx")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+
+[node name="UIAnimationPlayer" type="AnimationPlayer" parent="UI"]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_qiocs")
+}
 
 [node name="SpawnEnemiesTimer" type="Timer" parent="."]
 autostart = true

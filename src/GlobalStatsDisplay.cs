@@ -1,5 +1,3 @@
-using Godot;
-
 namespace Riftstrike.src
 {
     public partial class GlobalStatsDisplay : VBoxContainer
