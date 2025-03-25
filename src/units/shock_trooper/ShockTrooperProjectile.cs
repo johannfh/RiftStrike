@@ -8,11 +8,13 @@ namespace Riftstrike.src.units
 {
     public partial class ShockTrooperProjectile : Area2D
     {
-        public const string SCENE_PATH = "res://src/units/shock_trooper/shock_trooper_projectile.tscn";
+        private const string SCENE_PATH = "res://src/units/shock_trooper/shock_trooper_projectile.tscn";
+
+        public static PackedScene Scene
+            => GD.Load<PackedScene>(SCENE_PATH);
 
         public static ShockTrooperProjectile New()
-            => GD.Load<PackedScene>(SCENE_PATH)
-                .Instantiate<ShockTrooperProjectile>();
+            => Scene.Instantiate<ShockTrooperProjectile>();
 
         public Vector2 Velocity = Vector2.Zero;
 

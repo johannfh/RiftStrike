@@ -31,13 +31,13 @@ namespace Riftstrike.src.GameSetup
                 .ForEach(child => UnitSelectionBoxesContainer.RemoveChild(child));
 
             // render selection boxes for every unit data
-            var unitSelectionBoxScene = GD.Load<PackedScene>("res://src/GameSetup/unit_selection_box.tscn");
+
             foreach (var udBase in UnitData)
             {
                 // clone the unit data to prevent modifying the original stats
                 var udCopy = udBase.Duplicate<UnitData>();
 
-                var unitSelectionBox = unitSelectionBoxScene.Instantiate<UnitSelectionBox>();
+                var unitSelectionBox = UnitSelectionBox.New();
                 unitSelectionBox.Icon = udCopy.Icon;
                 unitSelectionBox.Selected += (selected) =>
                 {
@@ -65,7 +65,7 @@ namespace Riftstrike.src.GameSetup
             FightButton.Pressed += () =>
             {
                 if (GlobalState.UnitData.Count == 0) return;
-                GetTree().ChangeSceneToPacked(SceneLoader.GameScene);
+                GetTree().ChangeSceneToPacked(Game.Scene);
             };
         }
     }

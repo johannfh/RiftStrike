@@ -9,6 +9,14 @@ namespace Riftstrike.enemies
 	[GlobalClass]
 	public partial class Festerkin : Enemy, IHitable
 	{
+		private const string SCENE_PATH = "res://src/enemies/festerkin/festerkin.tscn";
+
+		public static PackedScene Scene
+			=> GD.Load<PackedScene>(SCENE_PATH);
+
+		public static Festerkin New()
+			=> Scene.Instantiate<Festerkin>();
+
 		[Export]
 		private NavigationAgent2D NavAgent;
 

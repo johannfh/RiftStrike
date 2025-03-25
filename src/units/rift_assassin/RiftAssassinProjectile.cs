@@ -8,11 +8,13 @@ namespace Riftstrike.src.units
 {
     public partial class RiftAssassinProjectile : Node2D
     {
-        public const string SCENE_PATH = "res://src/units/rift_assassin/rift_assassin_projectile.tscn";
+        private const string SCENE_PATH = "res://src/units/rift_assassin/rift_assassin_projectile.tscn";
+
+        public static PackedScene Scene
+            => GD.Load<PackedScene>(SCENE_PATH);
 
         public static RiftAssassinProjectile New()
-            => GD.Load<PackedScene>(SCENE_PATH)
-                .Instantiate<RiftAssassinProjectile>();
+            => Scene.Instantiate<RiftAssassinProjectile>();
 
         [Export]
         private double Speed;

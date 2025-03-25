@@ -13,7 +13,7 @@ namespace Riftstrike.src.WaveShop
             NextWaveButton.Pressed += () =>
             {
                 GlobalState.Wave++;
-                GetTree().ChangeSceneToPacked(SceneLoader.GameScene);
+                GetTree().ChangeSceneToPacked(Game.Scene);
             };
         }
 

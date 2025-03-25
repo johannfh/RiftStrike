@@ -4,6 +4,14 @@ namespace Riftstrike.src.RiftShard
 {
     public partial class RiftShard : Area2D
     {
+        private const string SCENE_PATH = "res://src/RiftShard/rift_shard.tscn";
+
+        public static PackedScene Scene
+            => GD.Load<PackedScene>(SCENE_PATH);
+
+        public static RiftShard New()
+            => Scene.Instantiate<RiftShard>();
+
         [ExportGroup("Textures")]
 
         [Export]

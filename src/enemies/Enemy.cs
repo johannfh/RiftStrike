@@ -26,8 +26,7 @@ namespace Riftstrike.enemies
         public new void QueueFree()
         {
             // drop rift shard
-            var riftShard = GD.Load<PackedScene>("res://src/RiftShard/rift_shard.tscn")
-                .Instantiate<RiftShard>();
+            var riftShard = RiftShard.New();
             riftShard.GlobalPosition = GlobalPosition + new Vector2(
                 rng.RandfRange(-RANDOM_DROP_OFFSET, RANDOM_DROP_OFFSET),
                 rng.RandfRange(-RANDOM_DROP_OFFSET, RANDOM_DROP_OFFSET)

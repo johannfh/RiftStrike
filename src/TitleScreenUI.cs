@@ -1,10 +1,16 @@
 using Godot;
 using Riftstrike.src;
+using Riftstrike.src.GameSetup;
 
 namespace Riftstrike
 {
     public partial class TitleScreenUI : Control
     {
+        private const string SCENE_PATH = "res://src/title_screen_ui.tscn";
+
+        public static PackedScene Scene
+            => GD.Load<PackedScene>(SCENE_PATH);
+
         [Export]
         private Button PlayButton;
 
@@ -15,7 +21,7 @@ namespace Riftstrike
 
             PlayButton.Pressed += () =>
             {
-                GetTree().ChangeSceneToPacked(SceneLoader.GameSetupScene);
+                GetTree().ChangeSceneToPacked(GameSetup.Scene);
             };
         }
 

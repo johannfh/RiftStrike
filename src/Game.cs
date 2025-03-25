@@ -4,11 +4,17 @@ using System.Linq;
 using Godot;
 using Riftstrike.enemies;
 using Riftstrike.src;
+using Riftstrike.src.WaveShop;
 
 namespace Riftstrike
 {
     public partial class Game : Node2D
     {
+        private const string SCENE_PATH = "res://src/game.tscn";
+
+        public static PackedScene Scene
+            => GD.Load<PackedScene>(SCENE_PATH);
+
         const float WAVE_DURATION_SCALE = 5;
         const float MAX_WAVE_DURATION = 60;
 
@@ -48,25 +54,24 @@ namespace Riftstrike
 
         private void SpawnEnemies()
         {
-#if DEBUG
             var start = DateTime.Now;
-#endif
+
+            // get spawn positions
             var enemySpawnCount = 2 + EnemySpawnCountScale * (GlobalState.Wave - GlobalState.DEFAULT_WAVE);
             var positions = GetSafeEnemySpawnPoints(enemySpawnCount);
-#if DEBUG
+
             var end = DateTime.Now;
-            GD.Print($"Time taken for spawn: {(end - start).TotalMilliseconds}ms");
-#endif
+            Debug.Print($"Time taken for spawn: {(end - start).TotalMilliseconds}ms");
+
             foreach (var pos in positions)
             {
-                var enemy = GD.Load<PackedScene>("res://src/enemies/festerkin/festerkin.tscn")
-                    .Instantiate<Enemy>();
+                var enemy = Festerkin.New();
                 enemy.GlobalPosition = pos;
                 Map.AddChild(enemy);
             }
         }
 
-        private static IEnumerable<Vector2> GetSafeEnemySpawnPoints(int count)
+        private static List<Vector2> GetSafeEnemySpawnPoints(int count)
         {
             var map = GetNavMap();
             var result = new List<Vector2>();
@@ -143,7 +148,7 @@ namespace Riftstrike
             GD.Print($"Rift Shards: {GlobalState.RiftShards} (+{riftShardsDiff})");
 
             GD.Print("Opening wave shop!");
-            GetTree().ChangeSceneToPacked(SceneLoader.WaveShopScene);
+            GetTree().ChangeSceneToPacked(WaveShop.Scene);
         }
 
         public override void _Process(double delta)
@@ -159,7 +164,7 @@ namespace Riftstrike
         private void HandleGameOver()
         {
             GD.Print("Game Over!");
-            GetTree().ChangeSceneToPacked(SceneLoader.TitleScreenScene);
+            GetTree().ChangeSceneToPacked(TitleScreenUI.Scene);
         }
     }
 }

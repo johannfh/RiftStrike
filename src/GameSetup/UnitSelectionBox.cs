@@ -4,6 +4,14 @@ namespace Riftstrike.src.GameSetup
 {
     public partial class UnitSelectionBox : AspectRatioContainer
     {
+        private const string SCENE_PATH = "res://src/GameSetup/unit_selection_box.tscn";
+
+        public static PackedScene Scene
+            => GD.Load<PackedScene>(SCENE_PATH);
+
+        public static UnitSelectionBox New()
+            => Scene.Instantiate<UnitSelectionBox>();
+
         private bool isSelected;
         public bool IsSelected
         {
