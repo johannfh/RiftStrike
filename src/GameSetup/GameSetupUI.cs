@@ -32,10 +32,13 @@ namespace Riftstrike.src.GameSetup
 
             // render selection boxes for every unit data
             var unitSelectionBoxScene = GD.Load<PackedScene>("res://src/GameSetup/unit_selection_box.tscn");
-            foreach (var ud in UnitData)
+            foreach (var udBase in UnitData)
             {
+                // clone the unit data to prevent modifying the original stats
+                var udCopy = udBase.Duplicate<UnitData>();
+
                 var unitSelectionBox = unitSelectionBoxScene.Instantiate<UnitSelectionBox>();
-                unitSelectionBox.Icon = ud.Icon;
+                unitSelectionBox.Icon = udCopy.Icon;
                 unitSelectionBox.Selected += (selected) =>
                 {
                     Debug.Print(selected);
@@ -43,19 +46,16 @@ namespace Riftstrike.src.GameSetup
                     {
                         if (GlobalState.UnitData.Count < MaxUnits)
                         {
-                            GlobalState.UnitData.Add(ud);
+                            GlobalState.UnitData.Add(udCopy);
                             unitSelectionBox.IsSelected = true;
                             Debug.Print($"Units chosen for next game: {string.Join(", ", GlobalState.UnitData.Select(ud => ud.ResourcePath.Split("/").Last()))}");
                         }
                     }
                     else
                     {
-                        if (GlobalState.UnitData.Contains(ud))
-                        {
-                            GlobalState.UnitData.Remove(ud);
-                            unitSelectionBox.IsSelected = false;
-                            Debug.Print($"Units chosen for next game: {string.Join(", ", GlobalState.UnitData.Select(ud => ud.ResourcePath.Split("/").Last()))}");
-                        }
+                        GlobalState.UnitData.Remove(udCopy);
+                        unitSelectionBox.IsSelected = false;
+                        Debug.Print($"Units chosen for next game: {string.Join(", ", GlobalState.UnitData.Select(ud => ud.ResourcePath.Split("/").Last()))}");
                     }
 
                 };
