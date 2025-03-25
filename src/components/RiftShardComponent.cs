@@ -13,7 +13,7 @@ namespace Riftstrike.components
             AreaEntered += OnAreaEntered;
         }
 
-        private readonly List<(RiftShard, float)> collectedShards = new();
+        private readonly List<(RiftShard, float)> collectedShards = [];
 
         private void OnAreaEntered(Area2D area)
         {

@@ -11,7 +11,7 @@ namespace Riftstrike.src.units
         [ExportGroup("Movement")]
         [Export] private float speed = 200;
         [Export] private float pushSpeed = 50;
-        private readonly List<Vector2> targets = new();
+        private readonly List<Vector2> targets = [];
 
         [ExportGroup("Attacks")]
         [Export] private float projectileSpeed = 300;

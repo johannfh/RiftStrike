@@ -17,7 +17,7 @@ namespace Riftstrike.src.WaveShop
             UpgradeShop.AllUpgradesPurchased += ToItemShop;
 
             // directly jump to item shop when there are no remaining levelups
-            if (GlobalState.UnitData.Select(ud => ud.RemainingLevelups.Any()).Any()) UpgradeShop.GetNextUpgrades();
+            if (GlobalState.UnitData.Select(ud => ud.RemainingLevelups.Count != 0).Any()) UpgradeShop.GetNextUpgrades();
             else ToItemShop();
         }
 

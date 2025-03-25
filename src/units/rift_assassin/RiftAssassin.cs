@@ -25,7 +25,7 @@ namespace Riftstrike.src.units
         private float baseAttackRange = 500;
         #endregion
 
-        private readonly List<Vector2> targets = new();
+        private readonly List<Vector2> targets = [];
         #endregion
 
         #region Selection
@@ -108,17 +108,17 @@ namespace Riftstrike.src.units
         {
             base._PhysicsProcess(delta);
             #region Movement
-            if (targets.Any() && NavAgent.GetNextPathPosition() != targets.First())
+            if (targets.Count != 0 && NavAgent.GetNextPathPosition() != targets.First())
             {
                 NavAgent.TargetPosition = targets.First();
             }
-            if (targets.Any() && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5)
+            if (targets.Count != 0 && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5)
             {
                 targets.RemoveAt(0);
             }
             var nextPos = NavAgent.GetNextPathPosition();
 
-            if (targets.Any())
+            if (targets.Count != 0)
             {
                 GlobalPosition = GlobalPosition.MoveToward(nextPos, (float)(speed * delta));
             }
@@ -135,7 +135,7 @@ namespace Riftstrike.src.units
             var count = 1 + Math.Max(CurrentStats.ProjectileBounces, 0);
             var enemies = GlobalPosition.GetNearbyEnemyChain(count, baseAttackRange);
 
-            if (!enemies.Any()) return;
+            if (enemies.Count == 0) return;
             Debug.Print($"Got {enemies.Count}/{count} targets to shoot at");
             AttackTimer.Start();
             ShootBullet(enemies);

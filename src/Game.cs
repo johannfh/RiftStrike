@@ -149,7 +149,7 @@ namespace Riftstrike
         public override void _Process(double delta)
         {
             base._Process(delta);
-            if (!UnitManager.Instance.units.Any() && !gameOver)
+            if (UnitManager.Instance.units.Count == 0 && !gameOver)
             {
                 gameOver = true;
                 HandleGameOver();

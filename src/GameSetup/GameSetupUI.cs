@@ -9,7 +9,7 @@ namespace Riftstrike.src.GameSetup
     public partial class GameSetupUI : Control
     {
         [Export]
-        private Array<UnitData> UnitData = new();
+        private Array<UnitData> UnitData = [];
 
         [Export]
         private HBoxContainer UnitSelectionBoxesContainer;
@@ -64,7 +64,7 @@ namespace Riftstrike.src.GameSetup
 
             FightButton.Pressed += () =>
             {
-                if (!GlobalState.UnitData.Any()) return;
+                if (GlobalState.UnitData.Count == 0) return;
                 GetTree().ChangeSceneToPacked(SceneLoader.GameScene);
             };
         }

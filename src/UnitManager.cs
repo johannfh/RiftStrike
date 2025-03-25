@@ -72,8 +72,8 @@ namespace Riftstrike
             }
         }
 
-        public readonly Array<Unit> units = new();
-        public readonly Array<Unit> unitsSelected = new();
+        public readonly Array<Unit> units = [];
+        public readonly Array<Unit> unitsSelected = [];
 
         public void HandleSelectUnit()
         {

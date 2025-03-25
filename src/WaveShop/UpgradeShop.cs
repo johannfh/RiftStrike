@@ -10,7 +10,7 @@ namespace Riftstrike.src.WaveShop
     public partial class UpgradeShop : MarginContainer
     {
         [Export]
-        private Array<UpgradeBox> UpgradeBoxes = new();
+        private Array<UpgradeBox> UpgradeBoxes = [];
 
         [Export]
         private Button RerollUpgradesButton;
@@ -47,7 +47,7 @@ namespace Riftstrike.src.WaveShop
                 var insufficientShards = GlobalState.RiftShards < NextRerollCosts;
                 var animationPlaying = AnimationPlayer.CurrentAnimation == "click_RerollUpgradesButton";
                 var upgradeChosen = UpgradeBoxes.Any(u => u.Chosen);
-                var upgradePoolEmpty = !GlobalState.UnitData.Any(u => u.RemainingLevelups.Any());
+                var upgradePoolEmpty = !GlobalState.UnitData.Any(u => u.RemainingLevelups.Count != 0);
 
                 if (insufficientShards || animationPlaying || upgradeChosen || upgradePoolEmpty) return;
                 GlobalState.RiftShards -= NextRerollCosts;
@@ -122,7 +122,7 @@ namespace Riftstrike.src.WaveShop
         public void GetNextUpgrades()
         {
             var unitsWithLevelups = GlobalState.UnitData
-                .Where(u => u.RemainingLevelups.Any());
+                .Where(u => u.RemainingLevelups.Count != 0);
 
             GD.Print($"Units with levelups: {unitsWithLevelups.Count()}");
 
@@ -185,7 +185,7 @@ namespace Riftstrike.src.WaveShop
 
         private void ChooseUpgradeHandler(Upgrade upgrade)
         {
-            if (CurrentUnitData == null || !CurrentUnitData.RemainingLevelups.Any()) return;
+            if (CurrentUnitData == null || CurrentUnitData.RemainingLevelups.Count == 0) return;
             GD.Print($"Upgrade {upgrade.ResourcePath} chosen");
 
             // apply upgrade

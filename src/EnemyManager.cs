@@ -25,7 +25,7 @@ namespace Riftstrike
             if (Instance == this) Instance = null;
         }
 
-        private readonly List<Enemy> enemies = new();
+        private readonly List<Enemy> enemies = [];
         public static List<Enemy> Enemies => Instance.enemies;
     }
 }

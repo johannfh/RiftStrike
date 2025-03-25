@@ -12,7 +12,7 @@ namespace Riftstrike.src
 
         public static GlobalState Instance { get; private set; }
 
-        private readonly Array<UnitData> unitData = new();
+        private readonly Array<UnitData> unitData = [];
         public static Array<UnitData> UnitData
         {
             get => Instance.unitData;

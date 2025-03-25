@@ -14,7 +14,7 @@ namespace Riftstrike.src.units
         public Texture2D Icon;
 
         [Export]
-        public Array<Upgrade> Upgrades = new();
+        public Array<Upgrade> Upgrades = [];
 
         [Export]
         public Stats BaseStats { get; private set; } = new();
@@ -23,7 +23,7 @@ namespace Riftstrike.src.units
         public ulong Level { get; private set; } = 1;
 
         [Export]
-        public Array<ulong> RemainingLevelups = new();
+        public Array<ulong> RemainingLevelups = [];
 
         private double experience;
         public double Experience

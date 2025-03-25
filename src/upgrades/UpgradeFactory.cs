@@ -8,7 +8,7 @@ namespace Riftstrike.upgrades
         public static UpgradeFactory Instance { get; private set; }
 
         [Export]
-        private Array<Upgrade> LevelupUpgrades = new();
+        private Array<Upgrade> LevelupUpgrades = [];
 
         private static readonly RandomNumberGenerator rng = new();
 

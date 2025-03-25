@@ -9,7 +9,7 @@ namespace Riftstrike.src.WaveShop
     {
 
         [Export]
-        private Array<RarityToTexture2D> RarityTextures = new();
+        private Array<RarityToTexture2D> RarityTextures = [];
 
         [Export]
         private TextureRect RarityTextureRect;

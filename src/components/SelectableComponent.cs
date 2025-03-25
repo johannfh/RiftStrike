@@ -25,7 +25,7 @@ namespace Riftstrike.components
 				.Select(v => v["collider"].As<SelectableComponent>().unit)
 				.OrderBy(u => -u.GlobalPosition.Y);
 				var overlappingSelectors = GetOverlappingAreas();
-				return (units.Any() && units.First() == unit) || overlappingSelectors.Any();
+				return (units.Any() && units.First() == unit) || overlappingSelectors.Count != 0;
 			}
 		}
 		public bool IsSelected

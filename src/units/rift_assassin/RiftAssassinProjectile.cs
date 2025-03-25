@@ -38,7 +38,7 @@ namespace Riftstrike.src.units
             // remove any invalid instances (e.g. if an enemy has died recently)
             Enemies.RemoveAll(enemy => !IsInstanceValid(enemy));
 
-            if (!Enemies.Any())
+            if (Enemies.Count == 0)
             {
                 QueueFree();
                 return;
@@ -65,7 +65,7 @@ namespace Riftstrike.src.units
 
         private void UpdateSpriteRotation()
         {
-            if (!Enemies.Any()) return;
+            if (Enemies.Count == 0) return;
             var nextTarget = Enemies.First();
             if (!IsInstanceValid(nextTarget)) return;
             Sprite.Rotation = GlobalPosition.AngleToPoint(nextTarget.GlobalPosition);
