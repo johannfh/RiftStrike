@@ -9,6 +9,20 @@ namespace Riftstrike
 {
     public partial class Game : Node2D
     {
+        private static Game Instance;
+
+        public static bool WaveOver
+            => Instance.WaveEndTimer.IsStopped();
+
+        [Export]
+        private Timer NextSceneTimer;
+
+        public override void _ExitTree()
+        {
+            base._ExitTree();
+            Instance = null;
+        }
+
         private const string SCENE_PATH = "res://src/game.tscn";
 
         public static PackedScene Scene
@@ -129,7 +143,10 @@ namespace Riftstrike
         public override void _Ready()
         {
             base._Ready();
+            Instance = this;
             CursorSettings.LoadCursors();
+
+            NextSceneTimer.Timeout += () => GetTree().ChangeSceneToPacked(WaveShop.Scene);
 
             PauseMenu.PausedChanged += paused =>
             {
@@ -175,7 +192,7 @@ namespace Riftstrike
             GD.Print($"Rift Shards: {GlobalState.RiftShards} (+{riftShardsDiff})");
 
             GD.Print("Opening wave shop!");
-            GetTree().ChangeSceneToPacked(WaveShop.Scene);
+            NextSceneTimer.Start();
         }
 
         public override void _Process(double delta)

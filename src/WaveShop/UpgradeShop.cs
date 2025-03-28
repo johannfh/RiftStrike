@@ -29,6 +29,9 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private UnitStatsDisplay UnitStatsDisplay;
 
+        [Export]
+        private AudioStreamPlayer PopSoundAudioStreamPlayer;
+
 #nullable enable
 
         private ulong NextRerollCosts = 1;
@@ -36,13 +39,15 @@ namespace Riftstrike.src.WaveShop
         public override void _Ready()
         {
             base._Ready();
+
             foreach (var upgradeBox in UpgradeBoxes)
-            {
                 upgradeBox.ChooseUpgrade += ChooseUpgradeHandler;
-            }
+
+            RerollUpgradesButton.MouseEntered += () => PopSoundAudioStreamPlayer.Play();
 
             RerollUpgradesButton.Pressed += () =>
             {
+                PopSoundAudioStreamPlayer.Play();
                 var insufficientShards = GlobalState.RiftShards < NextRerollCosts;
                 var animationPlaying = AnimationPlayer.CurrentAnimation == "click_RerollUpgradesButton";
                 var upgradeChosen = UpgradeBoxes.Any(u => u.Chosen);

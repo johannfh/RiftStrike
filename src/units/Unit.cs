@@ -51,7 +51,7 @@ namespace Riftstrike.src.units
             {
                 // retrieve enemies not yet in result
                 var enemies = EnemyManager.Enemies
-                    .Where(e => !result.Contains(e));
+                    .Where(e => e.IsAlive && !result.Contains(e));
 
                 // if there are no enemies, return current result
                 if (!enemies.Any()) break;
@@ -78,7 +78,7 @@ namespace Riftstrike.src.units
     {
         public static Enemy GetNearestEnemyTo(this Enemy enemy)
         {
-            var enemies = EnemyManager.Enemies.Where(e => e != enemy);
+            var enemies = EnemyManager.Enemies.Where(e => e.IsAlive && e != enemy);
             if (!enemies.Any()) return null;
 
             Enemy nearest = null;

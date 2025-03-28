@@ -33,6 +33,12 @@ namespace Riftstrike.src.units
 
         public override void _PhysicsProcess(double delta)
         {
+            if (Game.WaveOver)
+            {
+                QueueFree();
+                return;
+            }
+
             base._PhysicsProcess(delta);
 
             // remove any invalid instances (e.g. if an enemy has died recently)

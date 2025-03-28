@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://xepapvohrh5"]
+[gd_scene load_steps=18 format=3 uid="uid://xepapvohrh5"]
 
 [ext_resource type="Script" uid="uid://djak47gflkfbj" path="res://src/enemies/festerkin/Festerkin.cs" id="1_4b7xi"]
 [ext_resource type="Script" uid="uid://dv4wvjyl8cb6o" path="res://src/components/PushComponent.cs" id="2_nr7fl"]
+[ext_resource type="AudioStream" uid="uid://b11vw8k4vkwoo" path="res://src/assets/sounds/enemy-died.wav" id="2_tmdm4"]
 [ext_resource type="Texture2D" uid="uid://bmcvbaehh3ie6" path="res://src/assets/enemies/festerkin/festerkin.png" id="3_1o71y"]
 [ext_resource type="Script" uid="uid://bd2vb71x1f35v" path="res://src/components/HitboxComponent.cs" id="3_2iacg"]
 [ext_resource type="Script" uid="uid://dbj47raw5m83x" path="res://src/RandomTimer.cs" id="5_pydac"]
@@ -49,16 +50,75 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_tmdm4"]
+resource_name = "death"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(4, 4), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HealthBar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ilaup"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HealthBar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mk3da"]
 _data = {
+&"RESET": SubResource("Animation_ilaup"),
 &"blink": SubResource("Animation_a56l6"),
+&"death": SubResource("Animation_tmdm4"),
 &"walk": SubResource("Animation_p541c")
 }
 
-[node name="Festerkin" type="Node2D" node_paths=PackedStringArray("NavAgent", "AnimationPlayer", "Sprite", "RecalculateTargetTimer", "PushComponent", "HitboxComponent", "AttackTimer", "BlinkTimer", "HealthComponent")]
+[node name="Festerkin" type="Node2D" node_paths=PackedStringArray("NavAgent", "AnimationPlayer", "DeathSoundAudioStreamPlayer", "Sprite", "RecalculateTargetTimer", "PushComponent", "HitboxComponent", "AttackTimer", "BlinkTimer", "HealthComponent")]
 script = ExtResource("1_4b7xi")
 NavAgent = NodePath("NavigationAgent2D")
 AnimationPlayer = NodePath("AnimationPlayer")
+DeathSoundAudioStreamPlayer = NodePath("DeathSoundAudioStreamPlayer2D")
 Sprite = NodePath("Sprite2D")
 RecalculateTargetTimer = NodePath("RecalculateTargetTimer")
 PushComponent = NodePath("PushComponent")
@@ -68,6 +128,11 @@ BlinkTimer = NodePath("BlinkTimer")
 HealthComponent = NodePath("HealthComponent")
 speed = 300.0
 targetOvershootDistance = 150.0
+
+[node name="DeathSoundAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_tmdm4")
+volume_db = -20.0
+area_mask = 2
 
 [node name="PushComponent" type="Area2D" parent="."]
 collision_layer = 131072
@@ -91,12 +156,11 @@ position = Vector2(0, -64)
 scale = Vector2(4, 4)
 texture = ExtResource("3_1o71y")
 hframes = 4
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_mk3da")
+&"": SubResource("AnimationLibrary_mk3da")
 }
 speed_scale = 0.5
 
@@ -122,6 +186,7 @@ offset_left = -40.0
 offset_top = 10.0
 offset_right = 40.0
 offset_bottom = 30.0
+pivot_offset = Vector2(40, 10)
 theme_override_styles/background = ExtResource("7_e6l3h")
 theme_override_styles/fill = ExtResource("8_2fi66")
 value = 50.0

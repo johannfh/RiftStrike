@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bevjk7bpcj3jl"]
+[gd_scene load_steps=19 format=3 uid="uid://bevjk7bpcj3jl"]
 
 [ext_resource type="Script" uid="uid://d4bny0ukeyp6n" path="res://src/WaveShop/UpgradeBox.cs" id="1_kbrbs"]
 [ext_resource type="Texture2D" uid="uid://bm5kwmtqqmruk" path="res://src/resources/rarity_textures/common.tres" id="2_2vcoh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://pdvhtp40bq86" path="res://src/resources/rarity_textures/rare.tres" id="4_gg7ht"]
 [ext_resource type="Texture2D" uid="uid://d3l7jhb5nbbcv" path="res://src/resources/rarity_textures/epic.tres" id="5_qepo7"]
 [ext_resource type="Texture2D" uid="uid://c4a5bverkdcci" path="res://src/resources/rarity_textures/legendary.tres" id="6_41m4a"]
+[ext_resource type="AudioStream" uid="uid://b76b04xtstef8" path="res://src/assets/sounds/pop.wav" id="8_e0d0t"]
 [ext_resource type="Texture2D" uid="uid://bjxbm211f62bw" path="res://src/assets/AttackModule.png" id="8_p6gta"]
 
 [sub_resource type="Resource" id="Resource_goo15"]
@@ -124,7 +125,7 @@ _data = {
 &"click_ChooseUpgradeButton": SubResource("Animation_7v2fy")
 }
 
-[node name="UpgradeBox" type="AspectRatioContainer" node_paths=PackedStringArray("RarityTextureRect", "ChooseUpgradeButton", "UpgradeLabel", "AnimationPlayer")]
+[node name="UpgradeBox" type="AspectRatioContainer" node_paths=PackedStringArray("RarityTextureRect", "ChooseUpgradeButton", "UpgradeLabel", "AnimationPlayer", "PopSoundAudioStreamPlayer")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -137,11 +138,17 @@ offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kbrbs")
-RarityTextures = [SubResource("Resource_goo15"), SubResource("Resource_sl6wr"), SubResource("Resource_42vdb"), SubResource("Resource_03vlr"), SubResource("Resource_7p2yy")]
+RarityTextures = Array[ExtResource("2_se2r3")]([SubResource("Resource_goo15"), SubResource("Resource_sl6wr"), SubResource("Resource_42vdb"), SubResource("Resource_03vlr"), SubResource("Resource_7p2yy")])
 RarityTextureRect = NodePath("CenterContainer/RarityTextureRect")
 ChooseUpgradeButton = NodePath("CenterContainer/Control/ChooseUpgradeButton")
 UpgradeLabel = NodePath("CenterContainer/Control/Label")
 AnimationPlayer = NodePath("AnimationPlayer")
+PopSoundAudioStreamPlayer = NodePath("PopSoundAudioStreamPlayer")
+
+[node name="PopSoundAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_e0d0t")
+volume_db = -20.0
+pitch_scale = 0.8
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(128, 128)
@@ -194,5 +201,5 @@ vertical_alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_w4xjk")
+&"": SubResource("AnimationLibrary_w4xjk")
 }

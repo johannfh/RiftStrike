@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://che1j0eyupvc4"]
+[gd_scene load_steps=7 format=3 uid="uid://che1j0eyupvc4"]
 
 [ext_resource type="Script" uid="uid://2bdmjgl2ko80" path="res://src/RiftShard/RiftShard.cs" id="1_jlorh"]
 [ext_resource type="Texture2D" uid="uid://bp7o26awumcst" path="res://src/assets/RiftShardSmall.png" id="2_8xhd1"]
 [ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="3_cbwyq"]
 [ext_resource type="Texture2D" uid="uid://c3pcxucdwnjvq" path="res://src/assets/RiftShardLarge.png" id="4_od0sf"]
+[ext_resource type="AudioStream" uid="uid://b3vmbaaeqai8f" path="res://src/assets/sounds/riftshard-collected.wav" id="5_6kjd0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s40uy"]
 radius = 50.0
 
-[node name="RiftShard" type="Area2D" node_paths=PackedStringArray("Sprite")]
+[node name="RiftShard" type="Area2D" node_paths=PackedStringArray("Sprite", "CollectedSoundAudioStreamPlayer")]
 collision_layer = 512
 collision_mask = 0
 monitoring = false
@@ -20,6 +21,12 @@ ThresholdMedium = 5
 ThresholdLarge = 10
 Reward = 5
 Sprite = NodePath("Sprite2D")
+CollectedSoundAudioStreamPlayer = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6kjd0")
+volume_db = -30.0
+area_mask = 512
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)

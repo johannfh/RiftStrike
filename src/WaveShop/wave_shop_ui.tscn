@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://byjv7jtoirsp3"]
+[gd_scene load_steps=22 format=3 uid="uid://byjv7jtoirsp3"]
 
 [ext_resource type="Script" uid="uid://6r06qnbpv2j" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
 [ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_c1im7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ld7x8euadmmu" path="res://src/assets/dice/Dice_4.png" id="6_jyrnu"]
 [ext_resource type="Texture2D" uid="uid://b08t5v6uooogj" path="res://src/assets/dice/Dice_6.png" id="8_skjtv"]
 [ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="11_61kk1"]
+[ext_resource type="AudioStream" uid="uid://b76b04xtstef8" path="res://src/assets/sounds/pop.wav" id="15_4w6xb"]
 
 [sub_resource type="Animation" id="Animation_n3ahh"]
 length = 0.001
@@ -176,10 +177,15 @@ UpgradeShop = NodePath("UpgradeShop")
 ItemShop = NodePath("ItemShop")
 metadata/_edit_use_anchors_ = true
 
+[node name="PopSoundAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_4w6xb")
+volume_db = -10.0
+pitch_scale = 0.6
+
 [node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
 layout_mode = 0
 
-[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect", "UnitStatsDisplay")]
+[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect", "UnitStatsDisplay", "PopSoundAudioStreamPlayer")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,6 +199,7 @@ AnimationPlayer = NodePath("AnimationPlayer")
 RerollCostsLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/RerollCostsLabel")
 CurrentUnitIconTextureRect = NodePath("UnitDataDisplay/MarginContainer/VBoxContainer/Control/CurrentUnitIcon")
 UnitStatsDisplay = NodePath("UnitDataDisplay/MarginContainer/VBoxContainer/UnitStatsDisplay")
+PopSoundAudioStreamPlayer = NodePath("../PopSoundAudioStreamPlayer")
 
 [node name="UnitDataDisplay" type="Control" parent="UpgradeShop"]
 layout_mode = 2
@@ -242,7 +249,7 @@ size_flags_vertical = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UpgradeShop"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_vj0nn")
+&"": SubResource("AnimationLibrary_vj0nn")
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop"]
@@ -330,7 +337,7 @@ texture = ExtResource("11_61kk1")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ItemShop" type="CenterContainer" parent="." node_paths=PackedStringArray("NextWaveButton")]
+[node name="ItemShop" type="CenterContainer" parent="." node_paths=PackedStringArray("NextWaveButton", "PopSoundAudioStreamPlayer")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -340,6 +347,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_fjoik")
 NextWaveButton = NodePath("VBoxContainer/Control/NextWaveButton")
+PopSoundAudioStreamPlayer = NodePath("../PopSoundAudioStreamPlayer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ItemShop"]
 layout_mode = 2

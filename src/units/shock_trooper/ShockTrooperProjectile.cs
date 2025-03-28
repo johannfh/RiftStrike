@@ -46,6 +46,12 @@ namespace Riftstrike.src.units
 
         public override void _PhysicsProcess(double delta)
         {
+            if (Game.WaveOver)
+            {
+                QueueFree();
+                return;
+            }
+
             base._PhysicsProcess(delta);
             // move bullet
             GlobalPosition += Velocity * (float)delta;
@@ -76,7 +82,7 @@ namespace Riftstrike.src.units
                 // get all (not yet hit) enemies ordered by distance
                 var enemies = EnemyManager.Enemies
                     .OrderBy(e => e.GlobalPosition.DistanceTo(GlobalPosition))
-                    .Where(e => !alreadyHitEnemies.Contains(e));
+                    .Where(e => e.IsAlive && !alreadyHitEnemies.Contains(e));
 
                 // retarget closest next enemy (if any)
                 if (enemies.Any())

@@ -85,6 +85,9 @@ namespace Riftstrike.src.units
 
         private void HandleDeath()
         {
+            // immortal when wave is over
+            if (Game.WaveOver) return;
+
             GD.Print($"{Name} died!");
             QueueFree();
         }
@@ -105,6 +108,9 @@ namespace Riftstrike.src.units
 
         public override void _PhysicsProcess(double delta)
         {
+            // freeze when game is over
+            if (Game.WaveOver) return;
+
             base._PhysicsProcess(delta);
             #region Movement
             if (targets.Count != 0 && NavAgent.GetNextPathPosition() != targets.First())

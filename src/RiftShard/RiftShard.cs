@@ -45,8 +45,12 @@ namespace Riftstrike.src.RiftShard
         }
 
         [ExportGroup("Internal")]
+
         [Export]
         private Sprite2D Sprite;
+
+        [Export]
+        private AudioStreamPlayer2D CollectedSoundAudioStreamPlayer;
 
         public bool Collected { get; private set; } = false;
         public void Collect()
@@ -54,6 +58,7 @@ namespace Riftstrike.src.RiftShard
             if (Collected) return;
             Collected = true;
             GlobalState.RiftShards += Reward;
+            CollectedSoundAudioStreamPlayer.Play();
             Debug.Print($"{Name} was collected!");
         }
 

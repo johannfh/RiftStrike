@@ -25,6 +25,9 @@ namespace Riftstrike.src.WaveShop
         [Signal]
         public delegate void ChooseUpgradeEventHandler(Upgrade upgrade);
 
+        [Export]
+        private AudioStreamPlayer PopSoundAudioStreamPlayer;
+
 #nullable enable
 
         private Upgrade? upgrade;
@@ -88,6 +91,7 @@ namespace Riftstrike.src.WaveShop
         public override void _Ready()
         {
             base._Ready();
+            ChooseUpgradeButton.MouseEntered += () => PopSoundAudioStreamPlayer.Play();
             ChooseUpgradeButton.Pressed += () =>
             {
                 AnimationPlayer.Stop();

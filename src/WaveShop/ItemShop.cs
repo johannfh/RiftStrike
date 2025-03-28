@@ -5,12 +5,21 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private Button NextWaveButton;
 
+        [Export]
+        private AudioStreamPlayer PopSoundAudioStreamPlayer;
+
         public override void _Ready()
         {
             base._Ready();
             NextWaveButton.Pressed += () =>
             {
                 GlobalState.Wave++;
+
+                // move player to scene root to make sounds finish
+                PopSoundAudioStreamPlayer.Reparent(GetTree().Root);
+                PopSoundAudioStreamPlayer.Finished += PopSoundAudioStreamPlayer.QueueFree;
+                PopSoundAudioStreamPlayer.Play();
+
                 GetTree().ChangeSceneToPacked(Game.Scene);
             };
         }

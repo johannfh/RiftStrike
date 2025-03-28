@@ -23,6 +23,9 @@ namespace Riftstrike.enemies
 		private AnimationPlayer AnimationPlayer;
 
 		[Export]
+		private AudioStreamPlayer2D DeathSoundAudioStreamPlayer;
+
+		[Export]
 		private Sprite2D Sprite;
 
 		[Export]
@@ -60,8 +63,18 @@ namespace Riftstrike.enemies
 			AnimationPlayer.Play("walk");
 			RecalculateTargetTimer.Timeout += RecalculateTarget;
 			RecalculateTarget();
-			BlinkTimer.Timeout += () => AnimationPlayer.Play("blink");
-			AnimationPlayer.AnimationFinished += (_) => AnimationPlayer.Play("walk");
+			BlinkTimer.Timeout += () =>
+			{
+				if (AnimationPlayer.CurrentAnimation == "death") return;
+				AnimationPlayer.Play("blink");
+			};
+
+			AnimationPlayer.AnimationFinished += anim =>
+			{
+				if (anim == "walk") AnimationPlayer.Play("walk");
+				if (anim == "death") QueueFree();
+			};
+
 			AttackTimer.WaitTime = attackCooldown;
 			HitboxComponent.Hit += (dmg, attacker) =>
 			{
@@ -87,9 +100,22 @@ namespace Riftstrike.enemies
 
 		private void HandleDeath()
 		{
+			// immortal when wave is over
+			if (Game.WaveOver) return;
+
+			if (!IsAlive) return;
+			IsAlive = false;
+
 			// give last attacker (if any) the experience on death
 			if (lastAttacker != null) lastAttacker.Experience += ExperienceReward;
-			QueueFree();
+
+			// play death sound
+			DeathSoundAudioStreamPlayer.Reparent(GetParent());
+			DeathSoundAudioStreamPlayer.Finished += DeathSoundAudioStreamPlayer.QueueFree;
+			DeathSoundAudioStreamPlayer.Play();
+
+			// play death animation
+			AnimationPlayer.Play("death");
 		}
 
 		private void RecalculateTarget()
@@ -107,11 +133,14 @@ namespace Riftstrike.enemies
 
 		public override void _PhysicsProcess(double delta)
 		{
+			// freeze when wave is over or died
+			if (Game.WaveOver || !IsAlive) return;
+
 			base._PhysicsProcess(delta);
 			var nextPos = NavAgent.GetNextPathPosition();
 			GlobalPosition = GlobalPosition.MoveToward(nextPos, (float)speed * (float)delta);
 			GlobalPosition += PushComponent.PushDirection * (float)pushForce * (float)delta;
-			if (NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) RecalculateTarget();
+			if (!Game.WaveOver && NavAgent.GetFinalPosition().DistanceTo(GlobalPosition) < 5) RecalculateTarget();
 
 			var hitboxes = HitboxComponent.OverlappingHitboxes;
 			if (hitboxes.Any() && AttackTimer.IsStopped())

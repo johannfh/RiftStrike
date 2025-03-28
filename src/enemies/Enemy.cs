@@ -11,6 +11,8 @@ namespace Riftstrike.enemies
         [Export(PropertyHint.None)]
         public ulong RiftShardReward = 1;
 
+        public bool IsAlive = true;
+
         static readonly RandomNumberGenerator rng = new();
 
         public override void _Ready()

@@ -64,6 +64,9 @@ namespace Riftstrike.src.units
 
         private void HandleDeath()
         {
+            // immortal when wave is over
+            if (Game.WaveOver) return;
+
             GD.Print($"{Name} died!");
             QueueFree();
         }
@@ -96,6 +99,9 @@ namespace Riftstrike.src.units
 
         public override void _PhysicsProcess(double delta)
         {
+            // freeze when game is over
+            if (Game.WaveOver) return;
+
             base._PhysicsProcess(delta);
             if (targets.Count != 0 && NavAgent.TargetPosition != targets.First())
                 NavAgent.TargetPosition = targets.First();
@@ -112,8 +118,8 @@ namespace Riftstrike.src.units
 
             if (AttackReady)
             {
-                var enemies = EnemyManager.Enemies;
-                if (enemies.Count != 0)
+                var enemies = EnemyManager.Enemies.Where(e => e.IsAlive);
+                if (enemies.Any())
                 {
                     var closestTarget = enemies
                         .OrderBy(e => e.GlobalPosition.DistanceTo(GlobalPosition))
