@@ -13,6 +13,9 @@ namespace Riftstrike
 
         [Export]
         private Label DamageStatLabel;
+
+        [Export]
+        private Label ProjectileBounceStatLabel;
         #endregion
 
 #nullable enable
@@ -29,6 +32,7 @@ namespace Riftstrike
                 HealthStatLabel.Text = Stats.Health.ToString();
                 RegenerationStatLabel.Text = Stats.Regeneration.ToString();
                 DamageStatLabel.Text = $"{Stats.Damage}%";
+                ProjectileBounceStatLabel.Text = Stats.ProjectileBounces.ToString();
             }
         }
     }
