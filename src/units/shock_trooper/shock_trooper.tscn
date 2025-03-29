@@ -25,7 +25,6 @@ radius = 50.0
 radius = 500.0
 
 [node name="ShockTrooper" type="Node2D"]
-position = Vector2(0, 5)
 script = ExtResource("1_uintk")
 speed = 400.0
 projectileSpeed = 500.0
