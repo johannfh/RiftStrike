@@ -71,8 +71,12 @@ namespace Riftstrike.enemies
 
 			AnimationPlayer.AnimationFinished += anim =>
 			{
-				if (anim == "walk") AnimationPlayer.Play("walk");
-				if (anim == "death") QueueFree();
+				if (anim == "death")
+				{
+					QueueFree();
+					return;
+				}
+				AnimationPlayer.Play("walk");
 			};
 
 			AttackTimer.WaitTime = attackCooldown;
