@@ -44,6 +44,9 @@ namespace Riftstrike.src.units
         private Timer AttackTimer;
 
         [Export]
+        private Timer RegenerationTimer;
+
+        [Export]
         private PushComponent PushComponent;
 
         [Export]
@@ -72,6 +75,7 @@ namespace Riftstrike.src.units
             base._Ready();
             AssignNodeReferences();
             HitboxComponent.Hit += HandleHit;
+            RegenerationTimer.Timeout += HandleRegen;
             HealthComponent.Death += HandleDeath;
             StatsRecalculated += HandleStatsRecalculated;
             UpdateStats();
@@ -81,6 +85,14 @@ namespace Riftstrike.src.units
         {
             // NOTE: Damage absorbtion goes here
             HealthComponent.Damage(damage);
+        }
+
+        private void HandleRegen()
+        {
+            HealthComponent.Health = Mathf.Min(
+                HealthComponent.Health + CurrentStats.Regeneration * RegenerationTimer.WaitTime,
+                CurrentStats.Health
+            );
         }
 
         private void HandleDeath()
