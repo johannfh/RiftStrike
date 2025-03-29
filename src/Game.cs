@@ -38,6 +38,9 @@ namespace Riftstrike
         private PauseMenu PauseMenu;
 
         [Export]
+        private GameUI GameUI;
+
+        [Export]
         private AnimationPlayer UIAnimationPlayer;
 
         [Export]
@@ -158,6 +161,8 @@ namespace Riftstrike
                 // continue after animation has finished
                 else UIAnimationPlayer.Play("hide_pause_menu");
             };
+
+            GameUI.Paused += () => PauseMenu.Paused = true;
 
             UIAnimationPlayer.AnimationFinished += name =>
             {

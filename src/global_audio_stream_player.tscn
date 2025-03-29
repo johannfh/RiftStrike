@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://rni450tieg7h"]
+
+[ext_resource type="Script" uid="uid://qenta0rmhmbk" path="res://src/GlobalAudioStreamPlayer.cs" id="1_yegbh"]
+[ext_resource type="AudioStream" uid="uid://b76b04xtstef8" path="res://src/assets/sounds/pop.wav" id="2_dxmid"]
+
+[node name="GlobalAudioStreamPlayer" type="Node" node_paths=PackedStringArray("UIElementHoveredPlayer", "UIElementPressedPlayer")]
+process_mode = 3
+script = ExtResource("1_yegbh")
+UIElementHoveredPlayer = NodePath("HoveredSoundAudioStreamPlayer")
+UIElementPressedPlayer = NodePath("PressedSoundAudioStreamPlayer")
+
+[node name="HoveredSoundAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dxmid")
+volume_db = -20.0
+
+[node name="PressedSoundAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dxmid")
+volume_db = -20.0
+pitch_scale = 0.8

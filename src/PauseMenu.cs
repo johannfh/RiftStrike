@@ -15,7 +15,7 @@ namespace Riftstrike.src
         public bool Paused
         {
             get => paused;
-            private set
+            set
             {
                 if (paused == value) return;
                 paused = value;
@@ -23,7 +23,7 @@ namespace Riftstrike.src
             }
         }
 
-        private void TogglePaused()
+        public void TogglePaused()
             => Paused = !Paused;
 
         public override void _Ready()

@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot.Collections;
+using Riftstrike.Src.Globals;
 using Riftstrike.upgrades;
 
 namespace Riftstrike.src.WaveShop
@@ -24,9 +25,6 @@ namespace Riftstrike.src.WaveShop
 
         [Signal]
         public delegate void ChooseUpgradeEventHandler(Upgrade upgrade);
-
-        [Export]
-        private AudioStreamPlayer PopSoundAudioStreamPlayer;
 
 #nullable enable
 
@@ -68,17 +66,11 @@ namespace Riftstrike.src.WaveShop
         private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)
         {
             if (button.ButtonPressed)
-            {
                 Tween(button, "scale", Vector2.One * ((scale - 1) / 2 + 1), duration);
-            }
             else if (button.IsHovered())
-            {
                 Tween(button, "scale", Vector2.One * scale, duration);
-            }
             else
-            {
                 Tween(button, "scale", Vector2.One, revertDuration);
-            }
         }
 
 
@@ -91,9 +83,12 @@ namespace Riftstrike.src.WaveShop
         public override void _Ready()
         {
             base._Ready();
-            ChooseUpgradeButton.MouseEntered += () => PopSoundAudioStreamPlayer.Play();
+            ChooseUpgradeButton.MouseEntered += GlobalAudioStreamPlayer.PlayUIElementHoveredSound;
+
             ChooseUpgradeButton.Pressed += () =>
             {
+                GlobalAudioStreamPlayer.PlayUIElementPressedSound();
+
                 AnimationPlayer.Stop();
                 AnimationPlayer.Play("click_ChooseUpgradeButton");
             };

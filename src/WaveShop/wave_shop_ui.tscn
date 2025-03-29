@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://byjv7jtoirsp3"]
+[gd_scene load_steps=24 format=3 uid="uid://byjv7jtoirsp3"]
 
 [ext_resource type="Script" uid="uid://6r06qnbpv2j" path="res://src/WaveShop/WaveShopUI.cs" id="1_ub60g"]
 [ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_c1im7"]
@@ -10,11 +10,24 @@
 [ext_resource type="Texture2D" uid="uid://dunaoqsntqrth" path="res://src/assets/dice/Dice_2.png" id="4_tvl4p"]
 [ext_resource type="PackedScene" uid="uid://blh5lulg8kdkc" path="res://src/unit_stats_display.tscn" id="4_udbws"]
 [ext_resource type="Texture2D" uid="uid://chfx7lcfkk0bx" path="res://src/assets/dice/Dice_3.png" id="5_evfsw"]
+[ext_resource type="Theme" uid="uid://cn0m10ru4lckw" path="res://src/global_theme.tres" id="5_krccl"]
+[ext_resource type="Texture2D" uid="uid://ct4ubcmuft1sp" path="res://src/assets/RiftAssassinIcon.png" id="6_8wa4x"]
 [ext_resource type="Texture2D" uid="uid://cxav51bm748yf" path="res://src/assets/ArrowRightGreen.png" id="6_aiqw2"]
 [ext_resource type="Texture2D" uid="uid://ld7x8euadmmu" path="res://src/assets/dice/Dice_4.png" id="6_jyrnu"]
 [ext_resource type="Texture2D" uid="uid://b08t5v6uooogj" path="res://src/assets/dice/Dice_6.png" id="8_skjtv"]
 [ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="11_61kk1"]
-[ext_resource type="AudioStream" uid="uid://b76b04xtstef8" path="res://src/assets/sounds/pop.wav" id="15_4w6xb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w6xb"]
+bg_color = Color(0.42238, 0.2646, 0.49, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.423529, 0.262745, 0.490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="Animation" id="Animation_n3ahh"]
 length = 0.001
@@ -172,15 +185,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_krccl")
 script = ExtResource("1_ub60g")
 UpgradeShop = NodePath("UpgradeShop")
 ItemShop = NodePath("ItemShop")
 metadata/_edit_use_anchors_ = true
-
-[node name="PopSoundAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_4w6xb")
-volume_db = -10.0
-pitch_scale = 0.6
 
 [node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
 layout_mode = 0
@@ -197,9 +206,9 @@ UpgradeBoxes = [NodePath("VBoxContainer/UpgradesContainer/UpgradeBox"), NodePath
 RerollUpgradesButton = NodePath("VBoxContainer/HBoxContainer/Control/RerollUpgradesButton")
 AnimationPlayer = NodePath("AnimationPlayer")
 RerollCostsLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/RerollCostsLabel")
-CurrentUnitIconTextureRect = NodePath("UnitDataDisplay/MarginContainer/VBoxContainer/Control/CurrentUnitIcon")
-UnitStatsDisplay = NodePath("UnitDataDisplay/MarginContainer/VBoxContainer/UnitStatsDisplay")
-PopSoundAudioStreamPlayer = NodePath("../PopSoundAudioStreamPlayer")
+CurrentUnitIconTextureRect = NodePath("UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Control/CurrentUnitIcon")
+UnitStatsDisplay = NodePath("UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/UnitStatsDisplay")
+PopSoundAudioStreamPlayer = NodePath("")
 
 [node name="UnitDataDisplay" type="Control" parent="UpgradeShop"]
 layout_mode = 2
@@ -211,23 +220,35 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -204.0
+offset_left = -231.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeShop/UnitDataDisplay/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("5_krccl")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4w6xb")
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeShop/UnitDataDisplay/MarginContainer/PanelContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop/UnitDataDisplay/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeShop/UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Control" type="Control" parent="UpgradeShop/UnitDataDisplay/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="UpgradeShop/UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="CurrentUnitIcon" type="TextureRect" parent="UpgradeShop/UnitDataDisplay/MarginContainer/VBoxContainer/Control"]
+[node name="CurrentUnitIcon" type="TextureRect" parent="UpgradeShop/UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -240,8 +261,18 @@ offset_right = 64.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("6_8wa4x")
+stretch_mode = 4
 
-[node name="UnitStatsDisplay" parent="UpgradeShop/UnitDataDisplay/MarginContainer/VBoxContainer" instance=ExtResource("4_udbws")]
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeShop/UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="UnitStatsDisplay" parent="UpgradeShop/UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("4_udbws")]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 3
@@ -347,7 +378,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_fjoik")
 NextWaveButton = NodePath("VBoxContainer/Control/NextWaveButton")
-PopSoundAudioStreamPlayer = NodePath("../PopSoundAudioStreamPlayer")
+PopSoundAudioStreamPlayer = NodePath("")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ItemShop"]
 layout_mode = 2

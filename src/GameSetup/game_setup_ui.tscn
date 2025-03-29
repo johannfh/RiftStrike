@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cutt816bwo4ar"]
+[gd_scene load_steps=6 format=3 uid="uid://cutt816bwo4ar"]
 
 [ext_resource type="Script" uid="uid://dds8r8yno64kp" path="res://src/GameSetup/GameSetupUI.cs" id="1_pxduv"]
 [ext_resource type="Resource" uid="uid://d1nebduqf7mf2" path="res://src/UnitData/shock_trooper.tres" id="2_27mko"]
+[ext_resource type="Script" uid="uid://cwag2ccfoefq4" path="res://src/units/UnitData.cs" id="2_nj38h"]
 [ext_resource type="Resource" uid="uid://dul04wsxj83j2" path="res://src/UnitData/rift_assassin.tres" id="3_3t43i"]
 [ext_resource type="Texture2D" uid="uid://b2asucpphtpow" path="res://src/assets/PlayGameIcon.png" id="3_kvr5e"]
 
@@ -13,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pxduv")
-UnitData = [ExtResource("2_27mko"), ExtResource("3_3t43i")]
+UnitData = Array[ExtResource("2_nj38h")]([ExtResource("2_27mko"), ExtResource("3_3t43i")])
 UnitSelectionBoxesContainer = NodePath("UnitSelectionMenu/ScrollContainer/UnitSelectionBoxContainer")
 FightButton = NodePath("UnitSelectionMenu/Control/FightButton")
 
@@ -56,6 +57,7 @@ offset_right = 64.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(64, 64)
 focus_mode = 0
 mouse_default_cursor_shape = 2
 icon = ExtResource("3_kvr5e")

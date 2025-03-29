@@ -1,5 +1,6 @@
 using Riftstrike.src;
 using Riftstrike.src.GameSetup;
+using Riftstrike.Src.Globals;
 
 namespace Riftstrike
 {
@@ -18,8 +19,11 @@ namespace Riftstrike
             base._Ready();
             CursorSettings.LoadCursors();
 
+            PlayButton.MouseEntered += GlobalAudioStreamPlayer.PlayUIElementHoveredSound;
+
             PlayButton.Pressed += () =>
             {
+                GlobalAudioStreamPlayer.PlayUIElementPressedSound();
                 GetTree().ChangeSceneToPacked(GameSetup.Scene);
             };
         }

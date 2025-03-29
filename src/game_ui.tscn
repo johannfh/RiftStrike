@@ -1,19 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://tneid4vp0caj"]
+[gd_scene load_steps=6 format=3 uid="uid://tneid4vp0caj"]
 
+[ext_resource type="Theme" uid="uid://cn0m10ru4lckw" path="res://src/global_theme.tres" id="1_brbhv"]
 [ext_resource type="Script" uid="uid://d0wk1jyrxo8ma" path="res://src/GameUI.cs" id="1_fqu6f"]
 [ext_resource type="PackedScene" uid="uid://ckuy380lqlri4" path="res://src/global_stats_display.tscn" id="2_ucs57"]
+[ext_resource type="Texture2D" uid="uid://b8ncak0kr3x74" path="res://src/assets/PauseIcon.png" id="4_f8cms"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wn3co"]
-font_size = 48
+font_size = 56
 
-[node name="GameUI" type="Control"]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("PauseButton")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_brbhv")
 script = ExtResource("1_fqu6f")
+PauseButton = NodePath("MarginContainer/MenuContainer/VBoxContainer/Control/PauseButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -22,22 +27,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="GlobalStatsContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="GlobalStatsDisplay" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_ucs57")]
+[node name="GlobalStatsDisplay" parent="MarginContainer/GlobalStatsContainer" instance=ExtResource("2_ucs57")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="MenuContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MenuContainer"]
 layout_mode = 2
 
-[node name="WaveDurationLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/MenuContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PauseButton" type="TextureButton" parent="MarginContainer/MenuContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_f8cms")
+stretch_mode = 4
+
+[node name="WaveDurationLabel" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 text = "10"
 label_settings = SubResource("LabelSettings_wn3co")
 horizontal_alignment = 1

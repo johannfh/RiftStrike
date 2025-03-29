@@ -1,5 +1,6 @@
 using Godot.Collections;
 using Riftstrike.src.units;
+using Riftstrike.Src.Globals;
 using System.Linq;
 
 
@@ -27,7 +28,7 @@ namespace Riftstrike.src.GameSetup
 
             // remove remaining children from unit selection boxes container (if any)
             UnitSelectionBoxesContainer.GetChildren()
-                .ForEach(child => UnitSelectionBoxesContainer.RemoveChild(child));
+                .ForEach(UnitSelectionBoxesContainer.RemoveChild);
 
             // render selection boxes for every unit data
 
@@ -63,9 +64,33 @@ namespace Riftstrike.src.GameSetup
 
             FightButton.Pressed += () =>
             {
+                GlobalAudioStreamPlayer.PlayUIElementPressedSound();
                 if (GlobalState.UnitData.Count == 0) return;
                 GetTree().ChangeSceneToPacked(Game.Scene);
             };
+        }
+
+        public override void _Process(double delta)
+        {
+            base._Process(delta);
+            ButtonScaleTweenHover(FightButton, 1.3F, 0.3, 0.2);
+        }
+
+
+        private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)
+        {
+            if (button.ButtonPressed)
+                Tween(button, "scale", Vector2.One * ((scale - 1) / 2 + 1), duration);
+            else if (button.IsHovered())
+                Tween(button, "scale", Vector2.One * scale, duration);
+            else
+                Tween(button, "scale", Vector2.One, revertDuration);
+        }
+
+        private void Tween(GodotObject obj, NodePath property, Variant amount, double duration)
+        {
+            var tween = CreateTween();
+            tween.TweenProperty(obj, property, amount, duration);
         }
     }
 }

@@ -1,3 +1,5 @@
+using Riftstrike.Src.Globals;
+
 namespace Riftstrike.src.GameSetup
 {
     public partial class UnitSelectionBox : AspectRatioContainer
@@ -43,7 +45,13 @@ namespace Riftstrike.src.GameSetup
         public override void _Ready()
         {
             base._Ready();
-            SelectButton.Pressed += () => EmitSignal(SignalName.Selected, !IsSelected);
+            SelectButton.MouseEntered += GlobalAudioStreamPlayer.PlayUIElementHoveredSound;
+
+            SelectButton.Pressed += () =>
+            {
+                GlobalAudioStreamPlayer.PlayUIElementPressedSound();
+                EmitSignal(SignalName.Selected, !IsSelected);
+            };
 
             TextureRect.Texture = Icon;
             AnimationPlayer.Play("RESET");

@@ -1,3 +1,5 @@
+using Riftstrike.Src.Globals;
+
 namespace Riftstrike.src.WaveShop
 {
     public partial class ItemShop : CenterContainer
@@ -5,21 +7,15 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private Button NextWaveButton;
 
-        [Export]
-        private AudioStreamPlayer PopSoundAudioStreamPlayer;
-
         public override void _Ready()
         {
             base._Ready();
+            NextWaveButton.MouseEntered += GlobalAudioStreamPlayer.PlayUIElementHoveredSound;
+
             NextWaveButton.Pressed += () =>
             {
                 GlobalState.Wave++;
-
-                // move player to scene root to make sounds finish
-                PopSoundAudioStreamPlayer.Reparent(GetTree().Root);
-                PopSoundAudioStreamPlayer.Finished += PopSoundAudioStreamPlayer.QueueFree;
-                PopSoundAudioStreamPlayer.Play();
-
+                GlobalAudioStreamPlayer.PlayUIElementPressedSound();
                 GetTree().ChangeSceneToPacked(Game.Scene);
             };
         }

@@ -259,11 +259,12 @@ tile_size = Vector2i(64, 64)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_exono")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("NextSceneTimer", "PauseBlurPanel", "PauseMenu", "UIAnimationPlayer", "WaveEndTimer", "SpawnEnemiesTimer", "Map")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("NextSceneTimer", "PauseBlurPanel", "PauseMenu", "GameUI", "UIAnimationPlayer", "WaveEndTimer", "SpawnEnemiesTimer", "Map")]
 script = ExtResource("1_1yase")
 NextSceneTimer = NodePath("NextSceneTimer")
 PauseBlurPanel = NodePath("UI/PauseBlurPanel")
 PauseMenu = NodePath("UI/PauseMenu")
+GameUI = NodePath("UI/GameUI")
 UIAnimationPlayer = NodePath("UI/UIAnimationPlayer")
 WaveEndTimer = NodePath("WaveEndTimer")
 SpawnEnemiesTimer = NodePath("SpawnEnemiesTimer")

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot.Collections;
 using Riftstrike.src.units;
+using Riftstrike.Src.Globals;
 using Riftstrike.upgrades;
 
 namespace Riftstrike.src.WaveShop
@@ -29,9 +30,6 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private UnitStatsDisplay UnitStatsDisplay;
 
-        [Export]
-        private AudioStreamPlayer PopSoundAudioStreamPlayer;
-
 #nullable enable
 
         private ulong NextRerollCosts = 1;
@@ -43,11 +41,11 @@ namespace Riftstrike.src.WaveShop
             foreach (var upgradeBox in UpgradeBoxes)
                 upgradeBox.ChooseUpgrade += ChooseUpgradeHandler;
 
-            RerollUpgradesButton.MouseEntered += () => PopSoundAudioStreamPlayer.Play();
+            RerollUpgradesButton.MouseEntered += GlobalAudioStreamPlayer.PlayUIElementHoveredSound;
 
             RerollUpgradesButton.Pressed += () =>
             {
-                PopSoundAudioStreamPlayer.Play();
+                GlobalAudioStreamPlayer.PlayUIElementPressedSound();
                 var insufficientShards = GlobalState.RiftShards < NextRerollCosts;
                 var animationPlaying = AnimationPlayer.CurrentAnimation == "click_RerollUpgradesButton";
                 var upgradeChosen = UpgradeBoxes.Any(u => u.Chosen);

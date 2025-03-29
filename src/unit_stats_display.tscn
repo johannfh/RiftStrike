@@ -1,13 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://blh5lulg8kdkc"]
+[gd_scene load_steps=9 format=3 uid="uid://blh5lulg8kdkc"]
 
+[ext_resource type="Theme" uid="uid://cn0m10ru4lckw" path="res://src/global_theme.tres" id="1_1vpyk"]
 [ext_resource type="Script" uid="uid://f2ocxl0u8lct" path="res://src/UnitStatsDisplay.cs" id="1_14y41"]
 [ext_resource type="Texture2D" uid="uid://dmw662abx4se3" path="res://src/assets/HealthModule.png" id="2_qm8ed"]
 [ext_resource type="Texture2D" uid="uid://bjxbm211f62bw" path="res://src/assets/AttackModule.png" id="2_v2u57"]
 [ext_resource type="Texture2D" uid="uid://durq4ngcnedpl" path="res://src/assets/VitalityModule.png" id="3_d0b2r"]
 [ext_resource type="Texture2D" uid="uid://bks2jnltg1s4o" path="res://src/assets/ProjectileBounceIcon.png" id="5_53i6l"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xlax"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.56548, 0.3216, 0.67, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.564706, 0.321569, 0.670588, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 1
+shadow_offset = Vector2(2, 2)
+
 [sub_resource type="LabelSettings" id="LabelSettings_lvssi"]
-font_size = 32
+font_size = 40
 
 [node name="UnitStatsDisplay" type="MarginContainer" node_paths=PackedStringArray("HealthStatLabel", "RegenerationStatLabel", "DamageStatLabel", "ProjectileBounceStatLabel")]
 anchors_preset = 15
@@ -17,11 +36,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_1vpyk")
 script = ExtResource("1_14y41")
-HealthStatLabel = NodePath("ScrollContainer/StatsContainer/HealthStatContainer/HealthStatLabel")
-RegenerationStatLabel = NodePath("ScrollContainer/StatsContainer/RegenerationStatContainer/RegenerationStatLabel")
-DamageStatLabel = NodePath("ScrollContainer/StatsContainer/DamageStatContainer/DamageStatLabel")
-ProjectileBounceStatLabel = NodePath("ScrollContainer/StatsContainer/ProjectileBounceStatContainer/ProjectileBounceStatLabel")
+HealthStatLabel = NodePath("ScrollContainer/StatsContainer/HealthStatContainer/PanelContainer/HBoxContainer/HealthStatLabel")
+RegenerationStatLabel = NodePath("ScrollContainer/StatsContainer/RegenerationStatContainer/PanelContainer/HBoxContainer/RegenerationStatLabel")
+DamageStatLabel = NodePath("ScrollContainer/StatsContainer/DamageStatContainer/PanelContainer/HBoxContainer/DamageStatLabel")
+ProjectileBounceStatLabel = NodePath("ScrollContainer/StatsContainer/ProjectileBounceStatContainer/PanelContainer/HBoxContainer/ProjectileBounceStatLabel")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
@@ -31,64 +51,112 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 
-[node name="HealthStatContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer"]
+[node name="HealthStatContainer" type="MarginContainer" parent="ScrollContainer/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/StatsContainer/HealthStatContainer"]
+layout_mode = 2
+theme = ExtResource("1_1vpyk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xlax")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer/HealthStatContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="HealthStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/HealthStatContainer"]
+[node name="HealthStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/HealthStatContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("2_qm8ed")
 
-[node name="HealthStatLabel" type="Label" parent="ScrollContainer/StatsContainer/HealthStatContainer"]
+[node name="HealthStatLabel" type="Label" parent="ScrollContainer/StatsContainer/HealthStatContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "20"
 label_settings = SubResource("LabelSettings_lvssi")
 
-[node name="RegenerationStatContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer"]
+[node name="RegenerationStatContainer" type="MarginContainer" parent="ScrollContainer/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/StatsContainer/RegenerationStatContainer"]
+layout_mode = 2
+theme = ExtResource("1_1vpyk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xlax")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer/RegenerationStatContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="RegenerationStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/RegenerationStatContainer"]
+[node name="RegenerationStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/RegenerationStatContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("3_d0b2r")
 
-[node name="RegenerationStatLabel" type="Label" parent="ScrollContainer/StatsContainer/RegenerationStatContainer"]
+[node name="RegenerationStatLabel" type="Label" parent="ScrollContainer/StatsContainer/RegenerationStatContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "100"
 label_settings = SubResource("LabelSettings_lvssi")
 
-[node name="DamageStatContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer"]
+[node name="DamageStatContainer" type="MarginContainer" parent="ScrollContainer/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/StatsContainer/DamageStatContainer"]
+layout_mode = 2
+theme = ExtResource("1_1vpyk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xlax")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer/DamageStatContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="DamageStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/DamageStatContainer"]
+[node name="DamageStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/DamageStatContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("2_v2u57")
 
-[node name="DamageStatLabel" type="Label" parent="ScrollContainer/StatsContainer/DamageStatContainer"]
+[node name="DamageStatLabel" type="Label" parent="ScrollContainer/StatsContainer/DamageStatContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "100%"
 label_settings = SubResource("LabelSettings_lvssi")
 
-[node name="ProjectileBounceStatContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer"]
+[node name="ProjectileBounceStatContainer" type="MarginContainer" parent="ScrollContainer/StatsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/StatsContainer/ProjectileBounceStatContainer"]
+layout_mode = 2
+theme = ExtResource("1_1vpyk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4xlax")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/StatsContainer/ProjectileBounceStatContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="ProjectileBounceStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/ProjectileBounceStatContainer"]
+[node name="ProjectileBounceStatTextureRect" type="TextureRect" parent="ScrollContainer/StatsContainer/ProjectileBounceStatContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("5_53i6l")
 
-[node name="ProjectileBounceStatLabel" type="Label" parent="ScrollContainer/StatsContainer/ProjectileBounceStatContainer"]
+[node name="ProjectileBounceStatLabel" type="Label" parent="ScrollContainer/StatsContainer/ProjectileBounceStatContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "2"
 label_settings = SubResource("LabelSettings_lvssi")
