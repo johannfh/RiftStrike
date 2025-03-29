@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b37bdaunpavbi"]
+[gd_scene load_steps=4 format=3 uid="uid://b37bdaunpavbi"]
 
 [ext_resource type="Script" uid="uid://dl056abdssrsc" path="res://src/TitleScreenUI.cs" id="1_6clsk"]
 [ext_resource type="Texture2D" uid="uid://dl7dpsv2j7uo0" path="res://src/assets/PlayIcon.png" id="2_j502q"]
+[ext_resource type="Texture2D" uid="uid://ltu1dphuq22r" path="res://src/assets/RiftStrikeLogo.png" id="2_phuk1"]
 
 [node name="TitleScreenUI" type="Control" node_paths=PackedStringArray("PlayButton")]
 layout_mode = 3
@@ -25,22 +26,26 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 40
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(640, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_phuk1")
+stretch_mode = 4
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/Control"]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -75.0
-offset_right = 75.0
-offset_bottom = 75.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(75, 75)
@@ -51,12 +56,3 @@ mouse_default_cursor_shape = 2
 icon = ExtResource("2_j502q")
 flat = true
 expand_icon = true
-
-[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Credits
-(TODO)"

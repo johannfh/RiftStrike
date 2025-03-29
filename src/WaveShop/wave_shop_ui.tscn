@@ -194,7 +194,7 @@ metadata/_edit_use_anchors_ = true
 [node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
 layout_mode = 0
 
-[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect", "UnitStatsDisplay", "PopSoundAudioStreamPlayer")]
+[node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect", "UnitStatsDisplay")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -208,7 +208,6 @@ AnimationPlayer = NodePath("AnimationPlayer")
 RerollCostsLabel = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/RerollCostsLabel")
 CurrentUnitIconTextureRect = NodePath("UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Control/CurrentUnitIcon")
 UnitStatsDisplay = NodePath("UnitDataDisplay/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/UnitStatsDisplay")
-PopSoundAudioStreamPlayer = NodePath("")
 
 [node name="UnitDataDisplay" type="Control" parent="UpgradeShop"]
 layout_mode = 2
@@ -368,7 +367,7 @@ texture = ExtResource("11_61kk1")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ItemShop" type="CenterContainer" parent="." node_paths=PackedStringArray("NextWaveButton", "PopSoundAudioStreamPlayer")]
+[node name="ItemShop" type="CenterContainer" parent="." node_paths=PackedStringArray("NextWaveButton")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -378,7 +377,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_fjoik")
 NextWaveButton = NodePath("VBoxContainer/Control/NextWaveButton")
-PopSoundAudioStreamPlayer = NodePath("")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ItemShop"]
 layout_mode = 2
