@@ -73,7 +73,7 @@ namespace Riftstrike.src.GameSetup
         public override void _Process(double delta)
         {
             base._Process(delta);
-            ButtonScaleTweenHover(FightButton, 1.3F, 0.3, 0.2);
+            ButtonScaleTweenHover(FightButton, 1.2F, 0.3, 0.2);
         }
 
 

@@ -31,7 +31,7 @@ namespace Riftstrike
         public override void _Process(double delta)
         {
             base._Process(delta);
-            ButtonScaleTweenHover(PlayButton, 1.3F, 0.2, 0.1);
+            ButtonScaleTweenHover(PlayButton, 1.1F, 0.2, 0.1);
         }
 
         private void ButtonScaleTweenHover(Button button, float scale, double duration)
