@@ -12,10 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://chfx7lcfkk0bx" path="res://src/assets/dice/Dice_3.png" id="5_evfsw"]
 [ext_resource type="Theme" uid="uid://cn0m10ru4lckw" path="res://src/global_theme.tres" id="5_krccl"]
 [ext_resource type="Texture2D" uid="uid://ct4ubcmuft1sp" path="res://src/assets/RiftAssassinIcon.png" id="6_8wa4x"]
-[ext_resource type="Texture2D" uid="uid://cxav51bm748yf" path="res://src/assets/ArrowRightGreen.png" id="6_aiqw2"]
 [ext_resource type="Texture2D" uid="uid://ld7x8euadmmu" path="res://src/assets/dice/Dice_4.png" id="6_jyrnu"]
 [ext_resource type="Texture2D" uid="uid://b08t5v6uooogj" path="res://src/assets/dice/Dice_6.png" id="8_skjtv"]
 [ext_resource type="Texture2D" uid="uid://dwp08pqo11kf3" path="res://src/assets/RiftShardMedium.png" id="11_61kk1"]
+[ext_resource type="Texture2D" uid="uid://bvgj60yvhf76s" path="res://src/assets/ArrowRightIcon.png" id="16_krccl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4w6xb"]
 bg_color = Color(0.42238, 0.2646, 0.49, 1)
@@ -398,7 +398,7 @@ grow_vertical = 2
 pivot_offset = Vector2(100, 50)
 focus_mode = 0
 mouse_default_cursor_shape = 2
-icon = ExtResource("6_aiqw2")
+icon = ExtResource("16_krccl")
 flat = true
 icon_alignment = 1
 expand_icon = true
