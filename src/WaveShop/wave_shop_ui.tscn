@@ -191,8 +191,15 @@ UpgradeShop = NodePath("UpgradeShop")
 ItemShop = NodePath("ItemShop")
 metadata/_edit_use_anchors_ = true
 
-[node name="GlobalStatsDisplay" parent="." instance=ExtResource("2_c1im7")]
+[node name="GlobalStatsContainer" type="MarginContainer" parent="."]
 layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="GlobalStatsDisplay" parent="GlobalStatsContainer" instance=ExtResource("2_c1im7")]
+layout_mode = 2
 
 [node name="UpgradeShop" type="MarginContainer" parent="." node_paths=PackedStringArray("UpgradeBoxes", "RerollUpgradesButton", "AnimationPlayer", "RerollCostsLabel", "CurrentUnitIconTextureRect", "UnitStatsDisplay")]
 layout_mode = 1
@@ -297,25 +304,21 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="UpgradeBox" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../UpgradeBox4")
 focus_neighbor_right = NodePath("../UpgradeBox2")
 
 [node name="UpgradeBox2" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../UpgradeBox")
 focus_neighbor_right = NodePath("../UpgradeBox3")
 
 [node name="UpgradeBox3" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../UpgradeBox2")
 focus_neighbor_right = NodePath("../UpgradeBox4")
 
 [node name="UpgradeBox4" parent="UpgradeShop/VBoxContainer/UpgradesContainer" instance=ExtResource("3_n2kgm")]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 focus_neighbor_left = NodePath("../UpgradeBox3")
 focus_neighbor_right = NodePath("../UpgradeBox")

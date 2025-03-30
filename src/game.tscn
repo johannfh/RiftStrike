@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://pmn15t2bu3qh"]
+[gd_scene load_steps=30 format=4 uid="uid://pmn15t2bu3qh"]
 
 [ext_resource type="Script" uid="uid://cg3041kcxxvlq" path="res://src/Game.cs" id="1_1yase"]
 [ext_resource type="Script" uid="uid://hgl82kq7vg6f" path="res://src/Camera.cs" id="1_fw2jn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bn7i2l27i2hi7" path="res://src/Counter.cs" id="2_xi5ac"]
 [ext_resource type="Script" uid="uid://dhub8cf0b501g" path="res://src/UnitManager.cs" id="3_4v1vs"]
 [ext_resource type="Shader" uid="uid://bmffyr5cffe3y" path="res://src/gausian_blur.gdshader" id="4_qiocs"]
+[ext_resource type="PackedScene" uid="uid://byjv7jtoirsp3" path="res://src/WaveShop/wave_shop_ui.tscn" id="4_xdrfk"]
 [ext_resource type="PackedScene" uid="uid://bhlel76cfebxt" path="res://src/pause_menu.tscn" id="4_y2hwx"]
 [ext_resource type="PackedScene" uid="uid://cnusoylj055ft" path="res://src/Globals/DamageNumbersDisplay/damage_numbers_display.tscn" id="7_fh3ds"]
 [ext_resource type="Script" uid="uid://cws6ifgwm4p6a" path="res://src/EnemyManager.cs" id="7_galhq"]
@@ -17,6 +18,21 @@
 script = ExtResource("2_xi5ac")
 Value = 0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3j30"]
+shader = ExtResource("4_qiocs")
+shader_parameter/blur_radius = 8
+shader_parameter/Darkness = 0.4
+shader_parameter/R = 0.4
+shader_parameter/G = 0.4
+shader_parameter/B = 0.4
+shader_parameter/blur_strength = 0.1
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y2hwx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qiocs"]
+texture = SubResource("CanvasTexture_y2hwx")
+modulate_color = Color(0.27451, 0.27451, 0.27451, 0.470588)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xdrfk"]
 shader = ExtResource("4_qiocs")
 shader_parameter/blur_radius = 8
@@ -24,13 +40,7 @@ shader_parameter/Darkness = 0.4
 shader_parameter/R = 0.4
 shader_parameter/G = 0.4
 shader_parameter/B = 0.4
-shader_parameter/blur_strength = 4.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_y2hwx"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qiocs"]
-texture = SubResource("CanvasTexture_y2hwx")
-modulate_color = Color(0.27451, 0.27451, 0.27451, 0.470588)
+shader_parameter/blur_strength = 0.1
 
 [sub_resource type="Animation" id="Animation_qiocs"]
 length = 0.001
@@ -61,38 +71,98 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PauseBlurPanel:modulate")
+tracks/2/path = NodePath("PauseBlurPanel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PauseBlurPanel:visible")
+tracks/3/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.1]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
+tracks/4/path = NodePath("WaveShopUI:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WaveShopUI:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [4.0]
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WaveShopBlurPanel:material:shader_parameter/blur_strength")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WaveShopBlurPanel:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GameUI:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GameUI:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_xdrfk"]
@@ -137,22 +207,10 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PauseBlurPanel:modulate")
+tracks/3/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -201,33 +259,175 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PauseBlurPanel:modulate")
+tracks/3/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
+"values": [0.1, 6.0]
+}
+
+[sub_resource type="Animation" id="Animation_a7soy"]
+resource_name = "show_wave_shop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaveShopUI:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaveShopUI:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PauseBlurPanel:material:shader_parameter/blur_strength")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaveShopBlurPanel:material:shader_parameter/blur_strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.1, 6.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaveShopBlurPanel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GameUI:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GameUI:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g3j30"]
+resource_name = "hide_wave_shop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaveShopUI:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaveShopUI:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaveShopBlurPanel:material:shader_parameter/blur_strength")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.0, 0.1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WaveShopBlurPanel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GameUI:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GameUI:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qiocs"]
 _data = {
 &"RESET": SubResource("Animation_qiocs"),
 &"hide_pause_menu": SubResource("Animation_xdrfk"),
-&"show_pause_menu": SubResource("Animation_y2hwx")
+&"hide_wave_shop": SubResource("Animation_g3j30"),
+&"show_pause_menu": SubResource("Animation_y2hwx"),
+&"show_wave_shop": SubResource("Animation_a7soy")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4igf7"]
@@ -275,12 +475,14 @@ tile_size = Vector2i(128, 128)
 navigation_layer_0/layers = 1
 sources/3 = SubResource("TileSetAtlasSource_xdrfk")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("NextSceneTimer", "PauseBlurPanel", "PauseMenu", "GameUI", "UIAnimationPlayer", "WaveEndTimer", "SpawnEnemiesTimer", "Map")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("NextSceneTimer", "PlayerCamera", "PauseBlurPanel", "PauseMenu", "GameUI", "WaveShopUI", "UIAnimationPlayer", "WaveEndTimer", "SpawnEnemiesTimer", "Map")]
 script = ExtResource("1_1yase")
 NextSceneTimer = NodePath("NextSceneTimer")
+PlayerCamera = NodePath("Camera")
 PauseBlurPanel = NodePath("UI/PauseBlurPanel")
 PauseMenu = NodePath("UI/PauseMenu")
 GameUI = NodePath("UI/GameUI")
+WaveShopUI = NodePath("UI/WaveShopUI")
 UIAnimationPlayer = NodePath("UI/UIAnimationPlayer")
 WaveEndTimer = NodePath("WaveEndTimer")
 SpawnEnemiesTimer = NodePath("SpawnEnemiesTimer")
@@ -292,6 +494,20 @@ counter = SubResource("Resource_4dvgi")
 
 [node name="GameUI" parent="UI" node_paths=PackedStringArray("WaveEndTimer") instance=ExtResource("2_76pyg")]
 WaveEndTimer = NodePath("../../WaveEndTimer")
+
+[node name="WaveShopBlurPanel" type="Panel" parent="UI"]
+visible = false
+material = SubResource("ShaderMaterial_g3j30")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qiocs")
+
+[node name="WaveShopUI" parent="UI" instance=ExtResource("4_xdrfk")]
+visible = false
+modulate = Color(1, 1, 1, 0)
 
 [node name="PauseBlurPanel" type="Panel" parent="UI"]
 visible = false
@@ -324,6 +540,7 @@ one_shot = true
 
 [node name="NextSceneTimer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
 
 [node name="UnitManager" type="Node2D" parent="."]
 script = ExtResource("3_4v1vs")
@@ -342,6 +559,7 @@ zoomMinimum = 0.2
 zoomSensitivity = 0.15
 
 [node name="SelectionBox" type="Area2D" parent="."]
+process_mode = 3
 collision_layer = 33554432
 collision_mask = 16777216
 script = ExtResource("2_hwfey")

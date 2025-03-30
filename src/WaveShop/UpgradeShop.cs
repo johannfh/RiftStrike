@@ -32,7 +32,7 @@ namespace Riftstrike.src.WaveShop
 
 #nullable enable
 
-        private ulong NextRerollCosts = 1;
+        public ulong NextRerollCosts = 1;
 
         public override void _Ready()
         {
@@ -61,7 +61,11 @@ namespace Riftstrike.src.WaveShop
 
             AnimationPlayer.AnimationFinished += anim =>
             {
-                if (anim == "click_RerollUpgradesButton") GetNextUpgrades();
+                if (anim == "click_RerollUpgradesButton")
+                    GetNextUpgrades();
+
+                if (anim == "hide_UpgradeBoxes" && GlobalState.LevelupsLeft == 0)
+                    EmitSignal(SignalName.AllUpgradesPurchased);
             };
         }
 
@@ -119,8 +123,6 @@ namespace Riftstrike.src.WaveShop
             }
         }
 
-        private bool hadUpgrades = false;
-
         public void GetNextUpgrades()
         {
             var unitsWithLevelups = GlobalState.UnitData
@@ -132,22 +134,12 @@ namespace Riftstrike.src.WaveShop
             {
                 GD.Print("No more units with levelups!");
 
-                if (hadUpgrades)
-                {
-                    // wait for animation to finish before completing scene stage
-                    AnimationPlayer.Stop();
-                    AnimationPlayer.AnimationFinished += (_) => EmitSignal(SignalName.AllUpgradesPurchased);
-                    AnimationPlayer.Play("hide_UpgradeBoxes");
-                }
-                else
-                {
-                    EmitSignal(SignalName.AllUpgradesPurchased);
-                }
+                // wait for animation to finish before completing scene stage
+                AnimationPlayer.Stop();
+                AnimationPlayer.Play("hide_UpgradeBoxes");
 
                 return;
             }
-
-            hadUpgrades = true;
 
             CurrentUnitData = unitsWithLevelups.First();
             CurrentUnitIconTextureRect.Texture = CurrentUnitData.Icon;

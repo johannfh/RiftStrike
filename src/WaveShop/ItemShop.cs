@@ -7,6 +7,9 @@ namespace Riftstrike.src.WaveShop
         [Export]
         private Button NextWaveButton;
 
+        [Signal]
+        public delegate void NextWaveEventHandler();
+
         public override void _Ready()
         {
             base._Ready();
@@ -16,7 +19,7 @@ namespace Riftstrike.src.WaveShop
             {
                 GlobalState.Wave++;
                 GlobalAudioStreamPlayer.PlayUIElementPressedSound();
-                GetTree().ChangeSceneToPacked(Game.Scene);
+                EmitSignal(SignalName.NextWave);
             };
         }
 
@@ -29,17 +32,11 @@ namespace Riftstrike.src.WaveShop
         private void ButtonScaleTweenHover(Button button, float scale, double duration, double revertDuration)
         {
             if (button.ButtonPressed)
-            {
                 Tween(button, "scale", Vector2.One * ((scale - 1) / 2 + 1), duration);
-            }
             else if (button.IsHovered())
-            {
                 Tween(button, "scale", Vector2.One * scale, duration);
-            }
             else
-            {
                 Tween(button, "scale", Vector2.One, revertDuration);
-            }
         }
 
         private void Tween(GodotObject obj, NodePath property, Variant amount, double duration)

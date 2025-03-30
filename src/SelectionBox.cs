@@ -1,5 +1,6 @@
 using System.Linq;
 using Riftstrike.components;
+using Riftstrike.src;
 
 namespace Riftstrike
 {
@@ -26,12 +27,17 @@ namespace Riftstrike
 
         public override void _Process(double delta)
         {
+            if (Game.WaveOver || GetTree().Paused)
+            {
+                IsDragging = false;
+                return;
+            }
+
             base._Process(delta);
             var mousePos = GetGlobalMousePosition();
             if (Input.IsActionJustPressed("left_click")) start = mousePos;
             end = mousePos;
 
-            // TODO: HITBOX AND VISUAL UPDATES
             Panel.Visible = IsDragging;
             Collider.Disabled = !IsDragging;
 

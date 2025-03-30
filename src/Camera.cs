@@ -22,6 +22,8 @@ namespace Riftstrike
 
         public override void _Process(double delta)
         {
+            if (Game.WaveOver) return;
+
             HandleDragging();
             // only react to corner movement when
             // not dragging the camera with the mouse

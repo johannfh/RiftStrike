@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://irjecn2kimjw" path="res://src/level_display_fill.tres" id="3_wlkbx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tsfoe"]
-font_size = 28
+font_size = 40
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="LevelDisplay" type="Control"]

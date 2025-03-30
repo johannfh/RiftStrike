@@ -72,6 +72,9 @@ namespace Riftstrike
         }
 
         public readonly Array<Unit> units = [];
+        public static Array<Unit> Units
+            => Instance.units;
+
         public readonly Array<Unit> unitsSelected = [];
 
         public void HandleSelectUnit()

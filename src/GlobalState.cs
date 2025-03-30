@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot.Collections;
 using Riftstrike.src.units;
 
@@ -16,6 +17,9 @@ namespace Riftstrike.src
         {
             get => Instance.unitData;
         }
+
+        public static int LevelupsLeft
+            => UnitData.Sum(u => u.RemainingLevelups.Count);
 
         [Export]
         private ulong riftShards = DEFAULT_RIFT_SHARDS;

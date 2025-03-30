@@ -17,6 +17,9 @@ namespace Riftstrike
         [Export]
         private Timer NextSceneTimer;
 
+        [Export]
+        private Camera PlayerCamera;
+
         public override void _ExitTree()
         {
             base._ExitTree();
@@ -31,6 +34,10 @@ namespace Riftstrike
         const float WAVE_DURATION_SCALE = 5;
         const float MAX_WAVE_DURATION = 60;
 
+        private const string SHOW_WAVE_SHOP_ANIMATION = "show_wave_shop";
+        private const string HIDE_WAVE_SHOP_ANIMATION = "hide_wave_shop";
+        private const string HIDE_PAUSE_MENU_ANIMATION = "hide_pause_menu";
+
         [Export]
         private Panel PauseBlurPanel;
 
@@ -39,6 +46,9 @@ namespace Riftstrike
 
         [Export]
         private GameUI GameUI;
+
+        [Export]
+        private WaveShopUI WaveShopUI;
 
         [Export]
         private AnimationPlayer UIAnimationPlayer;
@@ -78,6 +88,8 @@ namespace Riftstrike
 
         private void SpawnEnemies()
         {
+            if (WaveOver) return;
+
             var start = DateTime.Now;
 
             // get spawn positions
@@ -99,10 +111,10 @@ namespace Riftstrike
         {
             var map = GetNavMap();
             var result = new List<Vector2>();
+
             for (int i = 0; i < count; i++)
-            {
                 result.Add(GetSafeEnemySpawnPoint(map));
-            }
+
             return result;
         }
 
@@ -129,10 +141,7 @@ namespace Riftstrike
                 }
 
                 // return first safe position that is found
-                if (isSafe)
-                {
-                    return position;
-                }
+                if (isSafe) return position;
             }
         }
 
@@ -149,7 +158,13 @@ namespace Riftstrike
             Instance = this;
             CursorSettings.LoadCursors();
 
-            NextSceneTimer.Timeout += () => GetTree().ChangeSceneToPacked(WaveShop.Scene);
+            NextSceneTimer.Timeout += () =>
+            {
+                WaveShopUI.Load();
+                UIAnimationPlayer.Play(SHOW_WAVE_SHOP_ANIMATION);
+            };
+
+            WaveShopUI.NextWave += () => UIAnimationPlayer.Play(HIDE_WAVE_SHOP_ANIMATION);
 
             PauseMenu.PausedChanged += paused =>
             {
@@ -159,26 +174,36 @@ namespace Riftstrike
                     GetTree().Paused = true;
                 }
                 // continue after animation has finished
-                else UIAnimationPlayer.Play("hide_pause_menu");
+                else UIAnimationPlayer.Play(HIDE_PAUSE_MENU_ANIMATION);
             };
 
             GameUI.Paused += () => PauseMenu.Paused = true;
 
             UIAnimationPlayer.AnimationFinished += name =>
             {
-                if (name == "hide_pause_menu")
-                {
+                if (name == HIDE_PAUSE_MENU_ANIMATION)
                     GetTree().Paused = false;
 
-                }
+                if (name == HIDE_WAVE_SHOP_ANIMATION)
+                    StartWave();
             };
 
             SpawnEnemiesTimer.Timeout += SpawnEnemies;
-            WaveEndTimer.WaitTime = Math.Min(10 + WAVE_DURATION_SCALE * GlobalState.Wave, MAX_WAVE_DURATION);
             WaveEndTimer.Timeout += EndWave;
+
+            StartWave();
+        }
+
+        private void StartWave()
+        {
+            DespawnEntities();
+            PlayerCamera.GlobalPosition = Vector2.Zero;
+
+            WaveEndTimer.WaitTime = Math.Min(10 + WAVE_DURATION_SCALE * GlobalState.Wave, MAX_WAVE_DURATION);
             WaveEndTimer.Start();
             riftShardsAtStart = GlobalState.RiftShards;
             GD.Print($"Starting wave {GlobalState.Wave}!");
+
             SpawnUnits();
         }
 
@@ -188,6 +213,10 @@ namespace Riftstrike
                 .Select(d => d.InstantiateUnit())
                 // spawn units
                 .ForEach(u => Map.AddChild(u));
+
+        private void DespawnEntities()
+            => Map.GetChildren()
+                .ForEach(entity => entity.QueueFree());
 
         private void EndWave()
         {
@@ -203,7 +232,7 @@ namespace Riftstrike
         public override void _Process(double delta)
         {
             base._Process(delta);
-            if (UnitManager.Instance.units.Count == 0 && !gameOver)
+            if (!WaveOver && UnitManager.Instance.units.Count == 0 && !gameOver)
             {
                 gameOver = true;
                 HandleGameOver();
