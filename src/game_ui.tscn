@@ -57,7 +57,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="Control" type="Control" parent="MarginContainer/MenuContainer/VBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 
 [node name="PauseButton" type="TextureButton" parent="MarginContainer/MenuContainer/VBoxContainer/Control"]
@@ -67,7 +67,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(32, 32)
+pivot_offset = Vector2(48, 48)
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("4_f8cms")
 stretch_mode = 4
