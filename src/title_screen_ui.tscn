@@ -32,6 +32,7 @@ theme_override_constants/separation = 40
 custom_minimum_size = Vector2(640, 128)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("2_phuk1")
 stretch_mode = 4
 
