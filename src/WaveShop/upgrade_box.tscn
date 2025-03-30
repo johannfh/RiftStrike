@@ -2,38 +2,38 @@
 
 [ext_resource type="Theme" uid="uid://cn0m10ru4lckw" path="res://src/global_theme.tres" id="1_e1miv"]
 [ext_resource type="Script" uid="uid://d4bny0ukeyp6n" path="res://src/WaveShop/UpgradeBox.cs" id="1_kbrbs"]
-[ext_resource type="Texture2D" uid="uid://bm5kwmtqqmruk" path="res://src/resources/rarity_textures/common.tres" id="2_2vcoh"]
 [ext_resource type="Script" uid="uid://mvxaiu3rh6vp" path="res://src/WaveShop/RarityToTexture2D.cs" id="2_se2r3"]
-[ext_resource type="Texture2D" uid="uid://b8bqn4gb5wisd" path="res://src/resources/rarity_textures/uncommon.tres" id="4_ainsd"]
-[ext_resource type="Texture2D" uid="uid://pdvhtp40bq86" path="res://src/resources/rarity_textures/rare.tres" id="4_gg7ht"]
-[ext_resource type="Texture2D" uid="uid://d3l7jhb5nbbcv" path="res://src/resources/rarity_textures/epic.tres" id="5_qepo7"]
-[ext_resource type="Texture2D" uid="uid://c4a5bverkdcci" path="res://src/resources/rarity_textures/legendary.tres" id="6_41m4a"]
+[ext_resource type="Texture2D" uid="uid://hl1sh01d5qt2" path="res://src/assets/rarity_textures/Common.png" id="4_e0d0t"]
+[ext_resource type="Texture2D" uid="uid://dqwbis0w4hq8p" path="res://src/assets/rarity_textures/Rare.png" id="6_e1miv"]
+[ext_resource type="Texture2D" uid="uid://chfife21ljqng" path="res://src/assets/rarity_textures/Epic.png" id="7_vmglj"]
 [ext_resource type="Texture2D" uid="uid://bjxbm211f62bw" path="res://src/assets/AttackModule.png" id="8_p6gta"]
+[ext_resource type="Texture2D" uid="uid://sqe818ldwrhl" path="res://src/assets/rarity_textures/Legendary.png" id="8_ukn1u"]
+[ext_resource type="Texture2D" uid="uid://b52e5nwmsuf3s" path="res://src/assets/rarity_textures/Uncommon.png" id="9_e1miv"]
 
 [sub_resource type="Resource" id="Resource_goo15"]
 script = ExtResource("2_se2r3")
 Rarity = 0
-Texture = ExtResource("2_2vcoh")
+Texture = ExtResource("4_e0d0t")
 
 [sub_resource type="Resource" id="Resource_sl6wr"]
 script = ExtResource("2_se2r3")
 Rarity = 2
-Texture = ExtResource("4_ainsd")
+Texture = ExtResource("9_e1miv")
 
 [sub_resource type="Resource" id="Resource_42vdb"]
 script = ExtResource("2_se2r3")
 Rarity = 3
-Texture = ExtResource("4_gg7ht")
+Texture = ExtResource("6_e1miv")
 
 [sub_resource type="Resource" id="Resource_03vlr"]
 script = ExtResource("2_se2r3")
 Rarity = 4
-Texture = ExtResource("5_qepo7")
+Texture = ExtResource("7_vmglj")
 
 [sub_resource type="Resource" id="Resource_7p2yy"]
 script = ExtResource("2_se2r3")
 Rarity = 5
-Texture = ExtResource("6_41m4a")
+Texture = ExtResource("8_ukn1u")
 
 [sub_resource type="LabelSettings" id="LabelSettings_yflln"]
 font_size = 30
@@ -150,10 +150,10 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
 [node name="RarityTextureRect" type="TextureRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
 theme = ExtResource("1_e1miv")
-texture = ExtResource("4_ainsd")
+texture = ExtResource("9_e1miv")
 
 [node name="Control" type="Control" parent="CenterContainer"]
 custom_minimum_size = Vector2(96, 96)
@@ -183,15 +183,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -64.0
-offset_right = 60.0
-offset_bottom = 64.0
+offset_left = -64.0
+offset_top = -72.0
+offset_right = 64.0
+offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "+10%"
 label_settings = SubResource("LabelSettings_yflln")
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
