@@ -174,7 +174,7 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_okpg4"]
-font_size = 32
+font_size = 40
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
@@ -358,7 +358,7 @@ layout_mode = 2
 
 [node name="RerollCostsLabel" type="Label" parent="UpgradeShop/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "$REROLL_COSTS"
+text = "10"
 label_settings = SubResource("LabelSettings_okpg4")
 
 [node name="TextureRect" type="TextureRect" parent="UpgradeShop/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]

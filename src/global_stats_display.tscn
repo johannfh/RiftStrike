@@ -25,5 +25,5 @@ texture = ExtResource("1_ch18j")
 [node name="RiftShardsLabel" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "$RIFT_SHARDS"
+text = "100"
 label_settings = SubResource("LabelSettings_gb0gn")
