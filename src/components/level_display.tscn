@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7yshd5tbajmv"]
+[gd_scene load_steps=6 format=3 uid="uid://b7yshd5tbajmv"]
 
+[ext_resource type="Theme" uid="uid://cn0m10ru4lckw" path="res://src/global_theme.tres" id="1_7g4pi"]
 [ext_resource type="Script" uid="uid://dn5g4lmbqx3pd" path="res://src/components/LevelDisplay.cs" id="1_iwb74"]
 [ext_resource type="StyleBox" uid="uid://da1xp3g4whps1" path="res://src/level_display_background.tres" id="2_senwj"]
 [ext_resource type="StyleBox" uid="uid://irjecn2kimjw" path="res://src/level_display_fill.tres" id="3_wlkbx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tsfoe"]
-font_size = 20
+font_size = 28
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="LevelDisplay" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_7g4pi")
 script = ExtResource("1_iwb74")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

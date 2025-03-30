@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://b8ncak0kr3x74" path="res://src/assets/PauseIcon.png" id="4_f8cms"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wn3co"]
-font_size = 56
+font_size = 64
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
 
 [node name="GameUI" type="Control" node_paths=PackedStringArray("PauseButton")]
 process_mode = 3
